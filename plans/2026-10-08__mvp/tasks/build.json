@@ -1,0 +1,32 @@
+[
+  {
+    "content": "[phase-1] Scaffold: root pyproject/.env.example/start.sh, FastAPI backend skeleton, Vite React-TS frontend skeleton",
+    "id": "p1",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-2] data/camera_models.json (3 entry-level cameras) + dynamic toolbar + brand/model selector",
+    "id": "p2",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-3] Simulation engine: settings→transforms (exposure/WB/noise/DoF/motion/style), before-after toggle, reset",
+    "id": "p3",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-4] AI coach: /api/exif, mock heuristic provider + strict JSON schema + cache, OpenAI provider (pluggable), guardrails",
+    "id": "p4",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-5] Polish: beginner tooltips, Why? toggles, coach tips per change, apply-recommended with undo, persistence",
+    "id": "p5",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-6] Tests (pytest + vitest), README with setup/test-plan, end-to-end verify via dev server",
+    "id": "p6",
+    "status": "in_progress"
+  }
+]

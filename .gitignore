@@ -1,0 +1,11 @@
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+*.log
+.DS_Store
+
+runtime_settings.json

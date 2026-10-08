@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "notes": "Photography-style knowledge base. Each style: 'recipe' = recommended starting settings + why (frontend can auto-apply via snapToCamera); 'priorities' = multipliers for the heuristic coach's score penalties (highlights, shadows, exposure, color_cast, noise, sharpness); 'rules' = deterministic nudges applied to recommendations (shutter_floor, aperture_target, iso_max, allow_slow_shutter); 'exercises' = style-specific drills (shown first, max 2, rest filled generically). Add a style by appending an object — no code changes.",
+  "styles": [
+    {
+      "id": "portrait",
+      "label": "Portrait",
+      "emoji": "🧑",
+      "description": "People, headshots, flattering background separation",
+      "recipe": {
+        "summary": "Wide aperture for background blur, shutter safe for handheld, lowest ISO the light allows.",
+        "settings": { "aperture": "f/2.0", "shutter_speed": "1/200", "iso": "100", "exposure_comp": 0 },
+        "why": "f/1.8–f/2.8 melts the background so the person pops; 1/200s freezes subtle movement and camera shake; base ISO keeps skin tones clean — raise ISO only when the shutter would drop below 1/125."
+      },
+      "priorities": { "sharpness": 1.5, "color_cast": 1.4, "noise": 0.8, "highlights": 1.0, "shadows": 0.8, "exposure": 1.0 },
+      "rules": { "aperture_target": "f/2.0" },
+      "watch_fors": [
+        "Focus landed on the nose or cheek instead of the near eye.",
+        "Background not separating — aperture not wide enough, or subject too close to the background.",
+        "Indoor skin drifting orange — the white balance is fighting the room's bulbs."
+      ],
+      "exercises": [
+        {
+          "title": "Eye of the needle",
+          "goal": "10 portraits where the near eye is tack-sharp at f/2 or wider.",
+          "how": "Use single-point AF placed on the near eye, shoot, then magnify playback to verify before moving on. Misses teach you your lens's focus behavior faster than anything else."
+        },
+        {
+          "title": "Distance beats aperture",
+          "goal": "Prove that subject-to-background distance changes blur more than stopping down.",
+          "how": "Photograph the same person twice at f/2.8: once with the background 2 m behind, once 10 m. Compare — then use it: pull your subject away from walls."
+        }
+      ]
+    },
+    {
+      "id": "landscape",
+      "label": "Landscape",
+      "emoji": "🏔️",
+      "description": "Scenery, mountains, seascapes — everything sharp, best light",
+      "recipe": {
+        "summary": "Mid-aperture sweet spot, base ISO, shutter can go slow on a tripod.",
+        "settings": { "aperture": "f/8.0", "shutter_speed": "1/125", "iso": "100", "exposure_comp": 0 },
+        "why": "f/8–f/11 is most lenses' sharpness sweet spot and holds front-to-back detail; base ISO maximizes dynamic range so the sky and shadows both survive; on a tripod the shutter can stretch as long as the light wants."
+      },
+      "priorities": { "highlights": 1.3, "shadows": 1.2, "exposure": 1.2, "color_cast": 0.8, "noise": 0.6, "sharpness": 1.1 },
+      "rules": { "aperture_target": "f/8.0" },
+      "watch_fors": [
+        "Sky far brighter than the land — the sky clips before the ground is exposed.",
+        "Everything slightly soft — diffraction past f/16 or focus not set near the hyperfocal distance.",
+        "Horizon dead-center flattening the frame — try thirds and a foreground anchor."
+      ],
+      "exercises": [
+        {
+          "title": "Thirds horizon",
+          "goal": "Shoot the same scene with the horizon on the top third, bottom third, and center.",
+          "how": "Compare which framing carries the scene: dramatic sky → horizon low; interesting foreground → horizon high. Note your instinct — then break it on purpose next time."
+        },
+        {
+          "title": "Front anchor",
+          "goal": "Add depth with a deliberate foreground element.",
+          "how": "Find a rock, path or flower 1–2 m from the camera, focus near the hyperfocal distance, and let it lead the eye to the background. Shoot with and without — depth is the difference."
+        }
+      ]
+    },
+    {
+      "id": "sports",
+      "label": "Sports / Action",
+      "emoji": "🏃",
+      "description": "Moving subjects, athletes, pets, vehicles",
+      "recipe": {
+        "summary": "Fast shutter first, continuous AF, open aperture, let ISO float.",
+        "settings": { "aperture": "f/4.0", "shutter_speed": "1/1000", "iso": "800", "exposure_comp": 0 },
+        "why": "1/1000s freezes most human and pet motion; AF-C / AI Servo keeps focus tracking; a wide aperture pays for the fast shutter and ISO floats upward — a frozen, slightly noisy frame beats a clean blur every time."
+      },
+      "priorities": { "sharpness": 1.6, "noise": 0.5, "highlights": 0.9, "shadows": 0.7, "exposure": 1.0, "color_cast": 0.5 },
+      "rules": { "shutter_floor": "1/500" },
+      "watch_fors": [
+        "Motion blur on hands, feet or the ball — shutter too slow for the speed of the action.",
+        "Focus snapped onto the crowd or fence behind the athlete.",
+        "Grain eating detail after chasing a fast shutter with ISO — acceptable trade, know your ceiling."
+      ],
+      "exercises": [
+        {
+          "title": "Shutter ladder",
+          "goal": "Find the exact shutter that freezes your subject.",
+          "how": "Shoot the same sprint/jump at 1/250, 1/500, 1/1000, 1/2000. Check hands and feet at 100% zoom — that's where blur shows first. Remember the number for that sport."
+        },
+        {
+          "title": "Panning practice",
+          "goal": "Sharp subject, streaked background — the deliberate-blur look.",
+          "how": "Set 1/30s, AF-C on the subject, and move the camera with them through the shot. Expect 1 keeper in 20 at first — it's a wrist skill."
+        }
+      ]
+    },
+    {
+      "id": "night",
+      "label": "Night & Celestial",
+      "emoji": "🌙",
+      "description": "Stars, cityscapes after dark, low light scenes",
+      "recipe": {
+        "summary": "Tripod required: wide aperture, multi-second shutter, moderate ISO.",
+        "settings": { "aperture": "f/2.8", "shutter_speed": "8\"", "iso": "1600", "exposure_comp": 0 },
+        "why": "On a tripod the shutter collects light for seconds; the widest aperture gathers the most of it; ISO 800–3200 balances noise against exposure. Start with the recipe, then adjust by test frames — digital film is free."
+      },
+      "priorities": { "noise": 1.3, "exposure": 1.3, "highlights": 0.7, "shadows": 0.9, "color_cast": 0.8, "sharpness": 1.0 },
+      "rules": { "iso_max": "1600", "allow_slow_shutter": true },
+      "watch_fors": [
+        "Stars smeared into short trails — shutter too long for the focal length (use the 500 rule: 500 ÷ focal length = max seconds).",
+        "Noise blooming in the shadows from high ISO.",
+        "Light pollution tinting the sky orange or green — a WB tweak or post fix."
+      ],
+      "exercises": [
+        {
+          "title": "500-rule workout",
+          "goal": "Find your lens's max star-sharp shutter.",
+          "how": "With a tripod, shoot the same star field at 5s, 10s, 15s, 20s with a 24mm lens. Zoom to 100%: the shutter where stars stop being dots marks your limit (≈20s here)."
+        },
+        {
+          "title": "Tripod discipline",
+          "goal": "Learn the ritual that keeps long exposures crisp.",
+          "how": "Tripod + 2s timer (or remote), no touching during exposure, mirror-up/EFCS if your camera has it. Repeat until sharp 5s handheld-impossible frames become routine."
+        }
+      ]
+    },
+    {
+      "id": "wedding",
+      "label": "Wedding",
+      "emoji": "💍",
+      "description": "Ceremonies, receptions, once-only moments in mixed light",
+      "recipe": {
+        "summary": "Flexible mid-fast settings: f/2.8–f/4, 1/160s+, ISO floats, WB matched per room.",
+        "settings": { "aperture": "f/2.8", "shutter_speed": "1/160", "iso": "800", "exposure_comp": 0 },
+        "why": "Venues mix daylight, tungsten and DJ lighting within minutes; f/2.8–f/4 keeps small groups sharp while gathering light; 1/160s survives the processional; a floating ISO matters less than missing the once-only moment."
+      },
+      "priorities": { "color_cast": 1.5, "highlights": 1.2, "sharpness": 1.3, "noise": 0.9, "shadows": 1.0, "exposure": 1.1 },
+      "rules": { "aperture_target": "f/2.8" },
+      "watch_fors": [
+        "The white dress blowing out — it clips before anything else in the frame.",
+        "Mixed light making skin orange in one corner and green in another.",
+        "Group shots taken at slow shutter — 1/125s minimum, and check every face for blinks."
+      ],
+      "exercises": [
+        {
+          "title": "Mixed-light safari",
+          "goal": "One room, three light sources, three WB decisions.",
+          "how": "In a room with window light plus bulbs, shoot the same subject under each source with the matching WB preset. Builds the reflex to re-check WB every time the light changes."
+        },
+        {
+          "title": "Dress guardian",
+          "goal": "Keep the white dress detailed in every frame.",
+          "how": "Enable highlight alert and expose so the dress sits just under clipping, letting the rest go slightly dark — recover shadows in post far more easily than fabric texture."
+        }
+      ]
+    },
+    {
+      "id": "child_baby",
+      "label": "Child / Baby",
+      "emoji": "👶",
+      "description": "Unpredictable small subjects, indoor light, eye-level stories",
+      "recipe": {
+        "summary": "Fast shutter for sudden moves, continuous AF + burst, wide aperture for indoor light.",
+        "settings": { "aperture": "f/2.8", "shutter_speed": "1/320", "iso": "400", "exposure_comp": 0 },
+        "why": "Kids sprint, spin and blink with zero warning: 1/320s and burst mode buy you the peak moment; AF-C tracks the chaos; a wide aperture covers dim living rooms; shoot from their eye level, not yours."
+      },
+      "priorities": { "sharpness": 1.5, "noise": 0.7, "exposure": 1.0, "color_cast": 0.9, "highlights": 1.0, "shadows": 0.8 },
+      "rules": { "shutter_floor": "1/320" },
+      "watch_fors": [
+        "Eyes closed mid-burst — check every frame, the keeper is often one shot earlier.",
+        "Shutter too slow for a sudden sprint — hands and feet blur before faces do.",
+        "Shooting down from adult height — crouch to their eye level for connection and depth."
+      ],
+      "exercises": [
+        {
+          "title": "Peak action bursts",
+          "goal": "Capture the exact peak of a jump, spin or laugh.",
+          "how": "Set AF-C + continuous burst, watch the rhythm of the play, start the burst just before the peak. Review which frame of each burst is the keeper — timing instinct grows fast."
+        },
+        {
+          "title": "Their world, their height",
+          "goal": "One full set of photos taken only at the child's eye level.",
+          "how": "Kneel, crawl, sit. Compare the set against your usual standing shots — backgrounds clean up and expressions gain intimacy."
+        }
+      ]
+    }
+  ]
+}

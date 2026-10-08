@@ -1,0 +1,22 @@
+[
+  {
+    "content": "[style-1] data/shooting_styles.json (6 styles: recipes, priorities, rules, drills) + backend loader",
+    "id": "s1",
+    "status": "completed"
+  },
+  {
+    "content": "[style-2] Style-aware mock coach (weighted scoring, style rules on recommendations, style drills) + style_id in /api/analyze + cache",
+    "id": "s2",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-3] Frontend: styles lib + snapToCamera, style selector (upload + header), recipe card w/ apply, store persistence, coach-engine badge",
+    "id": "s3",
+    "status": "completed"
+  },
+  {
+    "content": "[phase-4] Tests (pytest + vitest), README update, server restart + e2e verify",
+    "id": "s4",
+    "status": "completed"
+  }
+]

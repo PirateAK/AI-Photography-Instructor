@@ -2,31 +2,31 @@
   {
     "content": "[enh-1] Settings page: runtime provider config API (save/load masked key), Gemini + OpenAI providers (key-optional), provider factory hot-reload, frontend Settings screen",
     "id": "e1",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "[enh-2] Camera body SVG viewer: 6 views (top/back/front/left/right/bottom), JSON hotspots per camera, hotspot↔toolbar highlight linkage",
     "id": "e2",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "[enh-3] Simulator upgrades: live histogram overlay + draggable DoF focus point",
     "id": "e3",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "[enh-4] Guided lessons: deterministic lesson builder + step player (apply/undo, narration, highlights)",
     "id": "e4",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "[enh-5] Coach chat: /api/chat + provider.chat (deterministic now, AI when key set) + chat UI",
     "id": "e5",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "[enh-6] Tests, README update, server restart + e2e verify",
     "id": "e6",
-    "status": "pending"
+    "status": "completed"
   }
 ]

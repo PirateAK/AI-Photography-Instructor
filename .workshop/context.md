@@ -19,6 +19,13 @@
 - Coach chat: /api/chat (multipart, optional image) → provider.chat; mock = build_chat_reply keyword router with context. store.askCoach.
 - Style KB drives: recipe card (⚡ Use recipe → snapToCamera), weighted score penalties, deterministic recommendation rules (shutter_floor seconds-comparison: slower = larger), style drills first.
 
+## NEXT SESSION (locked plan): Training / Classes feature
+- Business model: app free with generous coach; paid video class packs sold via user's website (Stripe/Gumroad/LemonSqueezy) + redemption code unlock in-app; 2 teaser classes ship free.
+- Moat: lessons are interactive — "Try it" checkpoints hand control to the simulator with a settings preset.
+- Build: data/training_courses.json {id,title,cover,description,level,price:free|paid, lessons:[{title,duration,video_url(mp4|youtube|vimeo),summary,practice_preset}]}; data/app_config.json {store_url}; ClassesScreen with library grid (FREE/locked), course player (embedded video), Practice-in-simulator button (snapToCamera preset → workspace), locked overlay + store link + redemption-code field (client-side stub, server validation later).
+- Videos stream from external hosts (unlisted YouTube/Vimeo or MP4 CDN) — never bundled in repo.
+- GitHub: repo https://github.com/PirateAK/AI-Photography-Instructor (private), token GITHUB_TOKEN is fine-grained "WorkshopAI" — needs Workflows: Read+write permission for CI push (pending; CI workflow committed locally).
+
 ## Key design decisions
 - Simulation baseline = EXIF (iso/shutter/aperture) else camera defaults; gain = log2((t/t0)(ISO/ISO0)(N0/N)^2)+EV. DoF only when opening wider than baseline. Motion smear below 1/60s. WB presets/kelvin → temp/tint shifts. Picture styles → contrast/saturation/sharpen/mono.
 - Coach tips for setting changes are deterministic text (lib/tips.ts), NOT AI calls. Cache: LRU+TTL keyed by sha256(image)+camera+settings+style+intent.

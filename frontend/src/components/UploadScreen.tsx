@@ -14,6 +14,8 @@ export default function UploadScreen() {
   const setStyle = useStore((s) => s.setStyle);
   const goSettings = useStore((s) => s.goSettings);
   const goClasses = useStore((s) => s.goClasses);
+  const loadDemoPhoto = useStore((s) => s.loadDemoPhoto);
+  const openWorkspace = useStore((s) => s.openWorkspace);
   const startAnalysis = useStore((s) => s.startAnalysis);
   const cameras = getCameras();
   const styles = getStyles();
@@ -171,6 +173,15 @@ export default function UploadScreen() {
           </span>
           <button className="btn primary" onClick={goClasses}>
             🎓 Training classes
+          </button>
+          <button
+            className="btn"
+            onClick={() => {
+              void loadDemoPhoto().then((ok) => ok && openWorkspace());
+            }}
+            title="Explore the simulator instantly — no upload needed"
+          >
+            🎨 Try a demo photo
           </button>
           <button className="btn small ghost" onClick={goSettings} title="Provider & API key setup">
             ⚙ Coach engine setup

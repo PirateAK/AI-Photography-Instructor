@@ -70,8 +70,9 @@ interface PhotoState {
   askCoach: (message: string) => Promise<void>;
   openWorkspace: () => void;
   goClasses: () => void;
+  loadDemoPhoto: () => Promise<boolean>;
   unlockWithCode: (code: string) => boolean;
-  practicePreset: (preset: Record<string, string | number>, brief: string) => void;
+  practicePreset: (preset: Record<string, string | number>, brief: string) => Promise<void>;
 }
 
 let logId = 1;
@@ -227,6 +228,18 @@ export const useStore = create<PhotoState>()(
 
       goClasses: () => set({ screen: "classes" }),
 
+      loadDemoPhoto: async () => {
+        try {
+          const res = await fetch("/demo/sample.jpg");
+          if (!res.ok) return false;
+          const blob = await res.blob();
+          await get().loadFile(new File([blob], "demo-photo.jpg", { type: "image/jpeg" }));
+          return true;
+        } catch {
+          return false;
+        }
+      },
+
       unlockWithCode: (code) => {
         if (!isValidCode(code)) return false;
         const state = get();
@@ -241,18 +254,33 @@ export const useStore = create<PhotoState>()(
         return true;
       },
 
-      practicePreset: (preset, brief) => {
+      practicePreset: async (preset, brief) => {
         const state = get();
-        const cam = getCamera(state.cameraId);
+        if (!state.dataUrl) {
+          // No photo in this session — load the built-in demo photo first,
+          // so "Load in simulator" always lands in a working simulator.
+          const ok = await get().loadDemoPhoto();
+          if (!ok) {
+            set({
+              log: pushLog(state.log, {
+                kind: "system",
+                text: "Couldn't load the demo photo — upload any image, then try the drill again.",
+              }),
+            });
+            return;
+          }
+        }
+        const state2 = get();
+        const cam = getCamera(state2.cameraId);
         if (!cam) return;
-        const current = state.settingsByCamera[state.cameraId] ?? defaultSettings(cam);
+        const current = state2.settingsByCamera[state2.cameraId] ?? defaultSettings(cam);
         const snapped = snapToCamera(cam, preset as Settings);
         set({
-          settingsByCamera: { ...state.settingsByCamera, [state.cameraId]: { ...current, ...snapped } },
+          settingsByCamera: { ...state2.settingsByCamera, [state2.cameraId]: { ...current, ...snapped } },
           undoSnapshot: current,
           highlightSetting: null,
           screen: "workspace",
-          log: pushLog(state.log, {
+          log: pushLog(state2.log, {
             kind: "system",
             text: `🎓 Class practice loaded — ${brief}`,
           }),

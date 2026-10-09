@@ -169,6 +169,6 @@ export interface BodyHotspot {
 }
 
 export interface CameraBody {
-  type: "dslr" | "mirrorless";
+  type: "dslr" | "mirrorless" | "vlog";
   hotspots: Partial<Record<"top" | "back" | "front" | "left" | "right" | "bottom", BodyHotspot[]>>;
 }

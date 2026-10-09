@@ -83,8 +83,9 @@ function Hotspot({ hotspot: h, view }: { hotspot: BodyHotspot; view: View }) {
 
 // ------------------------------------------------------------- silhouettes
 
-function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless"; view: View }) {
+function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog"; view: View }) {
   const isDslr = bodyType === "dslr";
+  const isVlog = bodyType === "vlog";
   const fill = "#23262d";
   const stroke = "#3c414d";
   return (
@@ -94,14 +95,16 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless"; view: Vi
           <rect x="70" y="85" width="260" height="145" rx="18" />
           {isDslr ? (
             <polygon points="160,85 178,42 222,42 240,85" />
+          ) : isVlog ? (
+            <rect x="140" y="72" width="120" height="16" rx="7" fill="#1b1e24" />
           ) : (
             <rect x="165" y="52" width="70" height="36" rx="10" />
           )}
           <rect x={isDslr ? 278 : 288} y="78" width={isDslr ? 52 : 42} height="152" rx="20" fill="#262a31" />
-          <circle cx={isDslr ? 200 : 200} cy={isDslr ? 110 : 78} r="14" fill="#111318" />
+          <circle cx="200" cy={isDslr ? 110 : 100} r="14" fill="#111318" opacity={isDslr ? 1 : 0.5} />
           <rect x="130" y="130" width="140" height="60" rx="8" fill="#101216" opacity={isDslr ? 1 : 0.35} />
           <text x="200" y="165" textAnchor="middle" fontSize="13" fill="#4a5160" opacity={isDslr ? 1 : 0.4}>
-            {isDslr ? "TOP LCD" : "no top LCD"}
+            {isDslr ? "TOP LCD" : isVlog ? "FLAT TOP" : "no top LCD"}
           </text>
         </g>
       )}
@@ -110,12 +113,14 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless"; view: Vi
           <rect x="70" y="40" width="260" height="190" rx="18" />
           {isDslr ? (
             <rect x="172" y="55" width="56" height="34" rx="8" fill="#101216" />
+          ) : isVlog ? (
+            <rect x="172" y="55" width="56" height="34" rx="8" fill="#101216" opacity="0.25" />
           ) : (
             <rect x="118" y="55" width="56" height="34" rx="8" fill="#101216" />
           )}
           <rect x={isDslr ? 150 : 160} y="102" width="165" height="112" rx="8" fill="#101216" />
           <text x={isDslr ? 232 : 242} y="160" textAnchor="middle" fontSize="13" fill="#4a5160">
-            LCD
+            {isVlog ? "FLIP SCREEN" : "LCD"}
           </text>
           <circle cx={isDslr ? 235 : 242} cy="158" r="30" fill="#181b21" opacity="0.6" />
         </g>
@@ -125,6 +130,8 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless"; view: Vi
           <rect x="85" y="55" width="230" height="160" rx="18" />
           {isDslr ? (
             <polygon points="170,55 186,20 214,20 230,55" />
+          ) : isVlog ? (
+            <rect x="170" y="34" width="60" height="24" rx="7" fill="#1b1e24" />
           ) : (
             <rect x="172" y="26" width="56" height="32" rx="8" />
           )}

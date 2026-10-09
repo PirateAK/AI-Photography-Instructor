@@ -236,6 +236,23 @@ downscaled to ≤1024 px before analysis, strict pydantic validation of model ou
 for the OpenAI provider, then silent fallback to the mock with a visible notice. Cost control:
 downscaling + LRU/TTL cache keyed by image hash + camera + settings + intent.
 
+## Training classes (the storefront)
+
+The **🎓 Training classes** screen is the commercial layer: the app ships free, paid class
+packs are sold on your website and unlocked in-app with a redemption code.
+
+- `data/training_courses.json` — the catalog: courses → lessons → `video_url` (direct MP4 or
+  YouTube/Vimeo link, embedded automatically), `duration_min`, `summary`, and a
+  `practice_preset` — camera settings the lesson's **"Try it"** button loads into the
+  simulator (snapped to the selected camera's options). Two free courses ship as teasers.
+- `data/app_config.json` — `store_url` (opened from locked course cards) and
+  `redemption_codes` (a **client-side MVP stub**: any listed code unlocks all paid courses —
+  replace with server-side validation before real sales).
+- Locked courses show a store link + code-entry panel; unlocks persist in localStorage.
+- Lesson videos are never bundled in the repo — stream them from unlisted YouTube/Vimeo or an
+  MP4 CDN. The two free courses currently use CC0 placeholder videos; swap in your hosted
+  lessons by editing the JSON.
+
 ## Known limitations (deliberate MVP cuts)
 
 - Preview is an approximation: highlights can't be truly "un-blown", noise is synthetic,
@@ -250,7 +267,7 @@ downscaling + LRU/TTL cache keyed by image hash + camera + settings + intent.
 Automated:
 ```bash
 uv run pytest            # 48 backend tests: schema, determinism, clamping, styles, API, cache, guardrails, engines, chat
-cd frontend && npx vitest run   # 27 frontend tests: parsing, EV math, sim mapping, snapping, styles, lessons
+cd frontend && npx vitest run   # 34 frontend tests: parsing, EV math, sim mapping, snapping, styles, lessons, training
 ```
 
 Manual smoke test (~5 min):

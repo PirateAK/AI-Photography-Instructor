@@ -13,6 +13,7 @@ export default function UploadScreen() {
   const styleId = useStore((s) => s.styleId);
   const setStyle = useStore((s) => s.setStyle);
   const goSettings = useStore((s) => s.goSettings);
+  const goClasses = useStore((s) => s.goClasses);
   const startAnalysis = useStore((s) => s.startAnalysis);
   const cameras = getCameras();
   const styles = getStyles();
@@ -168,6 +169,9 @@ export default function UploadScreen() {
             {cameras.length} cameras · {styles.length} photography styles · heuristic coach works
             offline
           </span>
+          <button className="btn primary" onClick={goClasses}>
+            🎓 Training classes
+          </button>
           <button className="btn small ghost" onClick={goSettings} title="Provider & API key setup">
             ⚙ Coach engine setup
           </button>

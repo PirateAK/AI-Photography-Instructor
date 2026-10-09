@@ -633,3 +633,126 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   color: var(--text);
   font-weight: 600;
 }
+
+/* ---------- training classes ---------- */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+.course-card {
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  display: grid;
+}
+.course-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.course-cover {
+  position: relative;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+}
+.course-cover.hue-0 { background: linear-gradient(135deg, #1c2a4a, #101828); }
+.course-cover.hue-1 { background: linear-gradient(135deg, #2a1c4a, #161028); }
+.course-cover.hue-2 { background: linear-gradient(135deg, #123229, #0d1c17); }
+.course-cover.hue-3 { background: linear-gradient(135deg, #3a2418, #1c120d); }
+.course-cover.hue-4 { background: linear-gradient(135deg, #12303a, #0d1a1c); }
+.lock-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.price-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.price-badge.free { background: rgba(48, 209, 88, 0.2); color: var(--good); }
+.price-badge.paid { background: rgba(255, 214, 10, 0.16); color: var(--warn); }
+.course-meta { padding: 12px 14px 14px; display: grid; gap: 6px; }
+.course-meta h3 { margin: 0; font-size: 1rem; letter-spacing: -0.01em; }
+.course-meta p { margin: 0; font-size: 0.8rem; line-height: 1.45; }
+.course-stats { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.course-detail { display: grid; gap: 14px; }
+.player-card { padding: 16px; display: grid; gap: 14px; }
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  background: #000;
+  border: 1px solid var(--border);
+  display: block;
+}
+iframe.video-frame { border: none; }
+.lesson-list { display: grid; gap: 6px; }
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  text-align: left;
+}
+.lesson-row:hover { border-color: #3a4050; }
+.lesson-row.active { border-color: var(--accent); background: var(--accent-soft); }
+.lesson-row .play-ico { color: var(--accent); font-size: 0.7rem; }
+.lesson-row .lesson-title { flex: 1; }
+.lesson-row .lesson-dur { color: var(--text-dim); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+.practice-box {
+  background: var(--accent-soft);
+  border: 1px solid rgba(10, 132, 255, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.locked-panel { padding: 20px; }
+.locked-hero { display: flex; gap: 16px; align-items: flex-start; }
+.locked-hero h3 { margin: 0 0 6px; }
+.locked-emoji {
+  font-size: 2.4rem;
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #1c2a4a, #101828);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.unlock-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+.code-row { display: flex; gap: 8px; }
+.code-row input {
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  width: 170px;
+  text-transform: uppercase;
+}

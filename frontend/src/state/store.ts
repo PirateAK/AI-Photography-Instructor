@@ -6,12 +6,12 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { analyzePhoto, fetchExif, sendChat as apiSendChat } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
 import { getStyle } from "../lib/styles";
+import { courses, unlockAllPaid, isValidCode } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
 import type {
   AnalysisResult,
   ChatMessage,
   CoachResponse,
-  EngineSettings,
   ExifInfo,
   LogEntry,
   RecommendedSettings,
@@ -19,7 +19,7 @@ import type {
 } from "../lib/types";
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings";
+  screen: "upload" | "workspace" | "settings" | "classes";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -47,6 +47,8 @@ interface PhotoState {
   chatSending: boolean;
   chatNotice: string | null;
 
+  unlockedCourses: string[];
+
   // actions
   loadFile: (file: File) => Promise<void>;
   setCamera: (id: string) => void;
@@ -66,6 +68,10 @@ interface PhotoState {
   setFocusPoint: (p: { x: number; y: number }) => void;
   beginUndoable: () => void;
   askCoach: (message: string) => Promise<void>;
+  openWorkspace: () => void;
+  goClasses: () => void;
+  unlockWithCode: (code: string) => boolean;
+  practicePreset: (preset: Record<string, string | number>, brief: string) => void;
 }
 
 let logId = 1;
@@ -108,6 +114,8 @@ export const useStore = create<PhotoState>()(
       chatMessages: [],
       chatSending: false,
       chatNotice: null,
+
+      unlockedCourses: [],
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -210,9 +218,46 @@ export const useStore = create<PhotoState>()(
       setIntent: (s) => set({ intent: s }),
       goUpload: () => set({ screen: "upload" }),
       goSettings: () => set({ screen: "settings" }),
+      openWorkspace: () => {
+        if (get().dataUrl) set({ screen: "workspace" });
+      },
 
       setHighlight: (id) => set({ highlightSetting: id }),
       setFocusPoint: (p) => set({ focusPoint: p }),
+
+      goClasses: () => set({ screen: "classes" }),
+
+      unlockWithCode: (code) => {
+        if (!isValidCode(code)) return false;
+        const state = get();
+        const unlocked = Array.from(new Set([...state.unlockedCourses, ...unlockAllPaid()]));
+        set({
+          unlockedCourses: unlocked,
+          log: pushLog(state.log, {
+            kind: "system",
+            text: "🎟️ Redemption code accepted — all purchased classes are unlocked. Happy learning!",
+          }),
+        });
+        return true;
+      },
+
+      practicePreset: (preset, brief) => {
+        const state = get();
+        const cam = getCamera(state.cameraId);
+        if (!cam) return;
+        const current = state.settingsByCamera[state.cameraId] ?? defaultSettings(cam);
+        const snapped = snapToCamera(cam, preset as Settings);
+        set({
+          settingsByCamera: { ...state.settingsByCamera, [state.cameraId]: { ...current, ...snapped } },
+          undoSnapshot: current,
+          highlightSetting: null,
+          screen: "workspace",
+          log: pushLog(state.log, {
+            kind: "system",
+            text: `🎓 Class practice loaded — ${brief}`,
+          }),
+        });
+      },
 
       beginUndoable: () => {
         const state = get();
@@ -350,6 +395,7 @@ export const useStore = create<PhotoState>()(
         beginner: s.beginner,
         intent: s.intent,
         styleId: s.styleId,
+        unlockedCourses: s.unlockedCourses,
       }),
     },
   ),

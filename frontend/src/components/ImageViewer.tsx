@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
-import { baselineFromExif, defaultSettings, getCamera } from "../lib/camera";
+import { baselineFromExif, defaultSettings, getCamera, parseAperture } from "../lib/camera";
 import {
   computeHistogram,
   identityParams,
@@ -27,6 +27,7 @@ export default function ImageViewer() {
   const visibleRef = useRef<HTMLCanvasElement>(null);
   const sourceRef = useRef<HTMLCanvasElement | null>(null);
   const histRef = useRef<HTMLCanvasElement>(null);
+  const viewerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
 
   const cam = getCamera(cameraId)!;
@@ -68,17 +69,25 @@ export default function ImageViewer() {
 
   const usesNonDefaults = JSON.stringify(settings) !== JSON.stringify(defaultSettings(cam));
 
-  const onPointer = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!draggingRef.current) return;
-    const rect = e.currentTarget.getBoundingClientRect();
+  const updateFocusFromEvent = (e: React.PointerEvent) => {
+    const rect = viewerRef.current?.getBoundingClientRect();
+    if (!rect || !draggingRef.current) return;
     const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
     setFocusPoint({ x, y });
   };
 
+  const dofActive = (parseAperture(settings.aperture) ?? baseline.aperture) < baseline.aperture;
+
   return (
     <>
-      <div className="viewer">
+      <div
+        className="viewer"
+        ref={viewerRef}
+        onPointerMove={updateFocusFromEvent}
+        onPointerUp={() => (draggingRef.current = false)}
+        onPointerCancel={() => (draggingRef.current = false)}
+      >
         <canvas ref={visibleRef} />
         <span className="sim-badge">SIMULATION · APPROXIMATE</span>
         {rendering && <span className="loading">rendering…</span>}
@@ -92,16 +101,16 @@ export default function ImageViewer() {
 
         {/* draggable focus point for the DoF simulation */}
         <div
-          className={`focus-dot ${highlightSetting === "__focus__" ? "pulse" : ""}`}
+          className={`focus-dot ${dofActive ? "" : "dim"} ${highlightSetting === "__focus__" ? "pulse" : ""}`}
           style={{ left: `${focusPoint.x * 100}%`, top: `${focusPoint.y * 100}%` }}
-          title="Focus point — drag it; the depth-of-field blur falls away from here"
+          title={
+            dofActive
+              ? "Focus point — drag it: the background blur falls away from here"
+              : "Focus point — open the aperture wider than the as-shot value to see the blur that follows this point"
+          }
           onPointerDown={(e) => {
             draggingRef.current = true;
-            (e.target as HTMLElement).setPointerCapture(e.pointerId);
-          }}
-          onPointerMove={onPointer}
-          onPointerUp={() => {
-            draggingRef.current = false;
+            (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
           }}
         />
 

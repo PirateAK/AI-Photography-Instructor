@@ -503,7 +503,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
   cursor: grab;
-  z-index: 3;
+  z-index: 4;
   touch-action: none;
 }
 .focus-dot::after {
@@ -518,6 +518,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   font-weight: 700;
 }
 .focus-dot:active { cursor: grabbing; }
+.focus-dot.dim { opacity: 0.4; border-style: dashed; }
 .focus-dot.pulse { animation: focus-pulse 0.6s ease-in-out 3; }
 @keyframes focus-pulse {
   50% { box-shadow: 0 0 0 8px rgba(48, 209, 88, 0.3); }

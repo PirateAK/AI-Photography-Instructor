@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "notes": "Training classes catalog. price: 'free' (ships with the app) or 'paid' (unlocked by redemption code / purchase). video_url: direct MP4 or a YouTube/Vimeo link (the player embeds those automatically). practice_preset: camera settings the simulator loads for the lesson's 'Try it' moment — values are snapped to the selected camera's supported options. The two free courses are the shipped teasers; the sample video URLs are CC0 placeholders — swap in your hosted lessons.",
+  "notes": "Training classes catalog. price: 'free' (ships with the app) or 'paid' (unlocked by redemption code / purchase). video_url: direct MP4 or a YouTube/Vimeo link (the player embeds those automatically). practice_preset: camera settings the simulator loads for the lesson's 'Try it' moment — values are snapped to the selected camera's supported options. The two free courses are the shipped teasers; the sample video URLs are CC0 placeholders (Big Buck Bunny, has audio) — swap in your hosted lessons.",
   "courses": [
     {
       "id": "free-exposure-triangle",
@@ -16,7 +16,7 @@
           "title": "Meet the three knobs",
           "duration_min": 5,
           "summary": "Aperture, shutter speed and ISO each control light — and each has a side effect. This lesson shows the triangle in motion: one photo, three ways to brighten it, three different costs.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "400", "shutter_speed": "1/30", "aperture": "f/5.6" },
           "practice_brief": "Your preview is loaded at 1/30s. Step the shutter up to 1/250 and watch the photo darken — that's motion protection costing you light. Now raise ISO a few stops and watch grain buy the light back."
@@ -26,7 +26,7 @@
           "title": "Aperture is a storyteller",
           "duration_min": 6,
           "summary": "f-numbers do double duty: they control light AND what's in focus. Learn to choose aperture for the story — creamy background or everything sharp — before you touch anything else.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/16" },
           "practice_brief": "Start at f/16, then walk the aperture stepper down to the widest stop. Drag the focus point around the frame — the sharp zone follows it, the blur falls away from it."
@@ -36,7 +36,7 @@
           "title": "ISO: the emergency knob",
           "duration_min": 5,
           "summary": "ISO is amplification, not light. Learn where your camera's grain ceiling is and build the habit of reaching for it last, not first.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "6400", "shutter_speed": "1/125", "aperture": "f/5.6" },
           "practice_brief": "Start at ISO 6400 and step down toward 100, fixing the brightness with shutter or aperture as you go. Compare grain at 100% — that's your camera's real-world noise budget."
@@ -57,7 +57,7 @@
           "title": "Where freeze ends",
           "duration_min": 6,
           "summary": "Every subject has a shutter threshold where blur begins. Find yours with the smear simulator, then keep a safety margin for the ones that matter.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "800", "shutter_speed": "1/60", "aperture": "f/4.0" },
           "practice_brief": "Walk the shutter from 1/60 down to 1\" and back. Notice the smear kicks in below about 1/60 — that's the handheld shake floor, and it's also the motion line for walking subjects."
@@ -67,7 +67,7 @@
           "title": "Deliberate blur: the pan",
           "duration_min": 7,
           "summary": "Panning — moving the camera with the subject — keeps the subject readable while the world streaks. It's a wrist skill, and this lesson drills the timing.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "200", "shutter_speed": "1/15", "aperture": "f/11" },
           "practice_brief": "1/15s is pan territory. In the field: track the subject through the shot and keep moving after the shutter fires. Expect one keeper in twenty — that's normal."
@@ -88,7 +88,7 @@
           "title": "Why night is a tripod problem",
           "duration_min": 6,
           "summary": "Night exposures need seconds, not fractions. What changes when the shutter is open for 10s: technique, stability, and how you think about ISO.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "1600", "shutter_speed": "8\"", "aperture": "f/2.8" },
           "practice_brief": "Load the night starting point. Try handheld-style shutters (1/30) and watch the underexposure — then commit to the 8s exposure and see where the light comes from."
@@ -98,7 +98,7 @@
           "title": "The 500 rule",
           "duration_min": 7,
           "summary": "Stars smear because the Earth turns. The 500 rule gives the longest shutter that keeps stars as points for your focal length — here's the math made visual.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "3200", "shutter_speed": "15\"", "aperture": "f/2.8" },
           "practice_brief": "At 24mm your limit is about 20s. Compare 10s vs 20s vs 30s exposures and watch brightness climb while trailing threatens — that trade is the whole lesson."
@@ -108,7 +108,7 @@
           "title": "Cityscapes: tame the lights",
           "duration_min": 8,
           "summary": "City lights are your subject and your hazard. Exposure strategy for skylines that glow without clipping, plus white balance for mixed sodium/LED light.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "400", "shutter_speed": "4\"", "aperture": "f/8.0" },
           "practice_brief": "f/8 at 4s keeps buildings crisp while lights accumulate. Watch the histogram's right edge as you lengthen the shutter — stop before it stacks against the wall."
@@ -118,7 +118,7 @@
           "title": "Noise strategy after dark",
           "duration_min": 6,
           "summary": "High ISO is unavoidable at night — the skill is knowing how far to push and how to recover. ISO invariants, exposure-to-noise ratio, and when to accept grain.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "6400", "shutter_speed": "2\"", "aperture": "f/2.8" },
           "practice_brief": "Same brightness, two routes: ISO 6400 at 2\" versus ISO 1600 at 8\". Compare the grain — that difference is why tripods exist."
@@ -128,7 +128,7 @@
           "title": "Field checklist & drills",
           "duration_min": 5,
           "summary": "The pre-dark checklist: batteries, focus at infinity, live histogram habits — and the four drills from this class turned into a repeatable practice plan.",
-          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "1600", "shutter_speed": "8\"", "aperture": "f/2.8" },
           "practice_brief": "Run the full night starting recipe, then verify each leg of the triangle against the checklist: aperture wide, shutter at the rule, ISO at your tested ceiling."

@@ -88,6 +88,7 @@ interface PhotoState {
   instructorUnlocked: boolean;
   galleryItems: GalleryMeta[];
   lastRemovedGallery: GalleryEntry | null;
+  photoLoading: boolean;
 
   styles: ShootingStyle[];
   deviceId: string;
@@ -194,6 +195,7 @@ export const useStore = create<PhotoState>()(
       instructorUnlocked: false,
       galleryItems: [],
       lastRemovedGallery: null,
+      photoLoading: false,
 
       styles: styleCatalog.styles,
       deviceId:
@@ -343,7 +345,12 @@ export const useStore = create<PhotoState>()(
       goUpload: () => set({ screen: "upload" }),
       goSettings: () => set({ screen: "settings" }),
       openWorkspace: () => {
-        if (get().dataUrl) set({ screen: "workspace" });
+        if (get().dataUrl) {
+          set({ screen: "workspace" });
+          // entering the workspace should always start at the preview — the SPA
+          // otherwise inherits the home screen's scroll position on phones
+          window.scrollTo(0, 0);
+        }
       },
 
       setHighlight: (id) => set({ highlightSetting: id }),
@@ -455,8 +462,15 @@ export const useStore = create<PhotoState>()(
         if (!blob) return;
         const meta = get().galleryItems.find((g) => g.id === id);
         const file = new File([blob], meta?.name ?? "photo.jpg", { type: blob.type || "image/jpeg" });
-        await get().loadFile(file);
-        get().openWorkspace();
+        // visible feedback across the screen change: IDB read + decode takes a
+        // beat on phones, and silence reads as "broken"
+        set({ photoLoading: true });
+        try {
+          await get().loadFile(file);
+          get().openWorkspace();
+        } finally {
+          set({ photoLoading: false });
+        }
       },
 
       loadDemoPhoto: async () => {

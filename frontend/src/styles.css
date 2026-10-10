@@ -763,6 +763,22 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* global "loading a photo" pill (gallery pick → decode → coach) */
+.photo-loading-pill {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: var(--bg-elev2);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
 .dash-card {
   text-align: left;
   border: 1px solid var(--border);

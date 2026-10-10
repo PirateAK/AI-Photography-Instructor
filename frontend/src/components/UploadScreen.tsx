@@ -143,7 +143,7 @@ export default function UploadScreen() {
         <span className="gallery-chev">{galleryOpen ? "▴" : "▾"}</span>
       </button>
 
-      {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} />}
+      {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} autoAnalyze />}
 
       <div className="upload-form">
         <label>

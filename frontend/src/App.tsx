@@ -12,6 +12,7 @@ import { useEffect } from "react";
 
 export default function App() {
   const screen = useStore((s) => s.screen);
+  const photoLoading = useStore((s) => s.photoLoading);
 
   useEffect(() => {
     // pick up manual edits to shooting_styles.json / training_courses.json made outside the app
@@ -22,24 +23,31 @@ export default function App() {
   }, []);
 
   return (
-    <ErrorBoundary key={screen}>
-      {screen === "workspace" ? (
-        <Workspace />
-      ) : screen === "settings" ? (
-        <SettingsScreen />
-      ) : screen === "classes" ? (
-        <ClassesScreen />
-      ) : screen === "stylemanager" ? (
-        <StyleManagerScreen />
-      ) : screen === "coursemanager" ? (
-        <CourseManagerScreen />
-      ) : screen === "instructor" ? (
-        <InstructorDashboard />
-      ) : screen === "progress" ? (
-        <ProgressScreen />
-      ) : (
-        <UploadScreen />
+    <>
+      <ErrorBoundary key={screen}>
+        {screen === "workspace" ? (
+          <Workspace />
+        ) : screen === "settings" ? (
+          <SettingsScreen />
+        ) : screen === "classes" ? (
+          <ClassesScreen />
+        ) : screen === "stylemanager" ? (
+          <StyleManagerScreen />
+        ) : screen === "coursemanager" ? (
+          <CourseManagerScreen />
+        ) : screen === "instructor" ? (
+          <InstructorDashboard />
+        ) : screen === "progress" ? (
+          <ProgressScreen />
+        ) : (
+          <UploadScreen />
+        )}
+      </ErrorBoundary>
+      {photoLoading && (
+        <div className="photo-loading-pill" role="status">
+          ⏳ Loading photo…
+        </div>
       )}
-    </ErrorBoundary>
+    </>
   );
 }

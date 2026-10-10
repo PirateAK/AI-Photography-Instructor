@@ -82,6 +82,20 @@ export function baselineFromExif(cam: CameraModel, exif: ExifInfo | null): Basel
   return { iso, shutter, aperture };
 }
 
+/** EV difference vs the as-shot baseline (+ = brighter, − = darker). */
+export function evDelta(
+  baseline: Baseline,
+  s: { iso: string | number; shutter_speed: string | number; aperture: string | number; exposure_comp?: number | null },
+): number {
+  const t = parseShutter(s.shutter_speed) ?? baseline.shutter;
+  const iso = Number(s.iso) || baseline.iso;
+  const n = parseAperture(s.aperture) ?? baseline.aperture;
+  const ev =
+    Math.log2((t / baseline.shutter) * (iso / baseline.iso) * Math.pow(baseline.aperture / n, 2)) +
+    (Number(s.exposure_comp) || 0);
+  return Math.round(ev * 10) / 10;
+}
+
 /** Clamp an EV value to the camera's exposure-comp range, snapped to step. */
 export function clampEv(cam: CameraModel, ev: number): number {
   const def = cam.settings.exposure_comp;

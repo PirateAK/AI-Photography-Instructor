@@ -28,6 +28,11 @@ Rules:
 - Explain like a patient teacher: plain language, concrete numbers, no jargon without a one-line definition.
 - Always separate what to fix IN CAMERA next time vs what can be fixed IN POST.
 - Recommended settings MUST use only values from the camera's supported option lists provided below.
+- BRIGHTNESS RULE (critical): unless the photo is clearly over- or underexposed, the recommended
+  settings must form an EQUIVALENT EXPOSURE to the as-shot EXIF values — same overall brightness,
+  different trade-offs. Changing one triangle leg requires an offsetting change in another
+  (e.g. wider aperture f/4 -> f/2.8 is +2 EV, so the shutter must speed up 2 EV, e.g. 1/125 -> 1/500).
+  If the photo IS clearly over/underexposed, correct toward neutral brightness — never beyond it.
 - Respect the user's stated intent (e.g. "I want blurry backgrounds") when giving settings.
 - Evaluate ONLY what is visible in the image and the EXIF provided. Never invent facts.
 - Exactly 3 practice exercises, each tied to a real weakness you found.

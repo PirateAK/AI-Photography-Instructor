@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
+import { baselineFromExif, defaultSettings, evDelta, getCamera } from "../lib/camera";
 import { buildLessons, type Lesson } from "../lib/lessons";
-import { defaultSettings, getCamera } from "../lib/camera";
 import { FALLBACK_TIPS } from "../lib/tips";
 
 export default function CoachPanel() {
@@ -17,6 +17,10 @@ export default function CoachPanel() {
   const undoApply = useStore((s) => s.undoApply);
   const undoSnapshot = useStore((s) => s.undoSnapshot);
   const goSettings = useStore((s) => s.goSettings);
+  const exif = useStore((s) => s.exif);
+  const cameraId = useStore((s) => s.cameraId);
+  const camPanel = getCamera(cameraId);
+  const baseline = camPanel ? baselineFromExif(camPanel, exif) : null;
   const styles = useStore((s) => s.styles);
   const style = styles.find((s) => s.id === styleId);
 
@@ -189,6 +193,27 @@ export default function CoachPanel() {
                 </span>
               )}
             </div>
+            {baseline &&
+              analysis.recommended_settings.iso &&
+              analysis.recommended_settings.shutter_speed &&
+              analysis.recommended_settings.aperture &&
+              (() => {
+                const delta = evDelta(baseline, {
+                  iso: analysis.recommended_settings.iso!,
+                  shutter_speed: analysis.recommended_settings.shutter_speed!,
+                  aperture: analysis.recommended_settings.aperture!,
+                  exposure_comp: analysis.recommended_settings.exposure_comp ?? undefined,
+                });
+                if (Math.abs(delta) < 3) return null;
+                return (
+                  <div className="notice" style={{ marginBottom: 10 }}>
+                    ⚠ These settings are ~{Math.abs(delta)} stops {delta > 0 ? "brighter" : "darker"} than your
+                    as-shot exposure — the preview will show the literal result
+                    {delta > 0 ? " (likely blown out)" : " (very dark)"}. Unless this photo was badly{" "}
+                    {delta > 0 ? "underexposed" : "overexposed"}, treat with caution.
+                  </div>
+                );
+              })()}
             <div className="rec-reason">{analysis.recommended_settings.reasoning}</div>
             <div style={{ display: "flex", gap: 8 }}>
               <button className="btn primary small" onClick={() => applyRecommended(analysis.recommended_settings)}>

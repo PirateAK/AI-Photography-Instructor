@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { baselineFromExif, defaultSettings, getCamera, parseAperture } from "../lib/camera";
-import { focalZoomRatio, getLensById } from "../lib/lenses";
+import { focalZoomRatio, getLensById, parseFocal } from "../lib/lenses";
 import {
   computeHistogram,
   identityParams,
@@ -83,6 +83,7 @@ export default function ImageViewer() {
   };
 
   const dofActive = (parseAperture(settings.aperture) ?? baseline.aperture) < baseline.aperture;
+  const lensZoom = lens ? focalZoomRatio(lens, exif) : 1;
 
   return (
     <>
@@ -95,6 +96,14 @@ export default function ImageViewer() {
       >
         <canvas ref={visibleRef} />
         <span className="sim-badge">SIMULATION · APPROXIMATE</span>
+        {lens && lensZoom > 1.01 && (
+          <span
+            className="sim-badge lens-zoom-badge"
+            title={`Mounted ${lens.model}: simulating ~${Math.round((parseFocal(exif?.focal_length) ?? 0) * lensZoom)}mm framing versus your ${exif?.focal_length ?? ""} shot`}
+          >
+            🔍 LENS SWAP · {lensZoom.toFixed(1)}× TIGHTER
+          </span>
+        )}
         {rendering && <span className="loading">rendering…</span>}
 
         {showHistogram && (

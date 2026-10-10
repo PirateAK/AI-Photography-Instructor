@@ -870,3 +870,5 @@ select.lens-select {
 .curriculum-list { display: grid; gap: 9px; }
 .curriculum-row { display: flex; align-items: center; gap: 12px; }
 .curriculum-title { font-size: 0.84rem; min-width: 200px; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.lens-zoom-badge { top: 44px; }

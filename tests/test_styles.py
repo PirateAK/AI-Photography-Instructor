@@ -10,7 +10,7 @@ from backend.styles import get_style, load_styles
 
 ROOT = Path(__file__).resolve().parent.parent
 
-EXPECTED_IDS = {"portrait", "landscape", "sports", "night", "wedding", "child_baby"}
+EXPECTED_IDS = {"portrait", "landscape", "macro", "wildlife", "sports", "astrophotography", "street", "fine_art", "event", "architecture"}
 
 
 def load_cameras():
@@ -53,10 +53,11 @@ def test_sports_style_enforces_shutter_floor():
 
 def test_night_style_caps_iso_and_allows_slow_shutter():
     cam = camera("sony_a6400")
-    night = get_style("night")
+    astro = get_style("astrophotography")
+    assert astro["rules"]["allow_slow_shutter"] is True
     gray = Image.new("RGB", (64, 48), (45, 45, 55))
-    analysis, _, _ = analyze(gray, cam, {"iso": "6400"}, style=night)
-    assert int(analysis.recommended_settings.iso) <= 1600
+    analysis, _, _ = analyze(gray, cam, {"iso": "12800"}, style=astro)
+    assert int(analysis.recommended_settings.iso) <= 3200
 
 
 def test_portrait_style_targets_wide_aperture():
@@ -82,7 +83,7 @@ def test_style_weighted_scoring_is_deterministic_and_differs():
     img = Image.new("RGB", (64, 48), (20, 20, 25))  # dark + cool cast
     a_sports, _, _ = analyze(img, cam, style=get_style("sports"))
     a_sports2, _, _ = analyze(img, cam, style=get_style("sports"))
-    a_cast, _, _ = analyze(img, cam, style=get_style("wedding"))
+    a_cast, _, _ = analyze(img, cam, style=get_style("event"))
     assert a_sports.model_dump() == a_sports2.model_dump()  # deterministic
     assert a_sports.overall_score != a_cast.overall_score  # weights actually apply
 

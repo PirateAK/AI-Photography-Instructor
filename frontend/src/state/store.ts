@@ -278,7 +278,11 @@ export const useStore = create<PhotoState>()(
       reloadStyles: async () => {
         try {
           const styles = await fetchStyles();
-          set({ styles });
+          set((state) => ({
+            styles,
+            // a persisted styleId may reference a retired style — reset cleanly
+            styleId: styles.some((s) => s.id === state.styleId) ? state.styleId : "",
+          }));
         } catch {
           /* keep bundled catalog */
         }

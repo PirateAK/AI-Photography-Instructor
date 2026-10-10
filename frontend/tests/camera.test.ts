@@ -82,7 +82,7 @@ describe("snapToCamera (recipes + recommendations)", () => {
 describe("photography styles", () => {
   it("ships six styles with recipes and drills", () => {
     expect(getStyles().map((s) => s.id)).toEqual(
-      expect.arrayContaining(["portrait", "landscape", "sports", "night", "wedding", "child_baby"]),
+      expect.arrayContaining(["portrait", "landscape", "macro", "wildlife", "sports", "astrophotography", "street", "fine_art", "event", "architecture"]),
     );
     for (const style of getStyles()) {
       expect(style.recipe.settings).toBeTruthy();
@@ -97,8 +97,8 @@ describe("photography styles", () => {
   });
 
   it("night recipe resolves on the Nikon", () => {
-    const recipe = getStyle("night")!.recipe.settings;
-    const applied = snapToCamera(getCamera("nikon_z50")!, recipe);
+    const astro = getStyle("astrophotography")!.recipe.settings;
+    const applied = snapToCamera(getCamera("nikon_z50")!, astro);
     expect(applied.shutter_speed).toBe('8"');
     expect(applied.iso).toBe("1600");
   });

@@ -333,7 +333,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .score-ring svg { transform: rotate(-90deg); }
 .score-ring .score-num {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -424,7 +424,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   background: radial-gradient(circle at 50% 40%, #1d2026, #14161a);
   overflow: hidden;
 }
-.body-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.body-svg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; }
 
 .hotspot {
   position: absolute;
@@ -509,7 +509,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .coach-pane { position: relative; }
 .hist-guide {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   z-index: 5;
   background: var(--bg);
   overflow-y: auto;
@@ -618,7 +618,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
      the coach pane's height, close button always at the top of the viewport */
   .hist-guide {
     position: fixed;
-    inset: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     z-index: 60;
     border-left: none;
   }
@@ -635,7 +635,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .image-pane { position: relative; }
 .gallery-overlay {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   z-index: 8;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -657,7 +657,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 @media (max-width: 980px) {
   .gallery-overlay {
     position: fixed;
-    inset: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     z-index: 60;
     border: none;
     border-radius: 0;
@@ -879,7 +879,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .focus-dot::after {
   content: "+";
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1130,6 +1130,12 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   display: block;
 }
 iframe.video-frame { border: none; }
+
+/* graceful fallbacks for older Android browsers (Chrome < 88, pre-2021) */
+@supports not (aspect-ratio: 1 / 1) {
+  .camera-body-viewer { height: 420px; }
+  .video-frame { height: 220px; }
+}
 .lesson-list { display: grid; gap: 6px; }
 .lesson-row {
   display: flex;

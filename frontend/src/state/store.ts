@@ -124,7 +124,7 @@ interface PhotoState {
   unlockInstructor: (code: string) => boolean;
   lockInstructor: () => void;
   loadGallery: () => Promise<void>;
-  addToGallery: (files: File[]) => Promise<number>;
+  addToGallery: (files: File[]) => Promise<{ added: number; evicted: number; skipped: number }>;
   removeFromGallery: (id: number) => Promise<void>;
   undoGalleryRemove: () => Promise<void>;
   loadFromGallery: (id: number) => Promise<void>;
@@ -420,7 +420,7 @@ export const useStore = create<PhotoState>()(
       },
 
       addToGallery: async (files) => {
-        const { added, evicted } = await idbAddToGallery(files);
+        const { added, evicted, skipped } = await idbAddToGallery(files);
         await get().loadGallery();
         if (evicted > 0) {
           set({
@@ -430,7 +430,7 @@ export const useStore = create<PhotoState>()(
             }),
           });
         }
-        return added;
+        return { added, evicted, skipped };
       },
 
       removeFromGallery: async (id) => {

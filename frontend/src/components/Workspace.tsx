@@ -6,6 +6,7 @@ import CameraBody from "./camera_body/CameraBody";
 import CameraToolbar from "./CameraToolbar";
 import CoachPanel from "./CoachPanel";
 import HistogramGuide from "./HistogramGuide";
+import GalleryPanel from "./GalleryPanel";
 import ModelSelector from "./ModelSelector";
 
 export default function Workspace() {
@@ -23,6 +24,8 @@ export default function Workspace() {
   const styles = useStore((s) => s.styles);
   const [tab, setTab] = useState<"preview" | "body">("preview");
   const [histGuide, setHistGuide] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const galleryCount = useStore((s) => s.galleryItems.length);
 
   useEffect(() => {
     if (!dataUrl) goUpload();
@@ -76,6 +79,14 @@ export default function Workspace() {
         <button className="btn small" onClick={goClasses} title="Training classes">
           🎓 Classes
         </button>
+        <button
+          className="btn small"
+          onClick={() => setGalleryOpen((v) => !v)}
+          aria-expanded={galleryOpen}
+          title="Swap photos from your on-device gallery without leaving the coach"
+        >
+          🖼️{galleryCount > 0 ? ` ${galleryCount}` : ""}
+        </button>
         <button className="btn small" onClick={goProgress} title="Your saved analyses and progress">
           📈 Progress
         </button>
@@ -95,6 +106,17 @@ export default function Workspace() {
             <ImageViewer onToggleHistGuide={() => setHistGuide((v) => !v)} />
           ) : (
             <CameraBody cam={getCamera(cameraId)!} />
+          )}
+          {galleryOpen && (
+            <div className="gallery-overlay">
+              <div className="gallery-overlay-head">
+                <strong>🖼️ Gallery — tap a photo to swap it into the coach</strong>
+                <button className="btn small ghost" onClick={() => setGalleryOpen(false)}>
+                  ✕ Close
+                </button>
+              </div>
+              <GalleryPanel onClose={() => setGalleryOpen(false)} showClose={false} />
+            </div>
           )}
         </div>
         <aside className={`coach-pane ${histGuide ? "guide-open" : ""}`}>

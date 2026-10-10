@@ -83,22 +83,41 @@ export function isImageFile(file: File): boolean {
   return file.type.startsWith("image/");
 }
 
-/** Small JPEG preview (max 320px edge) for the gallery grid. */
+/** Small JPEG preview (max 320px edge) for the gallery grid. Tries the fast
+ *  path (createImageBitmap) then an <img> decode — a photo that survives both
+ *  still gets stored with an empty thumb rather than dropping the shot. */
 export async function makeThumb(blob: Blob): Promise<string> {
-  const bitmap = await createImageBitmap(blob);
-  try {
-    const scale = Math.min(1, 320 / Math.max(bitmap.width, bitmap.height));
-    const w = Math.max(1, Math.round(bitmap.width * scale));
-    const h = Math.max(1, Math.round(bitmap.height * scale));
+  const drawTo = (source: ImageBitmap | HTMLImageElement, w: number, h: number): string => {
     const canvas = document.createElement("canvas");
     canvas.width = w;
     canvas.height = h;
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("no 2d context");
-    ctx.drawImage(bitmap, 0, 0, w, h);
+    ctx.drawImage(source, 0, 0, w, h);
     return canvas.toDataURL("image/jpeg", 0.72);
-  } finally {
-    bitmap.close?.();
+  };
+  try {
+    const bitmap = await createImageBitmap(blob);
+    try {
+      const scale = Math.min(1, 320 / Math.max(bitmap.width, bitmap.height));
+      return drawTo(bitmap, Math.max(1, Math.round(bitmap.width * scale)), Math.max(1, Math.round(bitmap.height * scale)));
+    } finally {
+      bitmap.close?.();
+    }
+  } catch {
+    const url = URL.createObjectURL(blob);
+    try {
+      const img = new Image();
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error("image decode failed"));
+        img.src = url;
+      });
+      const scale = Math.min(1, 320 / Math.max(img.naturalWidth, img.naturalHeight));
+      return drawTo(img, Math.max(1, Math.round(img.naturalWidth * scale)), Math.max(1, Math.round(img.naturalHeight * scale)));
+    } finally {
+      URL.revokeObjectURL(url);
+    }
   }
 }
 
@@ -111,7 +130,7 @@ export async function listGallery(): Promise<GalleryMeta[]> {
     .map(({ id, addedAt, name, size, thumb }) => ({ id: id as number, addedAt, name, size, thumb }));
 }
 
-export async function addToGallery(files: File[]): Promise<{ added: number; evicted: number }> {
+export async function addToGallery(files: File[]): Promise<{ added: number; evicted: number; skipped: number }> {
   // prepare thumbnails BEFORE opening the write transaction — IDB transactions
   // auto-commit when a task yields, so no awaits may sit between puts
   const base = Date.now();
@@ -129,13 +148,14 @@ export async function addToGallery(files: File[]): Promise<{ added: number; evic
         thumb,
       });
     } catch {
-      // unreadable image — skip it rather than failing the batch
+      // unreadable image — counted as skipped, never aborts the batch
     }
   }
-  if (!prepared.length) return { added: 0, evicted: 0 };
+  const skipped = images.length - prepared.length + (files.length - images.length);
+  if (!prepared.length) return { added: 0, evicted: 0, skipped };
 
   const store = await storeFor("readwrite");
-  if (!store) return { added: 0, evicted: 0 };
+  if (!store) return { added: 0, evicted: 0, skipped };
   for (const entry of prepared) store.put(entry);
   await commit(store.transaction);
 
@@ -156,7 +176,7 @@ export async function addToGallery(files: File[]): Promise<{ added: number; evic
       evicted = excess;
     }
   }
-  return { added: prepared.length, evicted };
+  return { added: prepared.length, evicted, skipped };
 }
 
 export async function getGalleryBlob(id: number): Promise<Blob | null> {

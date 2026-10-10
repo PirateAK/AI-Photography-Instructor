@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCameras } from "../lib/camera";
 import { isInstructorCode } from "../lib/training";
 import { chunkRows, orderedStylesForWheel } from "../lib/styles";
 import type { ShootingStyle } from "../lib/styles";
-import type { GalleryMeta } from "../lib/gallery";
 import ModelSelector from "./ModelSelector";
+import GalleryPanel from "./GalleryPanel";
 
 const WHEEL_ROW_SIZE = 5;
-const GALLERY_PAGE = 10;
 
 export default function UploadScreen() {
   const loadFile = useStore((s) => s.loadFile);
@@ -27,56 +26,13 @@ export default function UploadScreen() {
   const loadDemoPhoto = useStore((s) => s.loadDemoPhoto);
   const openWorkspace = useStore((s) => s.openWorkspace);
   const galleryItems = useStore((s) => s.galleryItems);
-  const addToGallery = useStore((s) => s.addToGallery);
-  const removeFromGallery = useStore((s) => s.removeFromGallery);
-  const undoGalleryRemove = useStore((s) => s.undoGalleryRemove);
-  const loadFromGallery = useStore((s) => s.loadFromGallery);
   const startAnalysis = useStore((s) => s.startAnalysis);
   const cameras = getCameras();
   const styles = useStore((s) => s.styles);
 
   const [dragging, setDragging] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const [undoToast, setUndoToast] = useState<{ name: string } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const pickRef = useRef<HTMLInputElement>(null);
-  const camRef = useRef<HTMLInputElement>(null);
-
-  // auto-dismiss the remove toast
-  useEffect(() => {
-    if (!undoToast) return;
-    const t = setTimeout(() => setUndoToast(null), 6000);
-    return () => clearTimeout(t);
-  }, [undoToast]);
-
-  const onPickFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    e.target.value = ""; // allow re-picking the same photo
-    if (!files?.length) return;
-    try {
-      await addToGallery(Array.from(files));
-    } catch (err) {
-      alert(`Couldn't add to the gallery: ${err instanceof Error ? err.message : err}`);
-    }
-  };
-
-  const onCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = "";
-    if (!file) return;
-    try {
-      await addToGallery([file]);
-    } catch {
-      /* gallery write failed — still coach the shot directly */
-    }
-    await loadFile(file);
-    openWorkspace();
-  };
-
-  const handleGalleryRemove = async (id: number, name: string) => {
-    await removeFromGallery(id);
-    setUndoToast({ name });
-  };
 
   const onFiles = async (files: FileList | null) => {
     const file = files?.[0];
@@ -187,34 +143,7 @@ export default function UploadScreen() {
         <span className="gallery-chev">{galleryOpen ? "▴" : "▾"}</span>
       </button>
 
-      {galleryOpen && (
-        <div className="gallery-panel">
-          <div className="gallery-bar">
-            <button className="btn small" onClick={() => pickRef.current?.click()}>
-              🖼️ Pick photos
-            </button>
-            <button className="btn small" onClick={() => camRef.current?.click()} title="Shoot straight into the coach">
-              📸 Camera
-            </button>
-            <span className="muted">Lives on this device — nothing uploads until you analyze</span>
-            <div className="spacer" />
-            <button className="btn small ghost" onClick={() => setGalleryOpen(false)}>
-              ✕ Close
-            </button>
-          </div>
-          <input ref={pickRef} type="file" accept="image/*" multiple hidden onChange={(e) => void onPickFiles(e)} />
-          <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => void onCapture(e)} />
-
-          <GalleryWheel
-            items={galleryItems}
-            onLoad={(id) => {
-              setGalleryOpen(false); // selecting a photo closes the wheel
-              void loadFromGallery(id);
-            }}
-            onRemove={(id, name) => void handleGalleryRemove(id, name)}
-          />
-        </div>
-      )}
+      {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} />}
 
       <div className="upload-form">
         <label>
@@ -285,21 +214,6 @@ export default function UploadScreen() {
           </button>
         </div>
       </div>
-
-      {undoToast && (
-        <div className="gallery-toast" role="status">
-          <span>Removed {undoToast.name}</span>
-          <button
-            className="btn small"
-            onClick={() => {
-              setUndoToast(null);
-              void undoGalleryRemove();
-            }}
-          >
-            ↺ Undo
-          </button>
-        </div>
-      )}
     </div>
   );
 }
@@ -367,128 +281,6 @@ function StyleWheel({
       >
         ▼
       </button>
-    </div>
-  );
-}
-
-/**
- * The phone gallery: a single vertical wheel of photo cards. Drag-scrolls up
- * and down (native touch scrolling); a horizontal swipe flings a card away and
- * trims it from the gallery (undo toast appears). Only a page of cards renders
- * at a time — scrolling toward the end feeds more into the wheel.
- */
-function GalleryWheel({
-  items,
-  onLoad,
-  onRemove,
-}: {
-  items: GalleryMeta[];
-  onLoad: (id: number) => void;
-  onRemove: (id: number, name: string) => void;
-}) {
-  const [visibleCount, setVisibleCount] = useState(GALLERY_PAGE);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  // grow the rendered window as the sentinel scrolls into view
-  useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el || visibleCount >= items.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((en) => en.isIntersecting)) {
-          setVisibleCount((c) => Math.min(c + GALLERY_PAGE, items.length));
-        }
-      },
-      { root: el.closest(".gallery-list"), rootMargin: "200px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [visibleCount, items.length]);
-
-  if (items.length === 0) {
-    return (
-      <p className="muted gallery-empty">
-        Your gallery is empty — pick a few photos (or shoot one with the camera) and they'll be
-        waiting here, on this device, every time you come back.
-      </p>
-    );
-  }
-
-  const visible = items.slice(0, visibleCount);
-
-  return (
-    <div className="gallery-wrap">
-      <div className="gallery-title">
-        Your gallery <span className="muted">· {items.length} photo{items.length === 1 ? "" : "s"} — tap to coach, swipe a card away to trim</span>
-      </div>
-      <div className="gallery-list">
-        {visible.map((item) => (
-          <GalleryCard key={item.id} item={item} onLoad={onLoad} onRemove={onRemove} />
-        ))}
-        {visibleCount < items.length && <div ref={sentinelRef} className="gallery-sentinel" />}
-      </div>
-    </div>
-  );
-}
-
-function GalleryCard({
-  item,
-  onLoad,
-  onRemove,
-}: {
-  item: GalleryMeta;
-  onLoad: (id: number) => void;
-  onRemove: (id: number, name: string) => void;
-}) {
-  const [dx, setDx] = useState(0);
-  const [gone, setGone] = useState(false);
-  const startRef = useRef<{ x: number; y: number } | null>(null);
-  const movedRef = useRef(false);
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    startRef.current = { x: e.clientX, y: e.clientY };
-    movedRef.current = false;
-  };
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!startRef.current) return;
-    const ddx = e.clientX - startRef.current.x;
-    const ddy = e.clientY - startRef.current.y;
-    if (Math.abs(ddx) > 10 && Math.abs(ddx) > Math.abs(ddy)) {
-      movedRef.current = true;
-      setDx(ddx);
-    }
-  };
-  const settle = () => {
-    startRef.current = null;
-    if (Math.abs(dx) > 72) {
-      setGone(true);
-      setTimeout(() => onRemove(item.id, item.name), 150);
-    } else {
-      setDx(0);
-    }
-  };
-
-  return (
-    <div
-      className="gallery-card"
-      style={{
-        transform: `translateX(${gone ? dx * 4 : dx}px) rotate(${dx / 40}deg)`,
-        opacity: gone ? 0 : 1,
-      }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={settle}
-      onPointerCancel={() => {
-        startRef.current = null;
-        setDx(0);
-      }}
-      onClick={() => {
-        if (!movedRef.current) onLoad(item.id);
-      }}
-      title="Tap to load into the coach — swipe sideways to trim"
-    >
-      <img src={item.thumb} alt={item.name} draggable={false} />
-      <span className="gallery-card-name">{item.name}</span>
     </div>
   );
 }

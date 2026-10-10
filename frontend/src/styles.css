@@ -632,6 +632,37 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 }
 
 /* ---------- on-device photo gallery (vertical wheel) ---------- */
+.image-pane { position: relative; }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gallery-overlay-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+@media (max-width: 980px) {
+  .gallery-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    border: none;
+    border-radius: 0;
+  }
+}
 .gallery-toggle {
   align-self: flex-start;
 }
@@ -686,6 +717,14 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   object-fit: cover;
   display: block;
   pointer-events: none;
+}
+.gallery-thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  opacity: 0.6;
 }
 .gallery-card-name {
   position: absolute;

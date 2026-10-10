@@ -469,6 +469,17 @@ export const useStore = create<PhotoState>()(
         if (recs.white_balance) wanted.white_balance = recs.white_balance;
         if (typeof recs.exposure_comp === "number") wanted.exposure_comp = recs.exposure_comp;
         const clamped = snapToCamera(cam, wanted);
+        // no-op detection: recommendations already match (within this camera's stops)
+        const changed = Object.entries(clamped).filter(([k, v]) => String(current[k]) !== String(v));
+        if (changed.length === 0) {
+          set({
+            log: pushLog(state.log, {
+              kind: "system",
+              text: "The recommended settings already match your current setup — nothing to change. You nailed the shot.",
+            }),
+          });
+          return;
+        }
         set({
           settingsByCamera: { ...state.settingsByCamera, [state.cameraId]: { ...current, ...clamped } },
           undoSnapshot: current,

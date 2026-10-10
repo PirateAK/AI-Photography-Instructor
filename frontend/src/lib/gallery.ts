@@ -80,7 +80,20 @@ export function applyCap(count: number, cap: number = GALLERY_CAP): number {
 }
 
 export function isImageFile(file: File): boolean {
-  return file.type.startsWith("image/");
+  // empty type = picker didn't label it — still worth a decode attempt
+  return file.type.startsWith("image/") || file.type === "";
+}
+
+function heicish(file: File): boolean {
+  const t = file.type.toLowerCase();
+  const n = file.name.toLowerCase();
+  return t.includes("heic") || t.includes("heif") || n.endsWith(".heic") || n.endsWith(".heif");
+}
+
+export interface GallerySkip {
+  name: string;
+  reason: string;
+  heic: boolean;
 }
 
 /** Small JPEG preview (max 320px edge) for the gallery grid. Tries the fast
@@ -130,32 +143,46 @@ export async function listGallery(): Promise<GalleryMeta[]> {
     .map(({ id, addedAt, name, size, thumb }) => ({ id: id as number, addedAt, name, size, thumb }));
 }
 
-export async function addToGallery(files: File[]): Promise<{ added: number; evicted: number; skipped: number }> {
+export async function addToGallery(
+  files: File[],
+): Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[] }> {
   // prepare thumbnails BEFORE opening the write transaction — IDB transactions
   // auto-commit when a task yields, so no awaits may sit between puts
   const base = Date.now();
   const prepared: GalleryEntry[] = [];
-  const images = files.filter(isImageFile);
-  for (let i = 0; i < images.length; i++) {
+  const failures: GallerySkip[] = [];
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    if (!isImageFile(file)) {
+      failures.push({ name: file.name, reason: "not an image file", heic: false });
+      continue;
+    }
     try {
-      const thumb = await makeThumb(images[i]);
+      const thumb = await makeThumb(file);
       prepared.push({
         addedAt: base + i,
-        name: images[i].name || "photo.jpg",
-        size: images[i].size,
-        type: images[i].type,
-        blob: images[i],
+        name: file.name || "photo.jpg",
+        size: file.size,
+        type: file.type,
+        blob: file,
         thumb,
       });
-    } catch {
-      // unreadable image — counted as skipped, never aborts the batch
+    } catch (err) {
+      failures.push({
+        name: file.name || `photo ${i + 1}`,
+        reason:
+          err instanceof Error && err.message === "image decode failed"
+            ? "the browser couldn't decode it"
+            : "read error",
+        heic: heicish(file),
+      });
     }
   }
-  const skipped = images.length - prepared.length + (files.length - images.length);
-  if (!prepared.length) return { added: 0, evicted: 0, skipped };
+  const skipped = failures.length;
+  if (!prepared.length) return { added: 0, evicted: 0, skipped, failures };
 
   const store = await storeFor("readwrite");
-  if (!store) return { added: 0, evicted: 0, skipped };
+  if (!store) return { added: 0, evicted: 0, skipped, failures };
   for (const entry of prepared) store.put(entry);
   await commit(store.transaction);
 
@@ -176,7 +203,7 @@ export async function addToGallery(files: File[]): Promise<{ added: number; evic
       evicted = excess;
     }
   }
-  return { added: prepared.length, evicted, skipped };
+  return { added: prepared.length, evicted, skipped, failures };
 }
 
 export async function getGalleryBlob(id: number): Promise<Blob | null> {

@@ -24,6 +24,7 @@ import {
   restoreGalleryEntry,
   type GalleryEntry,
   type GalleryMeta,
+  type GallerySkip,
 } from "../lib/gallery";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
@@ -124,7 +125,9 @@ interface PhotoState {
   unlockInstructor: (code: string) => boolean;
   lockInstructor: () => void;
   loadGallery: () => Promise<void>;
-  addToGallery: (files: File[]) => Promise<{ added: number; evicted: number; skipped: number }>;
+  addToGallery: (
+    files: File[],
+  ) => Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[] }>;
   removeFromGallery: (id: number) => Promise<void>;
   undoGalleryRemove: () => Promise<void>;
   loadFromGallery: (id: number) => Promise<void>;
@@ -420,7 +423,7 @@ export const useStore = create<PhotoState>()(
       },
 
       addToGallery: async (files) => {
-        const { added, evicted, skipped } = await idbAddToGallery(files);
+        const { added, evicted, skipped, failures } = await idbAddToGallery(files);
         await get().loadGallery();
         if (evicted > 0) {
           set({
@@ -430,7 +433,7 @@ export const useStore = create<PhotoState>()(
             }),
           });
         }
-        return { added, evicted, skipped };
+        return { added, evicted, skipped, failures };
       },
 
       removeFromGallery: async (id) => {

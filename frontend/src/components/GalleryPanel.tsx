@@ -42,9 +42,21 @@ export default function GalleryPanel({
     if (!files.length) return;
     setBusy(`Reading ${files.length} photo${files.length === 1 ? "" : "s"}…`);
     try {
-      const { added, skipped } = await addToGallery(files);
+      const { added, skipped, failures } = await addToGallery(files);
       if (skipped > 0) {
-        alert(`Added ${added} photo${added === 1 ? "" : "s"}. ${skipped} couldn't be read (unsupported format or damaged file).`);
+        const heic = failures.filter((f) => f.heic).length;
+        const names = failures
+          .slice(0, 2)
+          .map((f) => f.name)
+          .join(", ");
+        const lines = [
+          `Added ${added} photo${added === 1 ? "" : "s"}; ${skipped} couldn't be read.`,
+          heic > 0
+            ? `${heic} of those are HEIC (iPhone-style) — browsers can't open that format; convert to JPG and pick again.`
+            : `Reason: ${failures[0]?.reason ?? "unknown"}.`,
+          names ? `e.g. ${names}${failures.length > 2 ? "…" : ""}` : "",
+        ].filter(Boolean);
+        alert(lines.join("\n"));
       }
     } catch (err) {
       alert(`Couldn't add to the gallery: ${err instanceof Error ? err.message : err}`);

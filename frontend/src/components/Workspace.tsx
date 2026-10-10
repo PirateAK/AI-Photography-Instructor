@@ -31,8 +31,8 @@ export default function Workspace() {
   return (
     <div className="workspace">
       <header className="app-header">
-        <button className="btn small ghost" onClick={goUpload}>
-          ← New photo
+        <button className="btn small ghost" onClick={goUpload} title="Back to the start screen — your photo and settings stay loaded">
+          🏠 Home
         </button>
         <div className="title">📷 Photo Coach</div>
         <select

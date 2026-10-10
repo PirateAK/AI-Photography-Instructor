@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { baselineFromExif, defaultSettings, getCamera, parseAperture } from "../lib/camera";
+import { focalZoomRatio, getLensById } from "../lib/lenses";
 import {
   computeHistogram,
   identityParams,
@@ -33,6 +34,7 @@ export default function ImageViewer() {
   const cam = getCamera(cameraId)!;
   const settings = settingsByCamera[cameraId] ?? defaultSettings(cam);
   const baseline = useMemo(() => baselineFromExif(cam, exif), [cam, exif]);
+  const lens = getLensById(useStore((s) => s.lensByCamera[cameraId]));
 
   // decode uploaded image to a preview-sized source canvas (once per image)
   useEffect(() => {
@@ -55,7 +57,10 @@ export default function ImageViewer() {
       requestAnimationFrame(() => {
         const params = showOriginal
           ? identityParams()
-          : settingsToSimParams(cam, settings, baseline);
+          : settingsToSimParams(cam, settings, baseline, {
+              zoomRatio: lens ? focalZoomRatio(lens, exif) : 1,
+              isStops: lens?.image_stabilization ? 4 : 0,
+            });
         renderPreview(source, params, target, focusPoint);
         setRendering(false);
         if (showHistogram && histRef.current) {

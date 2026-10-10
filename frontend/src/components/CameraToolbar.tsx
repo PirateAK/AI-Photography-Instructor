@@ -10,23 +10,65 @@ import {
   isRange,
   stepOption,
 } from "../lib/camera";
+import { getLensById, lensApertureDef, lensesForCamera } from "../lib/lenses";
 import type { CameraModel, DiscreteSetting, RangeSetting, Settings } from "../lib/types";
 
 export default function CameraToolbar() {
   const cameraId = useStore((s) => s.cameraId);
   const highlight = useStore((s) => s.highlightSetting);
+  const lensByCamera = useStore((s) => s.lensByCamera);
+  const setLens = useStore((s) => s.setLens);
   const cam = getCamera(cameraId)!;
   const settings = useStore((s) => s.settingsByCamera[cameraId]) ?? defaultSettings(cam);
+
+  // Lens swap: the selected lens replaces the camera's aperture options and
+  // drives the framing/IS simulation. No lens selected -> body-only (generic).
+  const lens = getLensById(lensByCamera[cameraId]);
+  const compatible = lensesForCamera(cam);
+  const effCam: CameraModel = lens
+    ? { ...cam, settings: { ...cam.settings, aperture: lensApertureDef(lens) } }
+    : cam;
 
   return (
     <div className="toolbar" aria-label={`${cam.brand} ${cam.model} controls`}>
       <div className="toolbar-groups">
-        {cam.layout.groups.map((group) => (
+        <div className="toolbar-group" key="lens">
+          <div className="toolbar-group-label">Lens</div>
+          <div className="controls">
+            <div className="control" style={{ minWidth: 200 }}>
+              <div className="control-label">
+                Mounted lens
+                <span className="value">{lens ? lens.model.split(" ").slice(-2).join(" ") : "body only"}</span>
+              </div>
+              <select
+                aria-label="Mounted lens"
+                className="lens-select"
+                value={lensByCamera[cameraId] ?? ""}
+                onChange={(e) => setLens(e.target.value)}
+              >
+                <option value="">Body only — pick a lens…</option>
+                {compatible.map((l) => (
+                  <option key={l.id} value={l.id}>
+                    {l.model}
+                    {l.image_stabilization ? " · IS" : ""}
+                  </option>
+                ))}
+              </select>
+              {lens && <div className="muted" style={{ fontSize: "0.7rem" }}>{lens.kind} · {lens.min_focal_mm}–{lens.max_focal_mm}mm · f/{lens.max_aperture} · ~${lens.price_used_usd} used</div>}
+              {!lens && (
+                <div className="muted" style={{ fontSize: "0.7rem" }}>
+                  Swap lenses to change framing, available apertures and shake limits.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        {effCam.layout.groups.map((group) => (
           <div className="toolbar-group" key={group.id}>
             <div className="toolbar-group-label">{group.label}</div>
             <div className="controls">
               {group.settings.map((settingId) => {
-                const def = cam.settings[settingId];
+                const def = effCam.settings[settingId];
                 if (!def) return null; // camera lacks this setting -> hide
                 const highlighted = highlight === settingId;
                 if (isRange(def)) {

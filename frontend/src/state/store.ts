@@ -5,6 +5,15 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 import { analyzePhoto, fetchExif, sendChat as apiSendChat } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
+import {
+  clampApertureToLens,
+  defaultLensForCamera,
+  focalZoomRatio,
+  getLensById,
+  lensApertureDef,
+  lensesForCamera,
+  shakeThresholdSec,
+} from "../lib/lenses";
 import { saveHistorySession } from "../lib/history";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
@@ -64,6 +73,7 @@ interface PhotoState {
 
   styles: ShootingStyle[];
   deviceId: string;
+  lensByCamera: Record<string, string>; // cameraId -> lensId
 
   // actions
   loadFile: (file: File) => Promise<void>;
@@ -82,6 +92,7 @@ interface PhotoState {
   clearError: () => void;
   setHighlight: (id: string | null) => void;
   setFocusPoint: (p: { x: number; y: number }) => void;
+  setLens: (id: string) => void;
   beginUndoable: () => void;
   askCoach: (message: string) => Promise<void>;
   openWorkspace: () => void;
@@ -145,6 +156,7 @@ export const useStore = create<PhotoState>()(
         (typeof crypto !== "undefined" && "randomUUID" in crypto
           ? crypto.randomUUID()
           : `dev-${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`) as string,
+      lensByCamera: {},
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -266,6 +278,50 @@ export const useStore = create<PhotoState>()(
 
       setHighlight: (id) => set({ highlightSetting: id }),
       setFocusPoint: (p) => set({ focusPoint: p }),
+
+      setLens: (id) => {
+        const state = get();
+        const cam = getCamera(state.cameraId);
+        if (!cam) return;
+        const lens = getLensById(id);
+        if (lens && !lensesForCamera(cam).some((l) => l.id === lens.id)) {
+          set({
+            log: pushLog(state.log, {
+              kind: "system",
+              text: `The ${lens.model} uses a different mount — it doesn't fit a ${cam.model}.`,
+            }),
+          });
+          return;
+        }
+        const current = state.settingsByCamera[state.cameraId] ?? defaultSettings(cam);
+        const next = { ...current };
+        let extra = "";
+        if (lens) {
+          const clampedAperture = clampApertureToLens(String(current.aperture ?? ""), lens);
+          if (clampedAperture !== String(current.aperture ?? "")) {
+            next.aperture = clampedAperture;
+            extra += ` Aperture clamped to ${clampedAperture} — this lens can't open that wide.`;
+          }
+          const zoom = focalZoomRatio(lens, state.exif);
+          if (zoom > 1.01) {
+            extra += ` Framing tightens ~${zoom}× versus the as-shot focal length.`;
+          } else if (state.exif?.focal_length) {
+            extra += " Wider than the shot — the preview can't reveal scene outside the frame, but shake tolerance improves.";
+          }
+          if (lens.image_stabilization) {
+            extra += " Stabilization buys ~4 stops of handheld shake.";
+          }
+        }
+        set({
+          lensByCamera: { ...state.lensByCamera, [state.cameraId]: id },
+          settingsByCamera: { ...state.settingsByCamera, [state.cameraId]: next },
+          log: pushLog(state.log, {
+            kind: "tip",
+            text: lens ? `🔍 Lens mounted: ${lens.model}. ${lens.note}` : "Lens removed — body only.",
+            why: extra || undefined,
+          }),
+        });
+      },
 
       goClasses: () => set({ screen: "classes" }),
       goStyleManager: () => set({ screen: "stylemanager" }),
@@ -531,6 +587,7 @@ export const useStore = create<PhotoState>()(
         styleId: s.styleId,
         unlockedCourses: s.unlockedCourses,
         deviceId: s.deviceId,
+        lensByCamera: s.lensByCamera,
       }),
     },
   ),

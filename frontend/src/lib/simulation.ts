@@ -22,6 +22,7 @@ export interface SimParams {
   dofBlurPx: number; // background blur radius
   motionPx: number; // directional smear length
   mono: boolean;
+  fovZoom: number; // >=1 lens-swap framing crop (1 = none)
 }
 
 export interface Baseline {
@@ -42,6 +43,7 @@ export function identityParams(): SimParams {
     dofBlurPx: 0,
     motionPx: 0,
     mono: false,
+    fovZoom: 1,
   };
 }
 
@@ -79,11 +81,15 @@ const STYLES: Record<string, { contrast: number; saturation: number; sharpen: nu
   monochrome: { contrast: 0.08, saturation: 1.0, sharpen: 0.2, mono: true },
 };
 
-/** settings → simulation parameters, relative to the as-shot baseline. */
+/** settings → simulation parameters, relative to the as-shot baseline.
+ *  lensParams (optional) models a lens swap: fovZoom tightens the framing and
+ *  isStops raises the handheld shake threshold (image stabilization).
+ */
 export function settingsToSimParams(
   cam: CameraModel,
   settings: Settings,
   baseline: Baseline,
+  lensParams?: { zoomRatio: number; isStops: number },
 ): SimParams {
   const iso = Number(settings.iso) || baseline.iso;
   const t = parseShutter(settings.shutter_speed) ?? baseline.shutter;
@@ -99,12 +105,16 @@ export function settingsToSimParams(
   // grain grows ~ with sqrt of ISO ratio above the as-shot ISO
   const noise = clamp(Math.max(0, Math.pow(iso / baseline.iso, 0.55) - 1) * 0.9, 0, 1.2);
 
-  // handheld camera shake below ~1/60s → directional smear
-  const motionPx = t > 1 / 60 ? clamp(14 * Math.log2(t * 60) + 3, 0, 40) : 0;
+  // handheld camera shake: threshold ~1/60s, raised by IS stops
+  const shakeThreshold = (1 / 60) * Math.pow(2, lensParams?.isStops ?? 0);
+  const motionPx = t > shakeThreshold ? clamp(14 * Math.log2(t / (1 / 60)) + 3, 0, 40) : 0;
 
   // opening the aperture wider than as-shot → background blur (cannot "un-blur")
   const dofBlurPx =
     n < baseline.aperture ? clamp(22 * Math.log2(baseline.aperture / n) * 0.55, 0, 26) : 0;
+
+  // lens swap: longer focal → tighter framing (crop), clamped in focalZoomRatio
+  const fovZoom = clamp(lensParams?.zoomRatio ?? 1, 1, 4);
 
   const wbKey = String(settings.white_balance ?? "auto");
   const wb =
@@ -125,6 +135,7 @@ export function settingsToSimParams(
     dofBlurPx,
     motionPx,
     mono: !!style.mono,
+    fovZoom,
   };
 }
 
@@ -196,19 +207,32 @@ export function renderPreview(
   const ctx = out.getContext("2d");
   if (!ctx) return;
 
-  // 1. motion smear
+  // 0. lens-swap framing: longer focal → center crop (zoom)
   let base: HTMLCanvasElement = source;
+  if (params.fovZoom > 1.01) {
+    const z = params.fovZoom;
+    const zw = Math.max(1, Math.round(w / z));
+    const zh = Math.max(1, Math.round(h / z));
+    const zoomed = makeCanvas(w, h);
+    const zctx = zoomed.getContext("2d");
+    if (zctx) {
+      zctx.drawImage(source, (w - zw) / 2, (h - zh) / 2, zw, zh, 0, 0, w, h);
+      base = zoomed;
+    }
+  }
+
+  // 1. motion smear
   if (params.motionPx >= 0.75) {
     const m = makeCanvas(w, h);
     const mctx = m.getContext("2d");
     if (mctx) {
-      mctx.drawImage(source, 0, 0);
+      mctx.drawImage(base, 0, 0);
       mctx.globalAlpha = 0.22;
       const p = params.motionPx;
       for (let i = 1; i <= 5; i++) {
         const off = (p * i) / 5;
-        mctx.drawImage(source, -off, 0);
-        mctx.drawImage(source, off, 0);
+        mctx.drawImage(base, -off, 0);
+        mctx.drawImage(base, off, 0);
       }
       mctx.globalAlpha = 1;
       base = m;

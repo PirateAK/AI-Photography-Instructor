@@ -805,3 +805,15 @@ iframe.video-frame { border: none; }
 }
 .history-body { flex: 1; min-width: 0; display: grid; gap: 3px; }
 .history-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 0.86rem; }
+
+/* ---------- lens selector ---------- */
+select.lens-select {
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  width: 100%;
+  max-width: 260px;
+}

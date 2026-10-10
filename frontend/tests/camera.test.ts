@@ -10,7 +10,7 @@ import {
   snapToCamera,
   stepOption,
 } from "../src/lib/camera";
-import { getStyle, getStyles } from "../src/lib/styles";
+import { chunkRows, getStyle, getStyles, orderedStylesForWheel } from "../src/lib/styles";
 import { settingsToSimParams } from "../src/lib/simulation";
 import type { ExifInfo } from "../src/lib/types";
 
@@ -95,6 +95,16 @@ describe("photography styles", () => {
     const recipe = getStyle("portrait")!.recipe.settings;
     expect(snapToCamera(canon, recipe).aperture).toBe("f/2.0");
     expect(snapToCamera(sony, recipe).aperture).toBe("f/2.0");
+  });
+
+  it("style wheel leads with the headline genres and chunks into rows of five", () => {
+    const ordered = orderedStylesForWheel(getStyles());
+    expect(ordered.slice(0, 5).map((s) => s.id)).toEqual(["portrait", "wildlife", "sports", "landscape", "wedding"]);
+    expect(ordered).toHaveLength(getStyles().length); // nothing dropped, nothing duplicated
+    const rows = chunkRows(ordered, 5);
+    expect(rows[0].map((s) => s.id)).toEqual(["portrait", "wildlife", "sports", "landscape", "wedding"]);
+    expect(rows.every((r) => r.length > 0 && r.length <= 5)).toBe(true);
+    expect(rows.length).toBe(Math.ceil(getStyles().length / 5));
   });
 
   it("night recipe resolves on the Nikon", () => {

@@ -69,3 +69,25 @@ export function getStyle(id: string | undefined | null): ShootingStyle | undefin
   if (!id) return undefined;
   return styleCatalog.styles.find((s) => s.id === id);
 }
+
+/** The five genres every newcomer should see first, in wheel order. */
+export const WHEEL_HEADLINERS = ["portrait", "wildlife", "sports", "landscape", "wedding"];
+
+/**
+ * Orders the style catalog for the home-screen style wheel: the headline
+ * genres first, then everything else in catalog order.
+ */
+export function orderedStylesForWheel(styles: ShootingStyle[]): ShootingStyle[] {
+  const head = WHEEL_HEADLINERS.map((id) => styles.find((s) => s.id === id)).filter(
+    (s): s is ShootingStyle => !!s,
+  );
+  const headIds = new Set(head.map((s) => s.id));
+  return [...head, ...styles.filter((s) => !headIds.has(s.id))];
+}
+
+/** Splits an ordered list into wheel rows of `size` chips. */
+export function chunkRows<T>(list: T[], size: number): T[][] {
+  const rows: T[][] = [];
+  for (let i = 0; i < list.length; i += size) rows.push(list.slice(i, i + size));
+  return rows;
+}

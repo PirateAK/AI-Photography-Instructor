@@ -2,7 +2,11 @@ import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCameras } from "../lib/camera";
 import { isInstructorCode } from "../lib/training";
+import { chunkRows, orderedStylesForWheel } from "../lib/styles";
+import type { ShootingStyle } from "../lib/styles";
 import ModelSelector from "./ModelSelector";
+
+const WHEEL_ROW_SIZE = 5;
 
 export default function UploadScreen() {
   const loadFile = useStore((s) => s.loadFile);
@@ -129,28 +133,17 @@ export default function UploadScreen() {
         <label>
           What are you shooting? <span className="muted">(optional — tailors recipes, drills and diagnostics)</span>
         </label>
-        <div className="style-grid">
-          {styles.map((st) => (
-            <button
-              key={st.id}
-              type="button"
-              className={`style-chip ${styleId === st.id ? "active" : ""}`}
-              onClick={() => setStyle(styleId === st.id ? "" : st.id)}
-              title={st.description}
-            >
-              <span className="emoji">{st.emoji}</span>
-              {st.label}
-            </button>
-          ))}
-          {styleId && (
-            <button type="button" className="style-chip" onClick={() => setStyle("")}>
-              ✕ clear
-            </button>
-          )}
-        </div>
+        <StyleWheel
+          styles={orderedStylesForWheel(styles)}
+          styleId={styleId}
+          onPick={(id) => setStyle(styleId === id ? "" : id)}
+        />
         {styleId && (
           <p className="muted" style={{ margin: 0 }}>
-            {styles.find((s) => s.id === styleId)?.description}
+            {styles.find((s) => s.id === styleId)?.description}{" "}
+            <button type="button" className="btn small ghost" onClick={() => setStyle("")} style={{ padding: "2px 10px" }}>
+              ✕ clear
+            </button>
           </p>
         )}
         <ModelSelector />
@@ -205,6 +198,73 @@ export default function UploadScreen() {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * One-row style "wheel": the headline genres face forward; ▲ / ▼ roll the
+ * rows like a wheel (with wrap-around) to reach the rest of the catalog.
+ * Rows slide, chips stay flat and tappable.
+ */
+function StyleWheel({
+  styles,
+  styleId,
+  onPick,
+}: {
+  styles: ShootingStyle[];
+  styleId: string;
+  onPick: (id: string) => void;
+}) {
+  const rows = chunkRows(styles, WHEEL_ROW_SIZE);
+  const [row, setRow] = useState(() => {
+    const idx = styles.findIndex((s) => s.id === styleId);
+    return idx >= 0 ? Math.floor(idx / WHEEL_ROW_SIZE) : 0;
+  });
+  const safeRow = Math.min(row, rows.length - 1);
+  const go = (dir: 1 | -1) => setRow((r) => (Math.min(r, rows.length - 1) + dir + rows.length) % rows.length);
+
+  return (
+    <div className="style-wheel">
+      <button
+        type="button"
+        className="wheel-arrow"
+        onClick={() => go(-1)}
+        title="Previous row of styles"
+        aria-label="Previous row of styles"
+      >
+        ▲
+      </button>
+      <div className="style-wheel-viewport">
+        <div className="style-wheel-track" style={{ transform: `translateY(calc(-${safeRow} * var(--wheel-row)))` }}>
+          {rows.map((group, ri) => (
+            <div className="style-wheel-row" key={ri} aria-hidden={ri !== safeRow}>
+              {group.map((st) => (
+                <button
+                  key={st.id}
+                  type="button"
+                  tabIndex={ri === safeRow ? 0 : -1}
+                  className={`style-chip ${styleId === st.id ? "active" : ""}`}
+                  onClick={() => onPick(st.id)}
+                  title={st.description}
+                >
+                  <span className="emoji">{st.emoji}</span>
+                  {st.label}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        className="wheel-arrow"
+        onClick={() => go(1)}
+        title="More styles"
+        aria-label="More styles"
+      >
+        ▼
+      </button>
     </div>
   );
 }

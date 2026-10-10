@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import {
   appConfig,
+  canManageContent,
   coursesByCategory,
   courseProgress,
   embedUrl,
@@ -17,6 +18,7 @@ import {
 } from "../lib/training";
 
 export default function ClassesScreen() {
+  const instructorUnlocked = useStore((s) => s.instructorUnlocked);
   const unlockedCourses = useStore((s) => s.unlockedCourses);
   const completedLessons = useStore((s) => s.completedLessons);
   const goUpload = useStore((s) => s.goUpload);
@@ -55,13 +57,38 @@ export default function ClassesScreen() {
           <button className="btn" onClick={dataUrl ? openWorkspace : goUpload}>
             ← {dataUrl ? "Back to workspace" : "Back to upload"}
           </button>
-          <button className="btn primary" onClick={goStyleManager}>
-            ✎ Manage styles
+          <button
+            className="btn primary"
+            onClick={goStyleManager}
+            disabled={!canManageContent({ instructorUnlocked })}
+            title={
+              instructorUnlocked
+                ? "Edit the shooting-style knowledge base"
+                : "🔒 Instructor/Pro tool — unlock with your instructor code on the home screen"
+            }
+          >
+            {instructorUnlocked ? "✎ Manage styles" : "🔒 Manage styles"}
           </button>
-          <button className="btn primary" onClick={goCourseManager}>
-            ✎ Manage courses
+          <button
+            className="btn primary"
+            onClick={goCourseManager}
+            disabled={!canManageContent({ instructorUnlocked })}
+            title={
+              instructorUnlocked
+                ? "Create and edit training courses"
+                : "🔒 Instructor/Pro tool — unlock with your instructor code on the home screen"
+            }
+          >
+            {instructorUnlocked ? "✎ Manage courses" : "🔒 Manage courses"}
           </button>
         </div>
+        {!instructorUnlocked && (
+          <p className="muted" style={{ margin: "6px 0 0", fontSize: "0.8rem" }}>
+            Style and course management are instructor/Pro tools — they unlock through the hidden
+            Instructor Dashboard (type your instructor code into the home screen's
+            "What do you want to learn or shoot?" field).
+          </p>
+        )}
       </div>
 
       {coursesByCategory(courses).map((group) => (

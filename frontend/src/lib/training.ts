@@ -102,6 +102,16 @@ export function isInstructorCode(code: string): boolean {
   return (appConfig.instructor_codes ?? []).some((c) => c.toUpperCase() === normalized);
 }
 
+/**
+ * Content-management gate: who may edit shooting styles and courses.
+ * Today that's the instructor code (hidden Dashboard). When the Pro/credit
+ * upgrade ships, OR it in here — every entry point (Classes buttons, App
+ * route guard, Dashboard) reads this single function.
+ */
+export function canManageContent(state: { instructorUnlocked: boolean }): boolean {
+  return state.instructorUnlocked;
+}
+
 /** Build the embeddable player URL for YouTube/Vimeo links; null = direct MP4. */
 export function embedUrl(url: string): string | null {
   let m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]{6,})/);

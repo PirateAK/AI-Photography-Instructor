@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   appConfig,
+  canManageContent,
   courses,
   embedUrl,
   getCourse,
@@ -60,6 +61,11 @@ describe("unlocks", () => {
     for (const ic of appConfig.instructor_codes ?? []) {
       expect(appConfig.redemption_codes.map((c) => c.toUpperCase())).not.toContain(ic.toUpperCase());
     }
+  });
+
+  it("content management is gated: instructor unlock now, Pro/credit later via the same gate", () => {
+    expect(canManageContent({ instructorUnlocked: false })).toBe(false);
+    expect(canManageContent({ instructorUnlocked: true })).toBe(true);
   });
 });
 

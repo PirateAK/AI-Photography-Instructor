@@ -1,4 +1,5 @@
 import { useStore } from "./state/store";
+import { canManageContent } from "./lib/training";
 import UploadScreen from "./components/UploadScreen";
 import Workspace from "./components/Workspace";
 import SettingsScreen from "./components/SettingsScreen";
@@ -12,6 +13,7 @@ import { useEffect } from "react";
 
 export default function App() {
   const screen = useStore((s) => s.screen);
+  const instructorUnlocked = useStore((s) => s.instructorUnlocked);
   const photoLoading = useStore((s) => s.photoLoading);
 
   useEffect(() => {
@@ -22,22 +24,28 @@ export default function App() {
     void useStore.getState().loadGallery();
   }, []);
 
+  // manager screens are gated behind the instructor code / future Pro upgrade —
+  // a locked user can never land on them, even via stale navigation state
+  const managed =
+    !canManageContent({ instructorUnlocked }) && (screen === "stylemanager" || screen === "coursemanager");
+  const guardedScreen = managed ? "upload" : screen;
+
   return (
     <>
-      <ErrorBoundary key={screen}>
-        {screen === "workspace" ? (
+      <ErrorBoundary key={guardedScreen}>
+        {guardedScreen === "workspace" ? (
           <Workspace />
-        ) : screen === "settings" ? (
+        ) : guardedScreen === "settings" ? (
           <SettingsScreen />
-        ) : screen === "classes" ? (
+        ) : guardedScreen === "classes" ? (
           <ClassesScreen />
-        ) : screen === "stylemanager" ? (
+        ) : guardedScreen === "stylemanager" ? (
           <StyleManagerScreen />
-        ) : screen === "coursemanager" ? (
+        ) : guardedScreen === "coursemanager" ? (
           <CourseManagerScreen />
-        ) : screen === "instructor" ? (
+        ) : guardedScreen === "instructor" ? (
           <InstructorDashboard />
-        ) : screen === "progress" ? (
+        ) : guardedScreen === "progress" ? (
           <ProgressScreen />
         ) : (
           <UploadScreen />

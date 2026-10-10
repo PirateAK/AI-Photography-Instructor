@@ -125,6 +125,32 @@ export function isHighIso(cam: CameraModel, isoValue: string): boolean {
   return Number(isoValue) > Number(def.usable_max);
 }
 
+/**
+ * Snap a single setting value onto a camera's supported options — used when
+ * style knowledge (written for generic cameras) meets a specific body.
+ * Returns null when the value cannot be applied at all (unknown setting,
+ * non-numeric discrete value this camera doesn't offer).
+ */
+export function snapValue(
+  cam: CameraModel,
+  settingId: string,
+  value: string | number,
+): string | number | null {
+  const def = cam.settings[settingId];
+  if (!def) return null;
+  if (isRange(def)) return clampEv(cam, Number(value));
+  if (!isDiscrete(def)) return null;
+  const str = String(value);
+  if (def.options.some((o) => o.value === str)) return str;
+  const target = numericOf(settingId, str);
+  if (target === null) return null; // e.g. WB preset name this brand doesn't have
+  const parsed = def.options
+    .map((o) => ({ val: o.value, n: numericOf(settingId, o.value) }))
+    .filter((o): o is { val: string; n: number } => o.n !== null);
+  if (!parsed.length) return null;
+  return parsed.reduce((best, o) => (Math.abs(o.n - target) < Math.abs(best.n - target) ? o : best)).val;
+}
+
 /** Map settings onto the camera's supported values (for applying recommendations). */
 export function clampToCamera(cam: CameraModel, wanted: Settings): Settings {
   const out: Settings = {};

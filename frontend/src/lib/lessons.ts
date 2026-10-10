@@ -3,7 +3,7 @@
 // personalize these; the structure and player stay the same.
 import type { AnalysisResult, CameraModel, Lesson, LessonStep, Settings } from "./types";
 import type { ShootingStyle } from "./styles";
-import { baselineFromExif, defaultSettings, isDiscrete, optionsOf, parseAperture, parseShutter, stepOption } from "./camera";
+import { baselineFromExif, defaultSettings, isDiscrete, optionsOf, parseAperture, parseShutter, snapValue, stepOption } from "./camera";
 import type { ExifInfo } from "./types";
 
 export type { Lesson };
@@ -120,7 +120,38 @@ export function buildLessons(
 ): Lesson[] {
   const lessons: Lesson[] = [];
   if (analysis) lessons.push(fixTourLesson(cam, settings, analysis));
-  if (style) lessons.push(styleRecipeLesson(cam, settings, style));
+  if (style) {
+    lessons.push(...styleKbLessons(cam, style));
+    lessons.push(styleRecipeLesson(cam, settings, style));
+  }
   lessons.push(triangleLesson(cam, settings, exif));
   return lessons.filter((l) => l.steps.length > 0);
+}
+
+/**
+ * Guided lessons saved on the style (AI-drafted, instructor-approved). Draft
+ * lessons are invisible to learners until approved in the Style Manager.
+ * Step values snap onto the current camera — "f/11" becomes the closest
+ * supported stop; steps the camera can't apply are dropped.
+ */
+function styleKbLessons(cam: CameraModel, style: ShootingStyle): Lesson[] {
+  const out: Lesson[] = [];
+  for (const l of style.lessons ?? []) {
+    if (l.draft) continue;
+    const steps: LessonStep[] = [];
+    for (const st of l.steps) {
+      const value = snapValue(cam, st.settingId, st.value);
+      if (value === null) continue;
+      steps.push({ settingId: st.settingId, value, narration: st.narration, why: st.why });
+    }
+    if (steps.length) {
+      out.push({
+        id: `style-${style.id}-${l.id}`,
+        title: `${style.emoji} ${l.title}`,
+        description: l.description,
+        steps,
+      });
+    }
+  }
+  return out;
 }

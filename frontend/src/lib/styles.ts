@@ -9,6 +9,25 @@ export interface StyleExercise {
   how: string;
 }
 
+/** One guided step: set ONE setting, watch the photo respond. */
+export interface StyleLessonStep {
+  settingId: string;
+  value: string | number;
+  narration: string;
+  why?: string;
+}
+
+/** A guided lesson attached to a style. AI drafts arrive as draft:true and only
+ *  reach learners once approved (draft cleared) via the Style Manager. */
+export interface StyleLesson {
+  id: string;
+  title: string;
+  description: string;
+  steps: StyleLessonStep[];
+  practice_brief?: string;
+  draft?: boolean;
+}
+
 export interface StyleRules {
   shutter_floor?: string;
   aperture_target?: string;
@@ -31,6 +50,7 @@ export interface ShootingStyle {
   rules?: StyleRules;
   watch_fors?: string[];
   exercises?: StyleExercise[];
+  lessons?: StyleLesson[];
 }
 
 export interface StyleCatalog {

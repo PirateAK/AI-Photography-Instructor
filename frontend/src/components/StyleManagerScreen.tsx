@@ -3,7 +3,7 @@
 // backed up) into data/shooting_styles.json — the single source of truth.
 import { useState } from "react";
 import { useStore } from "../state/store";
-import type { ShootingStyle } from "../lib/styles";
+import type { ShootingStyle, StyleLesson, StyleLessonStep } from "../lib/styles";
 
 interface StyleForm {
   isNew: boolean;
@@ -25,9 +25,11 @@ interface StyleForm {
   priorities: Record<string, string>;
   watchForsText: string;
   exercises: { title: string; goal: string; how: string }[];
+  lessons: StyleLesson[];
 }
 
 const PRIORITY_KEYS = ["highlights", "shadows", "exposure", "color_cast", "noise", "sharpness"] as const;
+const STEP_SETTINGS = ["iso", "aperture", "shutter_speed", "white_balance", "exposure_comp", "picture_style", "focus_mode", "metering_mode"] as const;
 
 function fromStyle(style: ShootingStyle, isNew: boolean): StyleForm {
   const s = style.recipe.settings;
@@ -51,6 +53,7 @@ function fromStyle(style: ShootingStyle, isNew: boolean): StyleForm {
     priorities: Object.fromEntries(PRIORITY_KEYS.map((k) => [k, String(style.priorities?.[k] ?? 1)])),
     watchForsText: (style.watch_fors ?? []).join("\n"),
     exercises: (style.exercises ?? []).slice(0, 3).map((e) => ({ ...e })),
+    lessons: (style.lessons ?? []).map((l) => ({ ...l, steps: l.steps.map((st) => ({ ...st })) })),
   };
 }
 
@@ -78,6 +81,7 @@ function blankForm(): StyleForm {
       { title: "", goal: "", how: "" },
       { title: "", goal: "", how: "" },
     ],
+    lessons: [],
   };
 }
 
@@ -107,6 +111,8 @@ function toStyle(f: StyleForm): ShootingStyle {
     rules,
     watch_fors: f.watchForsText.split("\n").map((s) => s.trim()).filter(Boolean),
     exercises: f.exercises.filter((e) => e.title.trim() && e.goal.trim() && e.how.trim()),
+    // empty list -> omit the key entirely so the JSON stays clean
+    ...(f.lessons.some((l) => l.title.trim() && l.steps.length) ? { lessons: f.lessons.filter((l) => l.title.trim() && l.steps.length) } : {}),
   };
 }
 
@@ -115,6 +121,7 @@ export default function StyleManagerScreen() {
   const saveStyle = useStore((s) => s.saveStyle);
   const deleteStyle = useStore((s) => s.deleteStyle);
   const draftStyleWithAI = useStore((s) => s.draftStyleWithAI);
+  const generateStyleLessons = useStore((s) => s.generateStyleLessons);
   const goClasses = useStore((s) => s.goClasses);
   const activeEngine = useStore((s) => s.coachMeta?.provider);
 
@@ -169,6 +176,41 @@ export default function StyleManagerScreen() {
       setBusy(null);
     }
   };
+
+  const genLessons = async () => {
+    if (!form?.id.trim()) return;
+    setBusy("ai-lessons");
+    setError(null);
+    try {
+      const { draft_lessons, validation_errors } = await generateStyleLessons(form.id.trim());
+      setForm((f) => {
+        if (!f) return f;
+        const approved = f.lessons.filter((l) => !l.draft);
+        return { ...f, lessons: [...approved, ...draft_lessons] };
+      });
+      if (validation_errors.length) {
+        setError(`AI draft had shape issues — review below or regenerate: ${validation_errors.join("; ")}`);
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "AI lesson generation failed");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const setLesson = (i: number, patch: Partial<StyleLesson>) =>
+    setForm((f) => (f ? { ...f, lessons: f.lessons.map((l, j) => (j === i ? { ...l, ...patch } : l)) } : f));
+  const setStep = (li: number, si: number, patch: Partial<StyleLessonStep>) =>
+    setForm((f) =>
+      f
+        ? {
+            ...f,
+            lessons: f.lessons.map((l, j) =>
+              j === li ? { ...l, steps: l.steps.map((st, k) => (k === si ? { ...st, ...patch } : st)) } : l,
+            ),
+          }
+        : f,
+    );
 
   if (form) {
     return (
@@ -253,6 +295,82 @@ export default function StyleManagerScreen() {
               ＋ Add drill
             </button>
           )}
+
+          <div className="section-title" style={{ marginTop: 8 }}>
+            Guided lessons (optional — appear in the coach pane for this style)
+          </div>
+          <div className="upload-row" style={{ marginTop: 0 }}>
+            <button
+              className="btn small"
+              onClick={genLessons}
+              disabled={busy !== null || form.isNew || !form.id.trim()}
+              title={
+                form.isNew || !form.id.trim()
+                  ? "Save the style first — the AI drafts lessons for a saved style"
+                  : `Draft 2-3 interactive lessons for ${form.label || "this style"} with AI`
+              }
+            >
+              {busy === "ai-lessons" ? "Drafting…" : "✨ Generate lessons with AI"}
+            </button>
+            {form.lessons.some((l) => l.draft) && (
+              <span className="draft-chip">AI drafts below — approve each, then Save</span>
+            )}
+          </div>
+          {form.lessons.map((lesson, li) => (
+            <div className={`card lesson-card ${lesson.draft ? "is-draft" : ""}`} key={`${lesson.id}-${li}`} style={{ padding: 12, display: "grid", gap: 8 }}>
+              <div className="upload-row" style={{ marginBottom: 0 }}>
+                {lesson.draft ? <span className="draft-chip">AI draft</span> : <span className="draft-chip approved">✓ approved</span>}
+                <div className="spacer" />
+                {lesson.draft && (
+                  <button className="btn small" onClick={() => setLesson(li, { draft: false })} title="Make this lesson visible to learners (then Save)">
+                    ✓ Approve
+                  </button>
+                )}
+                <button className="btn small" onClick={() => set({ lessons: form.lessons.filter((_, j) => j !== li) })}>
+                  Remove
+                </button>
+              </div>
+              <div className="form-grid form-grid-4">
+                <label>Title<input value={lesson.title} onChange={(e) => setLesson(li, { title: e.target.value })} /></label>
+                <label>Lesson id<input value={lesson.id} onChange={(e) => setLesson(li, { id: e.target.value })} /></label>
+              </div>
+              <label>Description<input value={lesson.description} onChange={(e) => setLesson(li, { description: e.target.value })} /></label>
+              {lesson.steps.map((step, si) => (
+                <div className="lesson-step" key={si}>
+                  <div className="form-grid form-grid-4">
+                    <label>
+                      Setting
+                      <select value={step.settingId} onChange={(e) => setStep(li, si, { settingId: e.target.value })}>
+                        {STEP_SETTINGS.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>Value<input value={String(step.value)} onChange={(e) => setStep(li, si, { value: e.target.value })} /></label>
+                  </div>
+                  <label>Narration<textarea rows={2} value={step.narration} onChange={(e) => setStep(li, si, { narration: e.target.value })} /></label>
+                  <button
+                    className="btn small ghost"
+                    onClick={() => setLesson(li, { steps: lesson.steps.filter((_, k) => k !== si) })}
+                    disabled={lesson.steps.length <= 1}
+                  >
+                    Remove step
+                  </button>
+                </div>
+              ))}
+              {lesson.steps.length < 6 && (
+                <button
+                  className="btn small"
+                  onClick={() => setLesson(li, { steps: [...lesson.steps, { settingId: "aperture", value: "f/5.6", narration: "" }] })}
+                >
+                  ＋ Add step
+                </button>
+              )}
+              <label>Practice brief<input value={lesson.practice_brief ?? ""} onChange={(e) => setLesson(li, { practice_brief: e.target.value })} /></label>
+            </div>
+          ))}
 
           <div className="upload-row" style={{ marginTop: 8 }}>
             <button className="btn primary" disabled={busy !== null} onClick={save}>

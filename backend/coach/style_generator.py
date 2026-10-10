@@ -5,6 +5,7 @@ saved — the user reviews and edits it in the Style Manager before saving.
 """
 from __future__ import annotations
 
+import json
 import re
 
 from . import provider_for_request
@@ -63,6 +64,73 @@ def draft_style(name: str) -> dict:
     user_prompt = f"Design the photography style entry for: {name.strip()}\n\n{SCHEMA_INSTRUCTIONS}"
     raw = provider.generate_json(SYSTEM_PROMPT, user_prompt, max_tokens=4000)
     return _parse(raw)
+
+
+LESSON_SYSTEM_PROMPT = """You are a photography instructor designing interactive guided lessons
+for a beginner photography teaching app with a LIVE CAMERA SIMULATOR. Output a single valid JSON
+object and nothing else.
+
+Each lesson is a short sequence of steps. Each step sets ONE camera setting on the simulator; the
+app applies it and the student watches the photo respond. Narrations teach WHY, in plain practical
+language: identify the subject first, pick the one priority dial that matters most, then blend the
+others around it. Every value must be a real camera value the simulator can apply."""
+
+LESSON_SCHEMA_INSTRUCTIONS = """{
+  "lessons": [
+    {
+      "id": "<short slug ending in -1/-2/-3>",
+      "title": "<short and specific, e.g. 'Freeze the bird, then pay for it'>",
+      "description": "<1-2 sentences: what the student will feel or learn>",
+      "steps": [
+        {
+          "settingId": "<one of: iso | aperture | shutter_speed | white_balance | exposure_comp | picture_style | focus_mode | metering_mode>",
+          "value": "<real camera value: '400', 'f/2.8', '1/500', 'auto', or a number for exposure_comp EV>",
+          "narration": "<1-2 sentences: what to watch change in the photo and why it happens>",
+          "why": "<optional one-line principle behind the move>"
+        }
+      ],
+      "practice_brief": "<a hands-on drill to try in the simulator, 1-2 sentences>"
+    }
+  ]
+}
+
+Rules: 2-3 lessons; 2-4 steps per lesson; steps should build on each other (priority dial first,
+blending second); output the JSON object only."""
+
+
+def draft_style_lessons(style: dict) -> dict:
+    """Ask the active AI engine for guided lessons for an existing style. ValueError when no AI engine."""
+    provider, kind = provider_for_request()
+    if kind == "mock" or provider.name == "mock":
+        raise ValueError(
+            "No AI engine connected — add a key on the Setup page to generate lessons with AI."
+        )
+    context = json.dumps(
+        {
+            "label": style.get("label"),
+            "description": style.get("description"),
+            "recipe": style.get("recipe"),
+            "watch_fors": style.get("watch_fors"),
+        },
+        ensure_ascii=False,
+    )
+    user_prompt = (
+        f"Design interactive guided lessons for this photography style:\n{context}\n\n"
+        f"{LESSON_SCHEMA_INSTRUCTIONS}"
+    )
+    raw = provider.generate_json(LESSON_SYSTEM_PROMPT, user_prompt, max_tokens=4000)
+    return _parse_lessons(raw)
+
+
+def _parse_lessons(raw: str) -> dict:
+    from .gemini_provider import _extract_json
+
+    data = _extract_json(raw)
+    if isinstance(data, dict) and isinstance(data.get("lessons"), list):
+        return data
+    if isinstance(data, dict) and isinstance(data.get("style_lessons"), dict):
+        return data["style_lessons"]
+    return {"lessons": []}
 
 
 def _parse(raw: str) -> dict:

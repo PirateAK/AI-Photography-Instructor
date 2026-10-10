@@ -9,11 +9,25 @@
       "description": "Captures natural or urban scenes, emphasizing scale and mood. This genre often features wide vistas or intimate details, showcasing the beauty of the environment.",
       "recipe": {
         "summary": "Mid-aperture sweet spot, base ISO, shutter can go slow on a tripod.",
-        "settings": { "aperture": "f/8.0", "shutter_speed": "1/125", "iso": "100", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/8.0",
+          "shutter_speed": "1/125",
+          "iso": "100",
+          "exposure_comp": 0
+        },
         "why": "f/8–f/11 is most lenses' sharpness sweet spot and holds front-to-back detail; base ISO maximizes dynamic range so the sky and shadows both survive; on a tripod the shutter can stretch as long as the light wants."
       },
-      "priorities": { "highlights": 1.3, "shadows": 1.2, "exposure": 1.2, "color_cast": 0.8, "noise": 0.6, "sharpness": 1.1 },
-      "rules": { "aperture_target": "f/8.0" },
+      "priorities": {
+        "highlights": 1.3,
+        "shadows": 1.2,
+        "exposure": 1.2,
+        "color_cast": 0.8,
+        "noise": 0.6,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "aperture_target": "f/8.0"
+      },
       "watch_fors": [
         "Sky far brighter than the land — the sky clips before the ground is exposed.",
         "Everything slightly soft — diffraction past f/16 or focus not set near the hyperfocal distance.",
@@ -39,11 +53,26 @@
       "description": "Focuses on extreme close-ups of small subjects, such as insects or flowers. It reveals intricate textures and details that are often overlooked, making the ordinary appear extraordinary.",
       "recipe": {
         "summary": "Stop down for working depth of field, fast shutter to beat magnified shake, moderate ISO.",
-        "settings": { "aperture": "f/8.0", "shutter_speed": "1/200", "iso": "400", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/8.0",
+          "shutter_speed": "1/200",
+          "iso": "400",
+          "exposure_comp": 0
+        },
         "why": "At macro distances depth of field is razor-thin even at f/8, so stopping down buys the only sharpness there is; 1/200s beats the magnified camera shake that close work exaggerates; ISO 400 covers the light you lose to the small aperture."
       },
-      "priorities": { "sharpness": 1.6, "noise": 0.9, "exposure": 1.0, "color_cast": 0.8, "highlights": 0.9, "shadows": 0.8 },
-      "rules": { "shutter_floor": "1/200", "aperture_target": "f/8.0" },
+      "priorities": {
+        "sharpness": 1.6,
+        "noise": 0.9,
+        "exposure": 1.0,
+        "color_cast": 0.8,
+        "highlights": 0.9,
+        "shadows": 0.8
+      },
+      "rules": {
+        "shutter_floor": "1/200",
+        "aperture_target": "f/8.0"
+      },
       "watch_fors": [
         "Depth of field a millimeter thin — the eyes sharp but the antennae gone.",
         "Camera shake multiplied by magnification — every wobble shows.",
@@ -69,11 +98,26 @@
       "description": "Documents animals in their natural habitats. This type requires patience and timing to capture the behavior and beauty of wildlife, often in remote locations.",
       "recipe": {
         "summary": "Long lens wide open, fast shutter for sudden movement, ISO floats upward.",
-        "settings": { "aperture": "f/5.6", "shutter_speed": "1/1000", "iso": "800", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/5.6",
+          "shutter_speed": "1/1000",
+          "iso": "800",
+          "exposure_comp": 0
+        },
         "why": "Animals never pose twice: 1/1000s freezes the flick of a tail, the widest aperture you have gathers light in dawn forests, and ISO floats upward without guilt — a noisy wildlife frame beats a missed one every time."
       },
-      "priorities": { "sharpness": 1.6, "noise": 0.6, "highlights": 0.9, "shadows": 0.8, "exposure": 1.0, "color_cast": 0.5 },
-      "rules": { "shutter_floor": "1/1000", "aperture_target": "f/5.6" },
+      "priorities": {
+        "sharpness": 1.6,
+        "noise": 0.6,
+        "highlights": 0.9,
+        "shadows": 0.8,
+        "exposure": 1.0,
+        "color_cast": 0.5
+      },
+      "rules": {
+        "shutter_floor": "1/1000",
+        "aperture_target": "f/5.6"
+      },
       "watch_fors": [
         "Focus on the grass in front of the animal, not the eye.",
         "Shutter too slow for a sudden sprint or wingbeat.",
@@ -99,11 +143,25 @@
       "description": "Aims to reveal a person's character or identity through posed or candid images. It focuses on the subject, capturing emotions and personality.",
       "recipe": {
         "summary": "Wide aperture for background blur, shutter safe for handheld, lowest ISO the light allows.",
-        "settings": { "aperture": "f/2.0", "shutter_speed": "1/200", "iso": "100", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/2.0",
+          "shutter_speed": "1/200",
+          "iso": "100",
+          "exposure_comp": 0
+        },
         "why": "f/1.8–f/2.8 melts the background so the person pops; 1/200s freezes subtle movement and camera shake; base ISO keeps skin tones clean — raise ISO only when the shutter would drop below 1/125."
       },
-      "priorities": { "sharpness": 1.5, "color_cast": 1.4, "noise": 0.8, "highlights": 1.0, "shadows": 0.8, "exposure": 1.0 },
-      "rules": { "aperture_target": "f/2.0" },
+      "priorities": {
+        "sharpness": 1.5,
+        "color_cast": 1.4,
+        "noise": 0.8,
+        "highlights": 1.0,
+        "shadows": 0.8,
+        "exposure": 1.0
+      },
+      "rules": {
+        "aperture_target": "f/2.0"
+      },
       "watch_fors": [
         "Focus landed on the nose or cheek instead of the near eye.",
         "Background not separating — aperture not wide enough, or subject too close to the background.",
@@ -129,11 +187,25 @@
       "description": "Requires fast autofocus and precise timing to capture action during games or events. This genre often involves dynamic scenes and movement, showcasing athleticism.",
       "recipe": {
         "summary": "Fast shutter first, continuous AF, open aperture, let ISO float.",
-        "settings": { "aperture": "f/4.0", "shutter_speed": "1/1000", "iso": "800", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/4.0",
+          "shutter_speed": "1/1000",
+          "iso": "800",
+          "exposure_comp": 0
+        },
         "why": "1/1000s freezes most human and pet motion; AF-C / AI Servo keeps focus tracking; a wide aperture pays for the fast shutter and ISO floats upward — a frozen, slightly noisy frame beats a clean blur every time."
       },
-      "priorities": { "sharpness": 1.6, "noise": 0.5, "highlights": 0.9, "shadows": 0.7, "exposure": 1.0, "color_cast": 0.5 },
-      "rules": { "shutter_floor": "1/500" },
+      "priorities": {
+        "sharpness": 1.6,
+        "noise": 0.5,
+        "highlights": 0.9,
+        "shadows": 0.7,
+        "exposure": 1.0,
+        "color_cast": 0.5
+      },
+      "rules": {
+        "shutter_floor": "1/500"
+      },
       "watch_fors": [
         "Motion blur on hands, feet or the ball — shutter too slow for the speed of the action.",
         "Focus snapped onto the crowd or fence behind the athlete.",
@@ -159,11 +231,27 @@
       "description": "Uses long exposures to photograph celestial objects like stars and galaxies. This type often requires specialized equipment and techniques to capture the night sky's beauty.",
       "recipe": {
         "summary": "Tripod required: wide aperture, multi-second shutter, high-but-controlled ISO.",
-        "settings": { "aperture": "f/2.8", "shutter_speed": "8\"", "iso": "1600", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/2.8",
+          "shutter_speed": "8\"",
+          "iso": "1600",
+          "exposure_comp": 0
+        },
         "why": "On a tripod the shutter collects starlight for seconds; the widest aperture gathers the most of it; ISO 1600–3200 balances noise against exposure. Start with the recipe, then adjust by test frames — digital film is free."
       },
-      "priorities": { "noise": 1.3, "exposure": 1.3, "highlights": 0.7, "shadows": 0.9, "color_cast": 0.8, "sharpness": 1.0 },
-      "rules": { "iso_max": 3200, "allow_slow_shutter": true, "aperture_target": "f/2.8" },
+      "priorities": {
+        "noise": 1.3,
+        "exposure": 1.3,
+        "highlights": 0.7,
+        "shadows": 0.9,
+        "color_cast": 0.8,
+        "sharpness": 1.0
+      },
+      "rules": {
+        "iso_max": 3200,
+        "allow_slow_shutter": true,
+        "aperture_target": "f/2.8"
+      },
       "watch_fors": [
         "Stars smeared into short trails — shutter too long for the focal length (use the 500 rule: 500 ÷ focal length = max seconds).",
         "Noise blooming in the shadows from high ISO.",
@@ -189,11 +277,26 @@
       "description": "Candidly captures everyday life and people in public spaces. This genre focuses on spontaneous moments, often highlighting the human experience in urban settings.",
       "recipe": {
         "summary": "Everything ready before the moment: moderate aperture, safe shutter, floating ISO.",
-        "settings": { "aperture": "f/5.6", "shutter_speed": "1/250", "iso": "400", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/5.6",
+          "shutter_speed": "1/250",
+          "iso": "400",
+          "exposure_comp": 0
+        },
         "why": "Street moments arrive in half a second: f/5.6 keeps a moving subject within the focus zone, 1/250s handles walking pace, and a floating ISO means you never miss while dialing — set it once, then only compose."
       },
-      "priorities": { "exposure": 1.1, "color_cast": 1.0, "sharpness": 1.2, "noise": 0.8, "highlights": 1.0, "shadows": 1.0 },
-      "rules": { "shutter_floor": "1/250", "aperture_target": "f/5.6" },
+      "priorities": {
+        "exposure": 1.1,
+        "color_cast": 1.0,
+        "sharpness": 1.2,
+        "noise": 0.8,
+        "highlights": 1.0,
+        "shadows": 1.0
+      },
+      "rules": {
+        "shutter_floor": "1/250",
+        "aperture_target": "f/5.6"
+      },
       "watch_fors": [
         "The decisive moment ruined by a half-pressed menu dive — settings should be set before you raise the camera.",
         "Harsh midday light carving hollow eyes — watch where faces turn.",
@@ -219,11 +322,25 @@
       "description": "Emphasizes creative expression and the photographer's vision rather than literal representation. It allows for artistic interpretation and can encompass various subjects.",
       "recipe": {
         "summary": "Break the rules on purpose: small aperture and long exposure are your brushes.",
-        "settings": { "aperture": "f/11", "shutter_speed": "2\"", "iso": "100", "exposure_comp": -0.3 },
+        "settings": {
+          "aperture": "f/11",
+          "shutter_speed": "2\"",
+          "iso": "100",
+          "exposure_comp": -0.3
+        },
         "why": "Fine art often wants what documentary avoids: f/11 for dreamy softness at the edges, multi-second exposures that turn water and people into abstractions, and deliberate underexposure for mood. Here the 'wrong' settings are the style."
       },
-      "priorities": { "exposure": 1.2, "color_cast": 1.1, "sharpness": 0.8, "noise": 0.7, "highlights": 1.0, "shadows": 1.1 },
-      "rules": { "allow_slow_shutter": true },
+      "priorities": {
+        "exposure": 1.2,
+        "color_cast": 1.1,
+        "sharpness": 0.8,
+        "noise": 0.7,
+        "highlights": 1.0,
+        "shadows": 1.1
+      },
+      "rules": {
+        "allow_slow_shutter": true
+      },
       "watch_fors": [
         "Blur that reads as accident instead of intention — commit to the effect.",
         " mood so dark the shadows turn to mud — underexpose with purpose, not by mistake.",
@@ -249,11 +366,26 @@
       "description": "Documents gatherings such as weddings, concerts, and parties. This genre blends candid and posed shots to capture the essence of the event and its participants.",
       "recipe": {
         "summary": "Flexible mid-fast settings: f/2.8–f/4, 1/160s+, ISO floats, WB matched per room.",
-        "settings": { "aperture": "f/2.8", "shutter_speed": "1/160", "iso": "800", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/2.8",
+          "shutter_speed": "1/160",
+          "iso": "800",
+          "exposure_comp": 0
+        },
         "why": "Venues mix daylight, tungsten and DJ lighting within minutes; f/2.8–f/4 keeps small groups sharp while gathering light; 1/160s survives the processional; a floating ISO matters less than missing the once-only moment."
       },
-      "priorities": { "color_cast": 1.5, "highlights": 1.2, "sharpness": 1.3, "noise": 0.9, "shadows": 1.0, "exposure": 1.1 },
-      "rules": { "aperture_target": "f/2.8", "shutter_floor": "1/160" },
+      "priorities": {
+        "color_cast": 1.5,
+        "highlights": 1.2,
+        "sharpness": 1.3,
+        "noise": 0.9,
+        "shadows": 1.0,
+        "exposure": 1.1
+      },
+      "rules": {
+        "aperture_target": "f/2.8",
+        "shutter_floor": "1/160"
+      },
       "watch_fors": [
         "The white dress or cake blowing out — bright subjects clip before anything else in the frame.",
         "Mixed light making skin orange in one corner and green in another.",
@@ -279,11 +411,27 @@
       "description": "Highlights the design and details of buildings and structures. This type focuses on lines, shadows, and the overall aesthetic of architectural forms.",
       "recipe": {
         "summary": "Small aperture for edge-to-edge sharpness, low ISO, tripod-friendly slow shutter.",
-        "settings": { "aperture": "f/8.0", "shutter_speed": "1/125", "iso": "100", "exposure_comp": 0 },
+        "settings": {
+          "aperture": "f/8.0",
+          "shutter_speed": "1/125",
+          "iso": "100",
+          "exposure_comp": 0
+        },
         "why": "Buildings hold still, so you can buy everything: f/8–f/11 keeps every line crisp corner to corner, base ISO squeezes out maximum detail, and a tripod plus slow shutter turns mixed light into even, clean exposures. Watch the verticals — they're the genre's signature."
       },
-      "priorities": { "sharpness": 1.3, "exposure": 1.2, "highlights": 1.2, "shadows": 1.1, "color_cast": 0.9, "noise": 0.7 },
-      "rules": { "aperture_target": "f/8.0", "iso_max": 800, "allow_slow_shutter": true },
+      "priorities": {
+        "sharpness": 1.3,
+        "exposure": 1.2,
+        "highlights": 1.2,
+        "shadows": 1.1,
+        "color_cast": 0.9,
+        "noise": 0.7
+      },
+      "rules": {
+        "aperture_target": "f/8.0",
+        "iso_max": 800,
+        "allow_slow_shutter": true
+      },
       "watch_fors": [
         "Keystoned verticals — walls leaning inward because you tilted the camera back.",
         "Mixed window light vs daylight color patches across one facade.",
@@ -299,6 +447,557 @@
           "title": "Light chasing",
           "goal": "Photograph the same building at three times of day.",
           "how": "Morning, midday, golden hour. Compare how shadows define the form — architecture is a light-dependent subject wearing a static disguise."
+        }
+      ]
+    },
+    {
+      "id": "underwater",
+      "label": "Underwater",
+      "emoji": "🤿",
+      "description": "Shot in or under water — diving, snorkeling, pools. Water steals red light and contrast with every meter, so this genre is about getting close, adding light back, and keeping the subject sharp through a housing port.",
+      "recipe": {
+        "summary": "Close focus, f/5.6 for strobe depth, 1/160 to freeze surge, ISO 400 to spare the strobes.",
+        "settings": {
+          "iso": "400",
+          "shutter_speed": "1/160",
+          "aperture": "f/5.6",
+          "exposure_comp": 0
+        },
+        "why": "Water eats red and contrast fast, so the fix is distance not exposure: get within a meter of the subject. f/5.6 holds depth on a moving reef subject, 1/160 freezes surge and fish jitter, and ISO 400 lets the strobes work at a distance they can actually reach."
+      },
+      "priorities": {
+        "highlights": 1.2,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 2.0,
+        "noise": 0.8,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "shutter_floor": "1/160",
+        "aperture_target": "f/5.6",
+        "iso_max": 1600
+      },
+      "watch_fors": [
+        "Everything hazy blue-gray — too much water between lens and subject; move closer, then closer again.",
+        "Backscatter snow in the strobe light — angle strobes outward from the housing, not straight ahead.",
+        "Blue-cyan cast deepening with depth — white balance manually at depth or shoot RAW and fix it later."
+      ],
+      "exercises": [
+        {
+          "title": "Minimum water",
+          "goal": "Feel why distance, not settings, makes underwater shots pop.",
+          "how": "Simulate a reef scene and note the haze; the teaching point is that no f-stop fixes water contrast. In the field, fill the frame with the subject before you touch a dial."
+        },
+        {
+          "title": "Strobe drag",
+          "goal": "Balance ambient exposure against strobe reach.",
+          "how": "Drop the shutter (more ambient blue) then raise it (darker, strobe-defined) and watch the color story change. Underwater exposure is two exposures in one frame."
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Food",
+      "emoji": "🍜",
+      "description": "Editorial and menu photography of dishes. Soft directional light, tight apertures around f/4–f/8 for appetite appeal, and color accuracy that makes the dish look edible.",
+      "recipe": {
+        "summary": "Tripod base ISO, f/4–f/8, slow shutter welcome; light from the side like a window.",
+        "settings": {
+          "iso": "200",
+          "shutter_speed": "1/60",
+          "aperture": "f/4.0",
+          "exposure_comp": 0
+        },
+        "why": "Food is still — spend shutter, not ISO, and keep ISO at base for clean tones. f/4 gives selective focus on the hero bite; stop toward f/8 when the whole plate must read. Side light mimics window light and builds the shadows that give dishes shape."
+      },
+      "priorities": {
+        "highlights": 1.3,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 1.6,
+        "noise": 1.3,
+        "sharpness": 1.3
+      },
+      "rules": {
+        "aperture_target": "f/4.0",
+        "iso_max": 800,
+        "allow_slow_shutter": true
+      },
+      "watch_fors": [
+        "Orange tungsten or green fluorescent cast — restaurants are mixed-light traps; fix WB before styling.",
+        "Glossy sauces and plates clipping to white — speculars blow before the food looks bright.",
+        "Everything sharp including the props — shallow depth is what separates food photos from snapshots."
+      ],
+      "exercises": [
+        {
+          "title": "Hero bite",
+          "goal": "Choose what stays sharp on the plate.",
+          "how": "At f/4 pick one region — the garnish, the cut interior, the drip — and focus there. Walk to f/8 and compare which version makes you hungry."
+        },
+        {
+          "title": "Window side-light",
+          "goal": "Build shape with one soft directional source.",
+          "how": "Rotate the plate (or the simulated light) from front-lit to side-lit to back-lit; watch texture appear in the shadows. Side light sells texture; front light sells flatness."
+        }
+      ]
+    },
+    {
+      "id": "concert",
+      "label": "Concert",
+      "emoji": "🎤",
+      "description": "Live music in dark venues with strobing, saturated stage light. The camera fights for every stop: fast glass, high ISO tolerance, and shutter control between freeze and motion energy.",
+      "recipe": {
+        "summary": "Widest glass, 1/250 for the performer, ISO ride the lighting desk's mood swings.",
+        "settings": {
+          "iso": "3200",
+          "shutter_speed": "1/250",
+          "aperture": "f/2.8",
+          "exposure_comp": 0
+        },
+        "why": "Stage light is theatrical: one song spans spotlight and blackout. Wide aperture grabs the stops the venue won't give, 1/250 holds a singing performer while hinting at motion in the hands, and ISO 3200+ is simply the cost of admission — grain beats missing the moment."
+      },
+      "priorities": {
+        "highlights": 1.4,
+        "shadows": 0.8,
+        "exposure": 1.1,
+        "color_cast": 0.7,
+        "noise": 0.5,
+        "sharpness": 1.0
+      },
+      "rules": {
+        "shutter_floor": "1/250",
+        "aperture_target": "f/2.8",
+        "iso_max": 12800
+      },
+      "watch_fors": [
+        "Red and blue gels crushing skin tones — expose for the face and let the stage go graphic.",
+        "Beams and haze fooling the meter — spot meter the performer, not the light show.",
+        "Frozen-but-ghosted faces from slow shutter — 1/250 minimum for the lead, blur is for the drum kit."
+      ],
+      "exercises": [
+        {
+          "title": "One song, three looks",
+          "goal": "Ride the light instead of fighting it.",
+          "how": "Shoot the same performer through a song change: expose the spotlight, then the blackout, and watch how far ISO and shutter travel. Venue lighting is a moving target — plan for swings, not a setting."
+        },
+        {
+          "title": "Motion with intent",
+          "goal": "Use 1/60 drag for energy where freeze kills the vibe.",
+          "how": "Drop to 1/60 and track the guitarist — sharp face, smeared hands. That's the concert look fast shutter can't give you."
+        }
+      ]
+    },
+    {
+      "id": "real_estate",
+      "label": "Real Estate",
+      "emoji": "🏠",
+      "description": "Interiors and exteriors for listings. Straight verticals, window views that hold detail, and honest color — the technical genre where tripods and bracketing beat drama.",
+      "recipe": {
+        "summary": "Tripod, base ISO, f/8, slow shutter; expose for the windows and lift the room.",
+        "settings": {
+          "iso": "200",
+          "shutter_speed": "1/30",
+          "aperture": "f/8.0",
+          "exposure_comp": 0
+        },
+        "why": "Rooms are still and must be corner-to-corner sharp: f/8 and base ISO on a tripod. The dynamic-range problem — bright windows vs dim interior — is solved with slow shutter plus highlight protection, or bracketing when even that fails."
+      },
+      "priorities": {
+        "highlights": 1.6,
+        "shadows": 1.1,
+        "exposure": 1.1,
+        "color_cast": 1.4,
+        "noise": 1.2,
+        "sharpness": 1.3
+      },
+      "rules": {
+        "aperture_target": "f/8.0",
+        "iso_max": 800,
+        "allow_slow_shutter": true
+      },
+      "watch_fors": [
+        "Windows blown to pure white — they read as 'no view'; protect them and lift the interior instead.",
+        "Converging walls and tilted verticals — keep the camera level; fix perspective in framing, not rescue.",
+        "Mixed lamp + daylight color — pick one temperature or light the room to match the windows."
+      ],
+      "exercises": [
+        {
+          "title": "Window rescue",
+          "goal": "Hold the view while keeping the room readable.",
+          "how": "Use exposure comp −1 EV until the histogram's right edge unhooks, then note how the room darkens — that gap is what HDR bracketing exists to fill."
+        },
+        {
+          "title": "Corner discipline",
+          "goal": "Shoot a room so walls stay vertical.",
+          "how": "Frame from chest height, camera level, one wall parallel to the frame. Compare with a hand-held tilt — the slant is subtle on the LCD and glaring on a listing."
+        }
+      ]
+    },
+    {
+      "id": "pet",
+      "label": "Pets",
+      "emoji": "🐕",
+      "description": "Dogs, cats and every unpredictable companion. Wildlife rules at living-room distances: fast shutter for sudden movement, wide aperture, and focus locked on the eyes.",
+      "recipe": {
+        "summary": "Shutter first like sports — 1/500+, wide aperture, ISO whatever it takes.",
+        "settings": {
+          "iso": "800",
+          "shutter_speed": "1/500",
+          "aperture": "f/2.8",
+          "exposure_comp": 0
+        },
+        "why": "Pets invent motion: a nap becomes a sprint in half a second. Choose shutter before anything else, open the aperture to lift the pet off a busy floor, and spend ISO freely — noise cleans up in post; a missed expression is gone for good."
+      },
+      "priorities": {
+        "highlights": 1.0,
+        "shadows": 1.0,
+        "exposure": 1.1,
+        "color_cast": 0.8,
+        "noise": 0.5,
+        "sharpness": 1.2
+      },
+      "rules": {
+        "shutter_floor": "1/500",
+        "aperture_target": "f/2.8",
+        "iso_max": 6400
+      },
+      "watch_fors": [
+        "Sharp nose, soft eyes — focus discipline: the eyes carry the whole photo.",
+        "Shutter crept below 1/250 during play — freeze fails exactly when the pose peaks.",
+        "Busy household background — drop the aperture wider or change your angle to a plain wall."
+      ],
+      "exercises": [
+        {
+          "title": "Eye rule",
+          "goal": "Prove the eyes carry pet portraits.",
+          "how": "Simulate focus on the nose, then the eyes. The f/2.8 falloff makes the difference brutal — build the reflex to check eyes before pressing."
+        },
+        {
+          "title": "Sprint budget",
+          "goal": "Price a freeze in ISO.",
+          "how": "Set 1/1000 for the zoomies and watch what ISO it costs indoors. Decide your ceiling before the pet decides your shutter."
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "label": "Family & Kids",
+      "emoji": "🧒",
+      "description": "Children, babies and family groups — portraits with a moving target. Fast shutter for unpredictability, gentle depth, and patience doing the work exposure can't.",
+      "recipe": {
+        "summary": "1/250 floor for toddlers, f/2.8 for gentle separation, ISO rides the room.",
+        "settings": {
+          "iso": "400",
+          "shutter_speed": "1/250",
+          "aperture": "f/2.8",
+          "exposure_comp": 0
+        },
+        "why": "Kids move in bursts and blink at the wrong moment: a 1/250 floor catches the peek-a-boo peak. f/2.8 separates faces from birthday-party chaos while keeping both eyes of the group in focus, and ISO 400–1600 is a fair trade for a real expression."
+      },
+      "priorities": {
+        "highlights": 1.1,
+        "shadows": 1.0,
+        "exposure": 1.1,
+        "color_cast": 1.0,
+        "noise": 0.6,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "shutter_floor": "1/250",
+        "aperture_target": "f/2.8",
+        "iso_max": 3200
+      },
+      "watch_fors": [
+        "Shutter dropped to 1/60 indoors — toddler speed makes that a motion-blur lottery.",
+        "Faces in open shade while the yard glows — expose the faces, let the background do what it wants.",
+        "Group depth too thin at f/1.8 — two rows of people need f/2.8–f/4 or the back row softens."
+      ],
+      "exercises": [
+        {
+          "title": "Burst anticipation",
+          "goal": "Catch the expression peak, not the aftermath.",
+          "how": "Pick 1/500 and simulate a giggle fit; the teaching point is rhythm — kids cycle still-burst-still, and the burst is where the keeper lives."
+        },
+        {
+          "title": "Party background triage",
+          "goal": "Tame chaos with aperture and angle.",
+          "how": "At f/2.8 note the melt; step to f/5.6 and watch the clutter return. Depth of field is your cleanup crew when the room won't cooperate."
+        }
+      ]
+    },
+    {
+      "id": "wedding",
+      "label": "Wedding",
+      "emoji": "💍",
+      "description": "One-shot documentary work across church dark, dance-floor chaos and outdoor light — often within the same hour. Event skills at their most unforgiving: no retries on the moments that matter.",
+      "recipe": {
+        "summary": "f/2.8 safety, 1/160 floor, ISO climbs to 6400 without apology.",
+        "settings": {
+          "iso": "1600",
+          "shutter_speed": "1/160",
+          "aperture": "f/2.8",
+          "exposure_comp": 0
+        },
+        "why": "Aisle light, reception tungsten and midday sun all arrive uninvited. f/2.8 keeps faces lifted from dim venues, 1/160 protects the first kiss from handheld drift, and ISO 6400 is cheaper than a moment that never happened."
+      },
+      "priorities": {
+        "highlights": 1.5,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 1.5,
+        "noise": 0.7,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "shutter_floor": "1/160",
+        "aperture_target": "f/2.8",
+        "iso_max": 6400
+      },
+      "watch_fors": [
+        "White dress clipping in sunlight — it's the largest bright surface in the frame; protect its texture.",
+        "Tungsten reception turning everything amber — the cast lands on skin, where nobody forgives it.",
+        "Dark venue + slow shutter — 1/160 floor; motion blur on the kiss is forever."
+      ],
+      "exercises": [
+        {
+          "title": "Dress first",
+          "goal": "Protect the one white surface that must survive.",
+          "how": "Drop exposure comp until the dress histogram edge unhooks; watch the suit and venue follow. Weddings are highlight management with people attached."
+        },
+        {
+          "title": "Venue crossover",
+          "goal": "Move from church dark to outdoor sun without a casualty.",
+          "how": "Simulate stepping outside: ISO 1600 → 100, shutter up, aperture held. The triangle changes three dials in four seconds — rehearse the order."
+        }
+      ]
+    },
+    {
+      "id": "automotive",
+      "label": "Automotive",
+      "emoji": "🏎️",
+      "description": "Cars as sculpture: controlled reflections, rolling or parked. Highlights and color are the whole game — paint lives or dies on what the body reflects.",
+      "recipe": {
+        "summary": "Polarizer mindset, f/5.6, 1/500 rolling or tripod stills at base ISO.",
+        "settings": {
+          "iso": "100",
+          "shutter_speed": "1/500",
+          "aperture": "f/5.6",
+          "exposure_comp": 0
+        },
+        "why": "Paint is a mirror — every panel reflects the world you point it at. f/5.6 holds the whole car, 1/500 freezes a rolling shot crisply, and base ISO keeps body-color gradations free of noise banding."
+      },
+      "priorities": {
+        "highlights": 1.6,
+        "shadows": 0.9,
+        "exposure": 1.2,
+        "color_cast": 1.2,
+        "noise": 1.1,
+        "sharpness": 1.2
+      },
+      "rules": {
+        "shutter_floor": "1/500",
+        "aperture_target": "f/5.6",
+        "iso_max": 400
+      },
+      "watch_fors": [
+        "You, the horizon and the grid reflected down the door — walk the angles before touching settings.",
+        "Hot speculars on chrome blowing to white — they're small but they read as damage.",
+        "Panning shots frozen wheels — rolling shots want 1/60–1/125 with the car tracked, wheels blurring."
+      ],
+      "exercises": [
+        {
+          "title": "Reflection walk",
+          "goal": "See what the car sees.",
+          "how": "Simulate a glossy body and move the light angle; watch highlights slide across panels. The best car photos are made walking the car, then choosing settings."
+        },
+        {
+          "title": "Rolling at 1/80",
+          "goal": "Pan so the car is sharp and the world streaks.",
+          "how": "Drop the shutter to 1/80 and track the body; motion in the background sells speed that 1/1000 erases."
+        }
+      ]
+    },
+    {
+      "id": "aerial",
+      "label": "Aerial & Drone",
+      "emoji": "🚁",
+      "description": "Photography from drones, planes and helicopters. High platform, high vibration, huge vistas: fast shutter to defeat aircraft shake, base ISO for clean skies, and geometry as the subject.",
+      "recipe": {
+        "summary": "1/500 against vibration, f/4–f/5.6, base ISO; treat the horizon as a spirit level.",
+        "settings": {
+          "iso": "100",
+          "shutter_speed": "1/500",
+          "aperture": "f/4.0",
+          "exposure_comp": 0
+        },
+        "why": "The aircraft vibrates even when your hands are steady: 1/500 stays ahead of prop and rotor shake. f/4 on a tiny sensor is already deep focus, base ISO keeps big skies gradation-clean, and sunlight from above is bright — spend shutter, not ISO."
+      },
+      "priorities": {
+        "highlights": 1.3,
+        "shadows": 0.9,
+        "exposure": 1.1,
+        "color_cast": 0.8,
+        "noise": 1.2,
+        "sharpness": 1.2
+      },
+      "rules": {
+        "shutter_floor": "1/500",
+        "aperture_target": "f/4.0",
+        "iso_max": 200
+      },
+      "watch_fors": [
+        "Fine texture smeared by vibration — the Nd-filter/slow-shutter combo needs a very steady platform.",
+        "Horizon tilted a degree — invisible on the small screen, permanent in the print.",
+        "Sky-to-land brightness gap — expose the land, watch the sky edge, consider a gradient in post."
+      ],
+      "exercises": [
+        {
+          "title": "Vibration floor",
+          "goal": "Find the shutter where platform shake stops mattering.",
+          "how": "Step shutter from 1/125 to 1/1000 and watch fine detail — field texture, roof lines. The stop where crispness locks in is your minimum airborne."
+        },
+        {
+          "title": "Geometry first",
+          "goal": "Compose with lines only a map sees.",
+          "how": "Note how roads, shorelines and field edges become the subject from above; depth of field stops mattering when everything is far away."
+        }
+      ]
+    },
+    {
+      "id": "black_and_white",
+      "label": "Black & White",
+      "emoji": "◼️",
+      "description": "Mono as a discipline, not a filter. With color gone, exposure becomes tonal placement — light, shape and texture carry everything the palette used to.",
+      "recipe": {
+        "summary": "Expose for the tones you want, not the colors you see; ISO 100–400 for clean grays.",
+        "settings": {
+          "iso": "200",
+          "shutter_speed": "1/125",
+          "aperture": "f/5.6",
+          "exposure_comp": 0
+        },
+        "why": "In mono, luminance is the only story: place shadows where they give shape, protect the whites that carve form. f/5.6 keeps texture honest, and clean low-ISO grays matter because noise reads as grit in tonal transitions."
+      },
+      "priorities": {
+        "highlights": 1.3,
+        "shadows": 1.3,
+        "exposure": 1.3,
+        "color_cast": 0.2,
+        "noise": 0.8,
+        "sharpness": 1.2
+      },
+      "rules": {
+        "aperture_target": "f/5.6",
+        "allow_slow_shutter": true
+      },
+      "watch_fors": [
+        "Two different colors landing as one gray — separation must come from light, not hue.",
+        "Flat mid-gray everything — no true black or clean white means no tonal spine.",
+        "Color cast in the capture distorting channel mix — WB accuracy still matters before conversion."
+      ],
+      "exercises": [
+        {
+          "title": "Tonal spine",
+          "goal": "Put a true black and a clean white in every frame.",
+          "how": "Watch the histogram for both walls being approached without touching them — that spread is what makes mono pop."
+        },
+        {
+          "title": "Light over color",
+          "goal": "Choose scenes by contrast, not by color appeal.",
+          "how": "Simulate a colorful sunset scene in mono and watch what survives — the lesson is to hunt light geometry (raking light, hard shadows) instead of palettes."
+        }
+      ]
+    },
+    {
+      "id": "travel",
+      "label": "Travel",
+      "emoji": "🧳",
+      "description": "Places, people and light on the move — one bag, no reshoots. The genre is adaptability: scene changes every ten minutes, so settings must follow subject, not habit.",
+      "recipe": {
+        "summary": "f/5.6 all-rounder, 1/125 floor for handheld walking, ISO flexible to 1600.",
+        "settings": {
+          "iso": "400",
+          "shutter_speed": "1/125",
+          "aperture": "f/5.6",
+          "exposure_comp": 0
+        },
+        "why": "Travel means midday plazas, dim temples and dusk markets in one afternoon. f/5.6 keeps scenes readable, 1/125 stays ahead of walking-pace handheld shake, and ISO 400–1600 is the flexibility budget that keeps you from carrying a tripod."
+      },
+      "priorities": {
+        "highlights": 1.2,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 1.0,
+        "noise": 0.8,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "shutter_floor": "1/125",
+        "aperture_target": "f/5.6",
+        "iso_max": 1600
+      },
+      "watch_fors": [
+        "Harsh noon sun flattening faces — move subjects into shade; the landmark can keep the sun.",
+        "Souvenir-shop clutter crowding the landmark — step sideways, drop aperture, or get closer.",
+        "Camera shaking at 1/30 after a long day — the floor is 1/125 handheld; rest or brace."
+      ],
+      "exercises": [
+        {
+          "title": "Three scenes, one walk",
+          "goal": "Re-derive settings from the subject every ten minutes.",
+          "how": "Cycle street → landmark → interior presets and narrate which dial leads each time: shutter for the market, aperture for the monument, ISO for the temple. Travel skill is switching, not perfecting."
+        },
+        {
+          "title": "Shade relocate",
+          "goal": "Fix people with placement before settings.",
+          "how": "Simulate harsh sun on a portrait, then move the subject to building shade — exposure evens out for free. Position is the first dial."
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "label": "Product",
+      "emoji": "📦",
+      "description": "Commercial shots of objects for catalogs and stores. Tripod, controlled light, honest color and edge-to-edge sharpness — precision work where consistency is the deliverable.",
+      "recipe": {
+        "summary": "Tripod base ISO, f/8 for full-object sharpness, slow shutter fine; light the set, not the camera.",
+        "settings": {
+          "iso": "100",
+          "shutter_speed": "1/125",
+          "aperture": "f/8.0",
+          "exposure_comp": 0
+        },
+        "why": "Product buyers judge texture, edges and true color: f/8 holds the whole object past its focal plane, base ISO keeps gradients spotless, and since nothing moves the shutter can be whatever the lights need. Accuracy beats drama — this genre's drama IS accuracy."
+      },
+      "priorities": {
+        "highlights": 1.4,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 1.6,
+        "noise": 1.4,
+        "sharpness": 1.5
+      },
+      "rules": {
+        "aperture_target": "f/8.0",
+        "iso_max": 400,
+        "allow_slow_shutter": true
+      },
+      "watch_fors": [
+        "Mixed color temperatures lying about the product color — clients return items that look wrong.",
+        "Dust and fingerprints screaming at 100% — clean the set before blaming the lens.",
+        "Specular hot spots on gloss — diffuse or flag the light; hot spots read as defects."
+      ],
+      "exercises": [
+        {
+          "title": "Color honesty",
+          "goal": "Hold true color across a set.",
+          "how": "Simulate a WB shift and watch a white label drift cream or blue — product color is a contract, so WB is set, not guessed."
+        },
+        {
+          "title": "Edge audit",
+          "goal": "Prove the whole object is sharp.",
+          "how": "At f/2.8 check the far edge, then step to f/8 and re-check — catalog work has no focal-plane excuses."
         }
       ]
     }

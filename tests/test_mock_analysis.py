@@ -104,14 +104,14 @@ def test_exposure_gain_matches_triangle():
 
 
 def test_clamp_recommended_snaps_to_options():
-    camera = load_cameras()[0]  # Canon SL3: ISO 100..25600, EV ±2, widest kit aperture f/4
+    camera = load_cameras()[0]  # Canon SL3: ISO 100..25600, EV ±2, aperture ladder f/1.4..f/22
     clamped = clamp_recommended(
         camera,
         {"iso": "333", "aperture": "f/1.4", "shutter_speed": "1/350", "exposure_comp": 9},
     )
     assert clamped["iso"] in ("3200", "400")  # nearest stops around 333
     assert clamped["exposure_comp"] <= 2
-    assert clamped["aperture"] == "f/4.0"  # snapped to the widest supported option
+    assert clamped["aperture"] == "f/1.4"  # prime apertures are on the mount ladder — exact match
     assert clamped["shutter_speed"] in ("1/250", "1/500")  # nearest to 1/350
 
 

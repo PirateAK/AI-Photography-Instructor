@@ -45,6 +45,28 @@ class StyleRulesModel(BaseModel):
     allow_slow_shutter: bool = False
 
 
+class StyleLessonStepModel(BaseModel):
+    settingId: str = Field(pattern=r"^[a-z_]{3,30}$")
+    value: Any
+    narration: str = Field(min_length=5)
+    why: Optional[str] = None
+
+
+class StyleLessonModel(BaseModel):
+    id: str = Field(pattern=r"^[a-z0-9_-]{2,40}$")
+    title: str = Field(min_length=3, max_length=90)
+    description: str = Field(min_length=5)
+    steps: list[StyleLessonStepModel] = Field(min_length=1, max_length=6)
+    practice_brief: Optional[str] = None
+    draft: bool = True
+
+
+KNOWN_STEP_SETTINGS = {
+    "iso", "aperture", "shutter_speed", "white_balance",
+    "exposure_comp", "picture_style", "focus_mode", "metering_mode",
+}
+
+
 class ShootingStyleModel(BaseModel):
     id: str = Field(pattern=r"^[a-z0-9_]{3,40}$")
     label: str = Field(min_length=2, max_length=40)
@@ -56,6 +78,7 @@ class ShootingStyleModel(BaseModel):
     rules: StyleRulesModel = Field(default_factory=StyleRulesModel)
     watch_fors: list[str] = Field(default_factory=list)
     exercises: list[StyleExerciseModel] = Field(min_length=2, max_length=4)
+    lessons: Optional[list[StyleLessonModel]] = None
 
 
 class StyleMutation(BaseModel):
@@ -82,6 +105,32 @@ def _validate_semantics(style: ShootingStyleModel) -> None:
             raise HTTPException(status_code=400, detail=f"recipe.settings needs at least iso, aperture and shutter_speed (missing '{key}').")
     if parse_shutter(style.recipe.settings.get("shutter_speed")) is None:
         raise HTTPException(status_code=400, detail="recipe.settings.shutter_speed is not a shutter speed.")
+    _validate_lessons(style.lessons)
+
+
+def _validate_lessons(lessons: Optional[list[StyleLessonModel]]) -> None:
+    """Guided-lesson steps must target known settings with values the simulator can apply."""
+    if not lessons:
+        return
+    ids = [l.id for l in lessons]
+    if len(ids) != len(set(ids)):
+        raise HTTPException(status_code=400, detail="Lesson ids must be unique within a style.")
+    for lesson in lessons:
+        for i, step in enumerate(lesson.steps):
+            if step.settingId not in KNOWN_STEP_SETTINGS:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Lesson '{lesson.id}' step {i + 1}: unknown setting '{step.settingId}'.",
+                )
+            v = step.value
+            if step.settingId == "iso" and (not isinstance(v, (int, float, str)) or not str(v).strip().isdigit()):
+                raise HTTPException(status_code=400, detail=f"Lesson '{lesson.id}' step {i + 1}: ISO value must be a number.")
+            if step.settingId == "aperture" and parse_aperture(str(v)) is None:
+                raise HTTPException(status_code=400, detail=f"Lesson '{lesson.id}' step {i + 1}: aperture value must look like 'f/2.8'.")
+            if step.settingId == "shutter_speed" and parse_shutter(str(v)) is None:
+                raise HTTPException(status_code=400, detail=f"Lesson '{lesson.id}' step {i + 1}: shutter value must look like '1/250' or '0.5'.")
+            if step.settingId == "exposure_comp" and not isinstance(v, (int, float)):
+                raise HTTPException(status_code=400, detail=f"Lesson '{lesson.id}' step {i + 1}: exposure_comp must be a number of EV.")
 
 
 def _load_styles() -> list[dict]:
@@ -121,6 +170,31 @@ def generate_style(payload: dict):
     except Exception as exc:
         errors = [f"{e.get('loc', '?')}: {e.get('msg', '')}" for e in getattr(exc, "errors", lambda: [])()][:5]
     return {"draft": draft, "validation_errors": errors}
+
+
+@router.post("/generate-lessons")
+def generate_lessons_for_style(payload: dict):
+    """AI-draft guided lessons for an existing style. Returned, never auto-saved —
+    the Style Manager review step (approve/edit/discard) owns the decision."""
+    sid = str(payload.get("style_id", "")).strip()
+    style = next((s for s in _load_styles() if s["id"] == sid), None)
+    if not style:
+        raise HTTPException(status_code=404, detail=f"Style '{sid}' not found.")
+    from .coach.style_generator import draft_style_lessons
+
+    try:
+        draft = draft_style_lessons(style)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"AI lesson draft failed: {exc}")
+    errors: list[str] = []
+    for lesson in draft.get("lessons", []):
+        try:
+            StyleLessonModel.model_validate(lesson)
+        except Exception as exc:
+            errors.extend(f"{lesson.get('id', '?')}: {e.get('msg', '')}" for e in getattr(exc, "errors", lambda: [])()[:3])
+    return {"draft_lessons": draft.get("lessons", []), "validation_errors": errors[:5]}
 
 
 @router.post("")

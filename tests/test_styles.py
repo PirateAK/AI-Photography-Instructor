@@ -10,7 +10,12 @@ from backend.styles import get_style, load_styles
 
 ROOT = Path(__file__).resolve().parent.parent
 
-EXPECTED_IDS = {"portrait", "landscape", "macro", "wildlife", "sports", "astrophotography", "street", "fine_art", "event", "architecture"}
+EXPECTED_IDS = {
+    "portrait", "landscape", "macro", "wildlife", "sports", "astrophotography",
+    "street", "fine_art", "event", "architecture",
+    "underwater", "food", "concert", "real_estate", "pet", "family",
+    "wedding", "automotive", "aerial", "black_and_white", "travel", "product",
+}
 
 
 def load_cameras():

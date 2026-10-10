@@ -106,3 +106,78 @@ def test_generate_requires_ai_engine():
     res = client.post("/api/styles/generate", json={"name": "Macro"})
     assert res.status_code == 400
     assert "Setup page" in res.json()["detail"]
+
+
+def test_generate_lessons_requires_ai_engine():
+    res = client.post("/api/styles/generate-lessons", json={"style_id": "landscape"})
+    assert res.status_code == 400
+    assert "No AI engine" in res.json()["detail"]
+
+
+def _valid_lesson_draft():
+    return {
+        "lessons": [
+            {
+                "id": "landscape-1",
+                "title": "Protect the sky",
+                "description": "Feel the sky-vs-land exposure gap and fix it.",
+                "steps": [
+                    {"settingId": "exposure_comp", "value": -0.7, "narration": "Pull the sky back from the right wall.", "why": "Highlights are the contract in landscapes."},
+                    {"settingId": "aperture", "value": "f/11", "narration": "Deepen focus front to back."},
+                ],
+                "practice_brief": "Watch the histogram right edge unhook as you step down.",
+                "draft": True,
+            }
+        ]
+    }
+
+
+def test_generate_lessons_returns_draft_without_saving(monkeypatch):
+    import backend.styles_admin as sa
+    from backend.coach import style_generator
+
+    monkeypatch.setattr(style_generator, "draft_style_lessons", lambda style: _valid_lesson_draft())
+    before = sa.STYLES_PATH.read_text(encoding="utf-8")
+    res = client.post("/api/styles/generate-lessons", json={"style_id": "landscape"})
+    assert res.status_code == 200
+    body = res.json()
+    assert body["validation_errors"] == []
+    assert body["draft_lessons"][0]["id"] == "landscape-1"
+    # file untouched — drafts are review-only
+    assert sa.STYLES_PATH.read_text(encoding="utf-8") == before
+
+
+def test_generate_lessons_unknown_style_404(monkeypatch):
+    from backend.coach import style_generator
+
+    monkeypatch.setattr(style_generator, "draft_style_lessons", lambda style: _valid_lesson_draft())
+    res = client.post("/api/styles/generate-lessons", json={"style_id": "nope"})
+    assert res.status_code == 404
+
+
+def test_upsert_approves_generated_lessons():
+    style = valid_style_payload()
+    style["lessons"] = _valid_lesson_draft()["lessons"]
+    res = client.post("/api/styles", json={"action": "upsert", "style": style})
+    assert res.status_code == 200
+    saved = next(s for s in res.json()["styles"] if s["id"] == "test_macro")
+    assert saved["lessons"][0]["id"] == "landscape-1"
+    assert saved["lessons"][0]["steps"][0]["settingId"] == "exposure_comp"
+
+
+def test_upsert_rejects_lesson_steps_that_cannot_apply():
+    style = valid_style_payload()
+    lessons = _valid_lesson_draft()["lessons"]
+    lessons[0]["steps"][1]["value"] = "banana"  # not an aperture
+    style["lessons"] = lessons
+    res = client.post("/api/styles", json={"action": "upsert", "style": style})
+    assert res.status_code == 400
+    assert "aperture" in res.json()["detail"]
+
+    style = valid_style_payload()
+    lessons = _valid_lesson_draft()["lessons"]
+    lessons[0]["steps"][0]["settingId"] = "gain"  # not a real camera setting
+    style["lessons"] = lessons
+    res = client.post("/api/styles", json={"action": "upsert", "style": style})
+    assert res.status_code == 400
+    assert "unknown setting" in res.json()["detail"]

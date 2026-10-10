@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import { buildLessons } from "../src/lib/lessons";
-import { defaultSettings, getCamera } from "../src/lib/camera";
+import { defaultSettings, getCamera, snapValue } from "../src/lib/camera";
 import { getStyle } from "../src/lib/styles";
 import { getCameras } from "../src/lib/camera";
 import type { AnalysisResult } from "../src/lib/types";
+import type { StyleLesson } from "../src/lib/styles";
 
 const canon = getCamera("canon_eos_rebel_sl3")!;
 const portrait = getStyle("portrait")!;
@@ -71,5 +72,65 @@ describe("buildLessons", () => {
         }
       }
     }
+  });
+
+  it("includes approved style lessons snapped to the camera, hides drafts", () => {
+    const styleWithLessons = {
+      ...portrait,
+      lessons: [
+        {
+          id: "portrait-1",
+          title: "Eyes first",
+          description: "Feel the f/1.8 falloff on a face.",
+          steps: [
+            { settingId: "aperture", value: "f/1.4", narration: "Open wide." },
+            { settingId: "aperture", value: "f/99", narration: "Impossible — should snap to the smallest stop." },
+            { settingId: "gain", value: "10", narration: "Not a camera setting — dropped." },
+          ],
+          practice_brief: "Watch the background melt.",
+          draft: true,
+        },
+        {
+          id: "portrait-2",
+          title: "Approved lesson",
+          description: "Visible to learners.",
+          steps: [{ settingId: "aperture", value: "f/2.8", narration: "Portrait classic." }],
+          draft: false,
+        },
+      ] as StyleLesson[],
+    };
+    const lessons = buildLessons(canon, defaultSettings(canon), null, styleWithLessons, null);
+    expect(lessons.find((l) => l.id === "style-portrait-portrait-1")).toBeUndefined(); // draft hidden
+    const approved = lessons.find((l) => l.id === "style-portrait-portrait-2")!;
+    expect(approved).toBeTruthy();
+    // f/2.8 isn't on the SL3's option list — assert the value landed on a real stop
+    const landed = String(approved.steps[0].value);
+    const apDef = canon.settings.aperture;
+    const supported = apDef && apDef.type === "discrete" ? apDef.options.map((o) => o.value) : [];
+    expect(supported).toContain(landed);
+    // draft with impossible values still snaps when approved: f/99 → smallest available stop
+    const draftVisible = buildLessons(canon, defaultSettings(canon), null, { ...styleWithLessons, lessons: styleWithLessons.lessons!.map((l) => (l.id === "portrait-1" ? { ...l, draft: false } : l)) }, null);
+    const snapped = draftVisible.find((l) => l.id === "style-portrait-portrait-1")!;
+    expect(snapped.steps.length).toBe(2); // unknown setting dropped
+    expect(snapped.steps[1].value).not.toBe("f/99");
+  });
+});
+
+describe("snapValue", () => {
+  it("passes through exact supported values", () => {
+    expect(snapValue(canon, "iso", "400")).toBe("400");
+  });
+
+  it("snaps numeric values to the nearest supported stop", () => {
+    expect(snapValue(canon, "iso", "500")).toBe("400");
+  });
+
+  it("clamps range settings (exposure comp) to the camera's span", () => {
+    expect(Math.abs(Number(snapValue(canon, "exposure_comp", 9)))).toBeLessThanOrEqual(3);
+  });
+
+  it("returns null for unknown settings and unsupported discrete values", () => {
+    expect(snapValue(canon, "gain", "10")).toBeNull();
+    expect(snapValue(canon, "white_balance", "tungsten_x")).toBeNull();
   });
 });

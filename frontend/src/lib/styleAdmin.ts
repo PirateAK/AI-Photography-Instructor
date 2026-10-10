@@ -1,5 +1,5 @@
 // Style Manager API client — /api/styles (GET list, POST upsert/delete, POST generate).
-import type { ShootingStyle } from "./styles";
+import type { ShootingStyle, StyleLesson } from "./styles";
 
 async function post<T>(path: string, body: unknown): Promise<T> {
   const res = await fetch(path, {
@@ -32,4 +32,10 @@ export function generateStyleDraft(
   name: string,
 ): Promise<{ draft: ShootingStyle; validation_errors: string[] }> {
   return post("/api/styles/generate", { name });
+}
+
+export function generateStyleLessons(
+  styleId: string,
+): Promise<{ draft_lessons: StyleLesson[]; validation_errors: string[] }> {
+  return post("/api/styles/generate-lessons", { style_id: styleId });
 }

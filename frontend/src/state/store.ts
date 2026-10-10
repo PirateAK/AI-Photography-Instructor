@@ -18,6 +18,8 @@ import { saveHistorySession } from "../lib/history";
 import type { HistData } from "../lib/histogram";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
+import { generateStyleLessons as apiGenerateStyleLessons } from "../lib/styleAdmin";
+import type { StyleLesson } from "../lib/styles";
 import { courses as bundledCourses, unlockAllPaid, isValidCode, isInstructorCode } from "../lib/training";
 import type { TrainingCourse } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
@@ -115,6 +117,9 @@ interface PhotoState {
   saveStyle: (style: ShootingStyle) => Promise<void>;
   deleteStyle: (id: string) => Promise<void>;
   draftStyleWithAI: (name: string) => Promise<ShootingStyle>;
+  generateStyleLessons: (
+    styleId: string,
+  ) => Promise<{ draft_lessons: StyleLesson[]; validation_errors: string[] }>;
   reloadCourses: () => Promise<void>;
   saveCourse: (course: TrainingCourse) => Promise<void>;
   deleteCourse: (id: string) => Promise<void>;
@@ -418,6 +423,12 @@ export const useStore = create<PhotoState>()(
       draftStyleWithAI: async (name) => {
         const { draft } = await generateStyleDraft(name);
         return draft;
+      },
+
+      generateStyleLessons: async (styleId) => {
+        // returns drafts only — the Style Manager edit form owns merging + approval,
+        // mirroring how draftStyleWithAI returns a draft without touching the catalog
+        return apiGenerateStyleLessons(styleId);
       },
 
       reloadCourses: async () => {

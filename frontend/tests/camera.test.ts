@@ -63,8 +63,9 @@ describe("baseline + clamping", () => {
 
 describe("snapToCamera (recipes + recommendations)", () => {
   it("snaps unsupported apertures to the nearest stop", () => {
-    expect(snapToCamera(canon, { aperture: "f/2.0" }).aperture).toBe("f/4.0");
-    expect(snapToCamera(sony, { aperture: "f/2.0" }).aperture).toBe("f/3.5");
+    // bodies carry the full f/1.4-f/22 mount ladder, so f/1.0 (below any real lens) snaps up
+    expect(snapToCamera(canon, { aperture: "f/1.0" }).aperture).toBe("f/1.4");
+    expect(snapToCamera(sony, { aperture: "f/1.0" }).aperture).toBe("f/1.4");
   });
 
   it("snaps shutters and keeps supported values verbatim", () => {
@@ -90,10 +91,10 @@ describe("photography styles", () => {
     }
   });
 
-  it("portrait recipe snaps to the camera's widest aperture", () => {
+  it("portrait recipe applies exactly — prime apertures are on every body's ladder", () => {
     const recipe = getStyle("portrait")!.recipe.settings;
-    expect(snapToCamera(canon, recipe).aperture).toBe("f/4.0");
-    expect(snapToCamera(sony, recipe).aperture).toBe("f/3.5");
+    expect(snapToCamera(canon, recipe).aperture).toBe("f/2.0");
+    expect(snapToCamera(sony, recipe).aperture).toBe("f/2.0");
   });
 
   it("night recipe resolves on the Nikon", () => {

@@ -660,6 +660,35 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   font-size: 0.78rem;
 }
 
+/* ---------- style manager: guided-lesson drafts ---------- */
+.draft-chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--warn);
+  background: rgba(255, 214, 10, 0.1);
+  border: 1px solid rgba(255, 214, 10, 0.4);
+  border-radius: 5px;
+  padding: 2px 8px;
+  align-self: center;
+}
+.draft-chip.approved {
+  color: var(--good);
+  background: rgba(48, 209, 88, 0.1);
+  border-color: rgba(48, 209, 88, 0.4);
+}
+.lesson-card.is-draft {
+  border-color: rgba(255, 214, 10, 0.35);
+}
+.lesson-step {
+  border-left: 3px solid var(--border);
+  padding: 6px 0 6px 10px;
+  display: grid;
+  gap: 6px;
+}
+
+
 
 .hist-toggle {
   position: absolute;

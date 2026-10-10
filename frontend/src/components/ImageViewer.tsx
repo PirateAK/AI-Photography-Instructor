@@ -11,7 +11,7 @@ import {
   settingsToSimParams,
 } from "../lib/simulation";
 
-export default function ImageViewer({ onOpenHistGuide }: { onOpenHistGuide?: () => void }) {
+export default function ImageViewer({ onToggleHistGuide }: { onToggleHistGuide?: () => void }) {
   const dataUrl = useStore((s) => s.dataUrl);
   const cameraId = useStore((s) => s.cameraId);
   const exif = useStore((s) => s.exif);
@@ -115,11 +115,11 @@ export default function ImageViewer({ onOpenHistGuide }: { onOpenHistGuide?: () 
             className="histogram clickable"
             role="button"
             tabIndex={0}
-            onClick={() => onOpenHistGuide?.()}
+            onClick={() => onToggleHistGuide?.()}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") onOpenHistGuide?.();
+              if (e.key === "Enter" || e.key === " ") onToggleHistGuide?.();
             }}
-            title="Luminance histogram — watch it shift as you change settings. Click for a quick tutorial."
+            title="Luminance histogram — tap to open or close the histogram training."
           >
             <canvas ref={histRef} width={220} height={72} />
             <span className="hist-caption">histogram</span>

@@ -91,7 +91,11 @@ export default function Workspace() {
               📷 Camera body
             </button>
           </div>
-          {tab === "preview" ? <ImageViewer onOpenHistGuide={() => setHistGuide(true)} /> : <CameraBody cam={getCamera(cameraId)!} />}
+          {tab === "preview" ? (
+            <ImageViewer onToggleHistGuide={() => setHistGuide((v) => !v)} />
+          ) : (
+            <CameraBody cam={getCamera(cameraId)!} />
+          )}
         </div>
         <aside className={`coach-pane ${histGuide ? "guide-open" : ""}`}>
           <CoachPanel />

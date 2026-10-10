@@ -17,6 +17,8 @@ export default function App() {
     // pick up manual edits to shooting_styles.json / training_courses.json made outside the app
     void useStore.getState().reloadStyles();
     void useStore.getState().reloadCourses();
+    // restore the on-device photo gallery (IndexedDB)
+    void useStore.getState().loadGallery();
   }, []);
 
   return (

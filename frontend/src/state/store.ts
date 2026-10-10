@@ -16,6 +16,15 @@ import {
 } from "../lib/lenses";
 import { saveHistorySession } from "../lib/history";
 import type { HistData } from "../lib/histogram";
+import {
+  addToGallery as idbAddToGallery,
+  getGalleryBlob,
+  listGallery,
+  removeGallery,
+  restoreGalleryEntry,
+  type GalleryEntry,
+  type GalleryMeta,
+} from "../lib/gallery";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
 import { generateStyleLessons as apiGenerateStyleLessons } from "../lib/styleAdmin";
@@ -76,6 +85,8 @@ interface PhotoState {
 
   unlockedCourses: string[];
   instructorUnlocked: boolean;
+  galleryItems: GalleryMeta[];
+  lastRemovedGallery: GalleryEntry | null;
 
   styles: ShootingStyle[];
   deviceId: string;
@@ -112,6 +123,11 @@ interface PhotoState {
   goInstructor: () => void;
   unlockInstructor: (code: string) => boolean;
   lockInstructor: () => void;
+  loadGallery: () => Promise<void>;
+  addToGallery: (files: File[]) => Promise<number>;
+  removeFromGallery: (id: number) => Promise<void>;
+  undoGalleryRemove: () => Promise<void>;
+  loadFromGallery: (id: number) => Promise<void>;
   loadDemoPhoto: () => Promise<boolean>;
   reloadStyles: () => Promise<void>;
   saveStyle: (style: ShootingStyle) => Promise<void>;
@@ -173,6 +189,8 @@ export const useStore = create<PhotoState>()(
 
       unlockedCourses: [],
       instructorUnlocked: false,
+      galleryItems: [],
+      lastRemovedGallery: null,
 
       styles: styleCatalog.styles,
       deviceId:
@@ -392,6 +410,51 @@ export const useStore = create<PhotoState>()(
         return true;
       },
       lockInstructor: () => set({ instructorUnlocked: false, screen: "upload" }),
+
+      loadGallery: async () => {
+        try {
+          set({ galleryItems: await listGallery() });
+        } catch {
+          /* gallery stays empty — IDB unavailable */
+        }
+      },
+
+      addToGallery: async (files) => {
+        const { added, evicted } = await idbAddToGallery(files);
+        await get().loadGallery();
+        if (evicted > 0) {
+          set({
+            log: pushLog(get().log, {
+              kind: "system",
+              text: `Gallery is capped at 100 — trimmed the ${evicted} oldest photo${evicted === 1 ? "" : "s"}.`,
+            }),
+          });
+        }
+        return added;
+      },
+
+      removeFromGallery: async (id) => {
+        const removed = await removeGallery(id);
+        if (!removed) return;
+        set({ lastRemovedGallery: removed, galleryItems: get().galleryItems.filter((g) => g.id !== id) });
+      },
+
+      undoGalleryRemove: async () => {
+        const removed = get().lastRemovedGallery;
+        if (!removed) return;
+        await restoreGalleryEntry(removed);
+        set({ lastRemovedGallery: null });
+        await get().loadGallery();
+      },
+
+      loadFromGallery: async (id) => {
+        const blob = await getGalleryBlob(id);
+        if (!blob) return;
+        const meta = get().galleryItems.find((g) => g.id === id);
+        const file = new File([blob], meta?.name ?? "photo.jpg", { type: blob.type || "image/jpeg" });
+        await get().loadFile(file);
+        get().openWorkspace();
+      },
 
       loadDemoPhoto: async () => {
         try {

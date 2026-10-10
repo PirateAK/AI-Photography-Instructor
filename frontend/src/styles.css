@@ -630,6 +630,87 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 14px;
 }
+
+/* ---------- on-device photo gallery (vertical wheel) ---------- */
+.gallery-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.gallery-empty { margin: 0; font-size: 0.85rem; }
+.gallery-title { font-size: 0.92rem; font-weight: 600; letter-spacing: -0.01em; }
+.gallery-title .muted { font-weight: 400; font-size: 0.8rem; }
+.gallery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 430px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 3px;
+  margin: -3px;
+}
+.gallery-sentinel { height: 1px; }
+.gallery-card {
+  position: relative;
+  flex: 0 0 auto;
+  height: 118px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+  cursor: grab;
+  touch-action: pan-y; /* vertical drags scroll the wheel; horizontal ones swipe the card */
+  user-select: none;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  will-change: transform;
+}
+.gallery-card:active { cursor: grabbing; }
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.gallery-card-name {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.68rem;
+  color: #e8eaf0;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 5px;
+  padding: 2px 7px;
+  pointer-events: none;
+}
+.gallery-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  max-width: min(92vw, 420px);
+}
+.gallery-toast span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .dash-card {
   text-align: left;
   border: 1px solid var(--border);

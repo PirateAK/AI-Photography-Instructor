@@ -25,6 +25,7 @@ from .coach import available_engines, provider_for_request
 from .coach.schema import CoachResponse
 from .config import ANALYSIS_MAX_DIM, CAMERAS_JSON, MAX_UPLOAD_BYTES
 from .exif import extract_exif
+from .history import router as history_router
 from .image_utils import downscale, encode_jpeg_b64, load_image
 from .runtime_config import clear_key, load as load_runtime, masked, save as save_runtime
 from .styles import get_style
@@ -188,6 +189,7 @@ async def analyze(
 
 
 app.include_router(styles_admin_router)
+app.include_router(history_router)
 
 
 @app.post("/api/chat")

@@ -11,6 +11,7 @@ export default function Workspace() {
   const goUpload = useStore((s) => s.goUpload);
   const goSettings = useStore((s) => s.goSettings);
   const goClasses = useStore((s) => s.goClasses);
+  const goProgress = useStore((s) => s.goProgress);
   const dataUrl = useStore((s) => s.dataUrl);
   const beginner = useStore((s) => s.beginner);
   const setBeginner = useStore((s) => s.setBeginner);
@@ -72,6 +73,9 @@ export default function Workspace() {
         </button>
         <button className="btn small" onClick={goClasses} title="Training classes">
           🎓 Classes
+        </button>
+        <button className="btn small" onClick={goProgress} title="Your saved analyses and progress">
+          📈 Progress
         </button>
       </header>
 

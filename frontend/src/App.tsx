@@ -4,6 +4,7 @@ import Workspace from "./components/Workspace";
 import SettingsScreen from "./components/SettingsScreen";
 import ClassesScreen from "./components/ClassesScreen";
 import StyleManagerScreen from "./components/StyleManagerScreen";
+import ProgressScreen from "./components/ProgressScreen";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { useEffect } from "react";
 
@@ -25,6 +26,8 @@ export default function App() {
         <ClassesScreen />
       ) : screen === "stylemanager" ? (
         <StyleManagerScreen />
+      ) : screen === "progress" ? (
+        <ProgressScreen />
       ) : (
         <UploadScreen />
       )}

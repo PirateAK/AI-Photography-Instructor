@@ -5,6 +5,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 import { analyzePhoto, fetchExif, sendChat as apiSendChat } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
+import { saveHistorySession } from "../lib/history";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
 import { courses, unlockAllPaid, isValidCode } from "../lib/training";
@@ -31,7 +32,7 @@ function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null 
 }
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager";
+  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "progress";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -62,6 +63,7 @@ interface PhotoState {
   unlockedCourses: string[];
 
   styles: ShootingStyle[];
+  deviceId: string;
 
   // actions
   loadFile: (file: File) => Promise<void>;
@@ -85,6 +87,7 @@ interface PhotoState {
   openWorkspace: () => void;
   goClasses: () => void;
   goStyleManager: () => void;
+  goProgress: () => void;
   loadDemoPhoto: () => Promise<boolean>;
   reloadStyles: () => Promise<void>;
   saveStyle: (style: ShootingStyle) => Promise<void>;
@@ -138,6 +141,10 @@ export const useStore = create<PhotoState>()(
       unlockedCourses: [],
 
       styles: styleCatalog.styles,
+      deviceId:
+        (typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : `dev-${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`) as string,
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -262,6 +269,7 @@ export const useStore = create<PhotoState>()(
 
       goClasses: () => set({ screen: "classes" }),
       goStyleManager: () => set({ screen: "stylemanager" }),
+      goProgress: () => set({ screen: "progress" }),
 
       loadDemoPhoto: async () => {
         try {
@@ -412,6 +420,30 @@ export const useStore = create<PhotoState>()(
                 text: response.chat_response,
               }),
             });
+
+            // auto-save to per-device history (best-effort, never blocks the UI)
+            const state2 = get();
+            const cam2 = getCamera(state2.cameraId);
+            if (file) {
+              void saveHistorySession(
+                state2.deviceId,
+                {
+                  camera_id: state2.cameraId,
+                  camera_label: cam2 ? `${cam2.brand} ${cam2.model}` : "",
+                  settings: JSON.stringify(state2.settingsByCamera[state2.cameraId] ?? {}),
+                  exif: JSON.stringify(state2.exif ?? {}),
+                  style_id: state2.styleId,
+                  intent: state2.intent,
+                  score: String(response.analysis.overall_score),
+                  summary: response.chat_response,
+                  issues: JSON.stringify(response.analysis.issues),
+                  provider: response.provider,
+                },
+                file,
+              ).catch(() => {
+                /* history is a bonus — ignore failures */
+              });
+            }
           } catch (err) {
             set({
               analyzing: false,
@@ -487,6 +519,7 @@ export const useStore = create<PhotoState>()(
         intent: s.intent,
         styleId: s.styleId,
         unlockedCourses: s.unlockedCourses,
+        deviceId: s.deviceId,
       }),
     },
   ),

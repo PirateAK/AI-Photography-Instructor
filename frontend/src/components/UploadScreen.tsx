@@ -13,6 +13,7 @@ export default function UploadScreen() {
   const setStyle = useStore((s) => s.setStyle);
   const goSettings = useStore((s) => s.goSettings);
   const goClasses = useStore((s) => s.goClasses);
+  const goProgress = useStore((s) => s.goProgress);
   const loadDemoPhoto = useStore((s) => s.loadDemoPhoto);
   const openWorkspace = useStore((s) => s.openWorkspace);
   const startAnalysis = useStore((s) => s.startAnalysis);
@@ -172,6 +173,9 @@ export default function UploadScreen() {
           </span>
           <button className="btn primary" onClick={goClasses}>
             🎓 Training classes
+          </button>
+          <button className="btn" onClick={goProgress}>
+            📈 Progress
           </button>
           <button
             className="btn"

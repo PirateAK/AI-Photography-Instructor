@@ -776,3 +776,32 @@ iframe.video-frame { border: none; }
 }
 .settings-form input:disabled { opacity: 0.5; }
 .settings-form .section-title { margin-top: 8px; }
+
+/* ---------- progress / history ---------- */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat-card { padding: 14px 16px; display: grid; gap: 4px; }
+.stat-k { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+.stat-v { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+.history-list { display: grid; gap: 10px; }
+.history-row {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  align-items: flex-start;
+}
+.history-thumb {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: var(--bg-elev2);
+}
+.history-body { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.history-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 0.86rem; }

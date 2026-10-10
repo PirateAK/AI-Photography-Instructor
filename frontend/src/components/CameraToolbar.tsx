@@ -32,6 +32,7 @@ export default function CameraToolbar() {
   return (
     <div className="toolbar" aria-label={`${cam.brand} ${cam.model} controls`}>
       <div className="toolbar-groups">
+        {compatible.length > 0 && (
         <div className="toolbar-group" key="lens">
           <div className="toolbar-group-label">Lens</div>
           <div className="controls">
@@ -63,6 +64,7 @@ export default function CameraToolbar() {
             </div>
           </div>
         </div>
+        )}
         {effCam.layout.groups.map((group) => (
           <div className="toolbar-group" key={group.id}>
             <div className="toolbar-group-label">{group.label}</div>

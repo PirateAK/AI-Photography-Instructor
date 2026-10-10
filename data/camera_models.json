@@ -19405,6 +19405,387 @@
           ]
         }
       }
+    },
+    {
+      "id": "phone_point_and_shoot",
+      "brand": "Phone",
+      "model": "Phone — point & shoot",
+      "description": "The camera in your pocket. One fixed lens, a tiny sensor, and software doing the heavy lifting. In Pro mode you still control ISO, shutter and exposure comp — aperture is fixed at f/1.7, which is why phone blur comes from software, not optics.",
+      "body": {
+        "type": "phone",
+        "hotspots": {
+          "back": [
+            {
+              "id": "camera_island",
+              "label": "Camera island",
+              "info": "Fixed f/1.7 lens — phones can't open wider or stop down; depth effects are software",
+              "x": 185,
+              "y": 62
+            },
+            {
+              "id": "main_lens",
+              "label": "Main lens",
+              "setting": "aperture",
+              "info": "One glass aperture for everything — the exposure triangle loses its third dial here",
+              "x": 200,
+              "y": 88
+            },
+            {
+              "id": "flash",
+              "label": "LED flash",
+              "info": "Harsh, close to the lens — last-resort light",
+              "x": 232,
+              "y": 52
+            }
+          ],
+          "front": [
+            {
+              "id": "screen",
+              "label": "Screen",
+              "setting": "focus_mode",
+              "info": "Tap-to-focus: you choose the subject, the phone chooses the settings",
+              "x": 200,
+              "y": 130
+            },
+            {
+              "id": "selfie_cam",
+              "label": "Selfie camera",
+              "info": "Smaller sensor than the rear cameras",
+              "x": 200,
+              "y": 48
+            }
+          ],
+          "top": [
+            {
+              "id": "top_mic",
+              "label": "Microphone",
+              "info": "Secondary mic for wind rejection on video",
+              "x": 200,
+              "y": 118
+            }
+          ],
+          "left": [
+            {
+              "id": "sim_tray",
+              "label": "SIM tray",
+              "info": "Nothing photographic here",
+              "x": 150,
+              "y": 130
+            }
+          ],
+          "right": [
+            {
+              "id": "volume",
+              "label": "Volume keys",
+              "info": "Works as a shutter release — steadier than tapping the screen",
+              "x": 252,
+              "y": 100
+            },
+            {
+              "id": "power",
+              "label": "Power button",
+              "info": "Double-press often launches the camera from sleep",
+              "x": 252,
+              "y": 160
+            }
+          ],
+          "bottom": [
+            {
+              "id": "usb_c",
+              "label": "USB-C",
+              "info": "Charging and fast photo transfer to a computer",
+              "x": 200,
+              "y": 118
+            },
+            {
+              "id": "speaker",
+              "label": "Speaker",
+              "info": "Not needed for photos — but keep it uncovered on video",
+              "x": 238,
+              "y": 122
+            }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/1.7",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "af_s",
+        "metering_mode": "multi"
+      },
+      "layout": {
+        "groups": [
+          {
+            "id": "exposure",
+            "label": "Exposure",
+            "settings": [
+              "iso",
+              "aperture",
+              "shutter_speed",
+              "exposure_comp"
+            ]
+          },
+          {
+            "id": "color",
+            "label": "Color",
+            "settings": [
+              "white_balance",
+              "picture_style"
+            ]
+          },
+          {
+            "id": "focus",
+            "label": "Focus & Metering",
+            "settings": [
+              "focus_mode",
+              "metering_mode"
+            ]
+          }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete",
+          "label": "ISO",
+          "default": "100",
+          "usable_max": "800",
+          "usable_note": "Phone sensors are tiny — 50-400 stays clean, 800 is the honest ceiling, past that the software smears detail to hide noise.",
+          "beginner": "How sensitive the sensor is. Your phone picks this automatically unless you switch to Pro mode — raising it is how night mode 'sees' in the dark.",
+          "options": [
+            {
+              "value": "50",
+              "label": "50"
+            },
+            {
+              "value": "100",
+              "label": "100"
+            },
+            {
+              "value": "200",
+              "label": "200"
+            },
+            {
+              "value": "400",
+              "label": "400"
+            },
+            {
+              "value": "800",
+              "label": "800"
+            },
+            {
+              "value": "1600",
+              "label": "1600"
+            },
+            {
+              "value": "3200",
+              "label": "3200"
+            }
+          ]
+        },
+        "aperture": {
+          "type": "discrete",
+          "label": "Aperture",
+          "default": "f/1.7",
+          "beginner": "Fixed at f/1.7 — phone lenses don't open up or stop down. Portrait-mode blur is software guesswork, which is why it sometimes paints glasses and hair edges too.",
+          "options": [
+            {
+              "value": "f/1.7",
+              "label": "f/1.7 (fixed)"
+            }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete",
+          "label": "Shutter",
+          "default": "1/125",
+          "beginner": "How long light is collected. Pro mode exposes this — 1/500+ freezes kids and pets; long exposures need to rest the phone on something solid.",
+          "options": [
+            {
+              "value": "1/4000",
+              "label": "1/4000"
+            },
+            {
+              "value": "1/2000",
+              "label": "1/2000"
+            },
+            {
+              "value": "1/1000",
+              "label": "1/1000"
+            },
+            {
+              "value": "1/500",
+              "label": "1/500"
+            },
+            {
+              "value": "1/250",
+              "label": "1/250"
+            },
+            {
+              "value": "1/125",
+              "label": "1/125"
+            },
+            {
+              "value": "1/60",
+              "label": "1/60"
+            },
+            {
+              "value": "1/30",
+              "label": "1/30"
+            },
+            {
+              "value": "1/15",
+              "label": "1/15"
+            },
+            {
+              "value": "1/8",
+              "label": "1/8"
+            },
+            {
+              "value": "1/4",
+              "label": "1/4"
+            },
+            {
+              "value": "1/2",
+              "label": "1/2"
+            },
+            {
+              "value": "1",
+              "label": "1\""
+            },
+            {
+              "value": "2",
+              "label": "2\""
+            },
+            {
+              "value": "4",
+              "label": "4\""
+            },
+            {
+              "value": "8",
+              "label": "8\""
+            },
+            {
+              "value": "15",
+              "label": "15\""
+            },
+            {
+              "value": "30",
+              "label": "30\""
+            }
+          ]
+        },
+        "exposure_comp": {
+          "type": "range",
+          "label": "Exposure comp",
+          "min": -2,
+          "max": 2,
+          "step": 0.333333,
+          "default": 0,
+          "unit": "EV",
+          "beginner": "The tap-to-focus sun slider. The one exposure control every phone shooter already uses — now you know its real name.",
+          "pro": "Nudges overall brightness without touching ISO or shutter — the fastest way to fight a backlit scene."
+        },
+        "white_balance": {
+          "type": "discrete",
+          "label": "White balance",
+          "default": "auto",
+          "beginner": "Tells the phone what 'white' is. AWB chases color casts in mixed light; locking a preset keeps a series of shots consistent.",
+          "options": [
+            {
+              "value": "auto",
+              "label": "AWB"
+            },
+            {
+              "value": "daylight",
+              "label": "Daylight"
+            },
+            {
+              "value": "shade",
+              "label": "Shade"
+            },
+            {
+              "value": "cloudy",
+              "label": "Cloudy"
+            },
+            {
+              "value": "incandescent",
+              "label": "Tungsten"
+            },
+            {
+              "value": "fluorescent",
+              "label": "Fluorescent"
+            }
+          ]
+        },
+        "picture_style": {
+          "type": "discrete",
+          "label": "Look",
+          "default": "standard",
+          "beginner": "The phone's built-in filters: color, contrast and sharpening recipes applied to your JPEG.",
+          "options": [
+            {
+              "value": "standard",
+              "label": "Standard"
+            },
+            {
+              "value": "vivid",
+              "label": "Vivid"
+            },
+            {
+              "value": "natural",
+              "label": "Natural"
+            },
+            {
+              "value": "monochrome",
+              "label": "Mono"
+            }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete",
+          "label": "Focus",
+          "default": "af_s",
+          "beginner": "Tap the screen to focus — that tap also sets exposure on most phones. Long-press to lock both.",
+          "options": [
+            {
+              "value": "af_s",
+              "label": "Tap to focus"
+            },
+            {
+              "value": "af_c",
+              "label": "Continuous AF"
+            },
+            {
+              "value": "mf",
+              "label": "Pro manual focus"
+            }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete",
+          "label": "Metering",
+          "default": "multi",
+          "beginner": "Where the phone reads the light from. Your tap-to-focus point usually takes priority anyway.",
+          "options": [
+            {
+              "value": "multi",
+              "label": "Matrix"
+            },
+            {
+              "value": "center_weighted",
+              "label": "Center"
+            },
+            {
+              "value": "spot",
+              "label": "Spot"
+            }
+          ]
+        }
+      }
     }
   ]
 }

@@ -232,13 +232,21 @@ export const useStore = create<PhotoState>()(
       },
 
       setCamera: (id) => {
-        const { settingsByCamera, cameraId } = get();
+        const { settingsByCamera, cameraId, lensByCamera } = get();
         if (id === cameraId) return;
         const cam = getCamera(id);
         if (!cam) return;
         const asShot = exifSettings(cam, get().exif);
+        // a persisted lens may not fit the new body (e.g. switching to a phone)
+        const nextLens = { ...lensByCamera };
+        let lensNote = "";
+        if (nextLens[id] && !lensesForCamera(cam).some((l) => l.id === nextLens[id])) {
+          delete nextLens[id];
+          lensNote = " No lens carried over — this body has none.";
+        }
         set({
           cameraId: id,
+          lensByCamera: nextLens,
           settingsByCamera: {
             ...settingsByCamera,
             [id]: settingsByCamera[id] ?? asShot ?? defaultSettings(cam),
@@ -246,7 +254,7 @@ export const useStore = create<PhotoState>()(
           undoSnapshot: null,
           log: pushLog(get().log, {
             kind: "system",
-            text: `Switched camera to ${cam.brand} ${cam.model} — toolbar rebuilt from camera_models.json.`,
+            text: `Switched camera to ${cam.brand} ${cam.model} — toolbar rebuilt from camera_models.json.${lensNote}`,
           }),
         });
       },

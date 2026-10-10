@@ -40,17 +40,20 @@ export function getLensById(id: string | undefined | null): Lens | undefined {
 
 export type Mount = "EF" | "RF" | "E" | "Z";
 
-/** Mount for a camera body (documented derivation — see file header). */
-export function mountOf(cam: CameraModel): Mount {
+/** Mount for a camera body (documented derivation — see file header).
+ *  Phones have no mount: null. */
+export function mountOf(cam: CameraModel): Mount | null {
+  if (cam.body?.type === "phone") return null;
   if (cam.brand === "Sony") return "E";
   if (cam.brand === "Nikon") return "Z";
   // Canon: mirrorless R-line = RF; DSLRs (EOS 60D, 5D IV, 7D II, Rebel) = EF
   return /\bR\d|R5|R6|R7|R8|R3|RP|R100|R50|R10\b/.test(cam.model) ? "RF" : "EF";
 }
 
-/** Lenses that physically fit a camera. */
+/** Lenses that physically fit a camera. Phones: none — the lens is built in. */
 export function lensesForCamera(cam: CameraModel): Lens[] {
   const mount = mountOf(cam);
+  if (!mount) return [];
   return lensCatalog.lenses.filter((l) => l.mount === mount);
 }
 

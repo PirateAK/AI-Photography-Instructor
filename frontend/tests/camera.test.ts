@@ -107,6 +107,24 @@ describe("photography styles", () => {
     expect(rows.length).toBe(Math.ceil(getStyles().length / 5));
   });
 
+  it("phone camera: fixed aperture, teachable pro-mode trio, no lens mount", () => {
+    const phone = getCamera("phone_point_and_shoot")!;
+    expect(phone.body?.type).toBe("phone");
+    const ap = phone.settings.aperture;
+    expect(ap.type).toBe("discrete");
+    expect(ap.type === "discrete" && ap.options).toHaveLength(1); // f/1.7 fixed
+    // all three triangle dials exist so the exposure triangle still teaches on a phone
+    for (const key of ["iso", "shutter_speed", "aperture", "exposure_comp"]) {
+      expect(phone.settings[key]).toBeTruthy();
+    }
+    // recipes still snap onto it: portrait's f/2.0 clamps to the fixed f/1.7
+    const snapped = snapToCamera(phone, { iso: "333", shutter_speed: "1/350", aperture: "f/2.0" });
+    expect(snapped.aperture).toBe("f/1.7");
+    expect(["200", "400"]).toContain(snapped.iso); // 333 snaps to a real phone ISO stop
+    // fixed aperture means snapping wider never happens — nothing to open
+    expect(snapToCamera(phone, { aperture: "f/1.0" }).aperture).toBe("f/1.7");
+  });
+
   it("night recipe resolves on the Nikon", () => {
     const astro = getStyle("astrophotography")!.recipe.settings;
     const applied = snapToCamera(getCamera("nikon_z50")!, astro);

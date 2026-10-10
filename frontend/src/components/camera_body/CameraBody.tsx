@@ -83,14 +83,60 @@ function Hotspot({ hotspot: h, view }: { hotspot: BodyHotspot; view: View }) {
 
 // ------------------------------------------------------------- silhouettes
 
-function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog"; view: View }) {
+function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog" | "phone"; view: View }) {
   const isDslr = bodyType === "dslr";
   const isVlog = bodyType === "vlog";
+  const isPhone = bodyType === "phone";
   const fill = "#23262d";
   const stroke = "#3c414d";
   return (
     <svg viewBox="0 0 400 260" className="body-svg" role="img">
-      {view === "top" && (
+      {isPhone && view === "front" && (
+        <g fill={fill} stroke={stroke} strokeWidth="2">
+          <rect x="150" y="24" width="100" height="212" rx="16" />
+          <rect x="158" y="34" width="84" height="192" rx="10" fill="#101216" />
+          <circle cx="200" cy="46" r="4" fill="#181b21" />
+          <text x="200" y="130" textAnchor="middle" fontSize="12" fill="#4a5160">TAP TO FOCUS</text>
+        </g>
+      )}
+      {isPhone && view === "back" && (
+        <g fill={fill} stroke={stroke} strokeWidth="2">
+          <rect x="150" y="24" width="100" height="212" rx="16" />
+          <rect x="162" y="34" width="76" height="92" rx="14" fill="#1b1e24" />
+          <circle cx="200" cy="86" r="16" fill="#101216" />
+          <circle cx="200" cy="86" r="8" fill="#23262d" />
+          <circle cx="232" cy="52" r="5" fill="#181b21" />
+        </g>
+      )}
+      {isPhone && (view === "left" || view === "right") && (
+        <g fill={fill} stroke={stroke} strokeWidth="2">
+          <rect x="150" y="24" width="100" height="212" rx="16" />
+          {view === "right" ? (
+            <>
+              <rect x="248" y="90" width="5" height="46" rx="2" fill="#3c414d" />
+              <rect x="248" y="146" width="5" height="30" rx="2" fill="#3c414d" />
+            </>
+          ) : (
+            <rect x="147" y="120" width="5" height="26" rx="2" fill="#3c414d" />
+          )}
+        </g>
+      )}
+      {isPhone && view === "top" && (
+        <g fill={fill} stroke={stroke} strokeWidth="2">
+          <rect x="110" y="96" width="180" height="68" rx="18" />
+          <circle cx="140" cy="130" r="3" fill="#101216" />
+        </g>
+      )}
+      {isPhone && view === "bottom" && (
+        <g fill={fill} stroke={stroke} strokeWidth="2">
+          <rect x="110" y="96" width="180" height="68" rx="18" />
+          <rect x="176" y="118" width="34" height="10" rx="5" fill="#101216" />
+          <circle cx="230" cy="123" r="2.5" fill="#101216" />
+          <circle cx="238" cy="123" r="2.5" fill="#101216" />
+          <circle cx="246" cy="123" r="2.5" fill="#101216" />
+        </g>
+      )}
+      {!isPhone && view === "top" && (
         <g fill={fill} stroke={stroke} strokeWidth="2">
           <rect x="70" y="85" width="260" height="145" rx="18" />
           {isDslr ? (
@@ -108,7 +154,7 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog";
           </text>
         </g>
       )}
-      {view === "back" && (
+      {!isPhone && view === "back" && (
         <g fill={fill} stroke={stroke} strokeWidth="2">
           <rect x="70" y="40" width="260" height="190" rx="18" />
           {isDslr ? (
@@ -125,7 +171,7 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog";
           <circle cx={isDslr ? 235 : 242} cy="158" r="30" fill="#181b21" opacity="0.6" />
         </g>
       )}
-      {view === "front" && (
+      {!isPhone && view === "front" && (
         <g fill={fill} stroke={stroke} strokeWidth="2">
           <rect x="85" y="55" width="230" height="160" rx="18" />
           {isDslr ? (
@@ -141,7 +187,7 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog";
           <circle cx="200" cy="135" r="18" fill="#23262d" />
         </g>
       )}
-      {(view === "left" || view === "right") && (
+      {!isPhone && (view === "left" || view === "right") && (
         <g fill={fill} stroke={stroke} strokeWidth="2">
           <rect x="80" y="70" width="240" height="130" rx="18" />
           {/* lens pointing right */}
@@ -151,7 +197,7 @@ function BodySvg({ bodyType, view }: { bodyType: "dslr" | "mirrorless" | "vlog";
           <rect x="140" y="95" width="120" height="36" rx="6" fill="#101216" opacity="0.5" />
         </g>
       )}
-      {view === "bottom" && (
+      {!isPhone && view === "bottom" && (
         <g fill={fill} stroke={stroke} strokeWidth="2">
           <rect x="80" y="80" width="240" height="100" rx="16" />
           <rect x="96" y="100" width="60" height="58" rx="8" fill="#101216" />

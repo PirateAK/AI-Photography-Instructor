@@ -29,9 +29,19 @@ describe("mount compatibility", () => {
     expect(mountOf(z9)).toBe("Z");
   });
 
+  it("phones have no mount and no interchangeable lenses", () => {
+    const phone = getCamera("phone_point_and_shoot")!;
+    expect(mountOf(phone)).toBeNull();
+    expect(lensesForCamera(phone)).toEqual([]);
+  });
+
   it("only offers lenses that physically fit", () => {
     for (const cam of getCameras()) {
       const fits = lensesForCamera(cam);
+      if (cam.body?.type === "phone") {
+        expect(fits).toEqual([]); // phones: the lens is built in
+        continue;
+      }
       expect(fits.length).toBeGreaterThan(0);
       for (const lens of fits) {
         expect(lens.mount).toBe(mountOf(cam));
@@ -39,8 +49,9 @@ describe("mount compatibility", () => {
     }
   });
 
-  it("gives every camera a default lens", () => {
+  it("gives every interchangeable-lens camera a default lens", () => {
     for (const cam of getCameras()) {
+      if (cam.body?.type === "phone") continue;
       expect(defaultLensForCamera(cam)).toBeTruthy();
     }
   });

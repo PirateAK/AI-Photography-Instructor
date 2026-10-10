@@ -817,3 +817,11 @@ select.lens-select {
   width: 100%;
   max-width: 260px;
 }
+
+.category-title {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}

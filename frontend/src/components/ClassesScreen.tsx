@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import {
   appConfig,
-  courses,
+  coursesByCategory,
   embedUrl,
   getCourse,
   isUnlocked,
@@ -42,7 +42,8 @@ export default function ClassesScreen() {
         <p>
           Short, hands-on classes built around the simulator — every lesson ends with a
           <strong> “Try it”</strong> moment that loads the settings into your workspace so you
-          learn by doing, not just watching. Two classes ship free.
+          learn by doing, not just watching. Fundamentals ship free; specialized tracks unlock
+          with purchase.
         </p>
         <div className="upload-row">
           <button className="btn" onClick={dataUrl ? openWorkspace : goUpload}>
@@ -54,16 +55,21 @@ export default function ClassesScreen() {
         </div>
       </div>
 
-      <div className="course-grid">
-        {courses.map((course) => (
-          <CourseCard
-            key={course.id}
-            course={course}
-            unlocked={isUnlocked(course, unlockedCourses)}
-            onOpen={() => setOpenId(course.id)}
-          />
-        ))}
-      </div>
+      {coursesByCategory().map((group) => (
+        <section key={group.category} style={{ marginTop: 22 }}>
+          <h2 className="category-title">{group.category}</h2>
+          <div className="course-grid">
+            {group.courses.map((course) => (
+              <CourseCard
+                key={course.id}
+                course={course}
+                unlocked={isUnlocked(course, unlockedCourses)}
+                onOpen={() => setOpenId(course.id)}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
 
       <p className="muted" style={{ marginTop: 24, fontSize: "0.8rem" }}>
         Purchases unlock via your store account and a redemption code. Codes are checked on this

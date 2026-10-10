@@ -17,6 +17,7 @@ export interface Lesson {
 
 export interface TrainingCourse {
   id: string;
+  category: string;
   title: string;
   cover_emoji: string;
   tagline: string;
@@ -41,6 +42,16 @@ export function getCourse(id: string): TrainingCourse | undefined {
 
 export function totalMinutes(course: TrainingCourse): number {
   return course.lessons.reduce((sum, l) => sum + l.duration_min, 0);
+}
+
+export const CATEGORY_ORDER = ["Fundamentals", "Genre-specific", "Advanced", "Specialized"];
+
+/** Courses grouped by category in curriculum order. */
+export function coursesByCategory(): { category: string; courses: TrainingCourse[] }[] {
+  return CATEGORY_ORDER.map((category) => ({
+    category,
+    courses: courses.filter((c) => c.category === category),
+  })).filter((g) => g.courses.length > 0);
 }
 
 export function isUnlocked(course: TrainingCourse, unlockedIds: string[]): boolean {

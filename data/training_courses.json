@@ -1,9 +1,62 @@
 {
-  "version": 1,
-  "notes": "Training classes catalog. price: 'free' (ships with the app) or 'paid' (unlocked by redemption code / purchase). video_url: direct MP4 or a YouTube/Vimeo link (the player embeds those automatically). practice_preset: camera settings the simulator loads for the lesson's 'Try it' moment — values are snapped to the selected camera's supported options. The two free courses are the shipped teasers; the sample video URLs are CC0 placeholders (Big Buck Bunny, has audio) — swap in your hosted lessons.",
+  "version": 3,
+  "notes": "Training classes catalog, grouped by category (Fundamentals / Genre-specific / Advanced / Specialized). Each course: category, price 'free' (teaser ships with the app) or 'paid' (unlocked by redemption code / purchase), lessons with video_url (direct MP4 or YouTube/Vimeo link), and optional practice_preset — camera settings the lesson's 'Try it' button loads into the simulator (values snap to the selected camera). Post-processing lessons intentionally have no practice_preset: they teach editing, not camera settings. The free courses are the shipped teasers; sample video URLs are CC0 placeholders (MDN friday.mp4, has audio) — swap in your hosted lessons.",
   "courses": [
     {
+      "id": "intro-digital-photography",
+      "category": "Fundamentals",
+      "title": "Introduction to Digital Photography",
+      "cover_emoji": "📷",
+      "tagline": "Exposure, composition and lighting — the foundations",
+      "description": "The complete starting point: what exposure really is, how to compose a frame that holds attention, and how to see light like a photographer. Every lesson ends with a hands-on drill in the simulator.",
+      "level": "Beginner",
+      "price": "free",
+      "lessons": [
+        {
+          "id": "idp-1",
+          "title": "What exposure really means",
+          "duration_min": 7,
+          "summary": "Exposure is how much light hits the sensor — controlled by the triangle of aperture, shutter speed and ISO. This lesson builds the mental model: three knobs, one brightness, three different side effects.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/5.6" },
+          "practice_brief": "Start balanced. Now slow the shutter one stop and watch the preview brighten — then raise ISO one stop to bring it back. Same brightness, different side effects. That's the whole triangle."
+        },
+        {
+          "id": "idp-2",
+          "title": "Composition: giving the eye a path",
+          "duration_min": 8,
+          "summary": "Rule of thirds, leading lines, clean edges and subject separation. Composition is arranging the frame so the viewer looks where you want — here's the vocabulary and the drills.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/250", "aperture": "f/5.6" },
+          "practice_brief": "Framing is yours to make — but notice how the depth-of-field blur (open the aperture wider) can isolate a subject and clean a cluttered background for you."
+        },
+        {
+          "id": "idp-3",
+          "title": "Seeing light: direction, quality, color",
+          "duration_min": 8,
+          "summary": "Hard vs soft light, front vs side vs back lighting, and the color of different light sources. The subject of every photo is really the light falling on it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/60", "aperture": "f/4.0" },
+          "practice_brief": "Indoor bulbs are orange and dim — this preset mimics that struggle. Try the Tungsten white balance preset and watch the cast vanish."
+        },
+        {
+          "id": "idp-4",
+          "title": "Holding and moving the camera",
+          "duration_min": 5,
+          "summary": "Stance, elbows, breathing and the shutter press — plus when to raise ISO instead of dropping below your handheld shutter floor.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "800", "shutter_speed": "1/15", "aperture": "f/4.0" },
+          "practice_brief": "1/15s handheld is asking for blur. Step the shutter up until the smear disappears — that's your personal handheld floor, and it's why ISO exists."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
+      "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",
       "cover_emoji": "🎛️",
       "tagline": "Shutter, aperture, ISO — feel how they trade off",
@@ -29,7 +82,7 @@
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/16" },
-          "practice_brief": "Start at f/16, then walk the aperture stepper down to the widest stop. Drag the focus point around the frame — the sharp zone follows it, the blur falls away from it."
+          "practice_brief": "Start at f/16, then walk the aperture stepper down to the widest stop. Compare the petal edges at 100% — depth grows, but diffraction softens everything past f/16."
         },
         {
           "id": "et-3",
@@ -45,6 +98,7 @@
     },
     {
       "id": "free-motion-and-blur",
+      "category": "Fundamentals",
       "title": "Motion, Blur & Freeze",
       "cover_emoji": "🏃",
       "tagline": "Make blur a choice, not an accident",
@@ -70,16 +124,225 @@
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_preset": { "iso": "200", "shutter_speed": "1/15", "aperture": "f/11" },
-          "practice_brief": "1/15s is pan territory. In the field: track the subject through the shot and keep moving after the shutter fires. Expect one keeper in twenty — that's normal."
+          "practice_brief": "1/15s is pan territory. In the field: track the subject through the shot and keep moving after the shutter fires. Expect 1 keeper in 20 at first — it's a wrist skill."
         }
       ]
     },
     {
-      "id": "paid-night-celestial",
+      "id": "photography-masterclass",
+      "category": "Fundamentals",
+      "title": "Photography Masterclass",
+      "cover_emoji": "🎓",
+      "tagline": "Basic to advanced — the complete journey",
+      "description": "A comprehensive course that includes both basic and advanced techniques: mastering light in every condition, advanced composition, color theory, and the workflows that tie it all together. The graduation course after the fundamentals.",
+      "level": "Beginner → Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "pm-1",
+          "title": "Advanced exposure: histograms and ETTR",
+          "duration_min": 9,
+          "summary": "Reading the histogram like a pro, exposing to the right (ETTR) for maximum quality, and when to deliberately break the rules.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/250", "aperture": "f/8.0", "exposure_comp": 0.7 },
+          "practice_brief": "Watch the histogram as you push exposure comp up — the goal is riding the right edge without spilling over. That's ETTR: maximum data, minimum noise."
+        },
+        {
+          "id": "pm-2",
+          "title": "Light mastery: golden hour to blue hour",
+          "duration_min": 10,
+          "summary": "Why photographers chase sunrise and sunset, how to expose when the light is dying, and white balance as a creative tool rather than a correctness chore.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/60", "aperture": "f/4.0" },
+          "practice_brief": "Golden hour light is warm and low. Try WB Shade on a daylight scene — the deliberate warmth is a style choice, not an error."
+        },
+        {
+          "id": "pm-3",
+          "title": "Composition II: breaking the grid",
+          "duration_min": 9,
+          "summary": "Beyond thirds: frames within frames, negative space as a subject, reflection and symmetry, and knowing when center composition wins.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/8.0" },
+          "practice_brief": "f/8 keeps everything sharp — now the composition carries the whole frame. Rehearse three different arrangements of the same scene."
+        },
+        {
+          "id": "pm-4",
+          "title": "Color theory for photographers",
+          "duration_min": 8,
+          "summary": "Complementary and analogous color, using color contrast to guide the eye, and Picture Styles / Creative Looks as a starting palette.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/5.6" },
+          "practice_brief": "Cycle the Picture Styles on one frame — Vivid vs Neutral vs Monochrome changes the story before any editing."
+        },
+        {
+          "id": "pm-5",
+          "title": "Focusing systems in depth",
+          "duration_min": 9,
+          "summary": "AF modes, AF-area choices, back-button focus and trap focusing — take full manual control of where and when the camera focuses.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/500", "aperture": "f/4.0" },
+          "practice_brief": "Switch to AF-C and imagine tracking a runner: continuous focus plus a fast shutter is the sports combo. The Focus point dot shows where the sharp zone sits."
+        },
+        {
+          "id": "pm-6",
+          "title": "The photographer's workflow",
+          "duration_min": 8,
+          "summary": "From pre-visualization to culling, editing and delivery — how pros move from idea to finished image without drowning in files.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/5.6" },
+          "practice_brief": "Recreate your best-ever shot from memory using only the simulator — settings, framing intent, light. If you can rebuild it, you understood it."
+        }
+      ]
+    },
+    {
+      "id": "portrait-course",
+      "category": "Genre-specific",
+      "title": "Portrait Photography",
+      "cover_emoji": "🧑",
+      "tagline": "Light, connection and flattering technique",
+      "description": "Techniques for capturing compelling portraits: shaping light on a face, directing people naturally, choosing backgrounds that flatter, and the settings that keep eyes sharp.",
+      "level": "Beginner",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "pc-1",
+          "title": "Flattering light: window, shade and golden hour",
+          "duration_min": 8,
+          "summary": "Soft light flatters skin; hard light sculpts it. Where to place your subject relative to a window or the sun, and why overcast is a portrait photographer's friend.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/200", "aperture": "f/2.0" },
+          "practice_brief": "Portrait starting point: wide open at f/2, 1/200s. Watch the background melt — then drag the focus dot onto the face to see the sharp zone you must protect."
+        },
+        {
+          "id": "pc-2",
+          "title": "The eyes have it: focus and connection",
+          "duration_min": 7,
+          "summary": "Single-point AF on the near eye, aperture choices for one person vs groups, and how eye contact changes the whole image.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/200", "aperture": "f/2.0" },
+          "practice_brief": "f/2 on a portrait lens is razor-thin. Open the aperture stepper wider and watch the focus zone shrink — the eyes survive, the ears don't."
+        },
+        {
+          "id": "pc-3",
+          "title": "Backgrounds that flatter",
+          "duration_min": 7,
+          "summary": "Distance, tone and clutter: how to choose and control what's behind your subject, in camera, before you shoot.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/250", "aperture": "f/2.8" },
+          "practice_brief": "Same subject, messy background? Wider aperture plus more subject-to-background distance is the recipe — the simulator shows the blur difference instantly."
+        },
+        {
+          "id": "pc-4",
+          "title": "Directing people who hate photos",
+          "duration_min": 8,
+          "summary": "Prompts instead of poses, movement exercises, shooting during the in-between moments, and camera confidence that transfers to the subject.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/320", "aperture": "f/2.8" },
+          "practice_brief": "Candid frames need faster shutters for laughter-in-motion: 1/320s and burst mode. The best expression often lives between the poses."
+        }
+      ]
+    },
+    {
+      "id": "street-course",
+      "category": "Genre-specific",
+      "title": "Street Photography",
+      "cover_emoji": "🏙️",
+      "tagline": "Candid moments in public spaces",
+      "description": "How to photograph people and scenes in public spaces: pre-setting your camera, reading light in the city, working a scene patiently, and the ethics of candid photography.",
+      "level": "Beginner",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "sc-1",
+          "title": "Pre-set and wait: the street method",
+          "duration_min": 8,
+          "summary": "Set exposure for the light, pre-focus a zone, and let the scene come to you. The street classic — camera ready before the moment exists.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/250", "aperture": "f/5.6" },
+          "practice_brief": "f/5.6 at 3m gives a deep-enough zone for walking subjects. Load it, then practice being ready — the drill is patience, not settings."
+        },
+        {
+          "id": "sc-2",
+          "title": "City light: reflections, shadows and rain",
+          "duration_min": 8,
+          "summary": "Urban light is dramatic: hard sun through buildings, glowing shop signs, wet pavement mirrors. Learn to hunt light, not subjects.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "800", "shutter_speed": "1/500", "aperture": "f/4.0" },
+          "practice_brief": "Shadows and highlights are the composition. Expose for the bright lane and let the rest go dark — underexposing on purpose is a street superpower."
+        },
+        {
+          "id": "sc-3",
+          "title": "Ethics, nerve and the candid frame",
+          "duration_min": 7,
+          "summary": "When to raise the camera, how to handle being noticed, and the respect that keeps street photography welcome in public spaces.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "1600", "shutter_speed": "1/125", "aperture": "f/2.8" },
+          "practice_brief": "Evening streets push ISO up — this preset accepts the grain to keep a safe shutter. Grain is the honest cost of being there."
+        }
+      ]
+    },
+    {
+      "id": "fine-art-course",
+      "category": "Genre-specific",
+      "title": "Fine Art Photography",
+      "cover_emoji": "🎨",
+      "tagline": "Storytelling and meaningful images",
+      "description": "Emphasizes storytelling and creating meaningful images: developing a personal vision, using long exposure and minimalism deliberately, and building a body of work that says something.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "fa-1",
+          "title": "Vision before settings",
+          "duration_min": 8,
+          "summary": "What do you want the viewer to feel? Turning an emotion into exposure, tone and framing choices — 'wrong' settings on purpose.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "2\"", "aperture": "f/11", "exposure_comp": -0.3 },
+          "practice_brief": "The long exposure turns anything moving into smoke — motion becomes the story. Darkness is a mood, not a mistake."
+        },
+        {
+          "id": "fa-2",
+          "title": "Minimalism: subject, space, silence",
+          "duration_min": 7,
+          "summary": "Removing until only meaning remains. Negative space, isolation, and the discipline of leaving things out.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/500", "aperture": "f/8.0" },
+          "practice_brief": "Sharp subject, vast emptiness. Frame a small subject with huge negative space using the composition you imagined — the settings are deliberately boring."
+        },
+        {
+          "id": "fa-3",
+          "title": "Building a series",
+          "duration_min": 8,
+          "summary": "One image is a moment; twelve images are a statement. Consistency in tone, treatment and subject — and sequencing that builds meaning.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/125", "aperture": "f/8.0" },
+          "practice_brief": "Series work demands repeatable settings. Lock this recipe, then go make variations — consistency is the craft here."
+        }
+      ]
+    },
+    {
+      "id": "night-celestial-course",
+      "category": "Genre-specific",
       "title": "Night & Celestial Photography",
       "cover_emoji": "🌙",
       "tagline": "Stars, cityscapes and long exposures after dark",
-      "description": "The full night class: tripods, the 500 rule, star fields, cityscapes and light pollution. Five lessons take you from your first blurry attempt to pin-point stars and glowing skylines — each with a simulator drill to lock in the exposure math before you're standing in the dark.",
+      "description": "The full night class: tripods, the 500 rule, star fields, cityscapes and light pollution. Five lessons take you from your first blurry attempt to pin-point stars and glowing skylines.",
       "level": "Intermediate",
       "price": "paid",
       "lessons": [
@@ -132,6 +395,170 @@
           "video_kind": "mp4",
           "practice_preset": { "iso": "1600", "shutter_speed": "8\"", "aperture": "f/2.8" },
           "practice_brief": "Run the full night starting recipe, then verify each leg of the triangle against the checklist: aperture wide, shutter at the rule, ISO at your tested ceiling."
+        }
+      ]
+    },
+    {
+      "id": "commercial-photography",
+      "category": "Advanced",
+      "title": "Commercial Photography",
+      "cover_emoji": "💼",
+      "tagline": "Advertising, product and marketing imagery",
+      "description": "Covers photography for advertising and marketing purposes: product shots on white, controlled studio lighting, working to a brief, and the precision commercial clients expect.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "cm-1",
+          "title": "Product on white: the commercial baseline",
+          "duration_min": 9,
+          "summary": "Even light, deep depth of field, exact exposure — product work is precision. Setting up a basic two-light white-background shot with any camera.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/125", "aperture": "f/8.0" },
+          "practice_brief": "Commercial baseline: f/8 front-to-back sharpness at base ISO. Nothing artistic here — consistency IS the product."
+        },
+        {
+          "id": "cm-2",
+          "title": "Working to a brief",
+          "duration_min": 8,
+          "summary": "Clients speak in adjectives ('clean', 'premium', 'bold'). Translating vague words into light, angle and composition decisions — and shooting for the edit.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/160", "aperture": "f/5.6" },
+          "practice_brief": "Shoot the same product three ways — clean, premium, bold — by changing angle and light, not just adjectives. The simulator shows the exposure differences."
+        },
+        {
+          "id": "cm-3",
+          "title": "Lighting for advertising looks",
+          "duration_min": 9,
+          "summary": "Soft boxes, gradients, rim light and reflections: the lighting patterns behind premium-looking commercial images, scaled down to a desk setup.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/200", "aperture": "f/11" },
+          "practice_brief": "f/11 plus controlled light: every edge defined, every highlight intentional. This is where manual everything stops being optional."
+        }
+      ]
+    },
+    {
+      "id": "post-processing-course",
+      "category": "Advanced",
+      "title": "Post-Processing Techniques",
+      "cover_emoji": "💻",
+      "tagline": "Lightroom, Photoshop and the digital darkroom",
+      "description": "Focuses on editing photos using software like Photoshop and Lightroom: RAW workflow, exposure and color grading, retouching, and building an edit that serves the image instead of decorating it.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "pp-1",
+          "title": "RAW workflow: why shoot RAW",
+          "duration_min": 9,
+          "summary": "What a RAW file actually is, why it survives edits JPEGs can't, and the import → cull → develop → export loop in Lightroom.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_brief": "Editing starts in camera: shoot RAW (check your camera's menu) and this lesson's recovery tricks become possible. The simulator's histogram is your preview of what RAW can fix."
+        },
+        {
+          "id": "pp-2",
+          "title": "Exposure and color grading in Lightroom",
+          "duration_min": 10,
+          "summary": "The develop panel in order: exposure → contrast → white balance → HSL color → sharpening. A repeatable grading recipe that works on any photo.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_brief": "Practice the judgment here: analyze a photo's histogram in the app first — what needs lifting, what needs taming — then do it in Lightroom. Diagnosis before sliders."
+        },
+        {
+          "id": "pp-3",
+          "title": "Retouching in Photoshop: less is more",
+          "duration_min": 10,
+          "summary": "Dodge and burn, cleanup, local adjustments with masks — the Photoshop layer workflow that improves images invisibly instead of loudly.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_brief": "Great retouching is invisible. Compare the simulated shot with the Original toggle — the goal in Photoshop is differences nobody notices, only feels."
+        }
+      ]
+    },
+    {
+      "id": "nikon-school-course",
+      "category": "Specialized",
+      "title": "Nikon School Online",
+      "cover_emoji": "🔴",
+      "tagline": "Courses tailored for Nikon camera users",
+      "description": "Courses tailored for Nikon camera users: Z-system setup, Picture Controls, Nikon's focusing system and the SnapBridge workflow — modeled on Nikon School's curriculum so Z-body owners get body-specific teaching.",
+      "level": "Beginner → Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "nk-1",
+          "title": "Setting up a Nikon Z body right",
+          "duration_min": 8,
+          "summary": "The menus that matter on a Z50/Z6/Z8: user modes, back-button AF setup, and the i-menu customization that makes the camera faster for you.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "100", "shutter_speed": "1/125", "aperture": "f/4.0" },
+          "practice_brief": "Pick your Nikon Z body in the selector and follow along — the toolbar mirrors the real controls, dials and all."
+        },
+        {
+          "id": "nk-2",
+          "title": "Picture Controls deep dive",
+          "duration_min": 8,
+          "summary": "Standard, Neutral, Vivid, Flat and Monochrome in practice: what each does to skin, skies and contrast, and which to shoot for editing later.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/5.6" },
+          "practice_brief": "Cycle the Picture Controls on one frame and watch the mood change — Flat for editing, Vivid for impact, Monochrome for form."
+        },
+        {
+          "id": "nk-3",
+          "title": "Nikon AF system mastery",
+          "duration_min": 9,
+          "summary": "AF-S vs AF-C vs AF-A, 3D-tracking, dynamic area vs single point — Nikon's focusing vocabulary explained through practical scenarios.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/500", "aperture": "f/5.6" },
+          "practice_brief": "AF-C at 1/500s is the Nikon action recipe. Combine it with the Focus point dot to rehearse keeping the sharp zone on your subject."
+        }
+      ]
+    },
+    {
+      "id": "online-workshops-course",
+      "category": "Specialized",
+      "title": "Online Workshops",
+      "cover_emoji": "🌐",
+      "tagline": "Focused workshops on lighting and composition",
+      "description": "Various platforms provide workshops on specific topics, such as lighting or composition. This course is the launchpad: two complete workshop-style sessions here, plus guidance for choosing external workshops that match your gaps.",
+      "level": "Beginner → Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "ws-1",
+          "title": "Workshop: lighting on location",
+          "duration_min": 12,
+          "summary": "A full location-lighting session: reading available light, adding one source, and balancing flash with ambient — the workshop format of watch-then-do-then-review.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "400", "shutter_speed": "1/60", "aperture": "f/4.0" },
+          "practice_brief": "Ambient-first thinking: set the exposure for the room (this preset), then imagine the flash adding a clean layer on the subject. Shutter controls the room, aperture/flash controls the subject."
+        },
+        {
+          "id": "ws-2",
+          "title": "Workshop: composition critique session",
+          "duration_min": 12,
+          "summary": "Live-critique format: real images reviewed for framing, timing and intent — then re-shot. The fastest learning loop in photography.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_preset": { "iso": "200", "shutter_speed": "1/125", "aperture": "f/5.6" },
+          "practice_brief": "Bring your own image to the critique: analyze it in the app first (score, issues, composition notes) — then re-shoot with one deliberate change."
+        },
+        {
+          "id": "ws-3",
+          "title": "Choosing your next workshop",
+          "duration_min": 6,
+          "summary": "How to audit your own weaknesses (histogram? focus? fear of strangers?) and pick external workshops that fix actual gaps instead of repeating strengths.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "practice_brief": "Use the Progress screen: your weakest recurring issue across saved sessions is the workshop topic to hunt for next."
         }
       ]
     }

@@ -13,7 +13,7 @@ import {
 
 describe("training catalog", () => {
   it("ships two free teaser courses and at least one paid course", () => {
-    expect(courses.filter((c) => c.price === "free").length).toBe(2);
+    expect(courses.filter((c) => c.price === "free").length).toBe(3);
     expect(courses.filter((c) => c.price === "paid").length).toBeGreaterThanOrEqual(1);
   });
 
@@ -65,5 +65,25 @@ describe("video embeds", () => {
   it("maps vimeo and leaves mp4 direct", () => {
     expect(embedUrl("https://vimeo.com/123456789")).toBe("https://player.vimeo.com/video/123456789");
     expect(embedUrl("https://cdn.example.com/lesson.mp4")).toBeNull();
+  });
+});
+
+describe("curriculum categories", () => {
+  it("groups every course into one of the four categories", () => {
+    const cats = new Set(courses.map((c) => c.category));
+    expect(cats).toEqual(new Set(["Fundamentals", "Genre-specific", "Advanced", "Specialized"]));
+  });
+
+  it("fundamentals include the free intro course", () => {
+    const intro = courses.find((c) => c.id === "intro-digital-photography")!;
+    expect(intro.category).toBe("Fundamentals");
+    expect(intro.price).toBe("free");
+    expect(intro.lessons.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("post-processing lessons teach editing, not camera settings", () => {
+    const pp = courses.find((c) => c.id === "post-processing-course")!;
+    expect(pp.category).toBe("Advanced");
+    for (const lesson of pp.lessons) expect(lesson.practice_preset).toBeUndefined();
   });
 });

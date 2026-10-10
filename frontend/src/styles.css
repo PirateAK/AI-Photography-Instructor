@@ -632,6 +632,19 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 }
 
 /* ---------- on-device photo gallery (vertical wheel) ---------- */
+.gallery-toggle {
+  align-self: flex-start;
+}
+.gallery-chev {
+  margin-left: 6px;
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+.gallery-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .gallery-bar {
   display: flex;
   gap: 10px;

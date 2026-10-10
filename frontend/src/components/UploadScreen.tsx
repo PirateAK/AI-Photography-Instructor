@@ -36,6 +36,7 @@ export default function UploadScreen() {
   const styles = useStore((s) => s.styles);
 
   const [dragging, setDragging] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
   const [undoToast, setUndoToast] = useState<{ name: string } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pickRef = useRef<HTMLInputElement>(null);
@@ -166,23 +167,45 @@ export default function UploadScreen() {
         </div>
       )}
 
-      <div className="gallery-bar">
-        <button className="btn" onClick={() => pickRef.current?.click()}>
-          🖼️ Pick photos
-        </button>
-        <button className="btn" onClick={() => camRef.current?.click()} title="Shoot straight into the coach">
-          📸 Camera
-        </button>
-        <span className="muted">Gallery lives on this device — nothing uploads until you analyze</span>
-      </div>
-      <input ref={pickRef} type="file" accept="image/*" multiple hidden onChange={(e) => void onPickFiles(e)} />
-      <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => void onCapture(e)} />
+      <button
+        type="button"
+        className="btn gallery-toggle"
+        aria-expanded={galleryOpen}
+        onClick={() => setGalleryOpen((v) => !v)}
+        title="Photos stored on this device — tap to open or close the gallery"
+      >
+        🖼️ Gallery{galleryItems.length > 0 ? ` (${galleryItems.length})` : ""}
+        <span className="gallery-chev">{galleryOpen ? "▴" : "▾"}</span>
+      </button>
 
-      <GalleryWheel
-        items={galleryItems}
-        onLoad={(id) => void loadFromGallery(id)}
-        onRemove={(id, name) => void handleGalleryRemove(id, name)}
-      />
+      {galleryOpen && (
+        <div className="gallery-panel">
+          <div className="gallery-bar">
+            <button className="btn small" onClick={() => pickRef.current?.click()}>
+              🖼️ Pick photos
+            </button>
+            <button className="btn small" onClick={() => camRef.current?.click()} title="Shoot straight into the coach">
+              📸 Camera
+            </button>
+            <span className="muted">Lives on this device — nothing uploads until you analyze</span>
+            <div className="spacer" />
+            <button className="btn small ghost" onClick={() => setGalleryOpen(false)}>
+              ✕ Close
+            </button>
+          </div>
+          <input ref={pickRef} type="file" accept="image/*" multiple hidden onChange={(e) => void onPickFiles(e)} />
+          <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => void onCapture(e)} />
+
+          <GalleryWheel
+            items={galleryItems}
+            onLoad={(id) => {
+              setGalleryOpen(false); // selecting a photo closes the wheel
+              void loadFromGallery(id);
+            }}
+            onRemove={(id, name) => void handleGalleryRemove(id, name)}
+          />
+        </div>
+      )}
 
       <div className="upload-form">
         <label>

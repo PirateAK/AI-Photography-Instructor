@@ -115,7 +115,7 @@ export default function Workspace() {
                   ✕ Close
                 </button>
               </div>
-              <GalleryPanel onClose={() => setGalleryOpen(false)} showClose={false} />
+              <GalleryPanel onClose={() => setGalleryOpen(false)} showClose={false} autoAnalyze />
             </div>
           )}
         </div>

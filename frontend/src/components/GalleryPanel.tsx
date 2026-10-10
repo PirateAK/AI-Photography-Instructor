@@ -13,15 +13,19 @@ const GALLERY_PAGE = 10;
 export default function GalleryPanel({
   onClose,
   showClose = true,
+  autoAnalyze = false,
 }: {
   onClose?: () => void;
   showClose?: boolean;
+  /** Run the coach immediately after a photo is chosen (workspace swap flow). */
+  autoAnalyze?: boolean;
 }) {
   const galleryItems = useStore((s) => s.galleryItems);
   const addToGallery = useStore((s) => s.addToGallery);
   const removeFromGallery = useStore((s) => s.removeFromGallery);
   const undoGalleryRemove = useStore((s) => s.undoGalleryRemove);
   const loadFromGallery = useStore((s) => s.loadFromGallery);
+  const startAnalysis = useStore((s) => s.startAnalysis);
 
   const [busy, setBusy] = useState<string | null>(null);
   const [undoToast, setUndoToast] = useState<{ name: string } | null>(null);
@@ -118,7 +122,11 @@ export default function GalleryPanel({
         items={galleryItems}
         onLoad={(id) => {
           onClose?.();
-          void loadFromGallery(id);
+          void (async () => {
+            await loadFromGallery(id);
+            // workspace swap flow: the coach responds to the new photo right away
+            if (autoAnalyze) startAnalysis();
+          })();
         }}
         onRemove={(id, name) => void handleGalleryRemove(id, name)}
       />

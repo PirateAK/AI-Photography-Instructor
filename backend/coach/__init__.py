@@ -41,8 +41,9 @@ def _resolved() -> dict:
     provider = (cfg.get("provider") or config.PROVIDER or "auto").lower()
     api_key = cfg.get("api_key") or os.getenv("GEMINI_API_KEY", "") or config.OPENAI_API_KEY
     model = cfg.get("model")
-    if not model:
-        model = "gemini-2.0-flash" if provider == "gemini" else config.OPENAI_MODEL
+    legacy = ("gemini-2.0-flash", "gemini-flash-latest")  # retired or too-slow defaults
+    if not model or model in legacy:
+        model = "gemini-flash-lite-latest" if provider in ("gemini", "auto") else config.OPENAI_MODEL
     base_url = cfg.get("base_url") or None
     return {"provider": provider, "api_key": api_key, "model": model, "base_url": base_url}
 
@@ -93,7 +94,7 @@ def provider_for_request():
             log.warning("OpenAI provider unavailable (%s); using mock.", exc)
     if os.getenv("GEMINI_API_KEY", ""):
         try:
-            return _build_engine("gemini", os.getenv("GEMINI_API_KEY", ""), "gemini-2.0-flash", None), "gemini"
+            return _build_engine("gemini", os.getenv("GEMINI_API_KEY", ""), "gemini-flash-lite-latest", None), "gemini"
         except Exception as exc:
             log.warning("Gemini provider unavailable (%s); using mock.", exc)
     return MockCoach(), "mock"

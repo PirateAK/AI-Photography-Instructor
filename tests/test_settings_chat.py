@@ -16,14 +16,6 @@ def jpeg_bytes(color=(100, 120, 140)):
     return buf.getvalue()
 
 
-@pytest.fixture(autouse=True)
-def isolated_runtime_settings(tmp_path, monkeypatch):
-    import backend.runtime_config as rc
-
-    monkeypatch.setattr(rc, "PATH", tmp_path / "runtime_settings.json")
-    yield
-
-
 def test_settings_roundtrip_masks_key(monkeypatch):
     saved = client.post(
         "/api/settings",

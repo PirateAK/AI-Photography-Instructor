@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 
 import httpx
 
@@ -17,7 +18,21 @@ from .schema import AnalysisResult
 log = logging.getLogger(__name__)
 
 DEFAULT_ROOT = "https://generativelanguage.googleapis.com/v1beta"
-DEFAULT_MODEL = "gemini-2.0-flash"
+# Self-updating alias for the current fast flash-lite model — quick enough for
+# free-tier latency and structured JSON output. Users can override in Setup.
+DEFAULT_MODEL = "gemini-flash-lite-latest"
+
+
+def _extract_json(text: str) -> dict:
+    """Parse model output tolerantly: strip fences, keep the outermost object."""
+    cleaned = _strip_fences(text)
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        start, end = cleaned.find("{"), cleaned.rfind("}")
+        if start != -1 and end > start:
+            return json.loads(cleaned[start:end + 1])
+        raise
 
 
 def _strip_fences(text: str) -> str:
@@ -45,22 +60,32 @@ class GeminiProvider:
                 **({"responseMimeType": "application/json"} if json_mode else {}),
             },
         }
-        response = httpx.post(
-            f"{self.root}/models/{self.model}:generateContent",
-            params={"key": self.api_key},
-            json=body,
-            timeout=90,
-        )
-        response.raise_for_status()
-        data = response.json()
-        candidates = data.get("candidates") or []
-        if not candidates:
-            raise RuntimeError(f"Gemini returned no candidates: {data.get('promptFeedback', data)}")
-        parts = candidates[0].get("content", {}).get("parts") or []
-        text = "".join(p.get("text", "") for p in parts).strip()
-        if not text:
-            raise RuntimeError("Gemini returned an empty response.")
-        return text
+        last_error: Exception | None = None
+        for attempt in range(3):  # free tier occasionally 503s — retry transient errors
+            try:
+                response = httpx.post(
+                    f"{self.root}/models/{self.model}:generateContent",
+                    headers={"x-goog-api-key": self.api_key},  # header auth: key never appears in URLs/logs
+                    json=body,
+                    timeout=90,
+                )
+                response.raise_for_status()
+                data = response.json()
+                candidates = data.get("candidates") or []
+                if not candidates:
+                    raise RuntimeError(f"Gemini returned no candidates: {data.get('promptFeedback', data)}")
+                parts = candidates[0].get("content", {}).get("parts") or []
+                text = "".join(p.get("text", "") for p in parts).strip()
+                if not text:
+                    raise RuntimeError("Gemini returned an empty response.")
+                return text
+            except httpx.HTTPStatusError as exc:
+                last_error = exc
+                if exc.response.status_code >= 500 and attempt < 2:
+                    time.sleep(1.5 * (attempt + 1))
+                    continue
+                raise
+        raise last_error  # pragma: no cover
 
     @staticmethod
     def _context_payload(camera: dict, settings: dict, intent: str, exif: dict, style: dict | None) -> dict:
@@ -97,9 +122,9 @@ class GeminiProvider:
 
         last_error: Exception | None = None
         for attempt in range(2):  # one retry on parse/schema failure
-            text = self._generate(SYSTEM_PROMPT, contents, temperature=0.4, max_tokens=2048, json_mode=True)
+            text = self._generate(SYSTEM_PROMPT, contents, temperature=0.4, max_tokens=8192, json_mode=True)
             try:
-                parsed = json.loads(_strip_fences(text))
+                parsed = _extract_json(text)
                 analysis = AnalysisResult.model_validate(parsed["analysis"])
                 chat = str(parsed.get("chat_response") or analysis.summary)
                 return analysis, chat, None

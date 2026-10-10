@@ -12,7 +12,7 @@ const ENGINE_LABELS: Record<string, string> = {
 const MODEL_HINTS: Record<string, string> = {
   mock: "n/a for the heuristic engine",
   openai: "gpt-4o-mini",
-  gemini: "gemini-2.0-flash",
+  gemini: "gemini-flash-lite-latest",
 };
 
 export default function SettingsScreen() {

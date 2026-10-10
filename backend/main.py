@@ -30,6 +30,7 @@ from .runtime_config import clear_key, load as load_runtime, masked, save as sav
 from .styles import get_style
 
 logging.basicConfig(level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARNING)  # httpx logs full request URLs — keep them quiet
 log = logging.getLogger(__name__)
 
 app = FastAPI(title="AI Photography Instructor", version="0.1.0")

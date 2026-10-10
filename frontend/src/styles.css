@@ -757,3 +757,22 @@ iframe.video-frame { border: none; }
   width: 170px;
   text-transform: uppercase;
 }
+
+/* ---------- style manager ---------- */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.form-grid-4 { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.form-grid-6 { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+.settings-form textarea,
+.form-grid textarea {
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  width: 100%;
+  resize: vertical;
+}
+.settings-form input:disabled { opacity: 0.5; }
+.settings-form .section-title { margin-top: 8px; }

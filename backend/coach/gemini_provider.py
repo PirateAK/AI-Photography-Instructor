@@ -140,6 +140,11 @@ class GeminiProvider:
                 ]
         raise RuntimeError(f"Gemini coach failed after retry: {last_error}")
 
+    def generate_json(self, system: str, user_prompt: str, max_tokens: int = 4000) -> str:
+        """Free-form structured JSON generation (used by the Style Manager)."""
+        contents = [{"role": "user", "parts": [{"text": user_prompt}]}]
+        return self._generate(system, contents, temperature=0.5, max_tokens=max_tokens, json_mode=True)
+
     def chat(self, message: str, history: list[dict], context: dict, image_b64: str | None = None) -> str:
         contents: list[dict] = []
         for turn in history[-12:]:

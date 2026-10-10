@@ -18,6 +18,7 @@ export default function ClassesScreen() {
   const unlockedCourses = useStore((s) => s.unlockedCourses);
   const goUpload = useStore((s) => s.goUpload);
   const openWorkspace = useStore((s) => s.openWorkspace);
+  const goStyleManager = useStore((s) => s.goStyleManager);
   const dataUrl = useStore((s) => s.dataUrl);
   const [openId, setOpenId] = useState<string | null>(null);
   const openCourse = openId ? getCourse(openId) : undefined;
@@ -46,6 +47,9 @@ export default function ClassesScreen() {
         <div className="upload-row">
           <button className="btn" onClick={dataUrl ? openWorkspace : goUpload}>
             ← {dataUrl ? "Back to workspace" : "Back to upload"}
+          </button>
+          <button className="btn primary" onClick={goStyleManager}>
+            ✎ Manage styles
           </button>
         </div>
       </div>

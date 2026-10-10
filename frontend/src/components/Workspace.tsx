@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useStore } from "../state/store";
 import { getCamera } from "../lib/camera";
-import { getStyles } from "../lib/styles";
 import ImageViewer from "./ImageViewer";
 import CameraBody from "./camera_body/CameraBody";
 import CameraToolbar from "./CameraToolbar";
@@ -19,7 +18,7 @@ export default function Workspace() {
   const styleId = useStore((s) => s.styleId);
   const setStyle = useStore((s) => s.setStyle);
   const cameraId = useStore((s) => s.cameraId);
-  const styles = getStyles();
+  const styles = useStore((s) => s.styles);
   const [tab, setTab] = useState<"preview" | "body">("preview");
 
   useEffect(() => {

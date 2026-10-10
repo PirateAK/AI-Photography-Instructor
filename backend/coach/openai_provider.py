@@ -88,6 +88,20 @@ class OpenAIProvider:
 
         raise RuntimeError(f"OpenAI coach failed after retry: {last_error}")
 
+    def generate_json(self, system: str, user_prompt: str, max_tokens: int = 4000) -> str:
+        """Free-form structured JSON generation (used by the Style Manager)."""
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user_prompt},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.5,
+            max_tokens=max_tokens,
+        )
+        return response.choices[0].message.content or ""
+
     def chat(self, message: str, history: list[dict], context: dict, image_b64: str | None = None) -> str:
         messages: list[dict] = [{"role": "system", "content": CHAT_SYSTEM_PROMPT}]
         for turn in history[-12:]:

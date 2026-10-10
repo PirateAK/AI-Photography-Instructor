@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCameras } from "../lib/camera";
-import { getStyles } from "../lib/styles";
 import ModelSelector from "./ModelSelector";
 
 export default function UploadScreen() {
@@ -18,7 +17,7 @@ export default function UploadScreen() {
   const openWorkspace = useStore((s) => s.openWorkspace);
   const startAnalysis = useStore((s) => s.startAnalysis);
   const cameras = getCameras();
-  const styles = getStyles();
+  const styles = useStore((s) => s.styles);
 
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -146,7 +145,7 @@ export default function UploadScreen() {
         </div>
         {styleId && (
           <p className="muted" style={{ margin: 0 }}>
-            {getStyles().find((s) => s.id === styleId)?.description}
+            {styles.find((s) => s.id === styleId)?.description}
           </p>
         )}
         <ModelSelector />

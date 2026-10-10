@@ -5,7 +5,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 import { analyzePhoto, fetchExif, sendChat as apiSendChat } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
-import { getStyle } from "../lib/styles";
+import { styleCatalog, type ShootingStyle } from "../lib/styles";
+import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
 import { courses, unlockAllPaid, isValidCode } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
 import type {
@@ -30,7 +31,7 @@ function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null 
 }
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings" | "classes";
+  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -60,6 +61,8 @@ interface PhotoState {
 
   unlockedCourses: string[];
 
+  styles: ShootingStyle[];
+
   // actions
   loadFile: (file: File) => Promise<void>;
   setCamera: (id: string) => void;
@@ -81,7 +84,12 @@ interface PhotoState {
   askCoach: (message: string) => Promise<void>;
   openWorkspace: () => void;
   goClasses: () => void;
+  goStyleManager: () => void;
   loadDemoPhoto: () => Promise<boolean>;
+  reloadStyles: () => Promise<void>;
+  saveStyle: (style: ShootingStyle) => Promise<void>;
+  deleteStyle: (id: string) => Promise<void>;
+  draftStyleWithAI: (name: string) => Promise<ShootingStyle>;
   unlockWithCode: (code: string) => boolean;
   practicePreset: (preset: Record<string, string | number>, brief: string) => Promise<void>;
 }
@@ -128,6 +136,8 @@ export const useStore = create<PhotoState>()(
       chatNotice: null,
 
       unlockedCourses: [],
+
+      styles: styleCatalog.styles,
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -184,7 +194,7 @@ export const useStore = create<PhotoState>()(
       setStyle: (id) => {
         const state = get();
         if (id === state.styleId) return;
-        const style = getStyle(id);
+        const style = state.styles.find((s) => s.id === id);
         set({
           styleId: id,
           log: pushLog(state.log, {
@@ -251,6 +261,7 @@ export const useStore = create<PhotoState>()(
       setFocusPoint: (p) => set({ focusPoint: p }),
 
       goClasses: () => set({ screen: "classes" }),
+      goStyleManager: () => set({ screen: "stylemanager" }),
 
       loadDemoPhoto: async () => {
         try {
@@ -262,6 +273,30 @@ export const useStore = create<PhotoState>()(
         } catch {
           return false;
         }
+      },
+
+      reloadStyles: async () => {
+        try {
+          const styles = await fetchStyles();
+          set({ styles });
+        } catch {
+          /* keep bundled catalog */
+        }
+      },
+
+      saveStyle: async (style) => {
+        const styles = await upsertStyle(style);
+        set({ styles });
+      },
+
+      deleteStyle: async (id) => {
+        const styles = await removeStyle(id);
+        set({ styles, styleId: get().styleId === id ? "" : get().styleId });
+      },
+
+      draftStyleWithAI: async (name) => {
+        const { draft } = await generateStyleDraft(name);
+        return draft;
       },
 
       unlockWithCode: (code) => {
@@ -411,7 +446,7 @@ export const useStore = create<PhotoState>()(
       applyRecipe: () => {
         const state = get();
         const cam = getCamera(state.cameraId);
-        const style = getStyle(state.styleId);
+        const style = state.styles.find((s) => s.id === state.styleId);
         if (!cam || !style?.recipe?.settings) return;
         const current = state.settingsByCamera[state.cameraId] ?? defaultSettings(cam);
         const snapped = snapToCamera(cam, style.recipe.settings);

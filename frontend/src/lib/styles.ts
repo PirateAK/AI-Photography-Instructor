@@ -21,6 +21,7 @@ export interface ShootingStyle {
   label: string;
   emoji: string;
   description: string;
+  level?: string;
   recipe: {
     summary: string;
     settings: Settings;

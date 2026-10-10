@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
-import { getStyle } from "../lib/styles";
 import { buildLessons, type Lesson } from "../lib/lessons";
 import { defaultSettings, getCamera } from "../lib/camera";
 import { FALLBACK_TIPS } from "../lib/tips";
@@ -18,7 +17,8 @@ export default function CoachPanel() {
   const undoApply = useStore((s) => s.undoApply);
   const undoSnapshot = useStore((s) => s.undoSnapshot);
   const goSettings = useStore((s) => s.goSettings);
-  const style = getStyle(styleId);
+  const styles = useStore((s) => s.styles);
+  const style = styles.find((s) => s.id === styleId);
 
   return (
     <>
@@ -265,7 +265,7 @@ function LessonPlayer() {
 
   const cam = getCamera(cameraId)!;
   const settings = settingsByCamera[cameraId] ?? defaultSettings(cam);
-  const style = getStyle(styleId);
+  const style = useStore((s) => s.styles.find((x) => x.id === s.styleId));
 
   const lessons = useMemo(
     () => buildLessons(cam, settings, exif, style, analysis),

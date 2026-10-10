@@ -81,6 +81,25 @@ describe("curriculum categories", () => {
     expect(intro.lessons.length).toBeGreaterThanOrEqual(4);
   });
 
+  it("exposure triangle course opens the catalog and teaches the priority-first arc", () => {
+    const et = courses.find((c) => c.id === "free-exposure-triangle")!;
+    expect(courses[0].id).toBe("free-exposure-triangle");
+    expect(et.lessons.length).toBe(7);
+    const titles = et.lessons.map((l) => l.title).join(" | ");
+    expect(titles).toContain("Pick your priority first");
+    expect(titles).toContain("slice of time");
+    // the f-stop numbering trap is taught: f-stops count how far CLOSED the aperture is
+    expect(et.lessons.some((l) => l.summary.includes("how far the aperture is CLOSED"))).toBe(true);
+    // focus does not guarantee sharpness — depth of field does
+    expect(et.lessons.some((l) => l.summary.includes("outside the depth of field"))).toBe(true);
+    // every lesson ends in a simulator drill
+    for (const l of et.lessons) {
+      expect(l.practice_preset).toBeDefined();
+      expect(Object.keys(l.practice_preset!).length).toBeGreaterThanOrEqual(3);
+      expect(l.practice_brief!.length).toBeGreaterThan(20);
+    }
+  });
+
   it("post-processing lessons teach editing, not camera settings", () => {
     const pp = courses.find((c) => c.id === "post-processing-course")!;
     expect(pp.category).toBe("Advanced");

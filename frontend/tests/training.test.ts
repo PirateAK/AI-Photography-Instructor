@@ -7,6 +7,7 @@ import {
   getCourse,
   isUnlocked,
   isValidCode,
+  isInstructorCode,
   totalMinutes,
   unlockAllPaid,
 } from "../src/lib/training";
@@ -48,6 +49,17 @@ describe("unlocks", () => {
     expect(isValidCode(appConfig.redemption_codes[0])).toBe(true);
     expect(isValidCode("nope")).toBe(false);
     expect(unlockAllPaid().length).toBe(courses.filter((c) => c.price === "paid").length);
+  });
+
+  it("instructor codes gate the dashboard (case/space tolerant)", () => {
+    expect((appConfig.instructor_codes ?? []).length).toBeGreaterThan(0);
+    const code = appConfig.instructor_codes![0];
+    expect(isInstructorCode(`  ${code.toLowerCase()} `)).toBe(true);
+    expect(isInstructorCode("nope")).toBe(false);
+    // codes must not collide with redemption codes
+    for (const ic of appConfig.instructor_codes ?? []) {
+      expect(appConfig.redemption_codes.map((c) => c.toUpperCase())).not.toContain(ic.toUpperCase());
+    }
   });
 });
 

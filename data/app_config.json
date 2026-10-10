@@ -1,6 +1,12 @@
 {
   "store_url": "https://example.com/photography-classes",
   "store_label": "Get more classes",
-  "redemption_codes": ["NIGHT2026", "PORTRAIT-PRO"],
-  "notes": "App-wide configuration. store_url opens from locked course cards. redemption_codes is a CLIENT-SIDE STUB for the MVP — any code in this list unlocks all paid courses; replace with server-side validation before real sales."
+  "redemption_codes": [
+    "NIGHT2026",
+    "PORTRAIT-PRO"
+  ],
+  "notes": "App-wide configuration. store_url opens from locked course cards. redemption_codes is a CLIENT-SIDE STUB for the MVP — any code in this list unlocks all paid courses; replace with server-side validation before real sales. instructor_codes unlock the hidden Instructor Dashboard: type one into the 'What do you want to learn or shoot?' field on the home screen.",
+  "instructor_codes": [
+    "INSTRUCTOR2026"
+  ]
 }

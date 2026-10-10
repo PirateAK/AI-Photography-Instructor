@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCameras } from "../lib/camera";
+import { isInstructorCode } from "../lib/training";
 import ModelSelector from "./ModelSelector";
 
 export default function UploadScreen() {
@@ -9,6 +10,9 @@ export default function UploadScreen() {
   const exif = useStore((s) => s.exif);
   const intent = useStore((s) => s.intent);
   const setIntent = useStore((s) => s.setIntent);
+  const instructorUnlocked = useStore((s) => s.instructorUnlocked);
+  const unlockInstructor = useStore((s) => s.unlockInstructor);
+  const goInstructor = useStore((s) => s.goInstructor);
   const styleId = useStore((s) => s.styleId);
   const setStyle = useStore((s) => s.setStyle);
   const goSettings = useStore((s) => s.goSettings);
@@ -156,7 +160,12 @@ export default function UploadScreen() {
             type="text"
             value={intent}
             placeholder={'e.g. "portraits with blurry backgrounds" or "my kid\'s soccer game"'}
-            onChange={(e) => setIntent(e.target.value)}
+            onChange={(e) => {
+              const v = e.target.value;
+              setIntent(v);
+              // hidden gate: an instructor code typed here opens the dashboard
+              if (isInstructorCode(v)) unlockInstructor(v);
+            }}
           />
         </label>
         <div className="upload-row">
@@ -177,6 +186,11 @@ export default function UploadScreen() {
           <button className="btn" onClick={goProgress}>
             📈 Progress
           </button>
+          {instructorUnlocked && (
+            <button className="btn" onClick={goInstructor} title="Content editing — shooting styles & classes">
+              🛠 Instructor
+            </button>
+          )}
           <button
             className="btn"
             onClick={() => {

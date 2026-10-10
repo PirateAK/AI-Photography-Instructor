@@ -613,6 +613,54 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   padding-top: 12px;
 }
 
+/* ---------- instructor dashboard ---------- */
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.dash-card {
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.dash-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.dash-emoji { font-size: 1.8rem; }
+.dash-title { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+.dash-count {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+.dash-card p {
+  margin: 4px 0 8px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+.dash-go { font-size: 0.85rem; color: var(--accent); margin-top: auto; }
+.dash-notes { margin: 0 0 12px; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.dash-notes li { font-size: 0.85rem; line-height: 1.5; color: #d6d8de; }
+.dash-notes code {
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 0.78rem;
+}
+
+
 .hist-toggle {
   position: absolute;
   top: 10px;

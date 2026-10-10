@@ -18,7 +18,7 @@ import { saveHistorySession } from "../lib/history";
 import type { HistData } from "../lib/histogram";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
-import { courses as bundledCourses, unlockAllPaid, isValidCode } from "../lib/training";
+import { courses as bundledCourses, unlockAllPaid, isValidCode, isInstructorCode } from "../lib/training";
 import type { TrainingCourse } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
 import type {
@@ -43,7 +43,7 @@ function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null 
 }
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "coursemanager" | "progress";
+  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "coursemanager" | "progress" | "instructor";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -73,6 +73,7 @@ interface PhotoState {
   chatNotice: string | null;
 
   unlockedCourses: string[];
+  instructorUnlocked: boolean;
 
   styles: ShootingStyle[];
   deviceId: string;
@@ -106,6 +107,9 @@ interface PhotoState {
   goStyleManager: () => void;
   goCourseManager: () => void;
   goProgress: () => void;
+  goInstructor: () => void;
+  unlockInstructor: (code: string) => boolean;
+  lockInstructor: () => void;
   loadDemoPhoto: () => Promise<boolean>;
   reloadStyles: () => Promise<void>;
   saveStyle: (style: ShootingStyle) => Promise<void>;
@@ -163,6 +167,7 @@ export const useStore = create<PhotoState>()(
       chatNotice: null,
 
       unlockedCourses: [],
+      instructorUnlocked: false,
 
       styles: styleCatalog.styles,
       deviceId:
@@ -359,6 +364,21 @@ export const useStore = create<PhotoState>()(
       goStyleManager: () => set({ screen: "stylemanager" }),
       goCourseManager: () => set({ screen: "coursemanager" }),
       goProgress: () => set({ screen: "progress" }),
+      goInstructor: () => set({ screen: "instructor" }),
+      unlockInstructor: (code) => {
+        if (!isInstructorCode(code)) return false;
+        set({
+          instructorUnlocked: true,
+          intent: "",
+          screen: "instructor",
+          log: pushLog(get().log, {
+            kind: "system",
+            text: "🛠 Instructor Dashboard unlocked — shooting styles and training classes are yours to edit.",
+          }),
+        });
+        return true;
+      },
+      lockInstructor: () => set({ instructorUnlocked: false, screen: "upload" }),
 
       loadDemoPhoto: async () => {
         try {
@@ -679,6 +699,7 @@ export const useStore = create<PhotoState>()(
         intent: s.intent,
         styleId: s.styleId,
         unlockedCourses: s.unlockedCourses,
+        instructorUnlocked: s.instructorUnlocked,
         deviceId: s.deviceId,
         lensByCamera: s.lensByCamera,
         completedLessons: s.completedLessons,

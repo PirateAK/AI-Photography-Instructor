@@ -33,6 +33,7 @@ export interface AppConfig {
   store_url: string;
   store_label: string;
   redemption_codes: string[];
+  instructor_codes?: string[];
 }
 
 export const appConfig = configJson as unknown as AppConfig;
@@ -88,6 +89,17 @@ export function unlockAllPaid(): string[] {
 export function isValidCode(code: string): boolean {
   const normalized = code.trim().toUpperCase();
   return appConfig.redemption_codes.some((c) => c.toUpperCase() === normalized);
+}
+
+/**
+ * Instructor codes unlock the hidden Instructor Dashboard (typed into the
+ * "What do you want to learn or shoot?" field on the home screen). Codes live
+ * in app_config.json — a client-side gate for solo/ship use, same trust level
+ * as the redemption codes.
+ */
+export function isInstructorCode(code: string): boolean {
+  const normalized = code.trim().toUpperCase();
+  return (appConfig.instructor_codes ?? []).some((c) => c.toUpperCase() === normalized);
 }
 
 /** Build the embeddable player URL for YouTube/Vimeo links; null = direct MP4. */

@@ -5,6 +5,7 @@ import SettingsScreen from "./components/SettingsScreen";
 import ClassesScreen from "./components/ClassesScreen";
 import StyleManagerScreen from "./components/StyleManagerScreen";
 import CourseManagerScreen from "./components/CourseManagerScreen";
+import InstructorDashboard from "./components/InstructorDashboard";
 import ProgressScreen from "./components/ProgressScreen";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { useEffect } from "react";
@@ -30,6 +31,8 @@ export default function App() {
         <StyleManagerScreen />
       ) : screen === "coursemanager" ? (
         <CourseManagerScreen />
+      ) : screen === "instructor" ? (
+        <InstructorDashboard />
       ) : screen === "progress" ? (
         <ProgressScreen />
       ) : (

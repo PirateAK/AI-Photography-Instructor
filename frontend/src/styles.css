@@ -475,6 +475,12 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   background: rgba(10, 11, 14, 0.5);
   z-index: 3;
 }
+.histogram.clickable { cursor: pointer; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.histogram.clickable:hover, .histogram.clickable:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  outline: none;
+}
 .histogram canvas { display: block; }
 .hist-caption {
   position: absolute;
@@ -485,6 +491,128 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   text-transform: uppercase;
   color: #7d8595;
 }
+.hist-hint {
+  position: absolute;
+  bottom: 3px;
+  right: 6px;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(10, 11, 14, 0.55);
+  border-radius: 4px;
+  padding: 1px 5px;
+  opacity: 0.85;
+}
+.histogram.clickable:hover .hist-hint { opacity: 1; }
+
+/* ---------- histogram training guide (overlay on the coach pane) ---------- */
+.coach-pane { position: relative; }
+.hist-guide {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--bg);
+  overflow-y: auto;
+  padding: 16px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.hist-guide-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  position: sticky;
+  top: -16px;
+  background: var(--bg);
+  padding: 14px 0 10px;
+  margin-top: -16px;
+  z-index: 1;
+  border-bottom: 1px solid var(--border);
+}
+.hist-guide h3 { margin: 0; font-size: 1.05rem; letter-spacing: -0.01em; }
+.hist-guide h4 {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+.hist-guide section { display: flex; flex-direction: column; gap: 8px; }
+.hist-guide-live canvas {
+  width: 100%;
+  max-width: 340px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: block;
+}
+.hist-map {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 340px;
+}
+.hist-map-bar {
+  height: 7px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #000, #777 50%, #fff);
+  border: 1px solid var(--border);
+}
+.hist-map-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  padding: 0 2px;
+}
+.hist-verdicts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.hist-verdicts .verdict {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 8px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+}
+.hist-verdicts .verdict.good { border-color: rgba(48, 209, 88, 0.45); }
+.hist-verdicts .verdict.warn { border-color: rgba(255, 214, 10, 0.45); }
+.hist-verdicts .verdict.bad { border-color: rgba(255, 69, 58, 0.55); }
+.hist-prose { margin: 0; font-size: 0.88rem; line-height: 1.55; color: #d6d8de; }
+.hist-prose.plain {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  color: var(--text-dim);
+}
+.hist-points { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.hist-points li { font-size: 0.85rem; line-height: 1.5; color: #d6d8de; }
+.hist-points .chip {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0b0c0f;
+}
+.hist-points .chip.blue { background: #4a9eff; }
+.hist-points .chip.red { background: #ff5a4e; }
+.hist-try-btns { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.hist-ev {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--warn);
+  min-width: 52px;
+  text-align: center;
+}
+.hist-reset { align-self: flex-start; }
+.hist-field {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
 .hist-toggle {
   position: absolute;
   top: 10px;

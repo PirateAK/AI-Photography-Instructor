@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { baselineFromExif, defaultSettings, getCamera, parseAperture } from "../lib/camera";
 import { focalZoomRatio, getLensById, parseFocal } from "../lib/lenses";
+import { drawHistogram } from "../lib/histogram";
 import {
   computeHistogram,
   identityParams,
@@ -10,7 +11,7 @@ import {
   settingsToSimParams,
 } from "../lib/simulation";
 
-export default function ImageViewer() {
+export default function ImageViewer({ onOpenHistGuide }: { onOpenHistGuide?: () => void }) {
   const dataUrl = useStore((s) => s.dataUrl);
   const cameraId = useStore((s) => s.cameraId);
   const exif = useStore((s) => s.exif);
@@ -20,6 +21,7 @@ export default function ImageViewer() {
   const setFocusPoint = useStore((s) => s.setFocusPoint);
   const highlightSetting = useStore((s) => s.highlightSetting);
   const setHighlight = useStore((s) => s.setHighlight);
+  const setHistData = useStore((s) => s.setHistData);
 
   const [showOriginal, setShowOriginal] = useState(false);
   const [rendering, setRendering] = useState(false);
@@ -63,8 +65,10 @@ export default function ImageViewer() {
             });
         renderPreview(source, params, target, focusPoint);
         setRendering(false);
+        // always compute so the histogram guide has data even with the overlay hidden
+        const hist = computeHistogram(target);
+        setHistData(hist);
         if (showHistogram && histRef.current) {
-          const hist = computeHistogram(target);
           drawHistogram(histRef.current, hist);
         }
       });
@@ -107,9 +111,19 @@ export default function ImageViewer() {
         {rendering && <span className="loading">rendering…</span>}
 
         {showHistogram && (
-          <div className="histogram" title="Luminance histogram — watch it shift as you change settings">
+          <div
+            className="histogram clickable"
+            role="button"
+            tabIndex={0}
+            onClick={() => onOpenHistGuide?.()}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") onOpenHistGuide?.();
+            }}
+            title="Luminance histogram — watch it shift as you change settings. Click for a quick tutorial."
+          >
             <canvas ref={histRef} width={220} height={72} />
             <span className="hist-caption">histogram</span>
+            <span className="hist-hint">ⓘ learn</span>
           </div>
         )}
 
@@ -166,34 +180,4 @@ export default function ImageViewer() {
       </div>
     </>
   );
-}
-
-function drawHistogram(
-  canvas: HTMLCanvasElement,
-  hist: { bins: number[]; clipLow: number; clipHigh: number } | null,
-) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  const { width: w, height: h } = canvas;
-  ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = "rgba(10, 11, 14, 0.72)";
-  ctx.fillRect(0, 0, w, h);
-  if (!hist) return;
-  const bw = w / hist.bins.length;
-  for (let i = 0; i < hist.bins.length; i++) {
-    const bh = hist.bins[i] * (h - 10);
-    // blue → white → red across the tonal range
-    const t = i / (hist.bins.length - 1);
-    ctx.fillStyle =
-      t < 0.06 ? "#4a9eff" : t > 0.94 ? "#ff5a4e" : `rgba(235, 238, 245, ${0.35 + 0.5 * Math.min(1, hist.bins[i] * 3)})`;
-    ctx.fillRect(i * bw, h - bh, Math.max(1, bw - 1), bh);
-  }
-  if (hist.clipHigh > 0.01) {
-    ctx.fillStyle = "#ff453a";
-    ctx.fillRect(w - 3, 0, 3, h);
-  }
-  if (hist.clipLow > 0.05) {
-    ctx.fillStyle = "#4a9eff";
-    ctx.fillRect(0, 0, 3, h);
-  }
 }

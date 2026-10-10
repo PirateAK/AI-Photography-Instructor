@@ -15,6 +15,7 @@ import {
   shakeThresholdSec,
 } from "../lib/lenses";
 import { saveHistorySession } from "../lib/history";
+import type { HistData } from "../lib/histogram";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
 import { courses as bundledCourses, unlockAllPaid, isValidCode } from "../lib/training";
@@ -65,6 +66,7 @@ interface PhotoState {
   highlightSetting: string | null;
   lastChangedSetting: { id: string; ts: number } | null;
   focusPoint: { x: number; y: number };
+  histData: HistData | null;
 
   chatMessages: ChatMessage[];
   chatSending: boolean;
@@ -95,6 +97,7 @@ interface PhotoState {
   clearError: () => void;
   setHighlight: (id: string | null) => void;
   setFocusPoint: (p: { x: number; y: number }) => void;
+  setHistData: (h: HistData | null) => void;
   setLens: (id: string) => void;
   beginUndoable: () => void;
   askCoach: (message: string) => Promise<void>;
@@ -153,6 +156,7 @@ export const useStore = create<PhotoState>()(
       highlightSetting: null,
       lastChangedSetting: null,
       focusPoint: { x: 0.5, y: 0.5 },
+      histData: null,
 
       chatMessages: [],
       chatSending: false,
@@ -304,6 +308,7 @@ export const useStore = create<PhotoState>()(
       },
 
       setHighlight: (id) => set({ highlightSetting: id }),
+      setHistData: (h) => set({ histData: h }),
       setFocusPoint: (p) => set({ focusPoint: p }),
 
       setLens: (id) => {

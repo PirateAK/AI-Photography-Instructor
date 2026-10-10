@@ -5,6 +5,7 @@ import ImageViewer from "./ImageViewer";
 import CameraBody from "./camera_body/CameraBody";
 import CameraToolbar from "./CameraToolbar";
 import CoachPanel from "./CoachPanel";
+import HistogramGuide from "./HistogramGuide";
 import ModelSelector from "./ModelSelector";
 
 export default function Workspace() {
@@ -21,6 +22,7 @@ export default function Workspace() {
   const cameraId = useStore((s) => s.cameraId);
   const styles = useStore((s) => s.styles);
   const [tab, setTab] = useState<"preview" | "body">("preview");
+  const [histGuide, setHistGuide] = useState(false);
 
   useEffect(() => {
     if (!dataUrl) goUpload();
@@ -89,10 +91,11 @@ export default function Workspace() {
               📷 Camera body
             </button>
           </div>
-          {tab === "preview" ? <ImageViewer /> : <CameraBody cam={getCamera(cameraId)!} />}
+          {tab === "preview" ? <ImageViewer onOpenHistGuide={() => setHistGuide(true)} /> : <CameraBody cam={getCamera(cameraId)!} />}
         </div>
-        <aside className="coach-pane">
+        <aside className={`coach-pane ${histGuide ? "guide-open" : ""}`}>
           <CoachPanel />
+          {histGuide && <HistogramGuide onClose={() => setHistGuide(false)} />}
         </aside>
       </div>
 

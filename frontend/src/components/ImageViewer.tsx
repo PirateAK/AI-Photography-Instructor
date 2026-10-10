@@ -159,7 +159,9 @@ export default function ImageViewer() {
         <div className="spacer" />
         <span className="muted">
           Baseline (as shot): ISO {baseline.iso} · {exif?.shutter_speed ?? "1/125"} ·{" "}
-          {exif?.aperture ?? "f/4"} — {exif?.has_exif ? "from EXIF" : "camera defaults"}
+          {exif?.aperture ?? "f/4"}
+          {exif?.focal_length ? ` · ${exif.focal_length}` : ""} — {exif?.has_exif ? "from EXIF" : "camera defaults"}
+          {lens ? ` · 🔍 ${lens.model} mounted` : ""}
         </span>
       </div>
     </>

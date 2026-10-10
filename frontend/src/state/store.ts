@@ -199,6 +199,22 @@ export const useStore = create<PhotoState>()(
             ? { ...get().settingsByCamera, [get().cameraId]: asShot ?? defaultSettings(cam) }
             : get().settingsByCamera,
         });
+        // remind which lens is still mounted — its zoom/IS effects apply to the NEW photo
+        const mountedLens = getLensById(get().lensByCamera[get().cameraId]);
+        if (mountedLens && cam) {
+          const zoom = focalZoomRatio(mountedLens, exif);
+          const zoomNote =
+            zoom > 1.01
+              ? `framing is now ~${zoom.toFixed(1)}× tighter than this photo's ${exif?.focal_length ?? "unknown"} shot`
+              : `framing matches this photo's focal length (${exif?.focal_length ?? "unknown"})`;
+          set({
+            log: pushLog(get().log, {
+              kind: "tip",
+              text: `🔍 Still mounted: ${mountedLens.model} — ${zoomNote}.`,
+              why: "Lenses stay mounted between photos, like a real camera. Switch or remove it in the Lens group on the toolbar.",
+            }),
+          });
+        }
       },
 
       setCamera: (id) => {

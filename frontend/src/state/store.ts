@@ -10,6 +10,7 @@ import { courses, unlockAllPaid, isValidCode } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
 import type {
   AnalysisResult,
+  CameraModel,
   ChatMessage,
   CoachResponse,
   ExifInfo,
@@ -17,6 +18,16 @@ import type {
   RecommendedSettings,
   Settings,
 } from "../lib/types";
+
+/** As-shot settings snapped onto a camera's supported stops (null if no EXIF). */
+function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null {
+  if (!exif || (!exif.iso && !exif.shutter_speed && !exif.aperture)) return null;
+  const wanted: Settings = {};
+  if (exif.iso) wanted.iso = String(exif.iso);
+  if (exif.shutter_speed) wanted.shutter_speed = exif.shutter_speed;
+  if (exif.aperture) wanted.aperture = exif.aperture;
+  return snapToCamera(cam, wanted);
+}
 
 interface PhotoState {
   screen: "upload" | "workspace" | "settings" | "classes";
@@ -131,6 +142,8 @@ export const useStore = create<PhotoState>()(
         } catch {
           exif = null; // non-fatal: EXIF is optional
         }
+        const cam = getCamera(get().cameraId);
+        const asShot = cam ? exifSettings(cam, exif) : null;
         set({
           file,
           dataUrl,
@@ -141,6 +154,10 @@ export const useStore = create<PhotoState>()(
           analyzeError: null,
           undoSnapshot: null,
           log: [],
+          // toolbar starts where reality started: as-shot settings from EXIF
+          settingsByCamera: cam
+            ? { ...get().settingsByCamera, [get().cameraId]: asShot ?? defaultSettings(cam) }
+            : get().settingsByCamera,
         });
       },
 
@@ -149,11 +166,12 @@ export const useStore = create<PhotoState>()(
         if (id === cameraId) return;
         const cam = getCamera(id);
         if (!cam) return;
+        const asShot = exifSettings(cam, get().exif);
         set({
           cameraId: id,
           settingsByCamera: {
             ...settingsByCamera,
-            [id]: settingsByCamera[id] ?? defaultSettings(cam),
+            [id]: settingsByCamera[id] ?? asShot ?? defaultSettings(cam),
           },
           undoSnapshot: null,
           log: pushLog(get().log, {
@@ -205,13 +223,19 @@ export const useStore = create<PhotoState>()(
         const state = get();
         const cam = getCamera(state.cameraId);
         if (!cam) return;
+        // Reset returns to the as-shot settings when EXIF is available —
+        // that's the photo's "reality" — otherwise the camera's defaults.
+        const restored = exifSettings(cam, state.exif) ?? defaultSettings(cam);
         set({
           settingsByCamera: {
             ...state.settingsByCamera,
-            [state.cameraId]: defaultSettings(cam),
+            [state.cameraId]: restored,
           },
           undoSnapshot: null,
-          log: pushLog(state.log, { kind: "system", text: "Settings reset to this camera's defaults." }),
+          log: pushLog(state.log, {
+            kind: "system",
+            text: "Settings reset — back to the as-shot values from the photo's EXIF.",
+          }),
         });
       },
 

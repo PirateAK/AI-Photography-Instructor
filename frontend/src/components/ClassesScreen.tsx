@@ -64,7 +64,7 @@ export default function ClassesScreen() {
             title={
               instructorUnlocked
                 ? "Edit the shooting-style knowledge base"
-                : "🔒 Instructor/Pro tool — unlock with your instructor code on the home screen"
+                : "🔒 Pro feature — Upgrade to Pro-user to access additional tools and features"
             }
           >
             {instructorUnlocked ? "✎ Manage styles" : "🔒 Manage styles"}
@@ -76,7 +76,7 @@ export default function ClassesScreen() {
             title={
               instructorUnlocked
                 ? "Create and edit training courses"
-                : "🔒 Instructor/Pro tool — unlock with your instructor code on the home screen"
+                : "🔒 Pro feature — Upgrade to Pro-user to access additional tools and features"
             }
           >
             {instructorUnlocked ? "✎ Manage courses" : "🔒 Manage courses"}
@@ -84,9 +84,8 @@ export default function ClassesScreen() {
         </div>
         {!instructorUnlocked && (
           <p className="muted" style={{ margin: "6px 0 0", fontSize: "0.8rem" }}>
-            Style and course management are instructor/Pro tools — they unlock through the hidden
-            Instructor Dashboard (type your instructor code into the home screen's
-            "What do you want to learn or shoot?" field).
+            🔒 Style and course management are Pro-user tools. Upgrade to Pro-user to access
+            additional tools and features.
           </p>
         )}
       </div>

@@ -26,7 +26,7 @@ from .coach.schema import CoachResponse
 from .config import ANALYSIS_MAX_DIM, CAMERAS_JSON, MAX_UPLOAD_BYTES
 from .exif import extract_exif
 from .history import router as history_router
-from .image_utils import downscale, encode_jpeg_b64, load_image
+from .image_utils import downscale, encode_jpeg_b64, load_image, mean_luminance
 from .runtime_config import clear_key, load as load_runtime, masked, save as save_runtime
 from .styles import get_style
 from .styles_admin import router as styles_admin_router
@@ -177,6 +177,11 @@ async def analyze(
         provider = FallbackCoach(notice_text)
         kind = "mock"
         analysis, chat, notice = provider.analyze(analysis_img, camera, settings_dict, intent, exif, style)
+
+    # equivalent-exposure guard: neutralize large EV drift in AI recommendations
+    from .coach.ev_guard import enforce_equivalent_exposure
+
+    enforce_equivalent_exposure(analysis, exif, camera, mean_luminance(analysis_img))
 
     payload = {
         "provider": provider.name,

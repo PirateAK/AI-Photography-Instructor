@@ -23,6 +23,14 @@ def downscale(img, max_dim: int):
     return img
 
 
+def mean_luminance(img) -> float:
+    """Average luminance 0..1 — used by the equivalent-exposure guard."""
+    from PIL import ImageStat
+
+    small = downscale(img, 64)
+    return ImageStat.Stat(small.convert("L")).mean[0] / 255.0
+
+
 def encode_jpeg_b64(img, quality: int = 85, max_dim: int = 1024) -> str:
     """Downscale + JPEG-encode + base64 (for vision model payloads)."""
     small = downscale(img, max_dim)

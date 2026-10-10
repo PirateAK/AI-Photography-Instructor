@@ -17,7 +17,8 @@ import {
 import { saveHistorySession } from "../lib/history";
 import { styleCatalog, type ShootingStyle } from "../lib/styles";
 import { fetchStyles, generateStyleDraft, removeStyle, upsertStyle } from "../lib/styleAdmin";
-import { courses, unlockAllPaid, isValidCode } from "../lib/training";
+import { courses as bundledCourses, unlockAllPaid, isValidCode } from "../lib/training";
+import type { TrainingCourse } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
 import type {
   AnalysisResult,
@@ -41,7 +42,7 @@ function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null 
 }
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "progress";
+  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "coursemanager" | "progress";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -73,7 +74,9 @@ interface PhotoState {
 
   styles: ShootingStyle[];
   deviceId: string;
-  lensByCamera: Record<string, string>; // cameraId -> lensId
+  lensByCamera: Record<string, string>;
+  courses: TrainingCourse[];
+  completedLessons: string[]; // cameraId -> lensId
 
   // actions
   loadFile: (file: File) => Promise<void>;
@@ -98,12 +101,18 @@ interface PhotoState {
   openWorkspace: () => void;
   goClasses: () => void;
   goStyleManager: () => void;
+  goCourseManager: () => void;
   goProgress: () => void;
   loadDemoPhoto: () => Promise<boolean>;
   reloadStyles: () => Promise<void>;
   saveStyle: (style: ShootingStyle) => Promise<void>;
   deleteStyle: (id: string) => Promise<void>;
   draftStyleWithAI: (name: string) => Promise<ShootingStyle>;
+  reloadCourses: () => Promise<void>;
+  saveCourse: (course: TrainingCourse) => Promise<void>;
+  deleteCourse: (id: string) => Promise<void>;
+  draftCourseWithAI: (topic: string) => Promise<TrainingCourse>;
+  toggleLessonComplete: (lessonId: string) => void;
   unlockWithCode: (code: string) => boolean;
   practicePreset: (preset: Record<string, string | number>, brief: string) => Promise<void>;
 }
@@ -157,6 +166,8 @@ export const useStore = create<PhotoState>()(
           ? crypto.randomUUID()
           : `dev-${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`) as string,
       lensByCamera: {},
+      courses: bundledCourses,
+      completedLessons: [],
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -325,6 +336,7 @@ export const useStore = create<PhotoState>()(
 
       goClasses: () => set({ screen: "classes" }),
       goStyleManager: () => set({ screen: "stylemanager" }),
+      goCourseManager: () => set({ screen: "coursemanager" }),
       goProgress: () => set({ screen: "progress" }),
 
       loadDemoPhoto: async () => {
@@ -365,6 +377,66 @@ export const useStore = create<PhotoState>()(
       draftStyleWithAI: async (name) => {
         const { draft } = await generateStyleDraft(name);
         return draft;
+      },
+
+      reloadCourses: async () => {
+        try {
+          const res = await fetch("/api/courses");
+          if (!res.ok) return;
+          const data = await res.json();
+          set({ courses: data.courses });
+        } catch {
+          /* keep bundled catalog */
+        }
+      },
+
+      saveCourse: async (course) => {
+        const res = await fetch("/api/courses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "upsert", course }),
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => null);
+          throw new Error(body?.detail ?? "Could not save course");
+        }
+        const data = await res.json();
+        set({ courses: data.courses });
+      },
+
+      deleteCourse: async (id) => {
+        const res = await fetch("/api/courses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "delete", course_id: id }),
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => null);
+          throw new Error(body?.detail ?? "Could not delete course");
+        }
+        const data = await res.json();
+        set({ courses: data.courses });
+      },
+
+      draftCourseWithAI: async (topic) => {
+        const res = await fetch("/api/courses/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ topic }),
+        });
+        const body = await res.json().catch(() => null);
+        if (!res.ok) throw new Error(body?.detail ?? "AI draft failed");
+        return body.draft as TrainingCourse;
+      },
+
+      toggleLessonComplete: (lessonId) => {
+        const state = get();
+        const done = state.completedLessons.includes(lessonId);
+        set({
+          completedLessons: done
+            ? state.completedLessons.filter((id) => id !== lessonId)
+            : [...state.completedLessons, lessonId],
+        });
       },
 
       unlockWithCode: (code) => {
@@ -588,6 +660,7 @@ export const useStore = create<PhotoState>()(
         unlockedCourses: s.unlockedCourses,
         deviceId: s.deviceId,
         lensByCamera: s.lensByCamera,
+        completedLessons: s.completedLessons,
       }),
     },
   ),

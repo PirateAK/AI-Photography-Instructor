@@ -11,6 +11,7 @@ export interface Lesson {
   summary: string;
   video_url: string;
   video_kind: "mp4" | "youtube" | "vimeo";
+  difficulty?: "Beginner" | "Intermediate" | "Advanced";
   practice_preset?: Record<string, string | number>;
   practice_brief?: string;
 }
@@ -23,6 +24,7 @@ export interface TrainingCourse {
   tagline: string;
   description: string;
   level: string;
+  author?: string;
   price: "free" | "paid";
   lessons: Lesson[];
 }
@@ -47,11 +49,32 @@ export function totalMinutes(course: TrainingCourse): number {
 export const CATEGORY_ORDER = ["Fundamentals", "Genre-specific", "Advanced", "Specialized"];
 
 /** Courses grouped by category in curriculum order. */
-export function coursesByCategory(): { category: string; courses: TrainingCourse[] }[] {
+export function coursesByCategory(all: TrainingCourse[]): { category: string; courses: TrainingCourse[] }[] {
   return CATEGORY_ORDER.map((category) => ({
     category,
-    courses: courses.filter((c) => c.category === category),
+    courses: all.filter((c) => c.category === category),
   })).filter((g) => g.courses.length > 0);
+}
+
+/** Difficulty shown on a lesson row: the lesson's own, else the course level. */
+export function lessonDifficulty(
+  course: TrainingCourse,
+  lesson: Lesson,
+): "Beginner" | "Intermediate" | "Advanced" {
+  if (lesson.difficulty) return lesson.difficulty;
+  if (course.level.startsWith("Advanced")) return "Advanced";
+  if (course.level.startsWith("Intermediate")) return "Intermediate";
+  return "Beginner";
+}
+
+/** Course progress against the learner's completed-lesson list. */
+export function courseProgress(
+  course: TrainingCourse,
+  completedIds: string[],
+): { done: number; total: number; pct: number } {
+  const total = course.lessons.length;
+  const done = course.lessons.filter((l) => completedIds.includes(l.id)).length;
+  return { done, total, pct: total === 0 ? 0 : Math.round((done / total) * 100) };
 }
 
 export function isUnlocked(course: TrainingCourse, unlockedIds: string[]): boolean {

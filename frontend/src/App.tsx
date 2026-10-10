@@ -4,6 +4,7 @@ import Workspace from "./components/Workspace";
 import SettingsScreen from "./components/SettingsScreen";
 import ClassesScreen from "./components/ClassesScreen";
 import StyleManagerScreen from "./components/StyleManagerScreen";
+import CourseManagerScreen from "./components/CourseManagerScreen";
 import ProgressScreen from "./components/ProgressScreen";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { useEffect } from "react";
@@ -12,8 +13,9 @@ export default function App() {
   const screen = useStore((s) => s.screen);
 
   useEffect(() => {
-    // pick up manual edits to shooting_styles.json made outside the app
+    // pick up manual edits to shooting_styles.json / training_courses.json made outside the app
     void useStore.getState().reloadStyles();
+    void useStore.getState().reloadCourses();
   }, []);
 
   return (
@@ -26,6 +28,8 @@ export default function App() {
         <ClassesScreen />
       ) : screen === "stylemanager" ? (
         <StyleManagerScreen />
+      ) : screen === "coursemanager" ? (
+        <CourseManagerScreen />
       ) : screen === "progress" ? (
         <ProgressScreen />
       ) : (

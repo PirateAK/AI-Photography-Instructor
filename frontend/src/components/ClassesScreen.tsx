@@ -6,9 +6,11 @@ import { useStore } from "../state/store";
 import {
   appConfig,
   coursesByCategory,
+  courseProgress,
   embedUrl,
   getCourse,
   isUnlocked,
+  lessonDifficulty,
   totalMinutes,
   type Lesson,
   type TrainingCourse,
@@ -16,12 +18,15 @@ import {
 
 export default function ClassesScreen() {
   const unlockedCourses = useStore((s) => s.unlockedCourses);
+  const completedLessons = useStore((s) => s.completedLessons);
   const goUpload = useStore((s) => s.goUpload);
   const openWorkspace = useStore((s) => s.openWorkspace);
   const goStyleManager = useStore((s) => s.goStyleManager);
+  const goCourseManager = useStore((s) => s.goCourseManager);
+  const courses = useStore((s) => s.courses);
   const dataUrl = useStore((s) => s.dataUrl);
   const [openId, setOpenId] = useState<string | null>(null);
-  const openCourse = openId ? getCourse(openId) : undefined;
+  const openCourse = openId ? courses.find((c) => c.id === openId) : undefined;
 
   if (openCourse) {
     return (
@@ -29,6 +34,7 @@ export default function ClassesScreen() {
         <CourseDetail
           course={openCourse}
           unlocked={isUnlocked(openCourse, unlockedCourses)}
+          completedLessons={completedLessons}
           onBack={() => setOpenId(null)}
         />
       </div>
@@ -52,10 +58,13 @@ export default function ClassesScreen() {
           <button className="btn primary" onClick={goStyleManager}>
             ✎ Manage styles
           </button>
+          <button className="btn primary" onClick={goCourseManager}>
+            ✎ Manage courses
+          </button>
         </div>
       </div>
 
-      {coursesByCategory().map((group) => (
+      {coursesByCategory(courses).map((group) => (
         <section key={group.category} style={{ marginTop: 22 }}>
           <h2 className="category-title">{group.category}</h2>
           <div className="course-grid">
@@ -64,6 +73,7 @@ export default function ClassesScreen() {
                 key={course.id}
                 course={course}
                 unlocked={isUnlocked(course, unlockedCourses)}
+                completedLessons={completedLessons}
                 onOpen={() => setOpenId(course.id)}
               />
             ))}
@@ -82,12 +92,15 @@ export default function ClassesScreen() {
 function CourseCard({
   course,
   unlocked,
+  completedLessons,
   onOpen,
 }: {
   course: TrainingCourse;
   unlocked: boolean;
+  completedLessons: string[];
   onOpen: () => void;
 }) {
+  const progress = courseProgress(course, completedLessons);
   return (
     <button className={`course-card card ${unlocked ? "" : "locked"}`} onClick={onOpen}>
       <div className={`course-cover hue-${course.id.length % 5}`}>
@@ -104,6 +117,17 @@ function CourseCard({
             {course.lessons.length} lessons · {totalMinutes(course)} min
           </span>
         </div>
+        {progress.done > 0 && (
+          <div className="course-progress">
+            <div className="course-progress-bar">
+              <div style={{ width: `${progress.pct}%` }} />
+            </div>
+            <span className="muted" style={{ fontSize: "0.7rem" }}>
+              {progress.done}/{progress.total} complete
+            </span>
+          </div>
+        )}
+        {course.author && <div className="muted" style={{ fontSize: "0.7rem" }}>by {course.author}</div>}
       </div>
     </button>
   );
@@ -112,17 +136,26 @@ function CourseCard({
 function CourseDetail({
   course,
   unlocked,
+  completedLessons,
   onBack,
 }: {
   course: TrainingCourse;
   unlocked: boolean;
+  completedLessons: string[];
   onBack: () => void;
 }) {
+  const toggleLessonComplete = useStore((s) => s.toggleLessonComplete);
   const [activeLesson, setActiveLesson] = useState<Lesson>(course.lessons[0]);
+  const [difficultyFilter, setDifficultyFilter] = useState<"All" | "Beginner" | "Intermediate" | "Advanced">("All");
   const practicePreset = useStore((s) => s.practicePreset);
   const unlockWithCode = useStore((s) => s.unlockWithCode);
   const [code, setCode] = useState("");
   const [codeError, setCodeError] = useState<string | null>(null);
+
+  const visibleLessons = course.lessons.filter(
+    (l) => difficultyFilter === "All" || lessonDifficulty(course, l) === difficultyFilter,
+  );
+  const levelsPresent = Array.from(new Set(course.lessons.map((l) => lessonDifficulty(course, l))));
 
   const tryUnlock = () => {
     if (unlockWithCode(code)) {
@@ -152,24 +185,61 @@ function CourseDetail({
           <span className={`chip ${course.price === "free" ? "good" : "medium"}`}>
             {course.price === "free" ? "FREE" : "PURCHASED CLASS"}
           </span>
+          {course.author && <span className="chip dim">by {course.author}</span>}
         </p>
       </div>
 
       {unlocked ? (
         <div className="player-card card">
-          <LessonPlayer lesson={activeLesson} />
-          <div className="lesson-list">
-            {course.lessons.map((lesson) => (
-              <button
-                key={lesson.id}
-                className={`lesson-row ${lesson.id === activeLesson.id ? "active" : ""}`}
-                onClick={() => setActiveLesson(lesson)}
-              >
-                <span className="play-ico">▶</span>
-                <span className="lesson-title">{lesson.title}</span>
-                <span className="lesson-dur">{lesson.duration_min} min</span>
-              </button>
-            ))}
+          <LessonPlayer lesson={activeLesson} completed={completedLessons.includes(activeLesson.id)} />
+          <div>
+            {levelsPresent.length > 1 && (
+              <div className="ab-toggle" style={{ marginBottom: 8 }} role="group" aria-label="Filter by difficulty">
+                {(["All", ...levelsPresent] as const).map((d) => (
+                  <button
+                    key={d}
+                    className={difficultyFilter === d ? "active" : ""}
+                    onClick={() => setDifficultyFilter(d)}
+                  >
+                    {d}
+                  </button>
+                ))}
+              </div>
+            )}
+            <div className="lesson-list">
+              {visibleLessons.map((lesson) => {
+                const diff = lessonDifficulty(course, lesson);
+                const done = completedLessons.includes(lesson.id);
+                return (
+                  <div
+                    key={lesson.id}
+                    className={`lesson-row ${lesson.id === activeLesson.id ? "active" : ""}`}
+                    onClick={() => setActiveLesson(lesson)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && setActiveLesson(lesson)}
+                  >
+                    <button
+                      className={`lesson-check ${done ? "done" : ""}`}
+                      title={done ? "Mark as not complete" : "Mark lesson complete"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleLessonComplete(lesson.id);
+                      }}
+                    >
+                      {done ? "✓" : ""}
+                    </button>
+                    <span className="lesson-title">
+                      {lesson.title}
+                      <span className={`chip ${diff === "Beginner" ? "low" : diff === "Intermediate" ? "medium" : "high"}`}>
+                        {diff}
+                      </span>
+                    </span>
+                    <span className="lesson-dur">{lesson.duration_min} min</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (
@@ -215,8 +285,9 @@ function CourseDetail({
   );
 }
 
-function LessonPlayer({ lesson }: { lesson: Lesson }) {
+function LessonPlayer({ lesson, completed }: { lesson: Lesson; completed: boolean }) {
   const practicePreset = useStore((s) => s.practicePreset);
+  const toggleLessonComplete = useStore((s) => s.toggleLessonComplete);
   const embed = useMemo(() => embedUrl(lesson.video_url), [lesson.video_url]);
 
   return (
@@ -234,7 +305,16 @@ function LessonPlayer({ lesson }: { lesson: Lesson }) {
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video className="video-frame" src={lesson.video_url} controls preload="metadata" />
       )}
-      <h3 style={{ margin: "14px 0 6px" }}>{lesson.title}</h3>
+      <h3 style={{ margin: "14px 0 6px", display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+        {lesson.title}
+        <button
+          className={`btn small ${completed ? "primary" : ""}`}
+          onClick={() => toggleLessonComplete(lesson.id)}
+          title="Track this lesson as completed"
+        >
+          {completed ? "✓ Completed" : "Mark complete"}
+        </button>
+      </h3>
       <p className="muted" style={{ marginTop: 0, lineHeight: 1.55 }}>
         {lesson.summary}
       </p>

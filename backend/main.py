@@ -30,6 +30,7 @@ from .image_utils import downscale, encode_jpeg_b64, load_image
 from .runtime_config import clear_key, load as load_runtime, masked, save as save_runtime
 from .styles import get_style
 from .styles_admin import router as styles_admin_router
+from .courses_admin import router as courses_admin_router
 
 logging.basicConfig(level=logging.INFO)
 logging.getLogger("httpx").setLevel(logging.WARNING)  # httpx logs full request URLs — keep them quiet
@@ -189,6 +190,7 @@ async def analyze(
 
 
 app.include_router(styles_admin_router)
+app.include_router(courses_admin_router)
 app.include_router(history_router)
 
 

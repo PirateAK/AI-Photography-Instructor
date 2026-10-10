@@ -2,6 +2,7 @@
 // browsable session list. Sessions auto-save after every successful analysis.
 import { useEffect, useMemo, useState } from "react";
 import { useStore } from "../state/store";
+import { courseProgress } from "../lib/training";
 import {
   buildChartPoints,
   buildStats,
@@ -13,6 +14,8 @@ import {
 export default function ProgressScreen() {
   const deviceId = useStore((s) => s.deviceId);
   const styles = useStore((s) => s.styles);
+  const courses = useStore((s) => s.courses);
+  const completedLessons = useStore((s) => s.completedLessons);
   const goUpload = useStore((s) => s.goUpload);
   const dataUrl = useStore((s) => s.dataUrl);
   const openWorkspace = useStore((s) => s.openWorkspace);
@@ -106,6 +109,28 @@ export default function ProgressScreen() {
           <div className="card" style={{ padding: 16, marginBottom: 14 }}>
             <div className="section-title">Score over time</div>
             <ScoreChart points={points} />
+          </div>
+
+          <div className="card" style={{ padding: 16, marginBottom: 14 }}>
+            <div className="section-title">Curriculum progress</div>
+            <div className="curriculum-list">
+              {courses.map((course) => {
+                const p = courseProgress(course, completedLessons);
+                return (
+                  <div key={course.id} className="curriculum-row">
+                    <span className="curriculum-title">
+                      {course.cover_emoji} {course.title}
+                    </span>
+                    <div className="course-progress-bar" style={{ flex: 1 }}>
+                      <div style={{ width: `${p.pct}%` }} />
+                    </div>
+                    <span className="muted" style={{ fontSize: "0.74rem", fontVariantNumeric: "tabular-nums" }}>
+                      {p.done}/{p.total}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="section-title">Sessions</div>

@@ -140,6 +140,7 @@
       "lessons": [
         {
           "id": "pm-1",
+          "difficulty": "Intermediate",
           "title": "Advanced exposure: histograms and ETTR",
           "duration_min": 9,
           "summary": "Reading the histogram like a pro, exposing to the right (ETTR) for maximum quality, and when to deliberately break the rules.",
@@ -150,6 +151,7 @@
         },
         {
           "id": "pm-2",
+          "difficulty": "Intermediate",
           "title": "Light mastery: golden hour to blue hour",
           "duration_min": 10,
           "summary": "Why photographers chase sunrise and sunset, how to expose when the light is dying, and white balance as a creative tool rather than a correctness chore.",
@@ -160,6 +162,7 @@
         },
         {
           "id": "pm-3",
+          "difficulty": "Beginner",
           "title": "Composition II: breaking the grid",
           "duration_min": 9,
           "summary": "Beyond thirds: frames within frames, negative space as a subject, reflection and symmetry, and knowing when center composition wins.",
@@ -170,6 +173,7 @@
         },
         {
           "id": "pm-4",
+          "difficulty": "Intermediate",
           "title": "Color theory for photographers",
           "duration_min": 8,
           "summary": "Complementary and analogous color, using color contrast to guide the eye, and Picture Styles / Creative Looks as a starting palette.",
@@ -180,6 +184,7 @@
         },
         {
           "id": "pm-5",
+          "difficulty": "Intermediate",
           "title": "Focusing systems in depth",
           "duration_min": 9,
           "summary": "AF modes, AF-area choices, back-button focus and trap focusing — take full manual control of where and when the camera focuses.",
@@ -190,6 +195,7 @@
         },
         {
           "id": "pm-6",
+          "difficulty": "Advanced",
           "title": "The photographer's workflow",
           "duration_min": 8,
           "summary": "From pre-visualization to culling, editing and delivery — how pros move from idea to finished image without drowning in files.",
@@ -491,6 +497,7 @@
       "lessons": [
         {
           "id": "nk-1",
+          "difficulty": "Beginner",
           "title": "Setting up a Nikon Z body right",
           "duration_min": 8,
           "summary": "The menus that matter on a Z50/Z6/Z8: user modes, back-button AF setup, and the i-menu customization that makes the camera faster for you.",
@@ -501,6 +508,7 @@
         },
         {
           "id": "nk-2",
+          "difficulty": "Beginner",
           "title": "Picture Controls deep dive",
           "duration_min": 8,
           "summary": "Standard, Neutral, Vivid, Flat and Monochrome in practice: what each does to skin, skies and contrast, and which to shoot for editing later.",
@@ -511,6 +519,7 @@
         },
         {
           "id": "nk-3",
+          "difficulty": "Intermediate",
           "title": "Nikon AF system mastery",
           "duration_min": 9,
           "summary": "AF-S vs AF-C vs AF-A, 3D-tracking, dynamic area vs single point — Nikon's focusing vocabulary explained through practical scenarios.",
@@ -533,6 +542,7 @@
       "lessons": [
         {
           "id": "ws-1",
+          "difficulty": "Intermediate",
           "title": "Workshop: lighting on location",
           "duration_min": 12,
           "summary": "A full location-lighting session: reading available light, adding one source, and balancing flash with ambient — the workshop format of watch-then-do-then-review.",
@@ -543,6 +553,7 @@
         },
         {
           "id": "ws-2",
+          "difficulty": "Beginner",
           "title": "Workshop: composition critique session",
           "duration_min": 12,
           "summary": "Live-critique format: real images reviewed for framing, timing and intent — then re-shot. The fastest learning loop in photography.",
@@ -553,6 +564,7 @@
         },
         {
           "id": "ws-3",
+          "difficulty": "Beginner",
           "title": "Choosing your next workshop",
           "duration_min": 6,
           "summary": "How to audit your own weaknesses (histogram? focus? fear of strangers?) and pick external workshops that fix actual gaps instead of repeating strengths.",

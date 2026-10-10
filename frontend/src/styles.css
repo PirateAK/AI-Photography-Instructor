@@ -825,3 +825,43 @@ select.lens-select {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
 }
+
+/* ---------- lessons: difficulty chips, completion, progress ---------- */
+.lesson-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-elev2);
+  color: #fff;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0;
+}
+.lesson-check.done { background: var(--good); border-color: var(--good); }
+.lesson-row .lesson-title { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.lesson-row { cursor: pointer; }
+
+.course-progress { display: flex; align-items: center; gap: 8px; }
+.course-progress-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.course-progress-bar > div {
+  height: 100%;
+  background: var(--good);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.curriculum-list { display: grid; gap: 9px; }
+.curriculum-row { display: flex; align-items: center; gap: 12px; }
+.curriculum-title { font-size: 0.84rem; min-width: 200px; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -47,13 +47,19 @@ export default function HistogramGuide({ onClose }: { onClose: () => void }) {
           </div>
         </div>
         <button className="btn small" onClick={onClose} title="Back to your coach session — nothing was lost">
-          ✕ Back to coach
+          ✕ Close
         </button>
       </div>
 
       <section className="hist-guide-live">
         <h4>Your photo right now</h4>
-        <canvas ref={canvasRef} width={300} height={110} />
+        <canvas
+          ref={canvasRef}
+          width={300}
+          height={110}
+          onClick={onClose}
+          title="Tap the histogram again to return to your coach session"
+        />
         <div className="hist-map" aria-hidden="true">
           <div className="hist-map-bar" />
           <div className="hist-map-labels">

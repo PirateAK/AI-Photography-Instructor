@@ -877,6 +877,701 @@
       }
     },
     {
+      "id": "canon_eos_r5_mark_ii",
+      "brand": "Canon",
+      "model": "EOS R5 Mark II",
+      "description": "45MP flagship · eye-control AF · 30fps",
+      "body": {
+        "type": "mirrorless",
+        "hotspots": {
+          "top": [
+            { "id": "mode_dial", "label": "Mode dial", "info": "P / Av / Tv / M + custom modes", "x": 108, "y": 96 },
+            { "id": "evf", "label": "EVF", "info": "5.76M-dot OLED viewfinder", "x": 200, "y": 78 },
+            { "id": "shutter", "label": "Shutter release", "info": "Half-press to focus, full-press to shoot", "x": 305, "y": 92 },
+            { "id": "main_dial", "label": "Main dial", "setting": "shutter_speed", "info": "Rolls shutter speed (aperture in Av)", "x": 316, "y": 132 },
+            { "id": "iso_btn", "label": "ISO button", "setting": "iso", "info": "Press, then roll the main dial", "x": 152, "y": 132 },
+            { "id": "av_btn", "label": "± AV button", "setting": "exposure_comp", "info": "Exposure compensation", "x": 142, "y": 178 },
+            { "id": "photo_video", "label": "Photo / Video switch", "info": "Dedicated stills-movie mode switch", "x": 335, "y": 170 },
+            { "id": "onoff", "label": "On / Off", "info": "Around the shutter", "x": 330, "y": 100 }
+          ],
+          "back": [
+            { "id": "vf", "label": "EVF eyepiece", "info": "Eye sensor switches displays", "x": 200, "y": 72 },
+            { "id": "menu", "label": "MENU", "info": "All camera settings live here", "x": 96, "y": 108 },
+            { "id": "info", "label": "INFO", "info": "Cycle display overlays", "x": 96, "y": 138 },
+            { "id": "q_wb", "label": "Q / WB", "setting": "white_balance", "info": "Quick menu — white balance lives here", "x": 96, "y": 168 },
+            { "id": "af", "label": "AF button", "setting": "focus_mode", "info": "Autofocus operation", "x": 96, "y": 198 },
+            { "id": "qset", "label": "SET / Picture Style", "setting": "picture_style", "info": "Picture Styles via the Q menu", "x": 232, "y": 158 },
+            { "id": "meter", "label": "Metering / zoom", "setting": "metering_mode", "info": "Metering mode (zoom in playback)", "x": 308, "y": 60 },
+            { "id": "play", "label": "Playback", "info": "Review your shots", "x": 330, "y": 210 }
+          ],
+          "front": [
+            { "id": "lens", "label": "RF mount", "info": "Full-frame RF glass — L lenses welcome", "x": 200, "y": 135 },
+            { "id": "focusswitch", "label": "AF / MF switch", "setting": "focus_mode", "info": "On the lens barrel", "x": 152, "y": 205 },
+            { "id": "lamp", "label": "AF-assist lamp", "info": "Helps autofocus in the dark", "x": 112, "y": 108 },
+            { "id": "grip", "label": "Grip", "info": "Deep flagship grip", "x": 292, "y": 140 }
+          ],
+          "left": [
+            { "id": "zoomring", "label": "Control ring", "info": "L-lenses add a clickable control ring", "x": 320, "y": 135 },
+            { "id": "ports", "label": "Ports", "info": "USB-C / HDMI / mic / headphones + ethernet grip option", "x": 120, "y": 135 }
+          ],
+          "right": [
+            { "id": "grip_r", "label": "Grip", "info": "Your right hand lands here", "x": 120, "y": 135 },
+            { "id": "focusring", "label": "Focus ring", "info": "Manual focus fine-tuning", "x": 320, "y": 135 }
+          ],
+          "bottom": [
+            { "id": "tripod", "label": "Tripod socket", "info": "¼\" thread", "x": 200, "y": 130 },
+            { "id": "battery", "label": "Battery & cards door", "info": "LP-E1P battery + dual card slots", "x": 277, "y": 130 },
+            { "id": "mount", "label": "Lens release", "info": "Press to twist the lens off", "x": 126, "y": 130 }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/1.8",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "one_shot",
+        "metering_mode": "evaluative"
+      },
+      "layout": {
+        "groups": [
+          { "id": "exposure", "label": "Exposure", "settings": ["iso", "aperture", "shutter_speed", "exposure_comp"] },
+          { "id": "color", "label": "Color", "settings": ["white_balance", "picture_style"] },
+          { "id": "focus", "label": "Focus & Metering", "settings": ["focus_mode", "metering_mode"] }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete", "label": "ISO", "default": "100", "usable_max": "25600",
+          "usable_note": "Flagship sensor — remarkably clean even at 25600.",
+          "beginner": "How sensitive the sensor is to light. Higher ISO = brighter photo but more grain.",
+          "options": [
+            { "value": "100", "label": "100" }, { "value": "200", "label": "200" }, { "value": "400", "label": "400" },
+            { "value": "800", "label": "800" }, { "value": "1600", "label": "1600" }, { "value": "3200", "label": "3200" },
+            { "value": "6400", "label": "6400" }, { "value": "12800", "label": "12800" }, { "value": "25600", "label": "25600" },
+            { "value": "51200", "label": "51200" }, { "value": "102400", "label": "102400" }
+          ]
+        },
+        "aperture": {
+          "type": "discrete", "label": "Aperture", "default": "f/1.8",
+          "beginner": "The size of the lens opening. Low f-numbers let in more light and blur the background; high f-numbers keep more in focus.",
+          "options": [
+            { "value": "f/1.2", "label": "f/1.2" }, { "value": "f/1.8", "label": "f/1.8" }, { "value": "f/2.8", "label": "f/2.8" },
+            { "value": "f/4.0", "label": "f/4.0" }, { "value": "f/5.6", "label": "f/5.6" }, { "value": "f/8.0", "label": "f/8.0" },
+            { "value": "f/11", "label": "f/11" }, { "value": "f/16", "label": "f/16" }, { "value": "f/22", "label": "f/22" }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete", "label": "Shutter speed", "default": "1/125",
+          "beginner": "How long the sensor is exposed to light. Fast speeds freeze motion; slow speeds let in more light but blur movement.",
+          "options": [
+            { "value": "30\"", "label": "30\"" }, { "value": "15\"", "label": "15\"" }, { "value": "8\"", "label": "8\"" },
+            { "value": "4\"", "label": "4\"" }, { "value": "2\"", "label": "2\"" }, { "value": "1\"", "label": "1\"" },
+            { "value": "1/2", "label": "1/2" }, { "value": "1/4", "label": "1/4" }, { "value": "1/8", "label": "1/8" },
+            { "value": "1/15", "label": "1/15" }, { "value": "1/30", "label": "1/30" }, { "value": "1/60", "label": "1/60" },
+            { "value": "1/125", "label": "1/125" }, { "value": "1/250", "label": "1/250" }, { "value": "1/500", "label": "1/500" },
+            { "value": "1/1000", "label": "1/1000" }, { "value": "1/2000", "label": "1/2000" }, { "value": "1/4000", "label": "1/4000" },
+            { "value": "1/8000", "label": "1/8000" }
+          ]
+        },
+        "exposure_comp": { "type": "range", "label": "Exp. comp", "min": -3, "max": 3, "step": 0.333333, "default": 0, "unit": "EV",
+          "beginner": "Nudges the overall brightness up (+) or down (−) without touching ISO, shutter or aperture." },
+        "white_balance": {
+          "type": "discrete", "label": "White balance", "default": "auto",
+          "beginner": "Tells the camera what 'white' is under the current light, so colors look natural.",
+          "options": [
+            { "value": "auto", "label": "AWB" }, { "value": "daylight", "label": "Daylight" }, { "value": "shade", "label": "Shade" },
+            { "value": "cloudy", "label": "Cloudy" }, { "value": "tungsten", "label": "Tungsten" }, { "value": "fluorescent", "label": "Fluorescent" },
+            { "value": "flash", "label": "Flash" }, { "value": "kelvin", "label": "Color temp" }
+          ],
+          "kelvin": { "min": 2500, "max": 10000, "step": 100, "default": 5500 }
+        },
+        "picture_style": {
+          "type": "discrete", "label": "Picture Style", "default": "standard",
+          "beginner": "The camera's built-in 'look': contrast, color and sharpness recipe applied to the JPEG.",
+          "options": [
+            { "value": "standard", "label": "Standard" }, { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }, { "value": "neutral", "label": "Neutral" },
+            { "value": "faithful", "label": "Faithful" }, { "value": "monochrome", "label": "Monochrome" }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete", "label": "Focus mode", "default": "one_shot",
+          "beginner": "One-Shot locks focus for still subjects; AI Servo tracks moving subjects; AI Focus decides for you.",
+          "options": [
+            { "value": "one_shot", "label": "One-Shot AF" }, { "value": "ai_servo", "label": "AI Servo AF" },
+            { "value": "ai_focus", "label": "AI Focus AF" }, { "value": "mf", "label": "Manual MF" }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete", "label": "Metering", "default": "evaluative",
+          "beginner": "Which part of the frame the camera uses to judge brightness. Spot reads a tiny area; Evaluative reads the whole scene.",
+          "options": [
+            { "value": "evaluative", "label": "Evaluative" }, { "value": "partial", "label": "Partial" },
+            { "value": "center_weighted", "label": "Center-weighted" }, { "value": "spot", "label": "Spot" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon_eos_r7",
+      "brand": "Canon",
+      "model": "EOS R7",
+      "description": "32.5MP APS-C · IBIS · sports-capable",
+      "body": {
+        "type": "mirrorless",
+        "hotspots": {
+          "top": [
+            { "id": "mode_dial", "label": "Mode dial", "info": "P / Av / Tv / M + custom modes", "x": 108, "y": 96 },
+            { "id": "evf", "label": "EVF", "info": "2.36M-dot OLED viewfinder", "x": 200, "y": 78 },
+            { "id": "shutter", "label": "Shutter release", "info": "Half-press to focus, full-press to shoot", "x": 305, "y": 92 },
+            { "id": "main_dial", "label": "Main dial", "setting": "shutter_speed", "info": "Rolls shutter speed (aperture in Av)", "x": 316, "y": 132 },
+            { "id": "iso_btn", "label": "ISO button", "setting": "iso", "info": "Press, then roll the main dial", "x": 152, "y": 132 },
+            { "id": "av_btn", "label": "± AV button", "setting": "exposure_comp", "info": "Exposure compensation", "x": 142, "y": 178 },
+            { "id": "onoff", "label": "On / Off", "info": "Around the shutter", "x": 330, "y": 100 }
+          ],
+          "back": [
+            { "id": "vf", "label": "EVF eyepiece", "info": "Eye sensor switches displays", "x": 200, "y": 72 },
+            { "id": "menu", "label": "MENU", "info": "All camera settings live here", "x": 96, "y": 108 },
+            { "id": "info", "label": "INFO", "info": "Cycle display overlays", "x": 96, "y": 138 },
+            { "id": "q_wb", "label": "Q / WB", "setting": "white_balance", "info": "Quick menu — white balance lives here", "x": 96, "y": 168 },
+            { "id": "af", "label": "AF button", "setting": "focus_mode", "info": "Autofocus operation", "x": 96, "y": 198 },
+            { "id": "qset", "label": "SET / Picture Style", "setting": "picture_style", "info": "Picture Styles via the Q menu", "x": 232, "y": 158 },
+            { "id": "meter", "label": "Metering / zoom", "setting": "metering_mode", "info": "Metering mode (zoom in playback)", "x": 308, "y": 60 },
+            { "id": "play", "label": "Playback", "info": "Review your shots", "x": 330, "y": 210 }
+          ],
+          "front": [
+            { "id": "lens", "label": "RF-S mount", "info": "RF-S 18–150mm kit + full-frame RF lenses work", "x": 200, "y": 135 },
+            { "id": "focusswitch", "label": "AF / MF switch", "setting": "focus_mode", "info": "On the lens barrel", "x": 152, "y": 205 },
+            { "id": "lamp", "label": "AF-assist lamp", "info": "Helps autofocus in the dark", "x": 112, "y": 108 },
+            { "id": "grip", "label": "Grip", "info": "Deep R7 grip with IBIS inside", "x": 292, "y": 140 }
+          ],
+          "left": [
+            { "id": "zoomring", "label": "Zoom ring", "info": "18mm ↔ 150mm on the kit", "x": 320, "y": 135 },
+            { "id": "ports", "label": "Ports", "info": "USB-C / HDMI / mic / headphones", "x": 120, "y": 135 }
+          ],
+          "right": [
+            { "id": "grip_r", "label": "Grip", "info": "Your right hand lands here", "x": 120, "y": 135 },
+            { "id": "focusring", "label": "Focus ring", "info": "Manual focus fine-tuning", "x": 320, "y": 135 }
+          ],
+          "bottom": [
+            { "id": "tripod", "label": "Tripod socket", "info": "¼\" thread", "x": 200, "y": 130 },
+            { "id": "battery", "label": "Battery & cards door", "info": "LP-E6NH battery + dual card slots", "x": 277, "y": 130 },
+            { "id": "mount", "label": "Lens release", "info": "Press to twist the lens off", "x": 126, "y": 130 }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/3.5",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "one_shot",
+        "metering_mode": "evaluative"
+      },
+      "layout": {
+        "groups": [
+          { "id": "exposure", "label": "Exposure", "settings": ["iso", "aperture", "shutter_speed", "exposure_comp"] },
+          { "id": "color", "label": "Color", "settings": ["white_balance", "picture_style"] },
+          { "id": "focus", "label": "Focus & Metering", "settings": ["focus_mode", "metering_mode"] }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete", "label": "ISO", "default": "100", "usable_max": "6400",
+          "usable_note": "32.5MP APS-C — clean to 6400.",
+          "beginner": "How sensitive the sensor is to light. Higher ISO = brighter photo but more grain.",
+          "options": [
+            { "value": "100", "label": "100" }, { "value": "200", "label": "200" }, { "value": "400", "label": "400" },
+            { "value": "800", "label": "800" }, { "value": "1600", "label": "1600" }, { "value": "3200", "label": "3200" },
+            { "value": "6400", "label": "6400" }, { "value": "12800", "label": "12800" }, { "value": "32000", "label": "32000" }
+          ]
+        },
+        "aperture": {
+          "type": "discrete", "label": "Aperture", "default": "f/3.5",
+          "beginner": "The size of the lens opening. Low f-numbers let in more light and blur the background; high f-numbers keep more in focus.",
+          "options": [
+            { "value": "f/3.5", "label": "f/3.5" }, { "value": "f/4.0", "label": "f/4.0" }, { "value": "f/4.5", "label": "f/4.5" },
+            { "value": "f/5.0", "label": "f/5.0" }, { "value": "f/5.6", "label": "f/5.6" }, { "value": "f/6.3", "label": "f/6.3" },
+            { "value": "f/7.1", "label": "f/7.1" }, { "value": "f/8.0", "label": "f/8.0" }, { "value": "f/9.0", "label": "f/9.0" },
+            { "value": "f/10", "label": "f/10" }, { "value": "f/11", "label": "f/11" }, { "value": "f/13", "label": "f/13" },
+            { "value": "f/14", "label": "f/14" }, { "value": "f/16", "label": "f/16" }, { "value": "f/18", "label": "f/18" },
+            { "value": "f/20", "label": "f/20" }, { "value": "f/22", "label": "f/22" }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete", "label": "Shutter speed", "default": "1/125",
+          "beginner": "How long the sensor is exposed to light. Fast speeds freeze motion; slow speeds let in more light but blur movement.",
+          "options": [
+            { "value": "30\"", "label": "30\"" }, { "value": "15\"", "label": "15\"" }, { "value": "8\"", "label": "8\"" },
+            { "value": "4\"", "label": "4\"" }, { "value": "2\"", "label": "2\"" }, { "value": "1\"", "label": "1\"" },
+            { "value": "1/2", "label": "1/2" }, { "value": "1/4", "label": "1/4" }, { "value": "1/8", "label": "1/8" },
+            { "value": "1/15", "label": "1/15" }, { "value": "1/30", "label": "1/30" }, { "value": "1/60", "label": "1/60" },
+            { "value": "1/125", "label": "1/125" }, { "value": "1/250", "label": "1/250" }, { "value": "1/500", "label": "1/500" },
+            { "value": "1/1000", "label": "1/1000" }, { "value": "1/2000", "label": "1/2000" }, { "value": "1/4000", "label": "1/4000" },
+            { "value": "1/8000", "label": "1/8000" }
+          ]
+        },
+        "exposure_comp": { "type": "range", "label": "Exp. comp", "min": -3, "max": 3, "step": 0.333333, "default": 0, "unit": "EV",
+          "beginner": "Nudges the overall brightness up (+) or down (−) without touching ISO, shutter or aperture." },
+        "white_balance": {
+          "type": "discrete", "label": "White balance", "default": "auto",
+          "beginner": "Tells the camera what 'white' is under the current light, so colors look natural.",
+          "options": [
+            { "value": "auto", "label": "AWB" }, { "value": "daylight", "label": "Daylight" }, { "value": "shade", "label": "Shade" },
+            { "value": "cloudy", "label": "Cloudy" }, { "value": "tungsten", "label": "Tungsten" }, { "value": "fluorescent", "label": "Fluorescent" },
+            { "value": "flash", "label": "Flash" }, { "value": "kelvin", "label": "Color temp" }
+          ],
+          "kelvin": { "min": 2500, "max": 10000, "step": 100, "default": 5500 }
+        },
+        "picture_style": {
+          "type": "discrete", "label": "Picture Style", "default": "standard",
+          "beginner": "The camera's built-in 'look': contrast, color and sharpness recipe applied to the JPEG.",
+          "options": [
+            { "value": "standard", "label": "Standard" }, { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }, { "value": "neutral", "label": "Neutral" },
+            { "value": "faithful", "label": "Faithful" }, { "value": "monochrome", "label": "Monochrome" }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete", "label": "Focus mode", "default": "one_shot",
+          "beginner": "One-Shot locks focus for still subjects; AI Servo tracks moving subjects; AI Focus decides for you.",
+          "options": [
+            { "value": "one_shot", "label": "One-Shot AF" }, { "value": "ai_servo", "label": "AI Servo AF" },
+            { "value": "ai_focus", "label": "AI Focus AF" }, { "value": "mf", "label": "Manual MF" }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete", "label": "Metering", "default": "evaluative",
+          "beginner": "Which part of the frame the camera uses to judge brightness. Spot reads a tiny area; Evaluative reads the whole scene.",
+          "options": [
+            { "value": "evaluative", "label": "Evaluative" }, { "value": "partial", "label": "Partial" },
+            { "value": "center_weighted", "label": "Center-weighted" }, { "value": "spot", "label": "Spot" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon_eos_r3",
+      "brand": "Canon",
+      "model": "EOS R3",
+      "description": "24MP pro sports body · eye-control AF",
+      "body": {
+        "type": "mirrorless",
+        "hotspots": {
+          "top": [
+            { "id": "mode_dial", "label": "Mode dial", "info": "P / Av / Tv / M + custom modes", "x": 108, "y": 96 },
+            { "id": "evf", "label": "EVF", "info": "5.76M-dot OLED viewfinder", "x": 200, "y": 78 },
+            { "id": "shutter", "label": "Shutter release", "info": "Half-press to focus, full-press to shoot", "x": 305, "y": 92 },
+            { "id": "main_dial", "label": "Main dial", "setting": "shutter_speed", "info": "Rolls shutter speed (aperture in Av)", "x": 316, "y": 132 },
+            { "id": "iso_btn", "label": "ISO button", "setting": "iso", "info": "Press, then roll the main dial", "x": 152, "y": 132 },
+            { "id": "av_btn", "label": "± AV button", "setting": "exposure_comp", "info": "Exposure compensation", "x": 142, "y": 178 },
+            { "id": "photo_video", "label": "Photo / Video switch", "info": "Dedicated stills-movie mode switch", "x": 335, "y": 170 },
+            { "id": "onoff", "label": "On / Off", "info": "Around the shutter", "x": 330, "y": 100 }
+          ],
+          "back": [
+            { "id": "vf", "label": "EVF eyepiece", "info": "Eye sensor switches displays", "x": 200, "y": 72 },
+            { "id": "menu", "label": "MENU", "info": "All camera settings live here", "x": 96, "y": 108 },
+            { "id": "info", "label": "INFO", "info": "Cycle display overlays", "x": 96, "y": 138 },
+            { "id": "q_wb", "label": "Q / WB", "setting": "white_balance", "info": "Quick menu — white balance lives here", "x": 96, "y": 168 },
+            { "id": "af", "label": "AF button", "setting": "focus_mode", "info": "Autofocus operation", "x": 96, "y": 198 },
+            { "id": "qset", "label": "SET / Picture Style", "setting": "picture_style", "info": "Picture Styles via the Q menu", "x": 232, "y": 158 },
+            { "id": "meter", "label": "Metering / zoom", "setting": "metering_mode", "info": "Metering mode (zoom in playback)", "x": 308, "y": 60 },
+            { "id": "play", "label": "Playback", "info": "Review your shots", "x": 330, "y": 210 }
+          ],
+          "front": [
+            { "id": "lens", "label": "RF mount", "info": "Built like the pro sports workhorse it is", "x": 200, "y": 135 },
+            { "id": "focusswitch", "label": "AF / MF switch", "setting": "focus_mode", "info": "On the lens barrel", "x": 152, "y": 205 },
+            { "id": "lamp", "label": "AF-assist lamp", "info": "Helps autofocus in the dark", "x": 112, "y": 108 },
+            { "id": "grip", "label": "Integrated vertical grip", "info": "Shutter buttons on both grips for portraits", "x": 292, "y": 140 }
+          ],
+          "left": [
+            { "id": "zoomring", "label": "Control ring", "info": "L-lenses add a clickable control ring", "x": 320, "y": 135 },
+            { "id": "ports", "label": "Ports", "info": "USB-C / HDMI / mic / headphones + ethernet", "x": 120, "y": 135 }
+          ],
+          "right": [
+            { "id": "grip_r", "label": "Vertical grip", "info": "Portrait-orientation shutter lives here", "x": 120, "y": 135 },
+            { "id": "focusring", "label": "Focus ring", "info": "Manual focus fine-tuning", "x": 320, "y": 135 }
+          ],
+          "bottom": [
+            { "id": "tripod", "label": "Tripod socket", "info": "¼\" thread", "x": 200, "y": 130 },
+            { "id": "battery", "label": "Battery & cards door", "info": "LP-E19 battery + dual card slots", "x": 277, "y": 130 },
+            { "id": "mount", "label": "Lens release", "info": "Press to twist the lens off", "x": 126, "y": 130 }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/1.8",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "ai_servo",
+        "metering_mode": "evaluative"
+      },
+      "layout": {
+        "groups": [
+          { "id": "exposure", "label": "Exposure", "settings": ["iso", "aperture", "shutter_speed", "exposure_comp"] },
+          { "id": "color", "label": "Color", "settings": ["white_balance", "picture_style"] },
+          { "id": "focus", "label": "Focus & Metering", "settings": ["focus_mode", "metering_mode"] }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete", "label": "ISO", "default": "100", "usable_max": "25600",
+          "usable_note": "Pro sports body — built for high ISO work.",
+          "beginner": "How sensitive the sensor is to light. Higher ISO = brighter photo but more grain.",
+          "options": [
+            { "value": "100", "label": "100" }, { "value": "200", "label": "200" }, { "value": "400", "label": "400" },
+            { "value": "800", "label": "800" }, { "value": "1600", "label": "1600" }, { "value": "3200", "label": "3200" },
+            { "value": "6400", "label": "6400" }, { "value": "12800", "label": "12800" }, { "value": "25600", "label": "25600" },
+            { "value": "51200", "label": "51200" }, { "value": "102400", "label": "102400" }, { "value": "204800", "label": "204800" }
+          ]
+        },
+        "aperture": {
+          "type": "discrete", "label": "Aperture", "default": "f/1.8",
+          "beginner": "The size of the lens opening. Low f-numbers let in more light and blur the background; high f-numbers keep more in focus.",
+          "options": [
+            { "value": "f/1.2", "label": "f/1.2" }, { "value": "f/1.8", "label": "f/1.8" }, { "value": "f/2.8", "label": "f/2.8" },
+            { "value": "f/4.0", "label": "f/4.0" }, { "value": "f/5.6", "label": "f/5.6" }, { "value": "f/8.0", "label": "f/8.0" },
+            { "value": "f/11", "label": "f/11" }, { "value": "f/16", "label": "f/16" }, { "value": "f/22", "label": "f/22" }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete", "label": "Shutter speed", "default": "1/125",
+          "beginner": "How long the sensor is exposed to light. Fast speeds freeze motion; slow speeds let in more light but blur movement.",
+          "options": [
+            { "value": "30\"", "label": "30\"" }, { "value": "15\"", "label": "15\"" }, { "value": "8\"", "label": "8\"" },
+            { "value": "4\"", "label": "4\"" }, { "value": "2\"", "label": "2\"" }, { "value": "1\"", "label": "1\"" },
+            { "value": "1/2", "label": "1/2" }, { "value": "1/4", "label": "1/4" }, { "value": "1/8", "label": "1/8" },
+            { "value": "1/15", "label": "1/15" }, { "value": "1/30", "label": "1/30" }, { "value": "1/60", "label": "1/60" },
+            { "value": "1/125", "label": "1/125" }, { "value": "1/250", "label": "1/250" }, { "value": "1/500", "label": "1/500" },
+            { "value": "1/1000", "label": "1/1000" }, { "value": "1/2000", "label": "1/2000" }, { "value": "1/4000", "label": "1/4000" },
+            { "value": "1/8000", "label": "1/8000" }
+          ]
+        },
+        "exposure_comp": { "type": "range", "label": "Exp. comp", "min": -3, "max": 3, "step": 0.333333, "default": 0, "unit": "EV",
+          "beginner": "Nudges the overall brightness up (+) or down (−) without touching ISO, shutter or aperture." },
+        "white_balance": {
+          "type": "discrete", "label": "White balance", "default": "auto",
+          "beginner": "Tells the camera what 'white' is under the current light, so colors look natural.",
+          "options": [
+            { "value": "auto", "label": "AWB" }, { "value": "daylight", "label": "Daylight" }, { "value": "shade", "label": "Shade" },
+            { "value": "cloudy", "label": "Cloudy" }, { "value": "tungsten", "label": "Tungsten" }, { "value": "fluorescent", "label": "Fluorescent" },
+            { "value": "flash", "label": "Flash" }, { "value": "kelvin", "label": "Color temp" }
+          ],
+          "kelvin": { "min": 2500, "max": 10000, "step": 100, "default": 5500 }
+        },
+        "picture_style": {
+          "type": "discrete", "label": "Picture Style", "default": "standard",
+          "beginner": "The camera's built-in 'look': contrast, color and sharpness recipe applied to the JPEG.",
+          "options": [
+            { "value": "standard", "label": "Standard" }, { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }, { "value": "neutral", "label": "Neutral" },
+            { "value": "faithful", "label": "Faithful" }, { "value": "monochrome", "label": "Monochrome" }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete", "label": "Focus mode", "default": "ai_servo",
+          "beginner": "One-Shot locks focus for still subjects; AI Servo tracks moving subjects; AI Focus decides for you.",
+          "options": [
+            { "value": "one_shot", "label": "One-Shot AF" }, { "value": "ai_servo", "label": "AI Servo AF" },
+            { "value": "ai_focus", "label": "AI Focus AF" }, { "value": "mf", "label": "Manual MF" }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete", "label": "Metering", "default": "evaluative",
+          "beginner": "Which part of the frame the camera uses to judge brightness. Spot reads a tiny area; Evaluative reads the whole scene.",
+          "options": [
+            { "value": "evaluative", "label": "Evaluative" }, { "value": "partial", "label": "Partial" },
+            { "value": "center_weighted", "label": "Center-weighted" }, { "value": "spot", "label": "Spot" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon_eos_rp",
+      "brand": "Canon",
+      "model": "EOS RP",
+      "description": "Budget full-frame · lightest RF full-framer",
+      "body": {
+        "type": "mirrorless",
+        "hotspots": {
+          "top": [
+            { "id": "mode_dial", "label": "Mode dial", "info": "P / Av / Tv / M + Auto", "x": 108, "y": 96 },
+            { "id": "evf", "label": "EVF", "info": "2.36M-dot OLED viewfinder", "x": 200, "y": 78 },
+            { "id": "shutter", "label": "Shutter release", "info": "Half-press to focus, full-press to shoot", "x": 305, "y": 92 },
+            { "id": "main_dial", "label": "Main dial", "setting": "shutter_speed", "info": "Rolls shutter speed (aperture in Av)", "x": 316, "y": 132 },
+            { "id": "iso_btn", "label": "ISO button", "setting": "iso", "info": "Press, then roll the main dial", "x": 152, "y": 132 },
+            { "id": "av_btn", "label": "± AV button", "setting": "exposure_comp", "info": "Exposure compensation", "x": 142, "y": 178 },
+            { "id": "onoff", "label": "On / Off", "info": "Around the shutter", "x": 330, "y": 100 }
+          ],
+          "back": [
+            { "id": "vf", "label": "EVF eyepiece", "info": "Eye sensor switches displays", "x": 200, "y": 72 },
+            { "id": "menu", "label": "MENU", "info": "All camera settings live here", "x": 96, "y": 108 },
+            { "id": "info", "label": "INFO", "info": "Cycle display overlays", "x": 96, "y": 138 },
+            { "id": "q_wb", "label": "Q / WB", "setting": "white_balance", "info": "Quick menu — white balance lives here", "x": 96, "y": 168 },
+            { "id": "af", "label": "AF button", "setting": "focus_mode", "info": "Autofocus operation", "x": 96, "y": 198 },
+            { "id": "qset", "label": "SET / Picture Style", "setting": "picture_style", "info": "Picture Styles via the Q menu", "x": 232, "y": 158 },
+            { "id": "meter", "label": "Metering / zoom", "setting": "metering_mode", "info": "Metering mode (zoom in playback)", "x": 308, "y": 60 },
+            { "id": "play", "label": "Playback", "info": "Review your shots", "x": 330, "y": 210 }
+          ],
+          "front": [
+            { "id": "lens", "label": "RF mount", "info": "Full-frame RF 24–105mm kit zoom", "x": 200, "y": 135 },
+            { "id": "focusswitch", "label": "AF / MF switch", "setting": "focus_mode", "info": "On the lens barrel", "x": 152, "y": 205 },
+            { "id": "lamp", "label": "AF-assist lamp", "info": "Helps autofocus in the dark", "x": 112, "y": 108 },
+            { "id": "grip", "label": "Grip", "info": "Shallow — travel-first design", "x": 292, "y": 140 }
+          ],
+          "left": [
+            { "id": "zoomring", "label": "Zoom ring", "info": "24mm ↔ 105mm on the kit", "x": 320, "y": 135 },
+            { "id": "ports", "label": "Ports", "info": "USB-C / HDMI micro / mic", "x": 120, "y": 135 }
+          ],
+          "right": [
+            { "id": "grip_r", "label": "Grip", "info": "Your right hand lands here", "x": 120, "y": 135 },
+            { "id": "focusring", "label": "Focus ring", "info": "Manual focus fine-tuning", "x": 320, "y": 135 }
+          ],
+          "bottom": [
+            { "id": "tripod", "label": "Tripod socket", "info": "¼\" thread", "x": 200, "y": 130 },
+            { "id": "battery", "label": "Battery & card door", "info": "LP-E17 battery and SD card", "x": 277, "y": 130 },
+            { "id": "mount", "label": "Lens release", "info": "Press to twist the lens off", "x": 126, "y": 130 }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/4.0",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "one_shot",
+        "metering_mode": "evaluative"
+      },
+      "layout": {
+        "groups": [
+          { "id": "exposure", "label": "Exposure", "settings": ["iso", "aperture", "shutter_speed", "exposure_comp"] },
+          { "id": "color", "label": "Color", "settings": ["white_balance", "picture_style"] },
+          { "id": "focus", "label": "Focus & Metering", "settings": ["focus_mode", "metering_mode"] }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete", "label": "ISO", "default": "100", "usable_max": "6400",
+          "usable_note": "2019 full-frame sensor — fine to 6400, noisy beyond.",
+          "beginner": "How sensitive the sensor is to light. Higher ISO = brighter photo but more grain.",
+          "options": [
+            { "value": "100", "label": "100" }, { "value": "200", "label": "200" }, { "value": "400", "label": "400" },
+            { "value": "800", "label": "800" }, { "value": "1600", "label": "1600" }, { "value": "3200", "label": "3200" },
+            { "value": "6400", "label": "6400" }, { "value": "12800", "label": "12800" }, { "value": "25600", "label": "25600" },
+            { "value": "40000", "label": "40000" }
+          ]
+        },
+        "aperture": {
+          "type": "discrete", "label": "Aperture", "default": "f/4.0",
+          "beginner": "The size of the lens opening. Low f-numbers let in more light and blur the background; high f-numbers keep more in focus.",
+          "options": [
+            { "value": "f/4.0", "label": "f/4.0" }, { "value": "f/4.5", "label": "f/4.5" }, { "value": "f/5.0", "label": "f/5.0" },
+            { "value": "f/5.6", "label": "f/5.6" }, { "value": "f/6.3", "label": "f/6.3" }, { "value": "f/7.1", "label": "f/7.1" },
+            { "value": "f/8.0", "label": "f/8.0" }, { "value": "f/9.0", "label": "f/9.0" }, { "value": "f/10", "label": "f/10" },
+            { "value": "f/11", "label": "f/11" }, { "value": "f/13", "label": "f/13" }, { "value": "f/14", "label": "f/14" },
+            { "value": "f/16", "label": "f/16" }, { "value": "f/18", "label": "f/18" }, { "value": "f/20", "label": "f/20" },
+            { "value": "f/22", "label": "f/22" }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete", "label": "Shutter speed", "default": "1/125",
+          "beginner": "How long the sensor is exposed to light. Fast speeds freeze motion; slow speeds let in more light but blur movement.",
+          "options": [
+            { "value": "30\"", "label": "30\"" }, { "value": "15\"", "label": "15\"" }, { "value": "8\"", "label": "8\"" },
+            { "value": "4\"", "label": "4\"" }, { "value": "2\"", "label": "2\"" }, { "value": "1\"", "label": "1\"" },
+            { "value": "1/2", "label": "1/2" }, { "value": "1/4", "label": "1/4" }, { "value": "1/8", "label": "1/8" },
+            { "value": "1/15", "label": "1/15" }, { "value": "1/30", "label": "1/30" }, { "value": "1/60", "label": "1/60" },
+            { "value": "1/125", "label": "1/125" }, { "value": "1/250", "label": "1/250" }, { "value": "1/500", "label": "1/500" },
+            { "value": "1/1000", "label": "1/1000" }, { "value": "1/2000", "label": "1/2000" }, { "value": "1/4000", "label": "1/4000" }
+          ]
+        },
+        "exposure_comp": { "type": "range", "label": "Exp. comp", "min": -3, "max": 3, "step": 0.333333, "default": 0, "unit": "EV",
+          "beginner": "Nudges the overall brightness up (+) or down (−) without touching ISO, shutter or aperture." },
+        "white_balance": {
+          "type": "discrete", "label": "White balance", "default": "auto",
+          "beginner": "Tells the camera what 'white' is under the current light, so colors look natural.",
+          "options": [
+            { "value": "auto", "label": "AWB" }, { "value": "daylight", "label": "Daylight" }, { "value": "shade", "label": "Shade" },
+            { "value": "cloudy", "label": "Cloudy" }, { "value": "tungsten", "label": "Tungsten" }, { "value": "fluorescent", "label": "Fluorescent" },
+            { "value": "flash", "label": "Flash" }, { "value": "kelvin", "label": "Color temp" }
+          ],
+          "kelvin": { "min": 2500, "max": 10000, "step": 100, "default": 5500 }
+        },
+        "picture_style": {
+          "type": "discrete", "label": "Picture Style", "default": "standard",
+          "beginner": "The camera's built-in 'look': contrast, color and sharpness recipe applied to the JPEG.",
+          "options": [
+            { "value": "standard", "label": "Standard" }, { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }, { "value": "neutral", "label": "Neutral" },
+            { "value": "faithful", "label": "Faithful" }, { "value": "monochrome", "label": "Monochrome" }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete", "label": "Focus mode", "default": "one_shot",
+          "beginner": "One-Shot locks focus for still subjects; AI Servo tracks moving subjects; AI Focus decides for you.",
+          "options": [
+            { "value": "one_shot", "label": "One-Shot AF" }, { "value": "ai_servo", "label": "AI Servo AF" },
+            { "value": "ai_focus", "label": "AI Focus AF" }, { "value": "mf", "label": "Manual MF" }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete", "label": "Metering", "default": "evaluative",
+          "beginner": "Which part of the frame the camera uses to judge brightness. Spot reads a tiny area; Evaluative reads the whole scene.",
+          "options": [
+            { "value": "evaluative", "label": "Evaluative" }, { "value": "partial", "label": "Partial" },
+            { "value": "center_weighted", "label": "Center-weighted" }, { "value": "spot", "label": "Spot" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "canon_eos_r100",
+      "brand": "Canon",
+      "model": "EOS R100",
+      "description": "Cheapest RF body · APS-C · fixed screen",
+      "body": {
+        "type": "mirrorless",
+        "hotspots": {
+          "top": [
+            { "id": "mode_dial", "label": "Mode dial", "info": "P / Av / Tv / M + Auto", "x": 108, "y": 96 },
+            { "id": "evf", "label": "EVF", "info": "2.36M-dot electronic viewfinder", "x": 200, "y": 78 },
+            { "id": "shutter", "label": "Shutter release", "info": "Half-press to focus, full-press to shoot", "x": 305, "y": 92 },
+            { "id": "main_dial", "label": "Main dial", "setting": "shutter_speed", "info": "Rolls shutter speed (aperture in Av)", "x": 316, "y": 132 },
+            { "id": "iso_btn", "label": "ISO button", "setting": "iso", "info": "Press, then roll the main dial", "x": 152, "y": 132 },
+            { "id": "av_btn", "label": "± AV button", "setting": "exposure_comp", "info": "Exposure compensation", "x": 142, "y": 178 },
+            { "id": "onoff", "label": "On / Off", "info": "Around the shutter", "x": 330, "y": 100 }
+          ],
+          "back": [
+            { "id": "vf", "label": "EVF eyepiece", "info": "Eye sensor switches displays", "x": 200, "y": 72 },
+            { "id": "menu", "label": "MENU", "info": "All camera settings live here", "x": 96, "y": 108 },
+            { "id": "info", "label": "INFO", "info": "Cycle display overlays", "x": 96, "y": 138 },
+            { "id": "q_wb", "label": "Q / WB", "setting": "white_balance", "info": "Quick menu — white balance lives here", "x": 96, "y": 168 },
+            { "id": "af", "label": "AF button", "setting": "focus_mode", "info": "Autofocus operation", "x": 96, "y": 198 },
+            { "id": "qset", "label": "SET / Picture Style", "setting": "picture_style", "info": "Picture Styles via the Q menu", "x": 232, "y": 158 },
+            { "id": "meter", "label": "Metering / zoom", "setting": "metering_mode", "info": "Metering mode (zoom in playback)", "x": 308, "y": 60 },
+            { "id": "play", "label": "Playback", "info": "Review your shots", "x": 330, "y": 210 }
+          ],
+          "front": [
+            { "id": "lens", "label": "RF-S mount", "info": "RF-S 18–45mm kit zoom", "x": 200, "y": 135 },
+            { "id": "focusswitch", "label": "AF / MF switch", "setting": "focus_mode", "info": "On the lens barrel", "x": 152, "y": 205 },
+            { "id": "lamp", "label": "AF-assist lamp", "info": "Helps autofocus in the dark", "x": 112, "y": 108 },
+            { "id": "grip", "label": "Grip", "info": "Minimal but functional", "x": 292, "y": 140 }
+          ],
+          "left": [
+            { "id": "zoomring", "label": "Zoom ring", "info": "18mm ↔ 45mm", "x": 320, "y": 135 },
+            { "id": "ports", "label": "Ports", "info": "USB-C / HDMI micro", "x": 120, "y": 135 }
+          ],
+          "right": [
+            { "id": "grip_r", "label": "Grip", "info": "Your right hand lands here", "x": 120, "y": 135 },
+            { "id": "focusring", "label": "Focus ring", "info": "Manual focus fine-tuning", "x": 320, "y": 135 }
+          ],
+          "bottom": [
+            { "id": "tripod", "label": "Tripod socket", "info": "¼\" thread", "x": 200, "y": 130 },
+            { "id": "battery", "label": "Battery & card door", "info": "LP-E17 battery and SD card", "x": 277, "y": 130 },
+            { "id": "mount", "label": "Lens release", "info": "Press to twist the lens off", "x": 126, "y": 130 }
+          ]
+        }
+      },
+      "defaults": {
+        "iso": "100",
+        "shutter_speed": "1/125",
+        "aperture": "f/4.5",
+        "exposure_comp": 0,
+        "white_balance": "auto",
+        "picture_style": "standard",
+        "focus_mode": "one_shot",
+        "metering_mode": "evaluative"
+      },
+      "layout": {
+        "groups": [
+          { "id": "exposure", "label": "Exposure", "settings": ["iso", "aperture", "shutter_speed", "exposure_comp"] },
+          { "id": "color", "label": "Color", "settings": ["white_balance", "picture_style"] },
+          { "id": "focus", "label": "Focus & Metering", "settings": ["focus_mode", "metering_mode"] }
+        ]
+      },
+      "settings": {
+        "iso": {
+          "type": "discrete", "label": "ISO", "default": "100", "usable_max": "3200",
+          "usable_note": "Entry sensor — keep ISO low for clean files.",
+          "beginner": "How sensitive the sensor is to light. Higher ISO = brighter photo but more grain.",
+          "options": [
+            { "value": "100", "label": "100" }, { "value": "200", "label": "200" }, { "value": "400", "label": "400" },
+            { "value": "800", "label": "800" }, { "value": "1600", "label": "1600" }, { "value": "3200", "label": "3200" },
+            { "value": "6400", "label": "6400" }, { "value": "12800", "label": "12800" }
+          ]
+        },
+        "aperture": {
+          "type": "discrete", "label": "Aperture", "default": "f/4.5",
+          "beginner": "The size of the lens opening. Low f-numbers let in more light and blur the background; high f-numbers keep more in focus.",
+          "options": [
+            { "value": "f/4.5", "label": "f/4.5" }, { "value": "f/5.0", "label": "f/5.0" }, { "value": "f/5.6", "label": "f/5.6" },
+            { "value": "f/6.3", "label": "f/6.3" }, { "value": "f/7.1", "label": "f/7.1" }, { "value": "f/8.0", "label": "f/8.0" },
+            { "value": "f/9.0", "label": "f/9.0" }, { "value": "f/10", "label": "f/10" }, { "value": "f/11", "label": "f/11" },
+            { "value": "f/13", "label": "f/13" }, { "value": "f/14", "label": "f/14" }, { "value": "f/16", "label": "f/16" },
+            { "value": "f/18", "label": "f/18" }, { "value": "f/20", "label": "f/20" }, { "value": "f/22", "label": "f/22" }
+          ]
+        },
+        "shutter_speed": {
+          "type": "discrete", "label": "Shutter speed", "default": "1/125",
+          "beginner": "How long the sensor is exposed to light. Fast speeds freeze motion; slow speeds let in more light but blur movement.",
+          "options": [
+            { "value": "30\"", "label": "30\"" }, { "value": "15\"", "label": "15\"" }, { "value": "8\"", "label": "8\"" },
+            { "value": "4\"", "label": "4\"" }, { "value": "2\"", "label": "2\"" }, { "value": "1\"", "label": "1\"" },
+            { "value": "1/2", "label": "1/2" }, { "value": "1/4", "label": "1/4" }, { "value": "1/8", "label": "1/8" },
+            { "value": "1/15", "label": "1/15" }, { "value": "1/30", "label": "1/30" }, { "value": "1/60", "label": "1/60" },
+            { "value": "1/125", "label": "1/125" }, { "value": "1/250", "label": "1/250" }, { "value": "1/500", "label": "1/500" },
+            { "value": "1/1000", "label": "1/1000" }, { "value": "1/2000", "label": "1/2000" }, { "value": "1/4000", "label": "1/4000" }
+          ]
+        },
+        "exposure_comp": { "type": "range", "label": "Exp. comp", "min": -2, "max": 2, "step": 0.333333, "default": 0, "unit": "EV",
+          "beginner": "Nudges the overall brightness up (+) or down (−) without touching ISO, shutter or aperture." },
+        "white_balance": {
+          "type": "discrete", "label": "White balance", "default": "auto",
+          "beginner": "Tells the camera what 'white' is under the current light, so colors look natural.",
+          "options": [
+            { "value": "auto", "label": "AWB" }, { "value": "daylight", "label": "Daylight" }, { "value": "shade", "label": "Shade" },
+            { "value": "cloudy", "label": "Cloudy" }, { "value": "tungsten", "label": "Tungsten" }, { "value": "fluorescent", "label": "Fluorescent" },
+            { "value": "flash", "label": "Flash" }, { "value": "custom", "label": "Custom WB" }
+          ]
+        },
+        "picture_style": {
+          "type": "discrete", "label": "Picture Style", "default": "standard",
+          "beginner": "The camera's built-in 'look': contrast, color and sharpness recipe applied to the JPEG.",
+          "options": [
+            { "value": "standard", "label": "Standard" }, { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }, { "value": "neutral", "label": "Neutral" },
+            { "value": "faithful", "label": "Faithful" }, { "value": "monochrome", "label": "Monochrome" }
+          ]
+        },
+        "focus_mode": {
+          "type": "discrete", "label": "Focus mode", "default": "one_shot",
+          "beginner": "One-Shot locks focus for still subjects; AI Servo tracks moving subjects; AI Focus decides for you.",
+          "options": [
+            { "value": "one_shot", "label": "One-Shot AF" }, { "value": "ai_servo", "label": "AI Servo AF" },
+            { "value": "ai_focus", "label": "AI Focus AF" }, { "value": "mf", "label": "Manual MF" }
+          ]
+        },
+        "metering_mode": {
+          "type": "discrete", "label": "Metering", "default": "evaluative",
+          "beginner": "Which part of the frame the camera uses to judge brightness. Spot reads a tiny area; Evaluative reads the whole scene.",
+          "options": [
+            { "value": "evaluative", "label": "Evaluative" }, { "value": "partial", "label": "Partial" },
+            { "value": "center_weighted", "label": "Center-weighted" }, { "value": "spot", "label": "Spot" }
+          ]
+        }
+      }
+    },
+    {
       "id": "canon_eos_r8",
       "brand": "Canon",
       "model": "EOS R8",

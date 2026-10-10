@@ -139,18 +139,22 @@ export async function addToGallery(files: File[]): Promise<{ added: number; evic
   for (const entry of prepared) store.put(entry);
   await commit(store.transaction);
 
-  // cap: evict oldest-first (fresh transactions — the write tx already committed)
+  // cap: evict oldest-first — every read/write after the commit needs a FRESH
+  // transaction; reusing `store` here throws TransactionInactiveError
   let evicted = 0;
-  const all = (await requestDone(store.getAll())) as GalleryEntry[];
-  const excess = applyCap(all.length);
-  if (excess > 0) {
-    const oldest = all.sort((a, b) => a.addedAt - b.addedAt).slice(0, excess);
-    const delStore = await storeFor("readwrite");
-    if (delStore) {
-      for (const entry of oldest) delStore.delete(entry.id as number);
-      await commit(delStore.transaction);
+  const readStore = await storeFor("readonly");
+  if (readStore) {
+    const all = (await requestDone(readStore.getAll())) as GalleryEntry[];
+    const excess = applyCap(all.length);
+    if (excess > 0) {
+      const oldest = all.sort((a, b) => a.addedAt - b.addedAt).slice(0, excess);
+      const delStore = await storeFor("readwrite");
+      if (delStore) {
+        for (const entry of oldest) delStore.delete(entry.id as number);
+        await commit(delStore.transaction);
+      }
+      evicted = excess;
     }
-    evicted = excess;
   }
   return { added: prepared.length, evicted };
 }

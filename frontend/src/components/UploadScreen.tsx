@@ -51,15 +51,24 @@ export default function UploadScreen() {
 
   const onPickFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files?.length) await addToGallery(Array.from(files));
     e.target.value = ""; // allow re-picking the same photo
+    if (!files?.length) return;
+    try {
+      await addToGallery(Array.from(files));
+    } catch (err) {
+      alert(`Couldn't add to the gallery: ${err instanceof Error ? err.message : err}`);
+    }
   };
 
   const onCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
-    await addToGallery([file]);
+    try {
+      await addToGallery([file]);
+    } catch {
+      /* gallery write failed — still coach the shot directly */
+    }
     await loadFile(file);
     openWorkspace();
   };

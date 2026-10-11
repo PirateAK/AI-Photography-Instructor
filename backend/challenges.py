@@ -16,6 +16,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import os
 import sqlite3
 import threading
 from datetime import datetime, timedelta
@@ -125,6 +126,13 @@ def _windows(now: datetime) -> list[dict]:
 
 
 def _now() -> datetime:
+    # Dev/demo hook: CHALLENGE_NOW=2026-11-04 walks voting/results out of season.
+    override = os.getenv("CHALLENGE_NOW", "")
+    if override:
+        try:
+            return datetime.fromisoformat(override)
+        except ValueError:
+            pass
     return datetime.now()
 
 

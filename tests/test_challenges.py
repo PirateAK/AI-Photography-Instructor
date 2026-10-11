@@ -47,8 +47,15 @@ def test_phase_engine():
     assert ch._phase(halloween, datetime(2026, 11, 9)) == "results"
 
 
-def test_stale_cycle_is_not_live_between_seasons(monkeypatch):
-    """Oct 11, 2026: last Halloween's gallery is long gone — the live cycle is the
+def test_challenge_now_env_override(monkeypatch):
+    """Dev hook: CHALLENGE_NOW freezes the contest clock for out-of-season walk-throughs."""
+    monkeypatch.setenv("CHALLENGE_NOW", "2026-11-04T12:00:00")
+    assert ch._now() == datetime(2026, 11, 4, 12, 0, 0)
+    monkeypatch.setenv("CHALLENGE_NOW", "not-a-date")
+    assert ch._now().year >= 2026  # bad values fall through to real time
+
+
+def test_stale_cycle_is_not_live_between_seasons(monkeypatch):    """Oct 11, 2026: last Halloween's gallery is long gone — the live cycle is the
     UPCOMING Oct 24 occurrence, not the 2025 one."""
     freeze(monkeypatch, "2026-10-11T12:00:00")
     view = client.get("/api/challenge/halloween").json()

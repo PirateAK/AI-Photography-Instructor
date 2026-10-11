@@ -6,8 +6,10 @@ import { chunkRows, orderedStylesForWheel } from "../lib/styles";
 import type { ShootingStyle } from "../lib/styles";
 import ModelSelector from "./ModelSelector";
 import GalleryPanel from "./GalleryPanel";
+import pkg from "../../package.json";
 
 const WHEEL_ROW_SIZE = 5;
+const RELEASE_DATE = "October 2026";
 
 export default function UploadScreen() {
   const loadFile = useStore((s) => s.loadFile);
@@ -49,7 +51,10 @@ export default function UploadScreen() {
   return (
     <div className="upload-wrap">
       <div className="upload-hero">
-        <h1>📷 AI Photography Instructor</h1>
+        <div className="hero-title-row">
+          <h1>📷 AI Photography Instructor</h1>
+          <AboutMenu />
+        </div>
         <p>
           Upload a photo and the Photo Coach will evaluate exposure, focus, color and composition —
           then teach you the exact camera settings to try next, with a live simulator to see the
@@ -229,6 +234,66 @@ export default function UploadScreen() {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * One-row style "wheel": the headline genres face forward; ▲ / ▼ roll the
+ * rows like a wheel (with wrap-around) to reach the rest of the catalog.
+ * Rows slide, chips stay flat and tappable.
+ */
+function AboutMenu() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // close on any click outside the menu
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  return (
+    <div className="about-menu" ref={ref}>
+      <button
+        type="button"
+        className="btn small ghost about-toggle"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        About <span className="gallery-chev">{open ? "▴" : "▾"}</span>
+      </button>
+      {open && (
+        <div className="about-panel" role="dialog" aria-label="About this app">
+          <strong>AI Photography Instructor</strong>
+          <div className="about-version">
+            Version {pkg.version} · {RELEASE_DATE}
+          </div>
+          <p>
+            A photography school in your pocket: a Photo Coach that evaluates your photos,
+            a live simulator for practicing settings, and a full curriculum of classes —
+            from your first shot to running a photography business.
+          </p>
+          <hr />
+          <strong>MuskegMan Photography &amp; Software</strong>
+          <p className="muted">
+            Built by MuskegMan — photography and software from Alaska, including{" "}
+            <strong>Pro-Photo_Sorter</strong> for managing and editing your photo library.
+          </p>
+          <a
+            className="btn primary small about-link"
+            href="https://muskegman.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🌐 Visit MuskegMan.com ↗
+          </a>
+        </div>
+      )}
     </div>
   );
 }

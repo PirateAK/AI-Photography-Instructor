@@ -959,7 +959,7 @@
           "id": "nl-2",
           "title": "The camera setup: manual everything",
           "duration_min": 7,
-          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open (f/1.4 to f/4 covers the aurora glass range), RAW, tripod locked, delayed shutter. The exposure balance is ISO 800–3200, f/1.4–f/4, 2.5–6 seconds — fast enough to hold the curtain's shape, slow enough to gather it. On a phone: night mode, ISO 400–1600, and the steadiest surface you can find.",
+          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, aperture at its widest (f/1.4 to f/4), ISO 1600 as the starting point, RAW, tripod locked, delayed shutter. White balance set around 3500K keeps the greens natural. Flash does nothing at aurora distances — leave it off — and turn image stabilization off on the locked tripod, where it can hunt and soften frames. On a phone: night mode, ISO 400–1600, and the steadiest surface you can find.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -968,13 +968,13 @@
             "shutter_speed": "1/8",
             "aperture": "f/2.8"
           },
-          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — f/1.4 to f/4, ISO 3200, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame. Faster glass buys lower ISO — see the trade as the dials move. Phone shooters: night mode on, phone braced or tripod-mounted, ISO 400–1600 — then hold still and let the stack work."
+          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — widest aperture, ISO 1600, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. WB around 3500K keeps the greens honest — in the app, dial white balance to the kelvin setting and see the shift. Phone shooters: night mode on, phone braced or tripod-mounted, ISO 400–1600 — then hold still and let the stack work."
         },
         {
           "id": "nl-3",
           "title": "Exposing the dance",
           "duration_min": 7,
-          "summary": "The working card: ISO between 800 and 3200, adjusted to the aurora's brightness; shutter between 2.5 and 6 seconds to gather the lights without blurring their structure; aperture f/1.4 to f/4 depending on the glass. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Then the pro loop: experiment with varying settings, review every frame, and adjust — the aurora changes faster than any fixed recipe.",
+          "summary": "The working card starts at ISO 1600, widest aperture (f/2.8 or lower where the glass allows), and 2.5 to 6 seconds to gather the lights without blurring their structure — then adjust: brighter dancing curtains drop the ISO toward 800; faint glows stretch everything. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Then the pro loop: experiment with varying settings, review every frame, and adjust — the aurora changes faster than any fixed recipe.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -983,7 +983,7 @@
             "shutter_speed": "1/4",
             "aperture": "f/2.8"
           },
-          "practice_brief": "The card drill: start at ISO 1600, your lens's widest (f/1.4 to f/4), 4 seconds — then experiment. Bright dancing curtains: drop ISO toward 800 and shorten toward 2.5s. Faint glows: raise ISO toward 3200 and stretch toward 6s. Review every frame and adjust one variable at a time — in the simulator: walk ISO and shutter at your aperture until the shape clears the left wall without clipping. The loop is the lesson: shoot, review, adjust, repeat."
+          "practice_brief": "The card drill: start at ISO 1600, widest aperture, 4 seconds — then experiment. Bright dancing curtains: drop ISO toward 800 and shorten toward 2.5s. Faint glows: raise ISO toward 3200 and stretch toward 6s. Review every frame and adjust one variable at a time — in the simulator: walk ISO and shutter at your aperture until the shape clears the left wall without clipping. The loop is the lesson: shoot, review, adjust, repeat."
         },
         {
           "id": "nl-4",
@@ -1004,7 +1004,7 @@
           "id": "nl-5",
           "title": "Cold, batteries, and the hunt",
           "duration_min": 6,
-          "summary": "Cold kills batteries — spares live in an inside pocket, not the bag. No lens changes in the field; the sealed-bag return indoors defeats condensation. And the habits that make the hunt: practice your settings before the trip until the manual dance is muscle memory, check weather and aurora forecasts to choose the night, and commit multiple nights — the hunt is the reward, and the night-photography skill is the prize.",
+          "summary": "Cold kills batteries — spares live in an inside pocket, not the bag. No lens changes in the field; the sealed-bag return indoors defeats condensation. Practice the manual settings dance before the trip, check weather and aurora forecasts to choose the night, and commit multiple nights. The finish happens later in Lightroom — clarity, contrast, and color balance, restrained per the Intermediate editing lessons — because the hunt is the reward, and the finished frame is the prize.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -1013,7 +1013,7 @@
             "shutter_speed": "1/4",
             "aperture": "f/2.8"
           },
-          "practice_brief": "The pre-trip drill, written: your cold-night kit — spare batteries in the inside pocket, no lens changes outside, bag-sealed return indoors, hand warmers for the tripod's joints. Then the practice session: rehearse the manual settings dance at home in the dark until you can do it without a light. Finally, the commitment: a multi-night window in your hunt plan, forecasts checked, foregrounds scouted in daylight. The aurora finds the prepared."
+          "practice_brief": "The pre-trip drill, written: your cold-night kit — spare batteries in the inside pocket, no lens changes outside, bag-sealed return indoors, hand warmers for the tripod's joints. Then the practice session: rehearse the manual settings dance at home in the dark until you can do it without a light. After the hunt: a restrained Lightroom pass — clarity, contrast, color balance — and the commitment stands: a multi-night window, forecasts checked, foregrounds scouted in daylight. The aurora finds the prepared."
         }
       ]
     },

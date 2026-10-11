@@ -249,7 +249,6 @@ function GalleryCard({
     <div
       className="gallery-card"
       style={{
-        aspectRatio: item.thumb_w && item.thumb_h ? `${item.thumb_w} / ${item.thumb_h}` : "3 / 2",
         transform: `translateX(${gone ? dx * 4 : dx}px) rotate(${dx / 40}deg)`,
         opacity: gone ? 0 : 1,
       }}
@@ -265,8 +264,9 @@ function GalleryCard({
       }}
       title="Tap to load into the coach — swipe sideways to trim"
     >
+      {item.thumb && <img src={item.thumb} alt="" aria-hidden="true" className="gallery-card-bg" draggable={false} />}
       {item.thumb ? (
-        <img src={item.thumb} alt={item.name} draggable={false} />
+        <img src={item.thumb} alt={item.name} draggable={false} className="gallery-card-img" />
       ) : (
         <div className="gallery-thumb-fallback">🖼️</div>
       )}

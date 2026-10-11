@@ -817,6 +817,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   position: relative;
   flex: 0 0 auto;
   width: 100%;
+  height: 150px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -828,10 +829,22 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   will-change: transform;
 }
 .gallery-card:active { cursor: grabbing; }
-.gallery-card img {
+.gallery-card-bg {
+  position: absolute;
+  top: -14px; left: -14px;
+  width: calc(100% + 28px);
+  height: calc(100% + 28px);
+  object-fit: cover;
+  filter: blur(16px) saturate(1.15);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.gallery-card-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* the whole photo, never cropped or stretched */
   display: block;
   pointer-events: none;
 }

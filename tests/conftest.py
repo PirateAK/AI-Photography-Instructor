@@ -19,3 +19,13 @@ def isolated_history_db(tmp_path, monkeypatch):
 
     monkeypatch.setattr(hist, "_DB_PATH", str(tmp_path / "photo_history.db"))
     yield
+
+
+@pytest.fixture(autouse=True)
+def access_gate_disabled(monkeypatch):
+    """The suite tests endpoints directly — the site access gate is exercised
+    separately in test_access_gate.py."""
+    import backend.main as main
+
+    monkeypatch.setitem(main.GATE, "disabled", True)
+    yield

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useStore } from "./state/store";
 import { canManageContent } from "./lib/training";
 import UploadScreen from "./components/UploadScreen";
@@ -7,14 +8,15 @@ import ClassesScreen from "./components/ClassesScreen";
 import StyleManagerScreen from "./components/StyleManagerScreen";
 import CourseManagerScreen from "./components/CourseManagerScreen";
 import InstructorDashboard from "./components/InstructorDashboard";
+import AccessGate from "./components/AccessGate";
 import ProgressScreen from "./components/ProgressScreen";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { useEffect } from "react";
 
 export default function App() {
   const screen = useStore((s) => s.screen);
   const instructorUnlocked = useStore((s) => s.instructorUnlocked);
   const photoLoading = useStore((s) => s.photoLoading);
+  const [accessOk, setAccessOk] = useState(() => localStorage.getItem("site-access-ok") === "1");
 
   useEffect(() => {
     // pick up manual edits to shooting_styles.json / training_courses.json made outside the app
@@ -29,6 +31,11 @@ export default function App() {
   const managed =
     !canManageContent({ instructorUnlocked }) && (screen === "stylemanager" || screen === "coursemanager");
   const guardedScreen = managed ? "upload" : screen;
+
+  // the published app sits behind the access code — nothing renders until it's entered
+  if (!accessOk) {
+    return <AccessGate onUnlock={() => setAccessOk(true)} />;
+  }
 
   return (
     <>

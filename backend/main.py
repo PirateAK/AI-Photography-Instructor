@@ -14,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,6 +44,56 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- site access gate (published deployments) --------------------------------
+# When data/app_config.json defines site_access_code, every non-GET /api call
+# must present it (cookie "site_access" or X-Access-Code header). Only
+# /api/access/verify is exempt. Tests disable the gate via GATE["disabled"].
+APP_CONFIG_PATH = Path(__file__).resolve().parent.parent / "data" / "app_config.json"
+GATE = {"disabled": False}
+_cached_access_code: str | None = None
+_access_code_loaded = False
+
+
+def _access_code() -> str | None:
+    global _cached_access_code, _access_code_loaded
+    if GATE["disabled"]:
+        return None
+    if not _access_code_loaded:
+        try:
+            cfg = json.loads(APP_CONFIG_PATH.read_text(encoding="utf-8"))
+            _cached_access_code = str(cfg.get("site_access_code") or "") or None
+        except Exception:
+            _cached_access_code = None
+        _access_code_loaded = True
+    return _cached_access_code
+
+
+@app.middleware("http")
+async def access_gate_middleware(request, call_next):
+    if (
+        request.url.path.startswith("/api")
+        and request.method not in ("GET", "OPTIONS")
+        and request.url.path != "/api/access/verify"
+    ):
+        code = _access_code()
+        if code:
+            provided = request.cookies.get("site_access") or request.headers.get("x-access-code", "")
+            if provided != code:
+                return JSONResponse(status_code=401, content={"detail": "Access code required."})
+    return await call_next(request)
+
+
+@app.post("/api/access/verify")
+def verify_access(payload: dict):
+    """Validate a site access code and set the browser cookie that carries it."""
+    code = _access_code()
+    provided = str(payload.get("code", "")).strip()
+    if not code or provided.upper() != code.upper():
+        raise HTTPException(status_code=401, detail="Incorrect access code.")
+    response = JSONResponse(content={"ok": True})
+    response.set_cookie("site_access", code, max_age=60 * 60 * 24 * 365, samesite="lax")
+    return response
 
 cache = MemoryCache(maxsize=128, ttl=3600)
 

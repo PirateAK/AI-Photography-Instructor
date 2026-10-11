@@ -18,6 +18,60 @@
 
 * { box-sizing: border-box; }
 
+/* ---------- site access gate (published deployments) ---------- */
+.access-gate {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(1100px 460px at 50% -8%, rgba(10, 132, 255, 0.12), transparent),
+    var(--bg);
+}
+.access-gate-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+.access-gate-emoji { font-size: 2.1rem; }
+.access-gate-card h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+.access-gate-card p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.access-gate-card input {
+  background: var(--bg-elev2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+.access-gate-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.access-gate-error {
+  color: var(--bad);
+  font-size: 0.84rem;
+}
+
 html, body, #root {
   margin: 0;
   height: 100%;

@@ -5,8 +5,9 @@
     "NIGHT2026",
     "PORTRAIT-PRO"
   ],
-  "notes": "App-wide configuration. store_url opens from locked course cards. redemption_codes is a CLIENT-SIDE STUB for the MVP — any code in this list unlocks all paid courses; replace with server-side validation before real sales. instructor_codes unlock the hidden Instructor Dashboard: type one into the 'What do you want to learn or shoot?' field on the home screen.",
+  "notes": "App-wide configuration. store_url opens from locked course cards. redemption_codes is a CLIENT-SIDE STUB for the MVP — any code in this list unlocks all paid courses; replace with server-side validation before real sales. instructor_codes unlock the hidden Instructor Dashboard: type one into the 'What do you want to learn or shoot?' field on the home screen. site_access_code locks the whole published app: every device enters it once (backend rejects unauthenticated writes without it). Restart the backend after changing it.",
   "instructor_codes": [
     "INSTRUCTOR2026"
-  ]
+  ],
+  "site_access_code": "MUSKEG2026"
 }

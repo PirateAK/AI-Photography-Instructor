@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -101,6 +101,21 @@
             "aperture": "f/2.8"
           },
           "practice_brief": "Open the aperture wider than your as-shot value first — that wakes up the ⊹ Focus point, since placement only matters when depth of field is thin. Drag the focus dot onto the subject's detail and watch sharpness bloom there; drag it to the background and watch the subject go soft. That is focus placement. In the field: guide autofocus onto a person's eye or an object's detail, take the photo, then zoom in on playback to check the DETAIL is sharp — if focus missed, place it more deliberately and shoot again."
+        },
+        {
+          "id": "bc-7",
+          "title": "Composition Fundamentals",
+          "duration_min": 6,
+          "summary": "Composition is how elements are arranged in the frame — and every frame includes some things and leaves others out, which is what guides the viewer's attention. Three tools, options rather than rules: balance (a subject needn't be centered to feel settled), leading lines (paths, railings, rows of objects that walk the eye toward the subject), and the rule of thirds (placing important elements off-center near grid lines or intersections). Centered works too, when it suits the subject. The goal is an intentional choice, not a correct one.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "In the field, make three photos of one subject: centered, off-center along a third (turn on your camera's grid display if it has one), and one using a leading line or natural frame like a doorway. Review all three and ask where your eye lands first. In the app, run the same photo through the coach with a style selected and read its composition notes, and use the lens selector to compare wider versus tighter framing of the same scene — framing is literally what gets included."
         }
       ]
     },

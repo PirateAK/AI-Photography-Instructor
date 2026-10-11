@@ -326,6 +326,13 @@ async def submit_entry(
     except Exception:
         raise HTTPException(status_code=400, detail="Could not read that file as an image (JPG/PNG expected).")
 
+    # shared gallery is moderated server-side — the client check is not trusted
+    from .coach.moderation import BLOCKED_MESSAGE, moderate_image
+
+    verdict = moderate_image(data)
+    if verdict["flagged"]:
+        raise HTTPException(status_code=422, detail=f"CONTENT_BLOCKED: {BLOCKED_MESSAGE}")
+
     if not 0 <= score <= 100:
         raise HTTPException(status_code=400, detail="score must be 0-100.")
 

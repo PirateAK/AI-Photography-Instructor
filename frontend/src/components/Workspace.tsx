@@ -24,6 +24,7 @@ export default function Workspace() {
   const [tab, setTab] = useState<"preview" | "body">("preview");
   const [histGuide, setHistGuide] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const contentBlocked = useStore((s) => s.contentBlocked);
   const galleryCount = useStore((s) => s.galleryItems.length);
   const instructorUnlocked = useStore((s) => s.instructorUnlocked);
   const goSettings = useStore((s) => s.goSettings);
@@ -105,7 +106,21 @@ export default function Workspace() {
               📷 Camera body
             </button>
           </div>
-          {tab === "preview" ? (
+          {contentBlocked ? (
+            <div className="blocked-notice" role="alert">
+              <div className="blocked-emoji" aria-hidden="true">🚫</div>
+              <h3>Photo blocked by the content review</h3>
+              <p>
+                This photo violates the app's content terms (adult or illegal content), so it
+                can't be coached, saved, or shared. Nothing was stored — the photo stays on this
+                device only.
+              </p>
+              <p className="muted">Full terms: home screen → About → Content terms.</p>
+              <button className="btn primary" onClick={goUpload}>
+                ← Back to home
+              </button>
+            </div>
+          ) : tab === "preview" ? (
             <ImageViewer onToggleHistGuide={() => setHistGuide((v) => !v)} />
           ) : (
             <CameraBody cam={getCamera(cameraId)!} />

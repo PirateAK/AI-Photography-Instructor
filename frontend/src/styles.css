@@ -966,6 +966,24 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   gap: 12px;
 }
 
+/* ---------- content-terms block notice (workspace) ---------- */
+.blocked-notice {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px solid rgba(255, 69, 58, 0.45);
+  border-radius: var(--radius);
+}
+.blocked-notice .blocked-emoji { font-size: 2.6rem; }
+.blocked-notice h3 { margin: 0; font-size: 1.05rem; }
+.blocked-notice p { margin: 0; max-width: 420px; line-height: 1.5; font-size: 0.88rem; }
+
 /* ---------- contest strip (voting/results on the home screen) ---------- */
 .contest-strip {
   margin-top: 10px;

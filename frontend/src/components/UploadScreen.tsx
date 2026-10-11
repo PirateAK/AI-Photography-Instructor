@@ -364,6 +364,16 @@ function AboutMenu() {
             📤 Share this app with your friends
           </button>
           {shareNote && <div className="about-share-note" role="status">{shareNote}</div>}
+          <hr />
+          <strong>📜 Content terms</strong>
+          <p className="muted" style={{ fontSize: "0.8rem" }}>
+            This app is family-friendly. Nudity or adult content, sexualization of minors, extreme
+            violence, and illegal content are not allowed — anywhere in the app. The AI coach
+            reviews every photo before anything else happens: blocked photos are never coached,
+            never saved to your gallery, and never uploaded. Challenge entries are checked again
+            on the server. When a photo is blocked, nothing about it is stored — it stays on
+            your device and goes nowhere.
+          </p>
         </div>
       )}
     </div>

@@ -50,8 +50,21 @@ export async function analyzePhoto(
   return postForm<CoachResponse>("/api/analyze", form);
 }
 
-export async function fetchEngineSettings(): Promise<EngineSettings> {
-  const res = await fetch("/api/settings");
+export interface ModerationVerdict {
+  flagged: boolean;
+  category: string;
+  reason: string;
+  moderated: boolean;
+}
+
+/** Content-terms check — runs before a photo may enter the coach or gallery. */
+export async function moderatePhoto(file: File): Promise<ModerationVerdict> {
+  const form = new FormData();
+  form.append("file", file);
+  return postForm<ModerationVerdict>("/api/moderate", form);
+}
+
+export async function fetchEngineSettings(): Promise<EngineSettings> {  const res = await fetch("/api/settings");
   if (!res.ok) throw new Error("Could not load engine settings");
   return res.json();
 }

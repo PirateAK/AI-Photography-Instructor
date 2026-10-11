@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getGalleryBlob, type GalleryMeta } from "../lib/gallery";
+import { moderatePhoto } from "../lib/api";
 import { buildGalleryShareMessage, sharePhotoBlob } from "../lib/share";
 
 const GALLERY_PAGE = 10;
@@ -47,7 +48,28 @@ export default function GalleryPanel({
     if (!files.length) return;
     setBusy(`Reading ${files.length} photo${files.length === 1 ? "" : "s"}…`);
     try {
-      const { added, skipped, failures } = await addToGallery(files);
+      // content terms: flagged photos never enter the gallery
+      const allowed: File[] = [];
+      let blocked = 0;
+      for (const f of files) {
+        try {
+          const verdict = await moderatePhoto(f);
+          if (verdict.flagged) {
+            blocked++;
+            continue;
+          }
+        } catch {
+          /* moderation endpoint unreachable — fail open, the coach re-checks */
+        }
+        allowed.push(f);
+      }
+      if (blocked > 0) {
+        alert(
+          `🚫 ${blocked} photo${blocked === 1 ? "" : "s"} violated the content terms (adult or illegal content) and ${blocked === 1 ? "was" : "were"} not added. See About → Content terms.`,
+        );
+      }
+      if (!allowed.length) return;
+      const { added, skipped, failures } = await addToGallery(allowed);
       if (skipped > 0) {
         const heic = failures.filter((f) => f.heic).length;
         const names = failures
@@ -75,6 +97,17 @@ export default function GalleryPanel({
     e.target.value = "";
     if (!file) return;
     setBusy("Saving shot…");
+    try {
+      const verdict = await moderatePhoto(file);
+      if (verdict.flagged) {
+        alert(
+          "🚫 This photo violates the app's content terms (adult or illegal content) — it can't be saved or coached. See About → Content terms.",
+        );
+        return;
+      }
+    } catch {
+      /* moderation endpoint unreachable — fail open, the coach re-checks */
+    }
     try {
       await addToGallery([file]);
     } catch {

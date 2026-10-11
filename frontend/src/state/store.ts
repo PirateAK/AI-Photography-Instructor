@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-import { analyzePhoto, fetchExif, sendChat as apiSendChat, type ChallengeContext } from "../lib/api";
+import { analyzePhoto, fetchExif, moderatePhoto, sendChat as apiSendChat, type ChallengeContext } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
 import {
   clampApertureToLens,
@@ -84,6 +84,7 @@ interface PhotoState {
   chatMessages: ChatMessage[];
   chatSending: boolean;
   chatNotice: string | null;
+  contentBlocked: boolean; // analyze-time moderation block — workspace swaps the image for a notice
 
   unlockedCourses: string[];
   instructorUnlocked: boolean;
@@ -206,6 +207,7 @@ export const useStore = create<PhotoState>()(
       chatMessages: [],
       chatSending: false,
       chatNotice: null,
+      contentBlocked: false,
 
       unlockedCourses: [],
       instructorUnlocked: false,
@@ -230,6 +232,20 @@ export const useStore = create<PhotoState>()(
       challengePhotoByEntry: {},
 
       loadFile: async (file) => {
+        // content terms first — a flagged photo never enters the coach or the gallery
+        try {
+          const verdict = await moderatePhoto(file);
+          if (verdict.flagged) {
+            alert(
+              "🚫 This photo violates the app's content terms (adult or illegal content) — " +
+                "it can't be loaded into the coach or saved to your gallery. See About → Content terms.",
+            );
+            return;
+          }
+        } catch {
+          /* moderation endpoint unreachable — fail open, analyze re-checks */
+        }
+        set({ contentBlocked: false });
         const dataUrl = await new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => resolve(String(reader.result));
@@ -365,7 +381,7 @@ export const useStore = create<PhotoState>()(
 
       setBeginner: (b) => set({ beginner: b }),
       setIntent: (s) => set({ intent: s }),
-      goUpload: () => set({ screen: "upload" }),
+      goUpload: () => set({ screen: "upload", contentBlocked: false }),
       goSettings: () => set({ screen: "settings" }),
       openWorkspace: () => {
         if (get().dataUrl) {
@@ -795,12 +811,19 @@ export const useStore = create<PhotoState>()(
               });
             }
           } catch (err) {
+            const raw = err instanceof Error ? err.message : "Analysis failed";
+            const blocked = raw.startsWith("CONTENT_BLOCKED");
             set({
               analyzing: false,
-              analyzeError: err instanceof Error ? err.message : "Analysis failed",
+              analyzeError: blocked
+                ? "🚫 This photo violates the app's content terms (adult or illegal content) — it can't be coached, saved, or shared here. See About → Content terms on the home screen."
+                : raw,
+              contentBlocked: blocked,
               log: pushLog(get().log, {
                 kind: "system",
-                text: "Analysis failed — showing general tips instead.",
+                text: blocked
+                  ? "Blocked by the content-terms review — no analysis was performed."
+                  : "Analysis failed — showing general tips instead.",
               }),
             });
           }

@@ -32,6 +32,6 @@
   {
     "content": "[contest-7] full test pass (pytest + tsc + vitest), push, update context",
     "id": "7",
-    "status": "in_progress"
+    "status": "completed"
   }
 ]

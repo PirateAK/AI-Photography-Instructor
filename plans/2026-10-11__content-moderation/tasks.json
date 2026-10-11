@@ -1,0 +1,27 @@
+[
+  {
+    "content": "[mod-1] backend/coach/moderation.py — Gemini vision verdict (flagged/category/reason), hash cache, fail-open on engine errors",
+    "id": "1",
+    "status": "completed"
+  },
+  {
+    "content": "[mod-2] enforce server-side: POST /api/moderate, /api/analyze moderates FIRST (422 + CONTENT_BLOCKED), /api/challenge/submit rejects flagged",
+    "id": "2",
+    "status": "completed"
+  },
+  {
+    "content": "[mod-3] frontend: moderate at loadFile (coach + gallery), GalleryPanel add-path filter, Workspace 🚫 notice swaps image on analyze-time block",
+    "id": "3",
+    "status": "completed"
+  },
+  {
+    "content": "[mod-4] Content terms section on About page",
+    "id": "4",
+    "status": "completed"
+  },
+  {
+    "content": "[mod-5] backend tests (stub engine, cache, fail-open, 422s) + full pass + push + context",
+    "id": "5",
+    "status": "in_progress"
+  }
+]

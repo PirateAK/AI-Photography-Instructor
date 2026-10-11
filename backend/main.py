@@ -23,6 +23,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .cache import MemoryCache, make_key
 from .coach import available_engines, provider_for_request
+from .coach.moderation import BLOCKED_MESSAGE, moderate_image
 from .coach.schema import CoachResponse
 from .config import ANALYSIS_MAX_DIM, CAMERAS_JSON, MAX_UPLOAD_BYTES
 from .exif import extract_exif
@@ -187,6 +188,20 @@ def _parse_challenge(raw: str) -> dict | None:
     return None
 
 
+@app.post("/api/moderate")
+async def moderate(file: UploadFile = File(...)):
+    """Standalone moderation verdict — the frontend checks photos at load time."""
+    data = await _read_upload(file)
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="Image too large.")
+    try:
+        load_image(data)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Could not read that file as an image (JPG/PNG expected).")
+    verdict = moderate_image(data)
+    return {**verdict, "terms": "Family-friendly only — no nudity/adult content, no illegal content."}
+
+
 @app.post("/api/analyze", response_model=CoachResponse)
 async def analyze(
     file: UploadFile = File(...),
@@ -197,6 +212,12 @@ async def analyze(
     challenge: str = Form(""),
 ):
     data = await _read_upload(file)
+
+    # moderation runs FIRST — before the coach sees anything
+    verdict = moderate_image(data)
+    if verdict["flagged"]:
+        raise HTTPException(status_code=422, detail=f"CONTENT_BLOCKED: {BLOCKED_MESSAGE}")
+
     camera = _camera_or_404(camera_id)
     style = get_style(style_id)  # unknown/empty style -> None (graceful)
     challenge_ctx = _parse_challenge(challenge)

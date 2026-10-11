@@ -7,6 +7,7 @@ import type { ShootingStyle } from "../lib/styles";
 import ModelSelector from "./ModelSelector";
 import GalleryPanel from "./GalleryPanel";
 import pkg from "../../package.json";
+import { shareApp as appShare } from "../lib/share";
 
 const WHEEL_ROW_SIZE = 5;
 const RELEASE_DATE = "October 2026";
@@ -245,6 +246,7 @@ export default function UploadScreen() {
  */
 function AboutMenu() {
   const [open, setOpen] = useState(false);
+  const [shareNote, setShareNote] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   // close on any click outside the menu
@@ -256,6 +258,18 @@ function AboutMenu() {
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
+
+  const shareApp = async () => {
+    const result = await appShare();
+    setShareNote(
+      result === "shared"
+        ? "Shared — thanks for spreading the word!"
+        : result === "copied"
+          ? "Copied to your clipboard — paste it to a friend!"
+          : "Sharing isn't available in this browser.",
+    );
+    setTimeout(() => setShareNote(null), 5000);
+  };
 
   return (
     <div className="about-menu" ref={ref}>
@@ -292,6 +306,10 @@ function AboutMenu() {
           >
             🌐 Visit MuskegMan.com ↗
           </a>
+          <button className="btn small about-link" onClick={() => void appShare()}>
+            📤 Share this app with your friends
+          </button>
+          {shareNote && <div className="about-share-note" role="status">{shareNote}</div>}
         </div>
       )}
     </div>

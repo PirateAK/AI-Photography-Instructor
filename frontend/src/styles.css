@@ -219,6 +219,14 @@ input, select { font-family: inherit; }
   align-self: flex-start;
   text-decoration: none;
 }
+.about-share-note {
+  font-size: 0.78rem;
+  color: var(--good);
+  background: rgba(48, 209, 88, 0.08);
+  border: 1px solid rgba(48, 209, 88, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
 .upload-hero p { color: var(--text-dim); margin: 0 0 28px; line-height: 1.55; }
 
 .dropzone {

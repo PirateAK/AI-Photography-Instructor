@@ -19,6 +19,34 @@ export function buildShareMessage(session: {
   );
 }
 
+export function buildAppShareMessage(): string {
+  return (
+    "📷 Found a great learning tool for photographers: the AI Photography Instructor. " +
+    "A Photo Coach evaluates your photos, a live simulator lets you practice settings, and there's a full " +
+    "class curriculum from your first shot to going pro.\n" +
+    `${APP_LINK}`
+  );
+}
+
+/** Share the app itself (no photo) — same fallback ladder as score sharing. */
+export async function shareApp(): Promise<ShareResult> {
+  const message = buildAppShareMessage();
+  try {
+    if (typeof navigator.share === "function") {
+      await navigator.share({ text: message, title: "AI Photography Instructor" });
+      return "shared";
+    }
+  } catch {
+    /* fall through to clipboard */
+  }
+  try {
+    await navigator.clipboard.writeText(message);
+    return "copied";
+  } catch {
+    return "unavailable";
+  }
+}
+
 async function thumbToFile(dataUrl: string): Promise<File | null> {
   try {
     const blob = await (await fetch(dataUrl)).blob();

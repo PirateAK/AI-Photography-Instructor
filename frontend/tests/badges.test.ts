@@ -1,7 +1,16 @@
 import { describe, expect, it } from "vitest";
 
 import { classBadges, masteryBadges, earnedBadgeCount } from "../src/lib/badges";
-import { buildShareMessage } from "../src/lib/share";
+import { buildAppShareMessage, buildShareMessage } from "../src/lib/share";
+
+describe("buildAppShareMessage", () => {
+  it("invites a friend and carries the app link", () => {
+    const msg = buildAppShareMessage();
+    expect(msg).toContain("AI Photography Instructor");
+    expect(msg).toContain("Photo Coach");
+    expect(msg).toContain("https://");
+  });
+});
 import { courses } from "../src/lib/training";
 
 const beginner = courses.find((c) => c.id === "beginner-class")!;

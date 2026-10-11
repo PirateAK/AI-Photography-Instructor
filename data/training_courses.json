@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Lesson 8 reads the light itself: front, side and backlight, soft versus hard sources, and how moving the subject or yourself rewrites the shadows. Lesson 9 adds color: recognizing a cast, using white balance presets to render neutrals honestly — or keeping a warm/cool shift on purpose. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Lesson 8 reads the light itself: front, side and backlight, soft versus hard sources, and how moving the subject or yourself rewrites the shadows. Lesson 9 adds color: recognizing a cast, using white balance presets to render neutrals honestly — or keeping a warm/cool shift on purpose. Lesson 10 puts it all together: an everyday subject, one quick photo, one deliberate remake — combining viewpoint, light, framing, focus and exposure into an intentional photograph. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -147,6 +147,21 @@
             "white_balance": "auto"
           },
           "practice_brief": "The simulator renders white balance for real: keep everything else fixed and cycle the White balance setting — AWB, then Shade (which warms), then Tungsten (which cools to correct warm bulbs) — and watch the colors swing while brightness doesn't move. Judge like the lesson says: which version looks natural, and which makes a better deliberate mood? Then the field version: the same neutral-object subject near a window and again under indoor lights, AWB plus one preset each — note the light source, the setting, and what changed."
+        },
+        {
+          "id": "bc-10",
+          "title": "Taking Better Everyday Photos",
+          "duration_min": 6,
+          "summary": "An intentional photo starts before the shutter: what do I want the viewer to notice? Notice the subject and the light's direction and quality, then choose a viewpoint, framing, focus point, and exposure that support it — changing viewpoint or framing often does more than touching settings. There is no required camera, mode, or gear: the aim is to make choices deliberately and understand their effects. Thoughtful decisions matter more than equipment.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The capstone drill uses your whole toolbox. Pick an ordinary subject — a cup, a plant, your desk. Photo 1: snap it without thinking. Photo 2: change at least two choices — move closer or lower, use side light, simplify the background, reframe, refocus, adjust exposure. Add both to the gallery and load each into the coach (🖼️ in the workspace) — compare the two responses; the score difference is your decision difference. Then replay either shot in the simulator: lens swaps for framing, the focus dot for placement, EV for exposure — before-and-after without re-shooting."
         }
       ]
     },

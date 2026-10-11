@@ -1,0 +1,13 @@
+{
+  "backend": {
+    "root": ".",
+    "entry": "backend.main:app",
+    "runner": "uvicorn"
+  },
+  "frontend": {
+    "root": "frontend",
+    "dist": "dist",
+    "install": "npm install",
+    "build": "npm run build"
+  }
+}

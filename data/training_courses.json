@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps every key part — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through both a DSLR and a mirrorless body. Later lessons build from parts to the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Later lessons build toward the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -26,6 +26,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "Open the 📷 Camera body tab and tap through all six views: find the lens, the viewfinder or screen, and the shutter button on the DSLR — the pins explain each part's job. Then do it again on the Phone body and notice the same jobs live in different places. Finish by tracing the light out loud: lens → aperture → shutter → sensor, mirror for a DSLR's viewfinder, straight to the sensor on a mirrorless."
+        },
+        {
+          "id": "bc-2",
+          "title": "Camera Types and Choosing Equipment",
+          "duration_min": 8,
+          "summary": "Start with what you want to photograph, not a brand name. Four camera types cover most beginners: a phone, a camera with a built-in lens, a DSLR, and a mirrorless body — each trading convenience against flexibility. Interchangeable-lens cameras add mounts: lenses must physically and electronically fit the body, and compatibility is checked per camera, lens, and adapter — never assumed.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Use the camera picker as your comparison table: switch between Phone, a Canon DSLR (Rebel SL3 — EF mount), and a Canon mirrorless (R50 — RF mount) and watch the Mounted-lens list change with the body. Only compatible lenses ever appear — that is the lesson. Then write down what you most want to photograph, what matters most (convenience, built-in zoom, changing lenses, direct controls), and the simplest setup that meets that need."
         }
       ]
     },

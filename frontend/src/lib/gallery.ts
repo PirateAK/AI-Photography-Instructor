@@ -16,6 +16,9 @@ export interface GalleryEntry {
   type: string;
   blob: Blob;
   thumb: string;
+  /** source pixel dimensions — cards honor the photo's aspect ratio */
+  thumb_w?: number;
+  thumb_h?: number;
 }
 
 export interface GalleryMeta {
@@ -24,6 +27,8 @@ export interface GalleryMeta {
   name: string;
   size: number;
   thumb: string;
+  thumb_w?: number;
+  thumb_h?: number;
 }
 
 let dbPromise: Promise<IDBDatabase | null> | null = null;
@@ -96,10 +101,11 @@ export interface GallerySkip {
   heic: boolean;
 }
 
-/** Small JPEG preview (max 320px edge) for the gallery grid. Tries the fast
+/** Small JPEG preview (max 320px edge) for the gallery wheel. Tries the fast
  *  path (createImageBitmap) then an <img> decode — a photo that survives both
- *  still gets stored with an empty thumb rather than dropping the shot. */
-export async function makeThumb(blob: Blob): Promise<string> {
+ *  still gets stored with an empty thumb rather than dropping the shot.
+ *  Returns the source's pixel dimensions so cards can honor the aspect. */
+export async function makeThumb(blob: Blob): Promise<{ dataUrl: string; width: number; height: number }> {
   const drawTo = (source: ImageBitmap | HTMLImageElement, w: number, h: number): string => {
     const canvas = document.createElement("canvas");
     canvas.width = w;
@@ -113,7 +119,8 @@ export async function makeThumb(blob: Blob): Promise<string> {
     const bitmap = await createImageBitmap(blob);
     try {
       const scale = Math.min(1, 320 / Math.max(bitmap.width, bitmap.height));
-      return drawTo(bitmap, Math.max(1, Math.round(bitmap.width * scale)), Math.max(1, Math.round(bitmap.height * scale)));
+      const dataUrl = drawTo(bitmap, Math.max(1, Math.round(bitmap.width * scale)), Math.max(1, Math.round(bitmap.height * scale)));
+      return { dataUrl, width: bitmap.width, height: bitmap.height };
     } finally {
       bitmap.close?.();
     }
@@ -127,7 +134,8 @@ export async function makeThumb(blob: Blob): Promise<string> {
         img.src = url;
       });
       const scale = Math.min(1, 320 / Math.max(img.naturalWidth, img.naturalHeight));
-      return drawTo(img, Math.max(1, Math.round(img.naturalWidth * scale)), Math.max(1, Math.round(img.naturalHeight * scale)));
+      const dataUrl = drawTo(img, Math.max(1, Math.round(img.naturalWidth * scale)), Math.max(1, Math.round(img.naturalHeight * scale)));
+      return { dataUrl, width: img.naturalWidth, height: img.naturalHeight };
     } finally {
       URL.revokeObjectURL(url);
     }
@@ -138,9 +146,36 @@ export async function listGallery(): Promise<GalleryMeta[]> {
   const store = await storeFor("readonly");
   if (!store) return [];
   const entries = (await requestDone(store.getAll())) as GalleryEntry[];
-  return entries
+  // legacy entries (pre-dimensions) get their aspect backfilled from the thumb
+  const withDims = await Promise.all(
+    entries.map(async (e) => {
+      if (e.thumb_w && e.thumb_h) return e;
+      try {
+        const dims = await new Promise<{ w: number; h: number }>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+          img.onerror = () => reject(new Error("decode failed"));
+          img.src = e.thumb;
+        });
+        e.thumb_w = dims.w;
+        e.thumb_h = dims.h;
+      } catch {
+        /* leave without dims — the card falls back to 3:2 */
+      }
+      return e;
+    }),
+  );
+  return withDims
     .sort((a, b) => b.addedAt - a.addedAt)
-    .map(({ id, addedAt, name, size, thumb }) => ({ id: id as number, addedAt, name, size, thumb }));
+    .map(({ id, addedAt, name, size, thumb, thumb_w, thumb_h }) => ({
+      id: id as number,
+      addedAt,
+      name,
+      size,
+      thumb,
+      thumb_w,
+      thumb_h,
+    }));
 }
 
 export async function addToGallery(
@@ -158,7 +193,7 @@ export async function addToGallery(
       continue;
     }
     try {
-      const thumb = await makeThumb(file);
+      const { dataUrl: thumb, width, height } = await makeThumb(file);
       prepared.push({
         addedAt: base + i,
         name: file.name || "photo.jpg",
@@ -166,6 +201,8 @@ export async function addToGallery(
         type: file.type,
         blob: file,
         thumb,
+        thumb_w: width,
+        thumb_h: height,
       });
     } catch (err) {
       failures.push({

@@ -816,7 +816,7 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .gallery-card {
   position: relative;
   flex: 0 0 auto;
-  height: 118px;
+  width: 100%;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border);

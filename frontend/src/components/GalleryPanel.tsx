@@ -249,6 +249,7 @@ function GalleryCard({
     <div
       className="gallery-card"
       style={{
+        aspectRatio: item.thumb_w && item.thumb_h ? `${item.thumb_w} / ${item.thumb_h}` : "3 / 2",
         transform: `translateX(${gone ? dx * 4 : dx}px) rotate(${dx / 40}deg)`,
         opacity: gone ? 0 : 1,
       }}

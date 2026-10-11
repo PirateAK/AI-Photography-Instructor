@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Later lessons build toward the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Later lessons build toward the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -41,6 +41,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "Use the camera picker as your comparison table: switch between Phone, a Canon DSLR (Rebel SL3 — EF mount), and a Canon mirrorless (R50 — RF mount) and watch the Mounted-lens list change with the body. Only compatible lenses ever appear — that is the lesson. Then write down what you most want to photograph, what matters most (convenience, built-in zoom, changing lenses, direct controls), and the simplest setup that meets that need."
+        },
+        {
+          "id": "bc-3",
+          "title": "Lens Basics: Focal Length, Prime vs Zoom, and Perspective",
+          "duration_min": 8,
+          "summary": "Focal length, marked in millimeters, governs how much of the scene fits in the frame — shorter includes more, longer shows a narrower view with the subject larger. A prime lens is one focal length; a zoom covers a range, and neither is automatically better. The other half of the story is where you stand: moving the camera changes perspective — how subject and background relate — and no amount of zooming undoes it. Compare focal lengths from the same position; move your feet for perspective.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Open the Mounted-lens selector and compare lenses on the same photo: a prime (Canon EF 50mm f/1.8 — one focal length, no range to turn) versus a zoom (EF-S 18-55) versus a long zoom (RF 100-400). The 🔍 LENS SWAP badge shows how much tighter each one frames versus your as-shot focal length — that is focal length changing framing from one fixed position. Perspective is the part the simulator can't do: it needs your feet. Take the same shot from two distances in the field and compare how the subject and background relate."
         }
       ]
     },

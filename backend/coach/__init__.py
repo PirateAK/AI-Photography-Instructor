@@ -27,8 +27,8 @@ class FallbackCoach:
         self._notice = notice
         self._mock = MockCoach()
 
-    def analyze(self, image, camera, settings, intent, exif, style=None):
-        analysis, chat, _ = self._mock.analyze(image, camera, settings, intent, exif, style)
+    def analyze(self, image, camera, settings, intent, exif, style=None, challenge=None):
+        analysis, chat, _ = self._mock.analyze(image, camera, settings, intent, exif, style, challenge)
         return analysis, chat, self._notice
 
     def chat(self, message, history, context, image_b64=None):

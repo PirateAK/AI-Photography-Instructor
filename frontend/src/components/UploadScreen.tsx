@@ -8,6 +8,7 @@ import ModelSelector from "./ModelSelector";
 import GalleryPanel from "./GalleryPanel";
 import pkg from "../../package.json";
 import { shareApp as appShare } from "../lib/share";
+import { activeHolidayWindow } from "../lib/holidays";
 
 const WHEEL_ROW_SIZE = 5;
 const RELEASE_DATE = "October 2026";
@@ -32,6 +33,7 @@ export default function UploadScreen() {
   const startAnalysis = useStore((s) => s.startAnalysis);
   const cameras = getCameras();
   const styles = useStore((s) => s.styles);
+  const holidayWindow = activeHolidayWindow();
 
   const [dragging, setDragging] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -139,19 +141,52 @@ export default function UploadScreen() {
       )}
 
       <div className="home-links-row">
-        <a
-          className="muskeg-banner"
-          href="https://muskegman.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Visit Muskegman.com"
-        >
-          <span className="muskeg-banner-text">
-            <strong>Muskegman.com</strong>
-            <span className="muskeg-banner-sub">Photo software &amp; prints — Pro-Photo_Sorter inside</span>
-          </span>
-          <span className="muskeg-banner-go" aria-hidden="true">↗</span>
-        </a>
+        {holidayWindow ? (
+          <button
+            type="button"
+            className="muskeg-banner holiday"
+            onClick={() => {
+              void (async () => {
+                if (useStore.getState().dataUrl) {
+                  openWorkspace();
+                  return;
+                }
+                // no photo loaded yet — bring in the demo so the challenge is never a dead end
+                const ok = await loadDemoPhoto();
+                if (ok) openWorkspace();
+              })();
+            }}
+            title={`${holidayWindow.holiday.emoji} ${holidayWindow.holiday.name} — open the coach for your shooting challenge`}
+            style={{
+              backgroundImage: `linear-gradient(90deg, rgba(10,11,14,0.85) 0%, rgba(10,11,14,0.5) 55%, rgba(10,11,14,0.25) 100%), url("${holidayWindow.holiday.banner}")`,
+            }}
+          >
+            <span className="muskeg-banner-text">
+              <strong>
+                {holidayWindow.holiday.emoji} {holidayWindow.holiday.name} —{" "}
+                {holidayWindow.holiday.challenge.title}
+              </strong>
+              <span className="muskeg-banner-sub">
+                Your holiday shooting goal from the coach — tap to see it
+              </span>
+            </span>
+            <span className="muskeg-banner-go" aria-hidden="true">🎯</span>
+          </button>
+        ) : (
+          <a
+            className="muskeg-banner"
+            href="https://muskegman.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Visit Muskegman.com"
+          >
+            <span className="muskeg-banner-text">
+              <strong>Muskegman.com</strong>
+              <span className="muskeg-banner-sub">Photo software &amp; prints — Pro-Photo_Sorter inside</span>
+            </span>
+            <span className="muskeg-banner-go" aria-hidden="true">↗</span>
+          </a>
+        )}
         <button
           type="button"
           className="btn gallery-toggle"

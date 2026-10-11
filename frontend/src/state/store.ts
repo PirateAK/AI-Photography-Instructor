@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-import { analyzePhoto, fetchExif, sendChat as apiSendChat } from "../lib/api";
+import { analyzePhoto, fetchExif, sendChat as apiSendChat, type ChallengeContext } from "../lib/api";
 import { defaultSettings, getCamera, getCameras, baselineFromExif, snapToCamera } from "../lib/camera";
 import {
   clampApertureToLens,
@@ -33,6 +33,7 @@ import type { StyleLesson } from "../lib/styles";
 import { courses as bundledCourses, unlockAllPaid, isValidCode, isInstructorCode } from "../lib/training";
 import type { TrainingCourse } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
+import { activeHoliday, challengeAfterShot, holidayById } from "../lib/holidays";
 import type {
   AnalysisResult,
   CameraModel,
@@ -97,6 +98,11 @@ interface PhotoState {
   courses: TrainingCourse[];
   completedLessons: string[]; // cameraId -> lensId
 
+  // 🎄 holiday challenges (activeChallengeId survives its banner window until dismissed)
+  activeChallengeId: string | null;
+  challengeShots: Record<string, number>;
+  completedChallenges: string[];
+
   // actions
   loadFile: (file: File) => Promise<void>;
   setCamera: (id: string) => void;
@@ -148,6 +154,10 @@ interface PhotoState {
   draftCourseWithAI: (topic: string) => Promise<TrainingCourse>;
   toggleLessonComplete: (lessonId: string) => void;
   unlockWithCode: (code: string) => boolean;
+  acceptChallenge: (id: string) => void;
+  dismissChallenge: () => void;
+  noteChallengeShot: () => boolean;
+  challengeContext: () => ChallengeContext | null;
   practicePreset: (preset: Record<string, string | number>, brief: string) => Promise<void>;
 }
 
@@ -208,6 +218,10 @@ export const useStore = create<PhotoState>()(
       lensByCamera: {},
       courses: bundledCourses,
       completedLessons: [],
+
+      activeChallengeId: null,
+      challengeShots: {},
+      completedChallenges: [],
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -597,6 +611,36 @@ export const useStore = create<PhotoState>()(
         return true;
       },
 
+      // ---- holiday challenges ----
+      challengeContext: () => {
+        const id = get().activeChallengeId;
+        const holiday = holidayById(id);
+        if (!holiday) return null;
+        return { id: holiday.id, title: holiday.challenge.title, goal: holiday.challenge.goal };
+      },
+
+      acceptChallenge: (id) => {
+        const holiday = holidayById(id);
+        if (!holiday) return;
+        set({
+          activeChallengeId: id,
+          log: pushLog(get().log, {
+            kind: "system",
+            text: `🎯 Challenge accepted — ${holiday.emoji} "${holiday.challenge.title}". Bring back 3 shots for challenge review.`,
+          }),
+        });
+      },
+
+      dismissChallenge: () => set({ activeChallengeId: null }),
+
+      noteChallengeShot: () => {
+        const id = get().activeChallengeId;
+        if (!id) return false;
+        const r = challengeAfterShot(get().challengeShots, get().completedChallenges, id);
+        set({ challengeShots: r.shots, completedChallenges: r.completed });
+        return r.justCompleted;
+      },
+
       practicePreset: async (preset, brief) => {
         const state = get();
         if (!state.dataUrl) {
@@ -653,6 +697,7 @@ export const useStore = create<PhotoState>()(
             state.settingsByCamera[state.cameraId] ?? {},
             state.styleId,
             file,
+            state.challengeContext(),
           );
           set({
             chatMessages: [...history, { role: "assistant", text: res.reply }],
@@ -681,6 +726,7 @@ export const useStore = create<PhotoState>()(
               get().settingsByCamera[get().cameraId] ?? {},
               get().intent,
               get().styleId,
+              get().challengeContext(),
             );
             set({
               analysis: response.analysis,
@@ -692,6 +738,17 @@ export const useStore = create<PhotoState>()(
                 text: response.chat_response,
               }),
             });
+
+            // challenge progress: every analyze while a challenge is active counts
+            if (get().noteChallengeShot()) {
+              const done = holidayById(get().activeChallengeId);
+              set({
+                log: pushLog(get().log, {
+                  kind: "system",
+                  text: `🎯 Challenge complete — "${done?.challenge.title}" — badge earned!`,
+                }),
+              });
+            }
 
             // auto-save to per-device history (best-effort, never blocks the UI)
             const state2 = get();
@@ -806,6 +863,9 @@ export const useStore = create<PhotoState>()(
         deviceId: s.deviceId,
         lensByCamera: s.lensByCamera,
         completedLessons: s.completedLessons,
+        activeChallengeId: s.activeChallengeId,
+        challengeShots: s.challengeShots,
+        completedChallenges: s.completedChallenges,
       }),
     },
   ),

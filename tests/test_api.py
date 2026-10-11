@@ -76,6 +76,33 @@ def test_analyze_rejects_unknown_camera():
     assert res.status_code == 400
 
 
+def test_analyze_accepts_challenge_and_keys_cache_separately():
+    data = jpeg_bytes()
+    form = {
+        "camera_id": "sony_a6400",
+        "settings": "{}",
+        "challenge": json.dumps({"id": "halloween", "title": "The Halloween Glow Hunt", "goal": "no flash"}),
+    }
+    files = {"file": ("t.jpg", data, "image/jpeg")}
+
+    res = client.post("/api/analyze", data=form, files=files)
+    assert res.status_code == 200
+    assert "The Halloween Glow Hunt" in res.json()["chat_response"]
+
+    # same image without a challenge must NOT hit the challenge-cached entry
+    plain = client.post("/api/analyze", data={"camera_id": "sony_a6400", "settings": "{}"}, files=files)
+    assert plain.status_code == 200
+    assert "The Halloween Glow Hunt" not in plain.json()["chat_response"]
+
+    # malformed challenge blob is ignored, not a 400
+    junk = client.post(
+        "/api/analyze",
+        data={"camera_id": "sony_a6400", "settings": "{}", "challenge": "{oops"},
+        files=files,
+    )
+    assert junk.status_code == 200
+
+
 def test_analyze_rejects_corrupt_image():
     res = client.post(
         "/api/analyze",

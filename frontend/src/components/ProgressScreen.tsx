@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { courseProgress, nextLessonFor } from "../lib/training";
-import { classBadges, masteryBadges, type Badge } from "../lib/badges";
+import { classBadges, masteryBadges, challengeBadges, type Badge } from "../lib/badges";
 import { shareSession, type ShareResult } from "../lib/share";
 import {
   buildChartPoints,
@@ -18,6 +18,7 @@ export default function ProgressScreen() {
   const styles = useStore((s) => s.styles);
   const courses = useStore((s) => s.courses);
   const completedLessons = useStore((s) => s.completedLessons);
+  const completedChallenges = useStore((s) => s.completedChallenges);
   const goUpload = useStore((s) => s.goUpload);
   const dataUrl = useStore((s) => s.dataUrl);
   const openWorkspace = useStore((s) => s.openWorkspace);
@@ -47,8 +48,12 @@ export default function ProgressScreen() {
   const stats = useMemo(() => buildStats(sessions), [sessions]);
   const points = useMemo(() => buildChartPoints(sessions), [sessions]);
   const badges = useMemo(
-    () => [...classBadges(courses, completedLessons), ...masteryBadges(styles, sessions)],
-    [courses, completedLessons, styles, sessions],
+    () => [
+      ...classBadges(courses, completedLessons),
+      ...challengeBadges(completedChallenges),
+      ...masteryBadges(styles, sessions),
+    ],
+    [courses, completedLessons, completedChallenges, styles, sessions],
   );
   const earned = useMemo(() => badges.filter((b) => b.earned), [badges]);
   const bestSession = useMemo(

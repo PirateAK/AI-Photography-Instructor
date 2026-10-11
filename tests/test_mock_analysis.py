@@ -58,6 +58,16 @@ def test_determinism(camera):
     assert c1 == c2
 
 
+def test_challenge_is_reflected_in_reply(camera):
+    img = solid_image((120, 90, 60))
+    plain = MockCoach().analyze(img, camera, {}, "", {})[1]
+    challenge = {"id": "halloween", "title": "The Halloween Glow Hunt", "goal": "Capture the glow, no flash."}
+    with_c = MockCoach().analyze(img, camera, {}, "", {}, None, challenge)[1]
+    assert "The Halloween Glow Hunt" in with_c
+    assert "Capture the glow, no flash." in with_c
+    assert "The Halloween Glow Hunt" not in plain
+
+
 def test_schema_bounds_and_exercise_count(camera):
     analysis, _, _ = analyze(solid_image((90, 110, 130)), camera)
     assert isinstance(analysis, AnalysisResult)

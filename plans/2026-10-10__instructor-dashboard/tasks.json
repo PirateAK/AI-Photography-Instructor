@@ -1,0 +1,22 @@
+[
+  {
+    "content": "[instructor-1] app_config.json instructor_codes + lib/training.ts isInstructorCode + store instructorUnlocked (persisted)",
+    "id": "instructor-1",
+    "status": "completed"
+  },
+  {
+    "content": "[instructor-2] InstructorDashboard hub screen (links to Style + Course managers, re-lock) + App.tsx routing",
+    "id": "instructor-2",
+    "status": "completed"
+  },
+  {
+    "content": "[instructor-3] Code gate in UploadScreen intent field + 🛠 nav button when unlocked",
+    "id": "instructor-3",
+    "status": "completed"
+  },
+  {
+    "content": "[instructor-4] Tests (vitest instructor code) + verify pytest/tsc/vite smoke + commit + push",
+    "id": "instructor-4",
+    "status": "completed"
+  }
+]

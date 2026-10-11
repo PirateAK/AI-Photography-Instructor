@@ -514,7 +514,7 @@ def _exercises(issues: list[Issue], style: dict | None = None) -> list[PracticeE
 class MockCoach:
     name = "mock"
 
-    def analyze(self, image, camera: dict, settings: dict, intent: str, exif: dict, style: dict | None = None):
+    def analyze(self, image, camera: dict, settings: dict, intent: str, exif: dict, style: dict | None = None, challenge: dict | None = None):
         s = compute_stats(image)
         issues = build_issues(s, settings, camera)
         score = _score(s, style)
@@ -539,6 +539,11 @@ class MockCoach:
             + (f", WB {recs.white_balance}" if recs.white_balance else "")
             + ". Apply them in the toolbar to preview the change."
         )
+        if challenge:
+            chat = (
+                f"🎯 Challenge “{challenge.get('title', '')}”: {challenge.get('goal', '')} "
+                "— here's how this shot stacks up. " + chat
+            )
 
         analysis = AnalysisResult(
             overall_score=score,

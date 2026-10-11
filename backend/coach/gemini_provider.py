@@ -88,7 +88,7 @@ class GeminiProvider:
         raise last_error  # pragma: no cover
 
     @staticmethod
-    def _context_payload(camera: dict, settings: dict, intent: str, exif: dict, style: dict | None) -> dict:
+    def _context_payload(camera: dict, settings: dict, intent: str, exif: dict, style: dict | None, challenge: dict | None = None) -> dict:
         return {
             "camera": {"brand": camera.get("brand"), "model": camera.get("model")},
             "supported_settings": {
@@ -103,13 +103,17 @@ class GeminiProvider:
                  "watch_fors": style.get("watch_fors")}
                 if style else "(none selected)"
             ),
+            "photo_challenge": (
+                {"title": challenge.get("title", ""), "goal": challenge.get("goal", "")}
+                if challenge else "(none)"
+            ),
         }
 
-    def analyze(self, image, camera: dict, settings: dict, intent: str, exif: dict, style: dict | None = None):
+    def analyze(self, image, camera: dict, settings: dict, intent: str, exif: dict, style: dict | None = None, challenge: dict | None = None):
         from ..image_utils import encode_jpeg_b64
 
         b64 = encode_jpeg_b64(image, quality=85, max_dim=1024)
-        payload = self._context_payload(camera, settings, intent, exif, style)
+        payload = self._context_payload(camera, settings, intent, exif, style, challenge)
         contents = [
             {
                 "role": "user",

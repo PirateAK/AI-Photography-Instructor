@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { classBadges, masteryBadges, earnedBadgeCount } from "../src/lib/badges";
+import { classBadges, masteryBadges, challengeBadges, earnedBadgeCount } from "../src/lib/badges";
 import { buildAppShareMessage, buildShareMessage } from "../src/lib/share";
 
 describe("buildAppShareMessage", () => {
@@ -50,6 +50,22 @@ describe("mastery badges", () => {
   it("near-perfect scores don't earn the mastery badge", () => {
     const badges = masteryBadges(styles, [{ score: 99, style_id: "food" }]);
     expect(badges.find((b) => b.id === "mastery-food")!.earned).toBe(false);
+  });
+});
+
+describe("challenge badges", () => {
+  it("are earned per completed holiday challenge", () => {
+    const badges = challengeBadges(["halloween"]);
+    expect(badges.length).toBeGreaterThanOrEqual(8); // full 2026-27 calendar
+    expect(badges.find((b) => b.id === "challenge-halloween")!.earned).toBe(true);
+    expect(badges.find((b) => b.id === "challenge-christmas")!.earned).toBe(false);
+    expect(badges.every((b) => b.kind === "challenge")).toBe(true);
+    expect(badges.find((b) => b.id === "challenge-halloween")!.requirement).toContain("3 shots");
+  });
+
+  it("count toward the earned total", () => {
+    const all = [...classBadges(courses, []), ...challengeBadges(["halloween", "christmas"])];
+    expect(earnedBadgeCount(all)).toBe(2);
   });
 });
 

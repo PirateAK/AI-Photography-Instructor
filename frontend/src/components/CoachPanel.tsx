@@ -3,6 +3,7 @@ import { useStore } from "../state/store";
 import { baselineFromExif, defaultSettings, evDelta, getCamera } from "../lib/camera";
 import { buildLessons, type Lesson } from "../lib/lessons";
 import { FALLBACK_TIPS } from "../lib/tips";
+import HolidayCard from "./HolidayCard";
 
 export default function CoachPanel() {
   const analysis = useStore((s) => s.analysis);
@@ -270,6 +271,7 @@ export default function CoachPanel() {
         ))}
       </section>
 
+      <HolidayCard />
       <CoachChat />
     </>
   );

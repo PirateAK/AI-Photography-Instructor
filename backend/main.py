@@ -174,6 +174,19 @@ async def exif_endpoint(file: UploadFile = File(...)):
     return info
 
 
+def _parse_challenge(raw: str) -> dict | None:
+    """Parse the optional challenge JSON blob from the frontend. Never raises."""
+    if not raw:
+        return None
+    try:
+        data = json.loads(raw)
+        if isinstance(data, dict) and data.get("title") and data.get("goal"):
+            return {"id": str(data.get("id", ""))[:64], "title": str(data["title"])[:200], "goal": str(data["goal"])[:1000]}
+    except Exception:
+        pass
+    return None
+
+
 @app.post("/api/analyze", response_model=CoachResponse)
 async def analyze(
     file: UploadFile = File(...),
@@ -181,10 +194,12 @@ async def analyze(
     settings: str = Form("{}"),
     intent: str = Form(""),
     style_id: str = Form(""),
+    challenge: str = Form(""),
 ):
     data = await _read_upload(file)
     camera = _camera_or_404(camera_id)
     style = get_style(style_id)  # unknown/empty style -> None (graceful)
+    challenge_ctx = _parse_challenge(challenge)
     try:
         settings_dict = json.loads(settings) if settings else {}
     except json.JSONDecodeError:
@@ -199,7 +214,7 @@ async def analyze(
         json.dumps(settings_dict, sort_keys=True),
         intent.strip().lower(),
         style_id.strip().lower(),
-        "v1",
+        "v1" + (f":chal:{challenge_ctx['id']}" if challenge_ctx else ""),
     )
     cached = cache.get(key)
     if cached is not None:
@@ -216,7 +231,7 @@ async def analyze(
     provider, kind = provider_for_request()
     notice = None
     try:
-        analysis, chat, provider_notice = provider.analyze(analysis_img, camera, settings_dict, intent, exif, style)
+        analysis, chat, provider_notice = provider.analyze(analysis_img, camera, settings_dict, intent, exif, style, challenge_ctx)
         notice = provider_notice
     except Exception as exc:
         log.warning("Provider '%s' failed (%s); falling back to mock coach.", provider.name, exc)
@@ -228,7 +243,7 @@ async def analyze(
         )
         provider = FallbackCoach(notice_text)
         kind = "mock"
-        analysis, chat, notice = provider.analyze(analysis_img, camera, settings_dict, intent, exif, style)
+        analysis, chat, notice = provider.analyze(analysis_img, camera, settings_dict, intent, exif, style, challenge_ctx)
 
     # equivalent-exposure guard: neutralize large EV drift in AI recommendations
     from .coach.ev_guard import enforce_equivalent_exposure
@@ -258,6 +273,7 @@ async def chat(
     camera_id: str = Form(""),
     settings: str = Form("{}"),
     style_id: str = Form(""),
+    challenge: str = Form(""),
     image: UploadFile | None = File(None),
 ):
     """Coach chat. Deterministic knowledge-base replies with the mock engine;
@@ -282,10 +298,12 @@ async def chat(
 
     camera = _camera_or_404(camera_id) if camera_id else {}
     style = get_style(style_id)
+    challenge_ctx = _parse_challenge(challenge)
     context = {
         "camera": {k: camera.get(k) for k in ("brand", "model")} if camera else None,
         "settings": settings_dict,
         "style": {"id": style["id"], "label": style["label"], "recipe": style.get("recipe")} if style else None,
+        "photo_challenge": {"title": challenge_ctx["title"], "goal": challenge_ctx["goal"]} if challenge_ctx else None,
     }
 
     image_b64 = None

@@ -1,0 +1,27 @@
+[
+  {
+    "content": "[gallery-1] lib/gallery.ts: IndexedDB store (cap 100, evict-oldest, thumbnails, undo-friendly remove)",
+    "id": "gallery-1",
+    "status": "completed"
+  },
+  {
+    "content": "[gallery-2] Store: galleryItems + load/add/remove/undo/loadFromGallery actions",
+    "id": "gallery-2",
+    "status": "completed"
+  },
+  {
+    "content": "[gallery-3] UploadScreen: Pick photos + Camera buttons, vertical wheel with swipe-trim + incremental pages, undo toast",
+    "id": "gallery-3",
+    "status": "completed"
+  },
+  {
+    "content": "[gallery-4] CSS: wheel styles + App.tsx startup load + tests",
+    "id": "gallery-4",
+    "status": "completed"
+  },
+  {
+    "content": "[gallery-5] Verify tsc/vitest + smoke + commit",
+    "id": "gallery-5",
+    "status": "completed"
+  }
+]

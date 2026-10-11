@@ -1,0 +1,199 @@
+{
+  "window_start_days": 7,
+  "window_end_days": 1,
+  "shots_to_complete": 3,
+  "holidays": [
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "emoji": "🎃",
+      "rule": { "type": "fixed", "month": 10, "day": 31 },
+      "banner": "/images/banners/halloween.jpg",
+      "style_id": "portrait",
+      "greeting": "Happy Halloween from MuskegMan Photography! Tonight the porches glow, the costumes come out, and every doorway becomes a portrait studio — if you know how to work the dark.",
+      "tips": [
+        "Expose for the flame: jack-o'-lanterns want 1/15–1/30s, f/2–4, ISO 400–800 — porch light OFF.",
+        "Portraits by porch light: wide open f/1.8–2.8, spot-meter on the face, not the dark background.",
+        "Skip the flash — it flattens the mood. Raise the ISO and let the shadows do the talking."
+      ],
+      "challenge": {
+        "title": "The Halloween Glow Hunt",
+        "goal": "Capture the night without killing it: a glowing jack-o'-lantern or a costume portrait lit only by porch light, candle or string lights — no flash allowed. 3 shots."
+      },
+      "drilldowns": [
+        { "id": "jackolanterns", "label": "Glowing jack-o'-lanterns", "prompt": "How do I photograph a glowing jack-o'-lantern so the flame still glows instead of going dark?" },
+        { "id": "costumes", "label": "Costume portraits by porch light", "prompt": "What settings work for a costume portrait lit only by porch light at night?" },
+        { "id": "silhouettes", "label": "Spooky silhouettes", "prompt": "How do I shoot a spooky Halloween silhouette against a lit doorway or window?" },
+        { "id": "candids", "label": "Trick-or-treat candids", "prompt": "What settings keep trick-or-treat candids sharp in near-dark conditions?" }
+      ]
+    },
+    {
+      "id": "thanksgiving",
+      "name": "Thanksgiving",
+      "emoji": "🦃",
+      "rule": { "type": "nth_weekday", "month": 11, "nth": 4, "weekday": 4 },
+      "banner": "/images/banners/thanksgiving.jpg",
+      "style_id": "food",
+      "greeting": "Happy Thanksgiving from MuskegMan Photography! The best food-photography light of the year is a kitchen window — and the best candids happen while everyone thinks you're not shooting.",
+      "tips": [
+        "Shoot the spread near a window: soft side light, and plates +1 EV so white dishes read white, not gray.",
+        "Kitchen candids: 1/125s or faster, auto ISO, and stay wide — 35mm keeps the story in frame.",
+        "Group shots: f/5.6–f/8 so every face is sharp, and use the 2-second timer — get IN the photo."
+      ],
+      "challenge": {
+        "title": "The Gathering Table",
+        "goal": "Tell the story of the day in 3 frames: one of the food, one candid of the people, and one group shot — all sharp, all natural light where possible."
+      },
+      "drilldowns": [
+        { "id": "spread", "label": "The spread", "prompt": "How do I photograph the Thanksgiving table so the food looks as good as it tastes?" },
+        { "id": "kitchen", "label": "Kitchen candids", "prompt": "What settings work for candid shots in a warm, busy kitchen with mixed light?" },
+        { "id": "group", "label": "The group shot", "prompt": "How do I get a sharp group photo of the whole family indoors?" },
+        { "id": "leftovers", "label": "Leftovers day", "prompt": "Any fun ideas for photographing Thanksgiving leftovers the next day?" }
+      ]
+    },
+    {
+      "id": "christmas",
+      "name": "Christmas",
+      "emoji": "🎄",
+      "rule": { "type": "fixed", "month": 12, "day": 25 },
+      "banner": "/images/banners/christmas.jpg",
+      "style_id": "family",
+      "greeting": "Merry Christmas from MuskegMan Photography! This is bokeh season — the one week a year the whole world hangs up tiny lights for you. Here's how to make them sing.",
+      "tips": [
+        "Tree bokeh: focus on your subject wide open (f/1.4–f/2) and the tree melts into glowing orbs.",
+        "Shooting the tree itself: ISO 800–1600, 1/30s braced, WB Tungsten ≈3500K — and no flash.",
+        "Morning chaos: auto ISO with a 1/125s floor so wrapping-paper moments stay sharp."
+      ],
+      "challenge": {
+        "title": "The Christmas Light Hunt",
+        "goal": "3 frames of Christmas light magic: a bokeh shot with a subject, a tree or candle scene with no flash, and one candid from the big morning."
+      },
+      "drilldowns": [
+        { "id": "bokeh", "label": "Tree-light bokeh", "prompt": "How do I get round Christmas-light bokeh behind my subject?" },
+        { "id": "tree", "label": "The tree itself", "prompt": "What settings shoot a Christmas tree by its own lights without flash?" },
+        { "id": "candles", "label": "Candle & fireplace scenes", "prompt": "How do I photograph people by candlelight or fireplace light?" },
+        { "id": "morning", "label": "Christmas-morning candids", "prompt": "What settings handle fast indoor Christmas-morning action?" }
+      ]
+    },
+    {
+      "id": "new_year",
+      "name": "New Year",
+      "emoji": "🎆",
+      "rule": { "type": "fixed", "month": 1, "day": 1 },
+      "banner": "/images/banners/new_year.jpg",
+      "style_id": "concert",
+      "greeting": "Happy New Year from MuskegMan Photography! Sparklers, fireworks and a countdown — the most photogenic night of the year. Tripods at the ready.",
+      "tips": [
+        "Sparkler writing: tripod, f/4–5.6, ISO 100–200, 2–6 seconds per letter — someone writes, you shoot.",
+        "Fireworks: f/8–16, 2–6s, ISO 100 — shoot the burst, check the screen, adjust, repeat.",
+        "Countdown candids: 1/125s+, ISO 1600–3200 — shoot wide and shoot a lot, the joy is in the faces."
+      ],
+      "challenge": {
+        "title": "The Midnight Challenge",
+        "goal": "Ring it in with 3 frames: sparkler light-writing, one long-exposure fireworks shot, and a countdown-moment candid."
+      },
+      "drilldowns": [
+        { "id": "sparklers", "label": "Sparkler writing", "prompt": "How do I write words with a sparkler in a long-exposure photo?" },
+        { "id": "fireworks", "label": "Fireworks", "prompt": "What are the exact settings for photographing fireworks?" },
+        { "id": "countdown", "label": "Countdown candids", "prompt": "How do I shoot sharp candids of a midnight countdown in a dim room?" },
+        { "id": "firstwalk", "label": "New Year's Day first walk", "prompt": "Any ideas for a meaningful New Year's Day first-walk photo?" }
+      ]
+    },
+    {
+      "id": "valentines",
+      "name": "Valentine's Day",
+      "emoji": "💝",
+      "rule": { "type": "fixed", "month": 2, "day": 14 },
+      "banner": "/images/banners/valentines.jpg",
+      "style_id": "portrait",
+      "greeting": "Happy Valentine's from MuskegMan Photography! Candlelight, string lights, and one person who doesn't mind the camera — let's make something worth printing.",
+      "tips": [
+        "Candlelit portrait: f/1.8–2.8, ISO 800–1600, 1/60s — bring the candle close, one light is enough.",
+        "String-light bokeh: subject 6+ feet in front of the lights, wide open, focus on the eyes.",
+        "The roses: side window light and a dark background — flowers love it as much as faces do."
+      ],
+      "challenge": {
+        "title": "The Date-Night Portrait",
+        "goal": "3 frames for the one you love: a candlelit or window-light portrait, one shot with string-light bokeh, and a still-life of the flowers or gift."
+      },
+      "drilldowns": [
+        { "id": "candlelight", "label": "Candlelit portrait", "prompt": "How do I take a romantic portrait by candlelight?" },
+        { "id": "stringlights", "label": "String-light bokeh", "prompt": "How do I blur string lights into a romantic backdrop?" },
+        { "id": "flowers", "label": "The bouquet", "prompt": "How do I photograph a bouquet of roses so it looks professional?" },
+        { "id": "datenight", "label": "Date-night scene", "prompt": "What settings work for a dim restaurant or date-night scene?" }
+      ]
+    },
+    {
+      "id": "easter",
+      "name": "Easter",
+      "emoji": "🐣",
+      "rule": { "type": "easter" },
+      "banner": "/images/banners/easter.jpg",
+      "style_id": "family",
+      "greeting": "Happy Easter from MuskegMan Photography! Spring light, pastels, and a backyard egg hunt — the fastest action sport in photography is a 5-year-old who just spotted the last egg.",
+      "tips": [
+        "Egg hunt: 1/500s+, continuous focus and burst mode — kneel down to kid eye level.",
+        "Pastels on overcast days: the clouds are a giant softbox, no flash needed.",
+        "Spring blooms: f/2.8–4 and watch the background — a busy bush fights the subject."
+      ],
+      "challenge": {
+        "title": "The Spring Morning Hunt",
+        "goal": "3 frames of the day: an egg-hunt action shot, a pastel still-life (baskets, eggs or blooms), and one family gathering moment."
+      },
+      "drilldowns": [
+        { "id": "egghunt", "label": "Egg-hunt action", "prompt": "What camera settings freeze kids running in an Easter egg hunt?" },
+        { "id": "pastels", "label": "Pastels & eggs", "prompt": "How do I expose pastel colors like Easter eggs and spring dresses?" },
+        { "id": "blooms", "label": "Spring blooms", "prompt": "How do I photograph spring flowers with a clean background?" },
+        { "id": "gathering", "label": "Family gathering", "prompt": "How do I organize a quick, happy family photo after the egg hunt?" }
+      ]
+    },
+    {
+      "id": "mothers_day",
+      "name": "Mother's Day",
+      "emoji": "💐",
+      "rule": { "type": "nth_weekday", "month": 5, "nth": 2, "weekday": 0 },
+      "banner": "/images/banners/mothers_day.jpg",
+      "style_id": "portrait",
+      "greeting": "Happy Mother's Day from MuskegMan Photography! The best gift is a photograph she's actually in — and hand someone else the camera today too, so Mom gets a picture WITH everyone.",
+      "tips": [
+        "Window-light portrait: face the window, f/2–2.8, +0.3 EV — soft, flattering, free.",
+        "The flowers she got: overcast light and a plain background beat any filter.",
+        "Generations shot: open shade, f/5.6+, and shoot 10 frames — someone always blinks."
+      ],
+      "challenge": {
+        "title": "Portraits of Mom",
+        "goal": "3 frames of Mom: one honest window-light portrait, one with the flowers, and one candid of her doing what she loves — then print the best one."
+      },
+      "drilldowns": [
+        { "id": "windowlight", "label": "Window-light portrait", "prompt": "How do I take a flattering window-light portrait?" },
+        { "id": "bouquet", "label": "The flowers", "prompt": "How do I photograph a Mother's Day bouquet like a pro?" },
+        { "id": "candid", "label": "Natural candids", "prompt": "How do I capture natural, unposed moments of someone special?" },
+        { "id": "printing", "label": "Pick one to print", "prompt": "How do I pick which photos are worth printing?" }
+      ]
+    },
+    {
+      "id": "july4th",
+      "name": "Independence Day",
+      "emoji": "🇺🇸",
+      "rule": { "type": "fixed", "month": 7, "day": 4 },
+      "banner": "/images/banners/july4th.jpg",
+      "style_id": "concert",
+      "greeting": "Happy Independence Day from MuskegMan Photography! Fireworks are the year's easiest 'wow' — tripod, low ISO, and let the shutter run long.",
+      "tips": [
+        "Fireworks: tripod, f/8–16, ISO 100, 2–6s per burst — arrive early, frame wide, shoot the finale manually.",
+        "Sparkler portraits: 1/60s, f/2.8–4, ISO 800 — the sparkler is a warm little lamp.",
+        "Backyard BBQ: 1/250s for game action, and shoot the flag against the sky."
+      ],
+      "challenge": {
+        "title": "Independence Night",
+        "goal": "3 frames of the Fourth: a long-exposure fireworks shot, a sparkler-lit portrait, and one red-white-and-blue scene that isn't the fireworks."
+      },
+      "drilldowns": [
+        { "id": "fireworks", "label": "Fireworks", "prompt": "What are the exact settings for sharp fireworks photos?" },
+        { "id": "sparklerportraits", "label": "Sparkler portraits", "prompt": "How do I light a portrait with sparklers?" },
+        { "id": "bbq", "label": "Backyard BBQ", "prompt": "What settings handle a bright backyard BBQ with people moving around?" },
+        { "id": "flag", "label": "Flag & sky", "prompt": "How do I photograph the flag without blowing out the sky?" }
+      ]
+    }
+  ]
+}

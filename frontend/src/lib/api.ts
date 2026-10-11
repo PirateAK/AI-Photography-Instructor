@@ -22,12 +22,23 @@ export async function fetchExif(file: File): Promise<ExifInfo> {
   return postForm<ExifInfo>("/api/exif", form);
 }
 
+export interface ChallengeContext {
+  id: string;
+  title: string;
+  goal: string;
+}
+
+function challengeForm(form: FormData, challenge: ChallengeContext | null | undefined): void {
+  if (challenge) form.append("challenge", JSON.stringify(challenge));
+}
+
 export async function analyzePhoto(
   file: File,
   cameraId: string,
   settings: Settings,
   intent: string,
   styleId: string = "",
+  challenge?: ChallengeContext | null,
 ): Promise<CoachResponse> {
   const form = new FormData();
   form.append("file", file);
@@ -35,6 +46,7 @@ export async function analyzePhoto(
   form.append("settings", JSON.stringify(settings));
   form.append("intent", intent);
   form.append("style_id", styleId);
+  challengeForm(form, challenge);
   return postForm<CoachResponse>("/api/analyze", form);
 }
 
@@ -70,6 +82,7 @@ export async function sendChat(
   settings: Settings,
   styleId: string,
   file?: File | null,
+  challenge?: ChallengeContext | null,
 ): Promise<{ reply: string; provider: string; notice?: string | null }> {
   const form = new FormData();
   form.append("message", message);
@@ -77,6 +90,7 @@ export async function sendChat(
   form.append("camera_id", cameraId);
   form.append("settings", JSON.stringify(settings));
   form.append("style_id", styleId);
+  challengeForm(form, challenge);
   if (file) form.append("image", file);
   return postForm("/api/chat", form);
 }

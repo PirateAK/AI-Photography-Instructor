@@ -1,0 +1,47 @@
+[
+  {
+    "content": "[holiday-1] data/holidays.json — 8 holidays (Halloween/Thanksgiving/Christmas/NewYear/Valentines/Easter/MothersDay/July4th): date rules, banners, greetings, challenges + drilldowns",
+    "id": "1",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-2] frontend/src/lib/holidays.ts — date resolver (fixed / nth-weekday / computus, window crossing, overlap priority) + vitest",
+    "id": "2",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-3] store: activeChallengeId, challengeShots, completedChallenges (persisted) + increment hook on successful analyze",
+    "id": "3",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-4] Workspace: holiday challenge card (greeting, accept, progress n/3, bring-shots-back, dismiss) + drilldown chips prefill coach chat",
+    "id": "4",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-5] UploadScreen: banner auto-swap during window, click opens coach challenge, revert after",
+    "id": "5",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-6] backend: challenge block in analyze payload — schema, mock tips, AI prompt block (override style mismatch)",
+    "id": "6",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-7] badges.ts kind 'challenge' (3 shots) + ProgressScreen trophy case + earnedBadgeCount",
+    "id": "7",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-8] scripts/generate_holiday_banners.py — Nano Banana 8 banners → 1600×560 JPEG in frontend/public/images/banners/",
+    "id": "8",
+    "status": "completed"
+  },
+  {
+    "content": "[holiday-9] pytest + tsc + vitest green, push to GitHub",
+    "id": "9",
+    "status": "in_progress"
+  }
+]

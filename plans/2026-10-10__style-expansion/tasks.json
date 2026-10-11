@@ -1,0 +1,32 @@
+[
+  {
+    "content": "[styles-1] Draft 12 new photography styles into shooting_styles.json (schema-exact, teaching-accurate)",
+    "id": "styles-1",
+    "status": "completed"
+  },
+  {
+    "content": "[styles-2] Update backend style tests (EXPECTED_IDS/counts) + validate new styles against StyleModel",
+    "id": "styles-2",
+    "status": "completed"
+  },
+  {
+    "content": "[styles-3] Backend: POST /api/styles/generate-lessons (AI drafts guided lessons for a style, validated, not auto-saved) + tests",
+    "id": "styles-3",
+    "status": "completed"
+  },
+  {
+    "content": "[styles-4] Frontend: StyleLesson type + api + store action + Style Manager review UI (approve/edit/discard) + draft flag in StyleModel",
+    "id": "styles-4",
+    "status": "completed"
+  },
+  {
+    "content": "[styles-5] Coach pane: approved style lessons appear in guided lessons (snapped to camera), drafts hidden from learners",
+    "id": "styles-5",
+    "status": "completed"
+  },
+  {
+    "content": "[styles-6] Verify pytest/vitest/tsc + smoke + commit (incl. recovery from killed dev server + aperture ladder fix)",
+    "id": "styles-6",
+    "status": "completed"
+  }
+]

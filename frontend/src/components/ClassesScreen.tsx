@@ -1,8 +1,6 @@
 // 🎓 Training classes — library grid + course player. Data-driven from
 // data/training_courses.json; free teasers ship with the app, paid classes
 // unlock via redemption code (MVP stub) or purchase on the store site.
-import { useMemo, useState } from "react";
-import { useStore } from "../state/store";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import {
@@ -30,6 +28,7 @@ export default function ClassesScreen() {
   const goCourseManager = useStore((s) => s.goCourseManager);
   const courses = useStore((s) => s.courses);
   const dataUrl = useStore((s) => s.dataUrl);
+  const courseToOpen = useStore((s) => s.courseToOpen);
   const [openId, setOpenId] = useState<string | null>(null);
   // hidden courses (e.g. parked placeholders) stay in the catalog for the
   // Course Manager but don't display to students

@@ -90,7 +90,6 @@ interface PhotoState {
   lastRemovedGallery: GalleryEntry | null;
   photoLoading: boolean;
   courseToOpen: string | null;
-  photoLoading: boolean;
 
   styles: ShootingStyle[];
   deviceId: string;
@@ -200,7 +199,6 @@ export const useStore = create<PhotoState>()(
       lastRemovedGallery: null,
       photoLoading: false,
       courseToOpen: null,
-      photoLoading: false,
 
       styles: styleCatalog.styles,
       deviceId:

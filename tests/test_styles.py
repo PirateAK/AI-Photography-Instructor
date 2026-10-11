@@ -15,6 +15,7 @@ EXPECTED_IDS = {
     "street", "fine_art", "event", "architecture",
     "underwater", "food", "concert", "real_estate", "pet", "family",
     "wedding", "automotive", "aerial", "black_and_white", "travel", "product",
+    "fashion", "conceptual",
 }
 
 

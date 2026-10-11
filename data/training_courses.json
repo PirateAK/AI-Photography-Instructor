@@ -7,8 +7,8 @@
       "category": "Fundamentals",
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
-      "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Lesson 8 reads the light itself: front, side and backlight, soft versus hard sources, and how moving the subject or yourself rewrites the shadows. Lesson 9 adds color: recognizing a cast, using white balance presets to render neutrals honestly — or keeping a warm/cool shift on purpose. Lesson 10 puts it all together: an everyday subject, one quick photo, one deliberate remake — combining viewpoint, light, framing, focus and exposure into an intentional photograph. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "tagline": "Know your camera before you touch a setting — the complete 11-lesson class",
+      "description": "A complete beginner class built around understanding the camera first, in eleven lessons: the parts and the light (1), camera types and choosing equipment (2), lenses and perspective (3), shooting modes (4), the exposure triangle (5), focus and autofocus (6), composition (7), lighting (8), white balance and color (9), putting it all together in an intentional everyday photo (10), and the workflow that protects your originals — import, organize, select, edit, export (11). Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -162,6 +162,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "The capstone drill uses your whole toolbox. Pick an ordinary subject — a cup, a plant, your desk. Photo 1: snap it without thinking. Photo 2: change at least two choices — move closer or lower, use side light, simplify the background, reframe, refocus, adjust exposure. Add both to the gallery and load each into the coach (🖼️ in the workspace) — compare the two responses; the score difference is your decision difference. Then replay either shot in the simulator: lens swaps for framing, the focus dot for placement, EV for exposure — before-and-after without re-shooting."
+        },
+        {
+          "id": "bc-11",
+          "title": "Basic Photo Organization and Editing",
+          "duration_min": 6,
+          "summary": "The shot isn't finished when the shutter closes. Protect your originals — edit in a way that leaves them intact, or save edited versions as separate copies. Organize consistently (a folder per project or date; findable beats clever). Select with purpose: focus, expression, composition, light, and whether the photo says what you intended. Edit with a light touch — brightness, contrast, and color can lift a photo, while strong changes push it unnatural. The workflow — import, organize, select, edit, export — applies across every camera and program, even when the buttons don't.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Run the whole workflow in the app: pick a small set into your gallery (import), swipe away the misfires (organize), load your top three into the coach and use its scores and notes to choose favorites (select — say why, out loud). Then on the winner, preview a restrained edit: nudge exposure comp for brightness, try a picture style for contrast, shift white balance for color — the histogram keeps you honest, and the gallery original never changes. When it looks right, recreate those same small moves in your editing app and export a copy — original untouched."
         }
       ]
     },

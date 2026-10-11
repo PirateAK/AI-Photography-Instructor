@@ -185,8 +185,8 @@
       "category": "Fundamentals",
       "title": "Intermediate Photography Class",
       "cover_emoji": "🎚️",
-      "tagline": "From knowing the dials to making them obey — 13 lessons",
-      "description": "The Beginner class built understanding; this class builds operational fluency. Thirteen lessons take deliberate control of exposure (manual practice, metering and compensation), deepen the two great side effects (depth of field and motion), advance autofocus and composition, then put it to work in natural light, flash, portraits, and landscapes — closing with a real editing workflow in RAW. Every lesson ends in the app's simulator or a field drill with written observations.",
+      "tagline": "From knowing the dials to making them obey — the complete 13-lesson class",
+      "description": "The Beginner class built understanding; this class builds operational fluency, in thirteen lessons: manual exposure in practice (1), metering and exposure compensation (2), depth of field as a predictable four-factor system (3), motion and shutter speed as creative choice (4), advanced autofocus (5), composition beyond the basics (6), working with natural light (7), flash and reflectors (8), portrait photography (9), landscape and travel (10), RAW processing (11), color and black-and-white editing (12), and a consistent workflow that protects your originals (13). Every lesson ends in the app's simulator or a field drill with written observations.",
       "level": "Intermediate",
       "price": "paid",
       "lessons": [
@@ -249,6 +249,141 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "The simulator renders motion smear and camera shake honestly. Walk the shutter ladder down from 1/250 and watch the smear grow — that's subject motion becoming visible. Then mount an image-stabilized lens and repeat: the shake floor drops several stops, because stabilization tames YOUR movement, not the subject's. In the field: photograph a moving subject at two shutter speeds — one frozen, one showing motion on purpose — and one handheld frame below your shake floor to study what your own unsteadiness looks like."
+        },
+        {
+          "id": "ic-5",
+          "title": "Advanced Autofocus Techniques",
+          "duration_min": 8,
+          "summary": "Autofocus is a partnership: the camera does the micro-adjustments, you decide what it locks onto. Single mode locks once for stationary subjects; continuous keeps chasing movement. Focus areas trade control for convenience — point, zone, or wide — and tracking plus subject detection are powerful but model-dependent. The review loop (shoot, enlarge, sort, adjust) is where the hit rate actually improves.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/500",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Set the focus mode control (AF-S vs AF-C on most brands) and photograph a moving person or object in continuous mode: choose a focus area, shoot a short series, review enlarged, and count sharp frames. Change ONE variable — area size, or single vs continuous — and shoot another series; compare hit rates. In the simulator, place the focus dot deliberately on the same detail every frame to build the placement reflex the review loop depends on."
+        },
+        {
+          "id": "ic-6",
+          "title": "Composition Beyond the Basics",
+          "duration_min": 7,
+          "summary": "From rules to decisions. Visual weight: brightness, contrast, sharpness, color and faces pull the eye — arrange the weights deliberately so nothing out-pulls your subject by accident. Layers give a flat frame depth: near element, subject, far context. Negative space is emphasis — as long as it stays clean. Viewpoint is the free dial: move before you adjust anything else.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Photograph one subject three ways: built in layers (near element, subject, far context), small inside deliberately clean negative space, and using an unusual balance that still holds together. Review all three and name what pulls the eye first in each — if something out-pulls your subject, re-weigh or exclude it. In the app, the coach's composition notes give you a second opinion on placement."
+        },
+        {
+          "id": "ic-7",
+          "title": "Working with Natural Light",
+          "duration_min": 7,
+          "summary": "From recognizing light to working it. Open shade is the flattering default — soft, even, with a sunlit boundary for depth. Backlight dramatizes — rim glow or silhouette, decided by where the exposure points — and fools the meter. Harsh sun squints and over-contrasts; four fixes in order of ease: shade, position, patience, purpose. Bounce from nearby surfaces is free fill. When the light changes, the exposure changes: move first, adjust second.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Photograph one subject under two different natural lights — open shade and backlight, or shade and sun. For each, note direction and softness, state what you changed to make it work (subject position, your position, or exposure), and choose which version suits the mood. In the app, use the histogram guide's EV buttons to see the meter's reaction you just lived through in the field."
+        },
+        {
+          "id": "ic-8",
+          "title": "Using Flash and Reflectors",
+          "duration_min": 7,
+          "summary": "Light can be redirected or added. A reflector re-routes what already exists — white neutral, silver punchy, gold warm. A flash carries its own sun, and modern metering makes the basic workflow simple. Every added light answers to three levers: position shapes, distance changes brightness fast (the inverse-square rule), and size sets hardness. Ambient exposure owns the room; flash owns the subject. One lever at a time.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Field drill with one tool at a time: baseline portrait as found (heavy shadow side), then a reflector or white surface opposite the main light — closer, then farther — and finally flash if available, adjusting power or distance one step per frame. Write down which lever moved and what the light did. There's no flash simulation in the app — this lesson is honest field and equipment work."
+        },
+        {
+          "id": "ic-9",
+          "title": "Portrait Photography",
+          "duration_min": 8,
+          "summary": "A strong portrait uses light, focus, composition, and exposure — but settings are the smallest part. Plan subject, location, and light first; direct the subject with actions rather than poses; focus the near eye and scan the frame edges before every shot. Saved recipes (the app's Portrait style carries one) start each session from experience instead of zero.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/2.0"
+          },
+          "practice_brief": "Load the Portrait style from the style selector — it carries a real recipe (wide-aperture priority) that starts your session from experience. Then the field series: a willing subject, open shade or window light, a background that helps. Give actions, not poses; focus the near eye; scan the edges. End by letting the subject pick their favorite frame — their answer teaches you something no histogram can."
+        },
+        {
+          "id": "ic-10",
+          "title": "Landscape and Travel Photography",
+          "duration_min": 8,
+          "summary": "A place is many photographs. Light makes the appointment — scout it with maps and sun position. Collect three kinds of frame everywhere you go: the wide establishing view with a deliberate foreground anchor, the detail the wide frame would swallow, and the scale shot that lets the viewer feel the size. Work the viewpoint instead of taking one frame, and pack for the subject, not the anxiety.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/250",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Load the Landscape style for its recipe and priorities, then photograph a nearby place three ways: the wide establishing view with a foreground anchor, a detail the wide frame would have swallowed, and a scale shot with a person or bicycle against the scene. Review the three as a story — does it say what the place felt like? Note what you would shoot differently at a different hour."
+        },
+        {
+          "id": "ic-11",
+          "title": "Introduction to RAW Processing",
+          "duration_min": 8,
+          "summary": "RAW is the ingredients; JPEG is a finished print the camera made for you. RAW files hold the sensor's nearly untouched readings, which is why they look flat, weigh more, and need software support verified per camera and editor. Edit in a restrained order — exposure, highlights and shadows, contrast, color — with small purposeful steps. The strongest edit is invisible, and the original file never changes.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Software does the editing — the app helps you choose WHAT deserves editing. Analyze a batch in the coach first: its scores and issues tell you which file has the most to give (the one with recoverable highlights, the nearly-sharp one). Edit that one in your RAW editor using the restrained order, then re-analyze the exported copy to see how far the file traveled. Reasons, not numbers, are the habit."
+        },
+        {
+          "id": "ic-12",
+          "title": "Color and Black-and-White Editing",
+          "duration_min": 7,
+          "summary": "Color and black and white are two languages. Color speaks in relationships — warm against cool, complementary against clashing — edited with restraint rather than cranked saturation. Black and white is a translation, not a filter: hues collapse into tonal weight, texture rises, and separation must be earned by contrast. Choose the language that serves what the photograph is about, and say the purpose in one sentence.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Preview the translation in the simulator: switch the picture style to Monochrome and watch a color photo become a tonal one — does the subject still separate from the background? Choose a photo with a strong color element, make both versions (color adjusted for relationships; mono translated for tone), and write one sentence stating the purpose of each. No sentence, no deliberate choice yet."
+        },
+        {
+          "id": "ic-13",
+          "title": "Building a Consistent Editing Workflow",
+          "duration_min": 8,
+          "summary": "Five stages — import, organize, select, edit, export — with backup riding over all of them. Consistency beats sophistication: findable beats clever. Leave cards untouched until copies are verified; mark favorites with reasons; keep originals sacred and exports separate; and keep a second copy somewhere else, automatic enough to actually happen. The library, not the shoebox.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The app is the first three stages. Import a small set into your gallery (pick photos), organize by swiping away the misfires, and select favorites by loading each into the coach and recording its score and top issue — reasons on record. The Progress screen becomes your archive habit. Edit the winner in your RAW editor and export a copy; back up originals and exports to a second location, then verify you can find both without searching twice."
         }
       ]
     },

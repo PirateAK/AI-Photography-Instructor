@@ -785,7 +785,7 @@
           "id": "moon-1",
           "title": "The moon is a sunlit rock",
           "duration_min": 6,
-          "summary": "The moon isn't a night scene — it's a rock lit by full daylight, which is why auto modes blow it into a white blob. Expose for the rock: roughly f/8, 1/250, ISO 200 for a full moon, and read the histogram of the disc itself. If it touches the right wall, the texture is gone.",
+          "summary": "The moon isn't a night scene — it's a rock lit by full daylight, which is why auto modes blow it into a white blob. The classic starting card is the Looney 11 rule: f/11, ISO 100, 1/100 second — and equivalents like f/8 at 1/250, ISO 200 read the same. Read the histogram of the disc itself: touching the right wall means the texture is gone. Tripod for sharpness, take many frames, and delete the failures freely.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -794,7 +794,7 @@
             "shutter_speed": "1/250",
             "aperture": "f/8"
           },
-          "practice_brief": "The reframe drill: expose a night scene normally and watch the moon-shaped highlight clip in the histogram — the auto modes' mistake, visible. Then pull −EV until the disc holds texture: f/8, 1/250, ISO 200 is the starting card. The moon follows the daylight-exposure rules you already know."
+          "practice_brief": "The reframe drill: expose a night scene normally and watch the moon-shaped highlight clip in the histogram — the auto modes' mistake, visible. Then the Looney 11 card: f/11, ISO 100, 1/100s on the tripod — and its equivalents (f/8, 1/250, ISO 200) to find what your lens and conditions prefer. Take many frames; the keepers cost nothing and the failures teach the exposure."
         },
         {
           "id": "moon-2",
@@ -815,7 +815,7 @@
           "id": "moon-3",
           "title": "Reach and detail",
           "duration_min": 6,
-          "summary": "The moon fills the frame only through serious reach — 600mm effective and up. But detail comes from discipline, not reach alone: tripod, manual focus on the terminator using live-view magnification, and the f/8–f/11 range where most lenses are sharpest. Cropping with intent completes what reach starts.",
+          "summary": "The moon fills the frame only through serious reach — 600mm effective and up. But detail comes from discipline, not reach alone: tripod, manual focus on the terminator using live-view magnification, and the f/8–f/11 range where most lenses are sharpest. Take multiple frames at each setting — atmospheric steadiness changes between shots — and crop with intent.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -824,7 +824,7 @@
             "shutter_speed": "1/320",
             "aperture": "f/11"
           },
-          "practice_brief": "Reach drill with the lens selector: mount the longest lens in the list and watch the swap badge grow the moon. Then the sharpness walk: f/5.6, f/8, f/11 on the same disc, enlarged — find where your lens peaks. Manual focus on the terminator edge, live view magnified."
+          "practice_brief": "Reach drill with the lens selector: mount the longest lens in the list and watch the swap badge grow the moon. Then the sharpness walk: f/5.6, f/8, f/11 on the same disc, tripod-mounted, three frames each — atmospheric steadiness varies between identical frames, and one of the multiples is always sharper. Manual focus on the terminator edge, live view magnified."
         },
         {
           "id": "moon-4",
@@ -959,7 +959,7 @@
           "id": "nl-2",
           "title": "The camera setup: manual everything",
           "duration_min": 7,
-          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open (f/2.8 to f/4 covers most aurora lenses), RAW, tripod locked, delayed shutter. The exposure balance is ISO 1600–3200, f/2.8–f/4, 2–6 seconds — fast enough to hold the curtain's shape, slow enough to gather it. On a phone: night mode, ISO 400–1600, and the steadiest surface you can find.",
+          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open (f/1.4 to f/4 covers the aurora glass range), RAW, tripod locked, delayed shutter. The exposure balance is ISO 800–3200, f/1.4–f/4, 2.5–6 seconds — fast enough to hold the curtain's shape, slow enough to gather it. On a phone: night mode, ISO 400–1600, and the steadiest surface you can find.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -968,13 +968,13 @@
             "shutter_speed": "1/8",
             "aperture": "f/2.8"
           },
-          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — f/2.8 to f/4, ISO 3200, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame. Phone shooters: night mode on, phone braced or tripod-mounted, ISO 400–1600 — then hold still and let the stack work."
+          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — f/1.4 to f/4, ISO 3200, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame. Faster glass buys lower ISO — see the trade as the dials move. Phone shooters: night mode on, phone braced or tripod-mounted, ISO 400–1600 — then hold still and let the stack work."
         },
         {
           "id": "nl-3",
           "title": "Exposing the dance",
           "duration_min": 7,
-          "summary": "The working card: ISO between 800 and 3200, adjusted to the aurora's brightness; shutter between 2.5 and 6 seconds to gather the lights without blurring their structure. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Then the pro loop: experiment with varying settings, review every frame, and adjust — the aurora changes faster than any fixed recipe.",
+          "summary": "The working card: ISO between 800 and 3200, adjusted to the aurora's brightness; shutter between 2.5 and 6 seconds to gather the lights without blurring their structure; aperture f/1.4 to f/4 depending on the glass. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Then the pro loop: experiment with varying settings, review every frame, and adjust — the aurora changes faster than any fixed recipe.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -983,7 +983,7 @@
             "shutter_speed": "1/4",
             "aperture": "f/2.8"
           },
-          "practice_brief": "The card drill: start at ISO 1600, f/2.8–f/4, 4 seconds — then experiment. Bright dancing curtains: drop ISO toward 800 and shorten toward 2.5s. Faint glows: raise ISO toward 3200 and stretch toward 6s. Review every frame and adjust one variable at a time — in the simulator: walk ISO and shutter at f/2.8–f/4 until the shape clears the left wall without clipping. The loop is the lesson: shoot, review, adjust, repeat."
+          "practice_brief": "The card drill: start at ISO 1600, your lens's widest (f/1.4 to f/4), 4 seconds — then experiment. Bright dancing curtains: drop ISO toward 800 and shorten toward 2.5s. Faint glows: raise ISO toward 3200 and stretch toward 6s. Review every frame and adjust one variable at a time — in the simulator: walk ISO and shutter at your aperture until the shape clears the left wall without clipping. The loop is the lesson: shoot, review, adjust, repeat."
         },
         {
           "id": "nl-4",

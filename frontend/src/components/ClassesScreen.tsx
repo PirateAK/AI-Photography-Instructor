@@ -28,6 +28,9 @@ export default function ClassesScreen() {
   const courses = useStore((s) => s.courses);
   const dataUrl = useStore((s) => s.dataUrl);
   const [openId, setOpenId] = useState<string | null>(null);
+  // hidden courses (e.g. parked placeholders) stay in the catalog for the
+  // Course Manager but don't display to students
+  const visibleCourses = useMemo(() => courses.filter((c) => !c.hidden), [courses]);
   const openCourse = openId ? courses.find((c) => c.id === openId) : undefined;
 
   if (openCourse) {
@@ -90,7 +93,7 @@ export default function ClassesScreen() {
         )}
       </div>
 
-      {coursesByCategory(courses).map((group) => (
+      {coursesByCategory(visibleCourses).map((group) => (
         <section key={group.category} style={{ marginTop: 22 }}>
           <h2 className="category-title">{group.category}</h2>
           <div className="course-grid">

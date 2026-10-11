@@ -27,6 +27,8 @@ export interface TrainingCourse {
   author?: string;
   price: "free" | "paid";
   lessons: Lesson[];
+  /** hidden courses exist in the catalog but don't display on the Classes screen */
+  hidden?: boolean;
 }
 
 export interface AppConfig {

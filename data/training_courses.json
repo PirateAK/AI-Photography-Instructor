@@ -772,6 +772,252 @@
       ]
     },
     {
+      "id": "shoot-the-moon",
+      "category": "Specialized",
+      "title": "Shoot the Moon",
+      "cover_emoji": "🌕",
+      "tagline": "The easiest night subject that everyone gets wrong",
+      "description": "A four-lesson romp through moon photography: why the auto modes blow the moon into a white blob (it's a sunlit rock!), phases and moonrise planning, reach and detail, and putting the moon into a landscape. Fun, practical, and the first night subject anyone can nail.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "moon-1",
+          "title": "The moon is a sunlit rock",
+          "duration_min": 6,
+          "summary": "The moon isn't a night scene — it's a rock lit by full daylight, which is why auto modes blow it into a white blob. Expose for the rock: roughly f/8, 1/250, ISO 200 for a full moon, and read the histogram of the disc itself. If it touches the right wall, the texture is gone.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The reframe drill: expose a night scene normally and watch the moon-shaped highlight clip in the histogram — the auto modes' mistake, visible. Then pull −EV until the disc holds texture: f/8, 1/250, ISO 200 is the starting card. The moon follows the daylight-exposure rules you already know."
+        },
+        {
+          "id": "moon-2",
+          "title": "Phases and planning",
+          "duration_min": 6,
+          "summary": "The moon rises about an hour later each day, and its phase changes everything: a full moon rises at sunset with flat, front-lit light; crescents rise near the sun with raking light that carves craters along the terminator. Moon apps predict phase, rise time, and position — plan like the Advanced class taught.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/60",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Phase drill: expose the crescent mood — the dark side needs ISO and wider aperture to show earthshine, while the lit crescent edge needs discipline. Two moons, two exposures, one simulator: walk both exposure cards and watch the terminator detail appear."
+        },
+        {
+          "id": "moon-3",
+          "title": "Reach and detail",
+          "duration_min": 6,
+          "summary": "The moon fills the frame only through serious reach — 600mm effective and up. But detail comes from discipline, not reach alone: tripod, manual focus on the terminator using live-view magnification, and the f/8–f/11 range where most lenses are sharpest. Cropping with intent completes what reach starts.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/320",
+            "aperture": "f/11"
+          },
+          "practice_brief": "Reach drill with the lens selector: mount the longest lens in the list and watch the swap badge grow the moon. Then the sharpness walk: f/5.6, f/8, f/11 on the same disc, enlarged — find where your lens peaks. Manual focus on the terminator edge, live view magnified."
+        },
+        {
+          "id": "moon-4",
+          "title": "The moon in the landscape",
+          "duration_min": 6,
+          "summary": "Put the moon in a scene and the two-brightness problem appears: expose for the landscape and the moon becomes a blown blob; expose for the moon and the land goes black. Decide early — silhouette composition, or bracket for blending the Advanced exposure way. Moon apps predict where it rises against your landmarks.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/30",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The two-brightness drill: expose for the landscape and watch the disc clip; expose for the disc and watch the land die. Both are legitimate frames — decide which one you're making. Then the position bonus: moon apps show where it rises against your landmark, and the simulator's EV walk rehearses the compromise."
+        },
+        {
+          "id": "moon-5",
+          "title": "Beyond the full moon",
+          "duration_min": 6,
+          "summary": "The moon's moods: crescent slivers need longer exposures and show earthshine on the dark side; eclipses turn copper and need a stop or two more than the full moon; moonbows exist for the devoted. Build your exposure cards per phase — then the next full moon is a planned shot, not a lucky one.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/15",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The card drill: build your exposure cards — full moon, crescent, eclipse — as one-page plans per phase. Then the assignment: shoot the next full moon with the plan, and one crescent within the week. The app's coach reviews both; the moon keeps its secrets for nobody who planned."
+        }
+      ]
+    },
+    {
+      "id": "following-the-rainbow",
+      "category": "Specialized",
+      "title": "Following the Rainbow",
+      "cover_emoji": "🌈",
+      "tagline": "The weather-reader's party trick — find it, expose it, compose it",
+      "description": "A four-lesson game of anticipation: the geometry that makes rainbows appear (sun behind, rain ahead), the exposure trick that keeps the arc vivid, composition that gives the sky-filling guest a subject, and the weather-reader's habit that finds them before other people do.",
+      "level": "Beginner",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "rb-1",
+          "title": "Chasing the geometry",
+          "duration_min": 6,
+          "summary": "Rainbows obey geometry, not luck: the sun must be BEHIND you and the rain in front, with the sun low in the sky. When you see one, turn your back to the sun first — then compose. The arc's center is always the shadow of your own head.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Geometry drill, in the field after rain with breaking sun: turn your back to the sun first, find the arc, and photograph it. Note the sun's height — low sun means a taller arc. No rainbow today? The simulator can't fake one, but the landscape style readies the scene for when the sky cooperates."
+        },
+        {
+          "id": "rb-2",
+          "title": "Exposure and the dim arc",
+          "duration_min": 6,
+          "summary": "The arc is one to two stops dimmer than the sky around it — so the meter's guess washes it out. Underexpose slightly to saturate it, and remove your polarizer (polarizers dim rainbows, the opposite of every other sky effect). A darker background sky makes the same arc more vivid.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/320",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The exposure trick in the simulator: darken the frame one stop with EV and watch a dim band gain saturation — the rainbow's advantage is contrast against a darkened sky. Then the field version: shoot the next arc at 0 and −1 EV and compare which holds the colors."
+        },
+        {
+          "id": "rb-3",
+          "title": "Composition with a sky-filling guest",
+          "duration_min": 6,
+          "summary": "The rainbow is huge — so give it a subject. Wide to include the full semicircle, or tight on where it touches down; a tree, a road, a person under the arc turns a weather event into a photograph. And when the fainter second rainbow appears, decide: both, or isolate the bright one.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/320",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Composition drill: the arc alone is a snapshot. Wide frame with a foreground anchor under the arc, then a tight frame where it touches the ground — two photographs, two stories. Spot the secondary bow and decide deliberately: include the pair or isolate the star."
+        },
+        {
+          "id": "rb-4",
+          "title": "The weather-reader's habit",
+          "duration_min": 6,
+          "summary": "Rainbows can't be scheduled — only anticipated. Sun low behind you plus rain ahead equals look up: weather apps show the rain-then-clear pattern, and the Landscape style readies the scene. The habit is the class: every time rain falls with sun on your back, check the sky. The rainbow finds the prepared.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/320",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The habit drill, written: your rainbow checklist — sun behind you, rain ahead, polarizer off, −1 EV, subject under the arc — taped to the camera bag. Then the commitment: for one week, every time rain falls with sun on your back, look up and shoot what's there. Load the Landscape style for the scene; the arc hangs it in the frame."
+        }
+      ]
+    },
+    {
+      "id": "northern-lights",
+      "category": "Specialized",
+      "title": "Northern Lights",
+      "cover_emoji": "🌌",
+      "tagline": "The hunt: forecast, freeze, and foreground",
+      "description": "Four lessons on the aurora hunt: the forecast deal (latitude, Kp index, apps), the all-manual camera setup, exposing a light that dances, and foregrounds that turn a weather event into a photograph — with cold-weather honesty about batteries and patience. Certified night-photography skills from the Advanced class assumed.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "nl-1",
+          "title": "The aurora deal: latitude, Kp, and apps",
+          "duration_min": 7,
+          "summary": "The aurora is forecast, not scheduled: high latitude, dark skies, clear weather, and geomagnetic activity (the Kp index) must all agree. Apps predict hours ahead — plan a window of nights, not a night. Manage expectations honestly: the hunt is the reward, the lights are the bonus.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/8",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "The hunt-plan drill, written: location, date window, backup nights, the forecast apps you'll check, and the bail-out criteria. Load the Astrophotography style — its wide-open, high-ISO recipe is the aurora's starting point. The plan is the lesson: the lights refuse schedules."
+        },
+        {
+          "id": "nl-2",
+          "title": "The camera setup: manual everything",
+          "duration_min": 7,
+          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open, RAW, tripod locked, delayed shutter. The exposure balance is ISO 1600–3200, f/2.8, 2–15 seconds — fast enough to hold the curtain's shape, slow enough to gather it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/8",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — ISO 3200, f/2.8, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame."
+        },
+        {
+          "id": "nl-3",
+          "title": "Exposing the dance",
+          "duration_min": 7,
+          "summary": "The aurora dances: fast curtains want 2–5 second exposures, slow glows tolerate 15. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Bright displays tolerate lower ISO; faint ones demand everything the sensor has.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/4",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Exposure drill: the night lesson's test-driven method, colder. Test frame at high ISO, read the histogram, scale down and stretch the shutter. In the simulator: walk ISO and shutter at f/2.8 until the shape clears the left wall — the exact decisions you'll make at minus ten."
+        },
+        {
+          "id": "nl-4",
+          "title": "Foregrounds: the aurora needs a subject",
+          "duration_min": 6,
+          "summary": "An aurora-only frame is a weather photo. The lights are the sky; the PHOTOGRAPH is the place — a cabin, trees, a frozen lake's reflection. Scout the foreground in daylight per the Advanced planning habit, so the night frame composes itself when the sky finally performs.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/4",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Composition drill: three foreground choices for one sky — a cabin silhouette, treeline, and a still-lake reflection — scouted in daylight and marked. When the lights arrive, the frame is already composed: sky does the performing, foreground does the storytelling."
+        },
+        {
+          "id": "nl-5",
+          "title": "Cold, batteries, and the hunt",
+          "duration_min": 6,
+          "summary": "Cold kills batteries — spares live in an inside pocket, not the bag. No lens changes in the field; the sealed-bag return indoors defeats condensation. And the final Pro-class habit: three nights committed beats one hopeful evening — the hunt is the reward, and the night-photography skill is the prize.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/4",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "The cold drill, written: your cold-night kit — spare batteries in the inside pocket, no lens changes outside, bag-sealed return indoors, hand warmers for the tripod's joints. Then the commitment: a three-night window in your hunt plan, with the foregrounds scouted in daylight. The aurora finds the prepared."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
       "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",
@@ -1514,7 +1760,8 @@
           },
           "practice_brief": "AF-C at 1/500s is the Nikon action recipe. Combine it with the Focus point dot to rehearse keeping the sharp zone on your subject."
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "id": "online-workshops-course",
@@ -1566,7 +1813,8 @@
           "video_kind": "mp4",
           "practice_brief": "Use the Progress screen: your weakest recurring issue across saved sessions is the workshop topic to hunt for next."
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "id": "wedding-event-playbook",

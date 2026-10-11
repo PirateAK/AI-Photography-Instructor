@@ -8,6 +8,6 @@
     "root": "frontend",
     "dist": "dist",
     "install": "npm ci",
-    "build": "npm run build"
+    "build": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build"
   }
 }

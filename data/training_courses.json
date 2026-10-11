@@ -3,6 +3,33 @@
   "notes": "Training classes catalog, grouped by category (Fundamentals / Genre-specific / Advanced / Specialized). Each course: category, price 'free' (teaser ships with the app) or 'paid' (unlocked by redemption code / purchase), lessons with video_url (direct MP4 or YouTube/Vimeo link), and optional practice_preset — camera settings the lesson's 'Try it' button loads into the simulator (values snap to the selected camera). Post-processing lessons intentionally have no practice_preset: they teach editing, not camera settings. The free courses are the shipped teasers; sample video URLs are CC0 placeholders (MDN friday.mp4, has audio) — swap in your hosted lessons.",
   "courses": [
     {
+      "id": "beginner-class",
+      "category": "Fundamentals",
+      "title": "Beginner Photography Class",
+      "cover_emoji": "🧭",
+      "tagline": "Know your camera before you touch a setting — 11 lessons",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps every key part — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through both a DSLR and a mirrorless body. Later lessons build from parts to the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "level": "Beginner",
+      "price": "free",
+      "lessons": [
+        {
+          "id": "bc-1",
+          "title": "How a Camera Works",
+          "duration_min": 8,
+          "summary": "A photograph begins with light: the lens gathers it, the aperture meters how much passes, the shutter times how long the sensor sees it, and the sensor records the image. Learn the visible parts, then follow the light through a DSLR — where a mirror feeds the optical viewfinder until the shot flips it away — and a mirrorless body, where the sensor itself drives the live view. Designs vary between models; following the light is the map that works on all of them.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Open the 📷 Camera body tab and tap through all six views: find the lens, the viewfinder or screen, and the shutter button on the DSLR — the pins explain each part's job. Then do it again on the Phone body and notice the same jobs live in different places. Finish by tracing the light out loud: lens → aperture → shutter → sensor, mirror for a DSLR's viewfinder, straight to the sensor on a mirrorless."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
       "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",

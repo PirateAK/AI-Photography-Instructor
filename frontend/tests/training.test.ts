@@ -14,8 +14,8 @@ import {
 } from "../src/lib/training";
 
 describe("training catalog", () => {
-  it("ships two free teaser courses and at least one paid course", () => {
-    expect(courses.filter((c) => c.price === "free").length).toBe(3);
+  it("ships free teaser courses and at least one paid course", () => {
+    expect(courses.filter((c) => c.price === "free").length).toBe(4);
     expect(courses.filter((c) => c.price === "paid").length).toBeGreaterThanOrEqual(1);
   });
 
@@ -99,9 +99,11 @@ describe("curriculum categories", () => {
     expect(intro.lessons.length).toBeGreaterThanOrEqual(4);
   });
 
-  it("exposure triangle course opens the catalog and teaches the priority-first arc", () => {
+  it("exposure triangle course teaches the priority-first arc", () => {
     const et = courses.find((c) => c.id === "free-exposure-triangle")!;
-    expect(courses[0].id).toBe("free-exposure-triangle");
+    // the user's own Beginner class leads the catalog; the triangle is the flagship free teaser after it
+    expect(courses[0].id).toBe("beginner-class");
+    expect(courses[1].id).toBe("free-exposure-triangle");
     expect(et.lessons.length).toBe(7);
     const titles = et.lessons.map((l) => l.title).join(" | ");
     expect(titles).toContain("Pick your priority first");

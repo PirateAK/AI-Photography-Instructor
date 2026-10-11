@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Later lessons build toward the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Later lessons build toward the exposure triangle and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -56,6 +56,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "Open the Mounted-lens selector and compare lenses on the same photo: a prime (Canon EF 50mm f/1.8 — one focal length, no range to turn) versus a zoom (EF-S 18-55) versus a long zoom (RF 100-400). The 🔍 LENS SWAP badge shows how much tighter each one frames versus your as-shot focal length — that is focal length changing framing from one fixed position. Perspective is the part the simulator can't do: it needs your feet. Take the same shot from two distances in the field and compare how the subject and background relate."
+        },
+        {
+          "id": "bc-4",
+          "title": "Shooting Modes and Camera Settings",
+          "duration_min": 8,
+          "summary": "Shooting modes decide how much of the exposure process you hand over. Auto and Program (P) let the camera make most decisions; aperture-priority (Av or A) has you choose the aperture — your depth-of-field dial — while the camera picks a shutter speed; shutter-priority (Tv or S) is the reverse for controlling motion. Manual (M) gives you both dials, and ISO may be yours or Auto. Labels vary by brand — Canon says Av/Tv where Nikon and Sony say A/S — so learn your own camera's names, and remember the camera's choices have limits in dim light.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The simulator puts you in M mode — every dial is yours. First walk all three dials one step each and say out loud which exposure variable each one drives. Then see 'the camera's' side: apply the coach's recommended settings and watch it land on a balanced combination — that's what a program does in a blink. In the field, pick aperture-priority (Av/A) or shutter-priority (Tv/S), change the scene's light without moving much, and note which setting you chose, which the camera adjusted, and whether your ISO is on Auto."
         }
       ]
     },

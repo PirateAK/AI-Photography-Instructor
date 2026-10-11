@@ -22,6 +22,7 @@ export default function CoachPanel() {
   const camPanel = getCamera(cameraId);
   const baseline = camPanel ? baselineFromExif(camPanel, exif) : null;
   const styles = useStore((s) => s.styles);
+  const setStyle = useStore((s) => s.setStyle);
   const style = styles.find((s) => s.id === styleId);
 
   return (
@@ -30,8 +31,18 @@ export default function CoachPanel() {
 
       {!analyzing && style && (
         <div className="card" style={{ padding: 14, borderColor: "rgba(10,132,255,0.35)" }}>
-          <div className="section-title" style={{ color: "#7db8ff" }}>
-            {style.emoji} {style.label} — starting recipe
+          <div className="section-title" style={{ color: "#7db8ff", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+            <span>
+              {style.emoji} {style.label} — starting recipe
+            </span>
+            <button
+              className="btn small ghost"
+              style={{ padding: "2px 8px", fontSize: "0.72rem" }}
+              onClick={() => setStyle("")}
+              title="Clear the style — the coach returns to general-purpose judging"
+            >
+              ✕ clear style
+            </button>
           </div>
           <div className="rec-row">
             {Object.entries(style.recipe.settings).map(([k, v]) => (

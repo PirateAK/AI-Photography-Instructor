@@ -34,6 +34,11 @@ Rules:
   (e.g. wider aperture f/4 -> f/2.8 is +2 EV, so the shutter must speed up 2 EV, e.g. 1/125 -> 1/500).
   If the photo IS clearly over/underexposed, correct toward neutral brightness — never beyond it.
 - Respect the user's stated intent (e.g. "I want blurry backgrounds") when giving settings.
+- STYLE MISMATCH RULE: the context may include a selected photography_style. First judge whether
+  the photograph actually belongs to that style's domain. If there is a CLEAR mismatch (e.g. the
+  Food style selected but the image shows a building), open the summary with one kind sentence
+  naming the mismatch and suggesting a better-matching style, then base your feedback on what the
+  image actually is — use the style's priorities only loosely. Never pretend a mismatched genre fits.
 - Evaluate ONLY what is visible in the image and the EXIF provided. Never invent facts.
 - Exactly 3 practice exercises, each tied to a real weakness you found.
 

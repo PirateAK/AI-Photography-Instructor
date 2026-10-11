@@ -384,12 +384,10 @@ export const useStore = create<PhotoState>()(
       goUpload: () => set({ screen: "upload", contentBlocked: false }),
       goSettings: () => set({ screen: "settings" }),
       openWorkspace: () => {
-        if (get().dataUrl) {
-          set({ screen: "workspace" });
-          // entering the workspace should always start at the preview — the SPA
-          // otherwise inherits the home screen's scroll position on phones
-          window.scrollTo(0, 0);
-        }
+        set({ screen: "workspace" });
+        // entering the workspace should always start at the preview — the SPA
+        // otherwise inherits the home screen's scroll position on phones
+        window.scrollTo(0, 0);
       },
 
       setHighlight: (id) => set({ highlightSetting: id }),

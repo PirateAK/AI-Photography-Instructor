@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCamera } from "../lib/camera";
+import { activeHolidayWindow } from "../lib/holidays";
 import ImageViewer from "./ImageViewer";
 import CameraBody from "./camera_body/CameraBody";
 import CameraToolbar from "./CameraToolbar";
@@ -120,6 +121,8 @@ export default function Workspace() {
                 ← Back to home
               </button>
             </div>
+          ) : !dataUrl ? (
+            <EmptyPhotoCard holidayActive={!!activeHolidayWindow()} onOpenGallery={() => setGalleryOpen(true)} />
           ) : tab === "preview" ? (
             <ImageViewer onToggleHistGuide={() => setHistGuide((v) => !v)} />
           ) : (
@@ -144,6 +147,69 @@ export default function Workspace() {
       </div>
 
       <CameraToolbar />
+    </div>
+  );
+}
+
+/** Empty image pane — the banner can open the coach before any photo is loaded
+ * (holiday challenge flow). Offers add-photo / gallery instead of a dead viewer. */
+function EmptyPhotoCard({
+  holidayActive,
+  onOpenGallery,
+}: {
+  holidayActive: boolean;
+  onOpenGallery: () => void;
+}) {
+  const loadFile = useStore((s) => s.loadFile);
+  const startAnalysis = useStore((s) => s.startAnalysis);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [reading, setReading] = useState(false);
+
+  const holiday = holidayActive ? activeHolidayWindow()!.holiday : null;
+
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!/^image\/(jpeg|png)$/.test(file.type)) {
+      alert("Please choose a JPG or PNG image.");
+      return;
+    }
+    setReading(true);
+    try {
+      await loadFile(file);
+      startAnalysis(); // straight into the coach, same as a gallery pick
+    } finally {
+      setReading(false);
+    }
+  };
+
+  return (
+    <div className="empty-photo-card" role="status">
+      <div className="empty-photo-emoji" aria-hidden="true">
+        {holiday ? holiday.emoji : "🖼️"}
+      </div>
+      <h3>{holiday ? `${holiday.name} challenge — bring your shot` : "Load a photo to get coached"}</h3>
+      <p className="muted">
+        {holiday
+          ? `Shoot for “${holiday.challenge.title}”, then add your photo here — the coach grades it against the goal.`
+          : "Add a photo and the coach will grade exposure, focus and composition."}
+      </p>
+      <div className="holiday-actions" style={{ justifyContent: "center" }}>
+        <button className="btn primary" disabled={reading} onClick={() => inputRef.current?.click()}>
+          {reading ? "Loading…" : "📷 Add your photo"}
+        </button>
+        <button className="btn" onClick={onOpenGallery}>
+          🖼️ Gallery
+        </button>
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png"
+        hidden
+        onChange={(e) => void onFile(e)}
+      />
     </div>
   );
 }

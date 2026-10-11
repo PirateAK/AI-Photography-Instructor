@@ -150,15 +150,7 @@ export default function UploadScreen() {
             type="button"
             className="muskeg-banner holiday"
             onClick={() => {
-              void (async () => {
-                if (useStore.getState().dataUrl) {
-                  openWorkspace();
-                  return;
-                }
-                // no photo loaded yet — bring in the demo so the challenge is never a dead end
-                const ok = await loadDemoPhoto();
-                if (ok) openWorkspace();
-              })();
+              openWorkspace();
             }}
             title={`${holidayWindow.holiday.emoji} ${holidayWindow.holiday.name} — open the coach for your shooting challenge`}
             style={{

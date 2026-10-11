@@ -1000,6 +1000,24 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
 .blocked-notice h3 { margin: 0; font-size: 1.05rem; }
 .blocked-notice p { margin: 0; max-width: 420px; line-height: 1.5; font-size: 0.88rem; }
 
+/* ---------- empty image pane (coach opened without a photo) ---------- */
+.empty-photo-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+.empty-photo-card .empty-photo-emoji { font-size: 2.8rem; }
+.empty-photo-card h3 { margin: 0; font-size: 1.05rem; }
+.empty-photo-card p { margin: 0; max-width: 400px; line-height: 1.5; font-size: 0.88rem; }
+
 /* ---------- contest strip (voting/results on the home screen) ---------- */
 .contest-strip {
   margin-top: 10px;

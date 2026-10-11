@@ -1000,6 +1000,97 @@
           "how": "At f/2.8 check the far edge, then step to f/8 and re-check — catalog work has no focal-plane excuses."
         }
       ]
+    },
+    {
+      "id": "fashion",
+      "label": "Fashion",
+      "emoji": "👗",
+      "description": "Editorial and lookbook photography of models and clothing — controlled studio or location light, deliberate posing, and garment-true color in service of a mood or a brand.",
+      "recipe": {
+        "summary": "Controlled light, base ISO, sync-speed shutter, and an aperture that holds the garment sharp while the background stays managed.",
+        "settings": {
+          "iso": "100",
+          "shutter_speed": "1/200",
+          "aperture": "f/5.6",
+          "exposure_comp": 0
+        },
+        "why": "Fashion lives on controlled light and garment-true color: base ISO keeps tones clean, 1/200 sits at most sync speeds for strobes, and f/5.6 holds the whole outfit sharp while the crew-managed background stays subordinate to the clothing."
+      },
+      "priorities": {
+        "highlights": 1.3,
+        "shadows": 1.0,
+        "exposure": 1.2,
+        "color_cast": 1.4,
+        "noise": 1.2,
+        "sharpness": 1.2
+      },
+      "rules": {
+        "shutter_floor": "1/200",
+        "aperture_target": "f/5.6",
+        "iso_max": 400
+      },
+      "watch_fors": [
+        "Garment color drifting — brands and stylists judge fabric hue exactly; WB is set, not guessed.",
+        "Wrinkles, tags and fit details shouting at 100% — style the outfit before blaming the retouch.",
+        "Trend-heavy filter looks dating the shoot — editorial processing ages fast."
+      ],
+      "exercises": [
+        {
+          "title": "Garment true",
+          "goal": "Hold fabric color honest under studio light.",
+          "how": "Shoot a colored garment on a gray card, set WB from the card, and compare before/after — the client's returns depend on this."
+        },
+        {
+          "title": "Edge scan",
+          "goal": "Catch styling faults before the client does.",
+          "how": "Shoot a full look, then zoom to 100% at every seam, tag and hem. Fix with styling, not retouching."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "emoji": "🎭",
+      "description": "Staged photography built around an idea — symbols, sets and compositing arranged to express a concept rather than record a scene. The planning happens before the camera comes out.",
+      "recipe": {
+        "summary": "Tripod, base ISO, working aperture; the concept is sketched and staged before capture so the frame executes the idea.",
+        "settings": {
+          "iso": "100",
+          "shutter_speed": "1/125",
+          "aperture": "f/8.0",
+          "exposure_comp": 0
+        },
+        "why": "Conceptual frames are built, not found: tripod and base ISO keep repeated takes identical, f/8 holds staged elements sharp, and the concept's readability — not a moment of light — decides when the frame is done."
+      },
+      "priorities": {
+        "highlights": 1.1,
+        "shadows": 1.1,
+        "exposure": 1.2,
+        "color_cast": 1.0,
+        "noise": 1.1,
+        "sharpness": 1.1
+      },
+      "rules": {
+        "aperture_target": "f/8.0",
+        "allow_slow_shutter": true
+      },
+      "watch_fors": [
+        "Concept readability — if the idea needs a caption to land, restage or simplify.",
+        "Overproduction crowding the idea — one clear symbol beats five competing ones.",
+        "Series drift — conceptual work lives in sets; keep the visual language consistent across frames."
+      ],
+      "exercises": [
+        {
+          "title": "One idea, three symbols",
+          "goal": "Translate an abstract idea into readable visuals.",
+          "how": "Pick an idea (growth, isolation, time), find three different objects that could symbolize it, and stage one clean frame each — then ask a friend to name the idea from the image."
+        },
+        {
+          "title": "Series consistency",
+          "goal": "Hold one visual language across a set.",
+          "how": "Stage three frames from the same concept with matched light, palette and framing — the set should read as one voice."
+        }
+      ]
     }
   ]
 }

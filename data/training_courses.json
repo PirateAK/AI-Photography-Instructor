@@ -1402,6 +1402,21 @@
             "aperture": "f/11"
           },
           "practice_brief": "f/11 plus controlled light: every edge defined, every highlight intentional. This is where manual everything stops being optional."
+        },
+        {
+          "id": "cp-4",
+          "title": "E-commerce volume: consistency at scale",
+          "duration_min": 7,
+          "summary": "Online stores need fifty products that look like ONE store: identical light, angle, and color across every frame. Build a repeatable set — locked tripod, fixed lights, a jig for placement — and shoot products like an assembly line, editing them to match. Consistency is the deliverable.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Volume drill: shoot five products of different sizes and colors on one locked set — identical framing, light, and exposure per product. Then compare the set: every product should sit at the same scale and color truth. The Commercial style's color-honesty priorities are the judge."
         }
       ]
     },
@@ -1550,6 +1565,771 @@
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "practice_brief": "Use the Progress screen: your weakest recurring issue across saved sessions is the workshop topic to hunt for next."
+        }
+      ]
+    },
+    {
+      "id": "wedding-event-playbook",
+      "category": "Genre-specific",
+      "title": "Wedding & Event Playbook",
+      "cover_emoji": "🥂",
+      "tagline": "No second chances — the complete event coverage playbook",
+      "description": "The most demanding genre: one pass, unrepeatable moments, and a client whose day depends on you. Six lessons cover the planning, the ceremony, the reception, family formals, non-wedding events, and the business of event work — every drill built on the Intermediate skills with the event and wedding style recipes loaded.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "wp-1",
+          "title": "The wedding day plan",
+          "duration_min": 7,
+          "summary": "Event coverage is won in the plan: a timeline built with the couple, a shot list that includes the must-haves nobody may miss, family groupings written down, and a gear plan that assumes no second chances. Scout the venue light beforehand and pre-decide the contingency for weather and schedule slips.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/250",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Draft a full wedding-day plan for a fictional morning ceremony: timeline, twelve-line shot list, family groupings, and two contingencies. Load the Wedding style to see the recipe the coach will judge your delivery against, and use the simulator to pre-test your three riskiest frames — the backlit altar, the dim hallway, the fast first-dance."
+        },
+        {
+          "id": "wp-2",
+          "title": "Ceremony coverage: quiet cameras, loud moments",
+          "duration_min": 7,
+          "summary": "The ceremony is the unrepeatable core: backlight, movement, emotion, and a venue that forbids disruption. Pre-position for the light, shoot silent, let ISO climb rather than miss the moment, and compose the vows tight — the faces carry the day.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "3200",
+            "shutter_speed": "1/250",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Simulate the altar problem: a backlit subject in dim light. Exposure comp −1 to protect the dress, ISO to 3200, shutter 1/250 — watch the histogram guide show the trade you'll accept. Then walk the focus dot onto the eyes: the vows are faces, and the near eye rules."
+        },
+        {
+          "id": "wp-3",
+          "title": "Reception: flash, floors and candid energy",
+          "duration_min": 7,
+          "summary": "Receptions are dark, fast, and joyful: off-camera or bounced flash for the room, slower shutters for dance-floor energy, and candid frames between the scheduled moments. The first dance is choreographed — everything around it isn't, and that's where the album lives.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/60",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "First-dance drill: 1/60 to let the room glow while flash holds the couple — drag-the-shutter technique, watched in the simulator's motion smear. Then the candids drill: walk the shutter from 1/60 to 1/250 and decide which version tells the dance floor's story."
+        },
+        {
+          "id": "wp-4",
+          "title": "Family formals: list discipline and kind speed",
+          "duration_min": 6,
+          "summary": "Formals are logistics: a written grouping list, a spokesperson who knows the families, and a photographer who moves groups fast and kindly. Eight groupings in twenty minutes is normal — the list makes it possible, the kindness makes it pleasant.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/160",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Write the eight-grouping list (starting from the couple outward), then simulate each at f/5.6 — depth enough for two rows of faces. The drill is the discipline: announce, arrange, shoot, release — and check the LIST, not the LCD, between groups."
+        },
+        {
+          "id": "wp-5",
+          "title": "Events beyond weddings",
+          "duration_min": 6,
+          "summary": "Corporate functions, parties, and launches share the wedding's DNA with different pressure: consistency over artistry. The brief defines the deliverables, the shot list is branding-adjacent, and the same correct exposure must repeat scene after scene — the Intermediate event drills at professional tempo.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/125",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Consistency drill: photograph three different 'scenes' (window light, dim corner, mixed lighting) and hold the same color and exposure language across all three — the event style's priorities, applied as a delivery standard rather than a creative choice."
+        },
+        {
+          "id": "wp-6",
+          "title": "The business of events",
+          "duration_min": 7,
+          "summary": "Event work is a business: packages built around coverage hours and deliverable counts, turnaround promises you can keep, second-shooter economics, and the referral ask at delivery — the moment of maximum goodwill. The Pro class's estimate and delivery lessons, applied to the genre that needs them most.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Build two event packages from the Pro pricing lesson — coverage hours, deliverable counts, turnaround — and write the delivery-email template including the referral ask. Then run the gallery workflow end to end on any event set you have: import, trim, select, deliver."
+        }
+      ]
+    },
+    {
+      "id": "wildlife-playbook",
+      "category": "Genre-specific",
+      "title": "Wildlife Playbook",
+      "cover_emoji": "🦅",
+      "tagline": "Patience, reach, and ethics — photographing animals on their terms",
+      "description": "Five lessons on the highest-patience genre: fieldcraft and ethics first, then reach and support, the shutter-priority settings that survive distance, composition at eye level, and planning shoots around habitats and seasons. The Wildlife style's priority order — shutter first, patience always — drives every drill.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "wl-1",
+          "title": "Fieldcraft: distance, patience, ethics",
+          "duration_min": 7,
+          "summary": "Wildlife photography is won before the shutter: learn the animal's patterns, approach downwind and slowly, and let behavior happen. The welfare rule outranks every frame — no baiting, no flushing, no nest disturbance — and the best lens is often a pair of quiet feet and a morning.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Ethics drill, written: research one local species' behavior and write your minimum-distance rule and retreat signals. Then the field hour: one location, no shots for the first thirty minutes — just observation. The frames you make afterward will be closer than the ones you'd have chased."
+        },
+        {
+          "id": "wl-2",
+          "title": "Reach and support: long-lens craft",
+          "duration_min": 7,
+          "summary": "Long lenses magnify the subject and every vibration with it. Stabilization, monopod or tripod technique, shutter-speed floors scaled to focal length, and support discipline — brace, exhale, squeeze — are what make 400mm usable handheld at dawn.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Mount the longest lens you own and walk the shake study from the Intermediate motion lesson at focal-length-scaled speeds — then mount an IS lens and watch the floor drop. The simulator's motion smear shows exactly what your support level buys at 400mm."
+        },
+        {
+          "id": "wl-3",
+          "title": "Settings for action: the wildlife triangle",
+          "duration_min": 7,
+          "summary": "Wildlife runs on shutter priority: 1/1000 floor for active animals, continuous autofocus with a zone, and ISO allowed to climb — noise beats blur, always. Aperture stays near the lens's wide end for reach and separation. The Wildlife style encodes exactly this order.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Load the Wildlife style and read its recipe: the shutter floor, the ISO ceiling, the aperture target. Then the dog-or-bird drill: a moving subject at home, burst mode, continuous AF — count sharp frames, raise the shutter one stop, count again. The hit-rate change is the lesson."
+        },
+        {
+          "id": "wl-4",
+          "title": "Composition in the wild",
+          "duration_min": 6,
+          "summary": "Eye-level with the animal, space in the frame toward its movement, and behavior as the subject — feeding, interacting, alert. A sharp animal in a boring pose loses to a slightly-soft frame of real behavior. The background matters as much as the animal: one step sideways changes everything.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/640",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Composition drill on a static substitute (a garden bird feeder or a pet): shoot eye-level rather than standing, leave frame-space in the direction of gaze, and make one behavior frame — feeding, grooming, playing. Three frames: space, level, behavior."
+        },
+        {
+          "id": "wl-5",
+          "title": "Habitats and seasons: planning the shot",
+          "duration_min": 6,
+          "summary": "Wildlife shoots are planned around migrations, seasons, and golden hours: research the species, the location, and the light, then commit sessions to the plan. The animal decides the moment; you decide to be there when it's likely.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/640",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Write a one-page wildlife shoot plan: species, location, season, light window, approach route, and the behavior you're hoping for. Then execute one session against the plan and review honestly — what did the plan predict, and what did the animal teach you?"
+        }
+      ]
+    },
+    {
+      "id": "food-playbook",
+      "category": "Genre-specific",
+      "title": "Food Playbook",
+      "cover_emoji": "🍽️",
+      "tagline": "Make it look edible — light, styling, and color honesty",
+      "description": "Four lessons on the commercial-meets-craft genre: the food set and props, side light and diffusion, styling and hero angles, and the business of menus and restaurants — with the Food style's color-honesty rule driving every drill.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "fd-1",
+          "title": "The food set: surfaces, props, backdrops",
+          "duration_min": 6,
+          "summary": "Food photography is set dressing around a hero: dark or light surfaces set the mood, props support without stealing, and backdrops control the story. Build a small kit — two boards, three linens, basic plates — and every dish becomes shootable at home.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/60",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Set drill: photograph the same dish on a dark surface and a light surface. Same dish, two stories — moody vs fresh. Load the Food style and note how its color-honesty priorities judge each version's cast."
+        },
+        {
+          "id": "fd-2",
+          "title": "Light for food: side, back, and diffusion",
+          "duration_min": 7,
+          "summary": "Window light from the side or behind makes food dimensional — shadows tell texture, steam and gloss show in back rim light. Diffuse hard sun through a sheet; bounce fill from the front with a white card. Front-on flash flattens; the Food style's side-light recipe exists because texture sells taste.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/60",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Light drill: rotate the dish (or yourself) through front, side, and backlit positions with one window. Watch texture appear in the shadows at side light and gloss ignite at backlight. The Food style's recipe assumes this side-light default — see why."
+        },
+        {
+          "id": "fd-3",
+          "title": "Styling and hero angles",
+          "duration_min": 7,
+          "summary": "Three angles cover most food: 45 degrees for bowls and depth, overhead for flat lays and tables, straight-on for stacks and layers. Style for the hero bite — garnish placed, sauce poured fresh, imperfections wiped. Shoot the pour, the steam, the cut while they happen.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/60",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Angle drill: the same plate at 45°, overhead, and straight-on — the food itself picks its angle (bowls want 45°, flat lays want overhead, stacks want straight-on). Then the action frame: the pour, the cut, the pull-apart — shot at the moment it happens, not after."
+        },
+        {
+          "id": "fd-4",
+          "title": "The food business: menus, restaurants, stock",
+          "duration_min": 6,
+          "summary": "Food clients buy consistency and color honesty: the menu photo must match the plate the customer receives. Workflow matters — restrained edits, honest color, repeatable setups — and restaurants, cafés and stock libraries are the recurring markets. The Pro estimate and delivery lessons apply directly.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/60",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Business drill: build a small menu-shoot estimate with the Pro pricing structure — session, per-dish editing count, license for menu and social use. Then shoot five dishes of one menu with the same light and edit them to match: consistency is the deliverable the client is actually buying."
+        }
+      ]
+    },
+    {
+      "id": "pet-playbook",
+      "category": "Genre-specific",
+      "title": "Pet Playbook",
+      "cover_emoji": "🐾",
+      "tagline": "Wildlife rules at living-room distance",
+      "description": "Four lessons on the most unpredictable subjects: behavior and timing, shutter-first settings, owners and home contexts, and the pet photography business — sessions, shelters, and the products that come after.",
+      "level": "Beginner",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "pt-1",
+          "title": "Pet behavior: timing over technique",
+          "duration_min": 6,
+          "summary": "Pets invent motion: a nap becomes a sprint in half a second. Shoot at their level, watch for the pre-play signals, and photograph in bursts during the energy peaks. The expression is the photograph; everything else is support.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/500",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Level drill: photograph a pet from standing height, then from their eye level — the eye-level frame wins every time. Then the timing drill: burst mode through one play cycle, and find the frame where the expression peaks."
+        },
+        {
+          "id": "pt-2",
+          "title": "Settings: shutter first, eyes always",
+          "duration_min": 6,
+          "summary": "Wildlife settings at home: shutter 1/500+ for play, wide aperture for the lift off busy floors, ISO spent freely — noise cleans up, missed expressions don't. Focus discipline: the eyes carry the whole photograph.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/500",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Settings drill: photograph a pet at 1/250, 1/500, and 1/1000 during play — find the shutter where motion stops mattering. Then the eye rule: focus the eyes deliberately, enlarge, and compare with a nose-focused frame at the same aperture."
+        },
+        {
+          "id": "pt-3",
+          "title": "Owners and homes: context portraits",
+          "duration_min": 6,
+          "summary": "The best pet photographs include the relationship: the sofa, the window, the owner's hands. Homes are dim — the shake floor and ISO ceiling decide the approach, and busy backgrounds are tamed with aperture and angle, exactly as the Intermediate composition lesson teaches.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/320",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Context drill: one pet frame with the owner in it — hands or full interaction — and one environmental frame showing the pet's place. Watch the background: aperture and angle are your cleanup crew, per the Intermediate composition lesson."
+        },
+        {
+          "id": "pt-4",
+          "title": "The pet business: sessions, shelters, products",
+          "duration_min": 6,
+          "summary": "Pet photography's markets: paid sessions with owners, shelter volunteering that builds skill and community goodwill, and product-adjacent work for pet brands. The Pro pricing and delivery lessons apply — packages built around the session, the owner's home, and the pet's patience.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "800",
+            "shutter_speed": "1/500",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Business drill: build a pet-session package using the Pro pricing structure — session length, deliverable count, turnaround — and volunteer one shelter session. Shelters are the portfolio builder: every image has an owner-shaped audience in the adoption listing."
+        }
+      ]
+    },
+    {
+      "id": "sports-playbook",
+      "category": "Genre-specific",
+      "title": "Sports Playbook",
+      "cover_emoji": "⚽",
+      "tagline": "Anticipation, positions, and shutter discipline",
+      "description": "Four lessons on photographing athletes in action: access and positions, shutter and anticipation strategy, the indoor-light problem and ISO courage, and the business from leagues to parents.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "sp-1",
+          "title": "Access and positions: where shooters stand",
+          "duration_min": 6,
+          "summary": "Sports photography starts with access: credentials, sidelines, and the positions that match the sport's geometry. Know where the action peaks — goals, finishes, turns — and pre-position there. The best sports frames come from the right spot and a prefocused camera.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Position drill: photograph any moving subject from three positions — front-on, side, and behind. Compare which position shows the effort (faces, strain) versus just motion. Then pick your next-shoot position based on where the emotion shows."
+        },
+        {
+          "id": "sp-2",
+          "title": "Shutter and anticipation: peak action",
+          "duration_min": 7,
+          "summary": "Peak action is anticipated, not reacted to: learn the sport's rhythm, prefocus on the spot where the moment will happen, and shoot through the play. 1/1000+ for most field sports, continuous autofocus with a zone, and burst discipline — the Intermediate motion lesson at game tempo.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Anticipation drill: pick a repeatable moment (a jump, a throw, a splash), prefocus on the spot, and shoot bursts through three repetitions. Review enlarged: which frame in each burst holds the peak? That timing sense — not the camera — is the skill."
+        },
+        {
+          "id": "sp-3",
+          "title": "Indoor sports: the light problem and ISO courage",
+          "duration_min": 7,
+          "summary": "Gymnasiums and rinks are dim caverns with fast movement: the hardest lighting in photography. The answer is courage — wide-aperture glass, ISO 6400 and beyond, and acceptance that noise beats blur. White balance against the room's lights and stay consistent across the set.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "6400",
+            "shutter_speed": "1/500",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "ISO courage drill in a dim room: shoot a moving subject at ISO 1600, 3200, 6400 at the shutter each requires — and compare enlarged. Find YOUR noise ceiling on this camera, then set it as the floor for indoor games. Watch WB consistency across the set."
+        },
+        {
+          "id": "sp-4",
+          "title": "The sports business: leagues, parents, teams",
+          "duration_min": 6,
+          "summary": "Sports photography's markets: league and team contracts, parent portraits, tournament coverage, and athletic brands. The work is volume — consistent, correctly exposed, fast-turned — and the Pro class's pricing, workflow, and delivery lessons carry it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/1000",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Business drill: draft a league coverage proposal — deliverables per team, per-player portrait options, turnaround promise — using the Pro pricing structure. Then shoot one practice session and deliver a five-image sample set on a 48-hour clock."
+        }
+      ]
+    },
+    {
+      "id": "macro-playbook",
+      "category": "Genre-specific",
+      "title": "Macro Playbook",
+      "cover_emoji": "🔬",
+      "tagline": "Tiny subjects, razor-thin focus, enormous patience",
+      "description": "Four lessons on close-up photography: magnification and working distance, lighting tiny subjects, focus discipline from rails to stacking, and the subjects and markets that reward the effort.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "mc-1",
+          "title": "Magnification and working distance",
+          "duration_min": 6,
+          "summary": "Macro magnifies subject AND shake AND thin depth of field. Understand magnification ratios, working distance, and why a macro lens differs from a close-up filter — then accept that the depth of field lesson's four factors all conspire against you here.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/200",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Magnification drill: photograph the same coin at your lens's closest focus, then with any extension (tube, close-up filter, or macro lens). Watch two things collapse together: working distance AND depth of field. The macro style's f/8 default exists because of this."
+        },
+        {
+          "id": "mc-2",
+          "title": "Light for tiny subjects",
+          "duration_min": 7,
+          "summary": "The lens is close enough to block its own light. Diffusion is everything: small diffusers, bounce cards, and off-camera flash at low power turn hard macro light into soft wrap. Watch the working distance budget — every modifier spends some of it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/200",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Diffusion drill: a small subject lit bare, then diffused with paper or a card — same position, same exposure. Compare shadow edges at 100%. Then bounce: a white card below the subject lifts the shadow side for free."
+        },
+        {
+          "id": "mc-3",
+          "title": "Focus discipline: rails, breath, and stacking",
+          "duration_min": 7,
+          "summary": "At macro distances, depth of field is millimeters — so focus becomes a physical discipline: tripod rails, focus peaking, or the move-and-burst technique. For subjects deeper than one plane allows, focus stacking from the Advanced techniques lesson finishes the job.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/200",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Stacking drill: a small still subject, camera locked, focus stepped front to back in even increments — five to eight frames — then stack in software per the Advanced panorama/stacking lesson. Review at 100% for seams. One subject, razor sharp front to back."
+        },
+        {
+          "id": "mc-4",
+          "title": "Macro subjects and markets",
+          "duration_min": 6,
+          "summary": "Macro's markets: nature and garden work, product detail shots for makers, textures and prints. The subjects are findable in any garden or kitchen drawer — the discipline from this playbook is the differentiator, and the Intermediate workflow lesson handles the deliverables.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/200",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Portfolio drill: build a five-image macro set — one insect or flower, one texture, one product detail, one water droplet, one free choice — with consistent light across the set. The consistency is what makes it a portfolio rather than five lucky frames."
+        }
+      ]
+    },
+    {
+      "id": "fashion-playbook",
+      "category": "Genre-specific",
+      "title": "Fashion Playbook",
+      "cover_emoji": "👗",
+      "tagline": "Crew, styling, and garment-true light",
+      "description": "Four lessons on editorial and lookbook work: the fashion set and its crew, light and styling for editorial looks, movement and fabric, and the business of test shoots and agencies. The Fashion style's garment-true color rule drives every drill.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "fs-1",
+          "title": "The fashion set: crew and mood boards",
+          "duration_min": 6,
+          "summary": "Fashion is a team sport: model, stylist, makeup, and photographer working from one mood board. Learn the set's roles, how a mood board aligns everyone before the shoot, and why the photographer directs the look while the stylist owns the garment.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/200",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Mood-board drill: build a three-image mood board for one look (palette, light, pose references), then shoot five frames of a willing subject to the board. The team reads the board and executes — that alignment is the fashion skill."
+        },
+        {
+          "id": "fs-2",
+          "title": "Light and styling: editorial looks",
+          "duration_min": 7,
+          "summary": "Editorial light is shaped and intentional: one key with intent, negative fill for drama, and a look that matches the garment's character. Styling owns wrinkles, tags, and fit — the camera owns the light. Garment-true color is non-negotiable; the Fashion style's WB discipline exists for the client's returns.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/200",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Look drill: shoot one outfit three ways — bright commercial, moody editorial, and high-contrast graphic — same garment, same model. Then the garment-true check: gray card WB, zoom to 100% on seams and hues. The Fashion style's WB rule isn't taste; it's the client's contract."
+        },
+        {
+          "id": "fs-3",
+          "title": "Movement and fabric",
+          "duration_min": 6,
+          "summary": "Fabric is motion: twirls, hems, wind machines and shutter choices. Faster shutters freeze structure; slower ones let fabric flow. Shoot the movement repeatedly — fashion frames are directed, rehearsed, and selected, not caught.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/320",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Movement drill: a flowing garment at 1/640 (structure frozen), 1/320 (partial flow), and 1/125 (full flow) — same twirl each time. Choose the treatment that suits the garment, then burst-shoot the best version and select the peak shape."
+        },
+        {
+          "id": "fs-4",
+          "title": "The fashion business: test shoots and agencies",
+          "duration_min": 6,
+          "summary": "Fashion careers start with test shoots: collaborations that build the book for models, stylists, and photographers together. Agency standards are specific — clean images, honest representation, and consistent delivery. The portfolio lesson's argument structure, pointed at the fashion market.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/200",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Test-shoot drill: plan one collaboration shoot — mood board, model or friend, one look — and deliver five edited frames within a week. Then build the fashion page of your portfolio per the Pro portfolio lesson: the niche's promise, proven in five images."
+        }
+      ]
+    },
+    {
+      "id": "travel-playbook",
+      "category": "Genre-specific",
+      "title": "Travel Playbook",
+      "cover_emoji": "🧭",
+      "tagline": "One bag, no reshoots, stories by the set",
+      "description": "Four lessons on travel craft: planning shoots around research and light, the three-shot habit in the field, people and culture with consent and respect, and the travel business of stock, licensing, and stories. Builds directly on the Intermediate landscape-and-travel lesson.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "tv-1",
+          "title": "Planning travel shoots",
+          "duration_min": 6,
+          "summary": "Travel photography starts at home: research the place's icons and its corners, the light's direction by hour, the events and permits, and a shot list wide enough to survive weather. The three-shot habit — wide, detail, scale — planned per location.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Plan drill: choose a nearby town and write its one-page shoot plan — three locations, the light window for each, and the three-shot list per location. Execute one location and grade the plan honestly: what did the research predict?"
+        },
+        {
+          "id": "tv-2",
+          "title": "The three-shot habit in the field",
+          "duration_min": 6,
+          "summary": "Wide, detail, scale — at every stop. The wide establishes; the detail proves you were there; the scale shot makes the viewer feel the size. Work each viewpoint before moving: the Intermediate lesson's discipline, applied at travel pace with one bag.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Field drill: one location, three frames — wide with a foreground anchor, a detail the wide would swallow, and a scale frame with a person or vehicle. Review as a story: does the set say what the place felt like? Then note the hour you'd return for."
+        },
+        {
+          "id": "tv-3",
+          "title": "People and culture: consent and respect",
+          "duration_min": 7,
+          "summary": "Travel photographs of people carry the Advanced ethics lesson's full weight, in places where you don't share language or context. Learn the local norms, ask with gestures and respect, buy the craft or the coffee, and photograph people WITH agency — as contributors to the frame, not exhibits in it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/250",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Consent drill: photograph a willing subject (friend or family) AS a travel portrait — ask first, show the result, learn one thing about them for the caption. Then write your personal travel-photography consent rule into the positions document from the Advanced ethics lesson."
+        },
+        {
+          "id": "tv-4",
+          "title": "The travel business: stock, licensing, stories",
+          "duration_min": 6,
+          "summary": "Travel work monetizes as licensed stock, commissioned stories, and destination collaborations — all built on the workflow discipline: releases where needed, consistent editing, and sets that tell complete stories. The Pro operations map, carried in one bag.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Business drill: take one travel set through the Pro delivery pipeline — proof gallery, written rules, license summary — and identify which three frames would lead a stock submission or pitch. The set that tells a complete story is the set that sells."
+        }
+      ]
+    },
+    {
+      "id": "underwater-playbook",
+      "category": "Genre-specific",
+      "title": "Underwater Playbook",
+      "cover_emoji": "🤿",
+      "tagline": "Minimum water, maximum light, certified divers only",
+      "description": "Four lessons on the most equipment-bound genre: housings and preparation, underwater light and the red-loss problem, buoyancy and technique, and the subjects from reefs to pools. Certification and safety are prerequisites, not lessons.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "uw-1",
+          "title": "Housing and equipment: preparation is the genre",
+          "duration_min": 7,
+          "summary": "Underwater photography begins on dry land: the housing, o-ring care, lens ports, and the test dive that catches floods before they matter. Equipment failure underwater isn't an inconvenience — it ends the dive. Preparation IS the underwater skill.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/160",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Prep drill: write and rehearse your housing routine — o-ring inspection, seal test, port check — until it's a checklist you could do nervous. The pool is the rehearsal space: test everything in shallow water before the real dive. The Underwater style's settings assume this preparation exists."
+        },
+        {
+          "id": "uw-2",
+          "title": "Light underwater: red loss and strobes",
+          "duration_min": 7,
+          "summary": "Water eats red light with every meter of depth — everything turns blue-green, and the fix is distance and strobes. Get close (the minimum-water rule), light with strobes from the sides, and expose for the subject while the water falls to blue behind. The Underwater style's ISO and shutter defaults assume strobe work.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/160",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The simulator can't go underwater, but the color lesson travels: shoot a red object through increasing amounts of glass or water at home and watch the cast deepen — that's the ocean's red loss, visible in miniature. In the field: minimum water between lens and subject, strobes angled outward against backscatter."
+        },
+        {
+          "id": "uw-3",
+          "title": "Buoyancy and technique: shooting while diving",
+          "duration_min": 7,
+          "summary": "Underwater photography is a diving skill first: neutral buoyancy, controlled breathing, and never touching the reef. Compose by moving your whole body — there's no tripod — and shoot upward or level for separation. Safety and certification are prerequisites: this playbook assumes trained divers.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/160",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Buoyancy drill (in water, certified divers only): hover motionless at one meter for a full minute, then compose and shoot without touching anything. The stillness you practice is the sharpness you get — platform stability is the underwater equivalent of the tripod."
+        },
+        {
+          "id": "uw-4",
+          "title": "Underwater subjects: reefs, divers, pools",
+          "duration_min": 6,
+          "summary": "The genre's subjects: reef life and behavior, divers in the frame for scale and story, and pools as the controlled studio for technique practice. Markets include dive shops, tourism, and conservation organizations — where the ethics rule doubles: the reef's welfare outranks every frame.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/160",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Subject drill: one pool session as the controlled studio — a subject on a white background, strobes practiced, minimum-water discipline rehearsed. Then the conservation angle: organizations need honest underwater imagery, and that market rewards certified, careful shooters."
+        }
+      ]
+    },
+    {
+      "id": "conceptual-playbook",
+      "category": "Genre-specific",
+      "title": "Conceptual Playbook",
+      "cover_emoji": "🎭",
+      "tagline": "Ideas first, symbols second, camera third",
+      "description": "Four lessons on staged photography built around ideas: concept and symbol development, building the frame with props and sets, series thinking with a consistent visual language, and the markets — galleries, commissions, and personal projects.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "cn-1",
+          "title": "Idea first: concepts and symbols",
+          "duration_min": 6,
+          "summary": "Conceptual photography starts with a sentence: the idea the image must express. Then symbols — objects, colors, gestures that carry the idea visually. Sketch before shooting: the frame is built, not found, and a concept that needs a caption to land needs restaging.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Symbol drill: pick an abstract idea — growth, isolation, time — and stage three frames, each using a different object as the symbol. Then ask a friend to name the idea from each image. The one they name correctly is the one with a readable concept."
+        },
+        {
+          "id": "cn-2",
+          "title": "Building the frame: props, sets, compositing",
+          "duration_min": 7,
+          "summary": "Conceptual frames are constructed: props placed, sets built, and sometimes composites assembled from multiple captures. The capture rules from the Advanced combining lesson apply — locked camera, consistent light, one variable — because a composite is only as clean as its parts.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Build drill: stage one concept with three props — one hero, two supporting — on a tripod at base ISO. Shoot takes, adjust the staging (not just the settings), and compare which arrangement says the idea cleanest. Restage until it reads without a caption."
+        },
+        {
+          "id": "cn-3",
+          "title": "Series thinking: one visual language",
+          "duration_min": 6,
+          "summary": "Conceptual work lives in sets: three to ten frames sharing a visual language — light, palette, framing — so the series reads as one voice. The personal-style audit from the Advanced class becomes a production tool: your found patterns are the series' language.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Series drill: stage three frames of one concept with matched light, palette, and framing — the set should read as one voice. Then break one frame's language deliberately and see how loudly it shouts. Consistency is the conceptual photographer's signature."
+        },
+        {
+          "id": "cn-4",
+          "title": "The conceptual business: galleries and commissions",
+          "duration_min": 6,
+          "summary": "Conceptual work sells as fine-art prints, gallery series, and conceptual commissions for brands and publications that want an idea visualized. The personal project is the portfolio: commissions come from series that prove you can think AND execute.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Portfolio drill: complete a three-frame concept series — idea, build, consistency — and write the one-sentence statement for the set. Then draft the pitch: which publication, gallery, or brand would this concept serve, and what would you propose next?"
         }
       ]
     }

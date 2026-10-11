@@ -11,7 +11,6 @@ import ModelSelector from "./ModelSelector";
 
 export default function Workspace() {
   const goUpload = useStore((s) => s.goUpload);
-  const goSettings = useStore((s) => s.goSettings);
   const goClasses = useStore((s) => s.goClasses);
   const goProgress = useStore((s) => s.goProgress);
   const dataUrl = useStore((s) => s.dataUrl);
@@ -26,6 +25,8 @@ export default function Workspace() {
   const [histGuide, setHistGuide] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const galleryCount = useStore((s) => s.galleryItems.length);
+  const instructorUnlocked = useStore((s) => s.instructorUnlocked);
+  const goSettings = useStore((s) => s.goSettings);
 
   useEffect(() => {
     if (!dataUrl) goUpload();
@@ -73,9 +74,11 @@ export default function Workspace() {
         <button className="btn small" onClick={resetSettings} title="Reset settings to this camera's defaults">
           Reset
         </button>
-        <button className="btn small" onClick={goSettings} title="Coach engine setup — provider & API key">
-          ⚙ Setup
-        </button>
+        {instructorUnlocked && (
+          <button className="btn small" onClick={goSettings} title="Coach engine setup (instructor)">
+            ⚙ Setup
+          </button>
+        )}
         <button className="btn small" onClick={goClasses} title="Training classes">
           🎓 Classes
         </button>

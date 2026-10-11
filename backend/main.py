@@ -71,11 +71,12 @@ def _access_code() -> str | None:
 
 @app.middleware("http")
 async def access_gate_middleware(request, call_next):
-    if (
-        request.url.path.startswith("/api")
-        and request.method not in ("GET", "OPTIONS")
-        and request.url.path != "/api/access/verify"
-    ):
+    path = request.url.path
+    method = request.method
+    gated = path.startswith("/api") and (
+        method not in ("GET", "OPTIONS", "HEAD") or path == "/api/settings"
+    )
+    if gated and path != "/api/access/verify":
         code = _access_code()
         if code:
             provided = request.cookies.get("site_access") or request.headers.get("x-access-code", "")

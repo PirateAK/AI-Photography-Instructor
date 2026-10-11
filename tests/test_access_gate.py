@@ -53,6 +53,16 @@ def test_verify_sets_cookie_that_unlocks_writes(gate_enabled):
     assert res.status_code == 404  # past the gate — course simply doesn't exist
 
 
+def test_settings_read_is_gated_when_active(gate_enabled):
+    # /api/settings is the one sensitive read — the masked engine config
+    client.cookies.clear()  # drop any cookie from earlier tests in this module
+    res = client.get("/api/settings")
+    assert res.status_code == 401
+
+    client.post("/api/access/verify", json={"code": "MUSKEG2026"})
+    assert client.get("/api/settings").status_code == 200
+
+
 def test_gate_disabled_when_no_code_configured(monkeypatch):
     import backend.main as main
 

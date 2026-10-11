@@ -29,7 +29,8 @@ export default function App() {
   // manager screens are gated behind the instructor code / future Pro upgrade —
   // a locked user can never land on them, even via stale navigation state
   const managed =
-    !canManageContent({ instructorUnlocked }) && (screen === "stylemanager" || screen === "coursemanager");
+    !canManageContent({ instructorUnlocked }) &&
+    (screen === "stylemanager" || screen === "coursemanager" || screen === "settings");
   const guardedScreen = managed ? "upload" : screen;
 
   // the published app sits behind the access code — nothing renders until it's entered

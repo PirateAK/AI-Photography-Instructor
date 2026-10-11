@@ -55,7 +55,8 @@ def test_challenge_now_env_override(monkeypatch):
     assert ch._now().year >= 2026  # bad values fall through to real time
 
 
-def test_stale_cycle_is_not_live_between_seasons(monkeypatch):    """Oct 11, 2026: last Halloween's gallery is long gone — the live cycle is the
+def test_stale_cycle_is_not_live_between_seasons(monkeypatch):
+    """Oct 11, 2026: last Halloween's gallery is long gone — the live cycle is the
     UPCOMING Oct 24 occurrence, not the 2025 one."""
     freeze(monkeypatch, "2026-10-11T12:00:00")
     view = client.get("/api/challenge/halloween").json()

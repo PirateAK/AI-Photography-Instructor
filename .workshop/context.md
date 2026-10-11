@@ -26,7 +26,7 @@
 - Style KB drives: recipe card, weighted score penalties, deterministic recommendation rules, style drills first. Stale persisted styleId resets on reload. Course catalog reload also resets stale styleId.
 
 ## Key design decisions
-- Mobile-verified devices (published URL): Moto G Power 5G (2024, Android 15) — primary reference, layout/wheel/interactions confirmed; Galaxy Note 5 (2015-era) + Galaxy A21 (budget tier) — full passes, broad Android compatibility confirmed. Fleet testing ongoing (six-phone matrix).
+- Mobile-verified devices (published URL): Moto G Power 5G (2024, Android 15) — primary reference, layout/wheel/interactions confirmed; Galaxy Note 5 (2015-era) + Galaxy A21 (budget tier) — full passes, broad Android compatibility confirmed; iPhone 16 Pro (iOS Safari) — full pass, cross-platform confirmed. Fleet testing ongoing.
 - Mobile-verified on Moto g Power 5G (2024), Android 15 — user confirms layout, style wheel, and interactions work well on a small Android screen. Keep this device as the responsive test reference.
 - Simulation baseline = EXIF (iso/shutter/aperture/focal) else camera defaults; gain = log2((t/t0)(ISO/ISO0)(N0/N)^2)+EV. DoF only when opening wider than baseline. Motion smear below 1/60s (raised by IS). WB presets/kelvin → temp/tint shifts. Picture styles → contrast/saturation/sharpen/mono.
 - Coach tips for setting changes are deterministic text (lib/tips.ts), NOT AI calls. Cache: LRU+TTL keyed by sha256(image)+camera+settings+style+intent.

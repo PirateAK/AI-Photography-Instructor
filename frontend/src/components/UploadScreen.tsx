@@ -132,16 +132,31 @@ export default function UploadScreen() {
         </div>
       )}
 
-      <button
-        type="button"
-        className="btn gallery-toggle"
-        aria-expanded={galleryOpen}
-        onClick={() => setGalleryOpen((v) => !v)}
-        title="Photos stored on this device — tap to open or close the gallery"
-      >
-        🖼️ Gallery{galleryItems.length > 0 ? ` (${galleryItems.length})` : ""}
-        <span className="gallery-chev">{galleryOpen ? "▴" : "▾"}</span>
-      </button>
+      <div className="home-links-row">
+        <a
+          className="muskeg-banner"
+          href="https://muskegman.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Visit Muskegman.com"
+        >
+          <span className="muskeg-banner-text">
+            <strong>Muskegman.com</strong>
+            <span className="muskeg-banner-sub">Photography from the Last Frontier</span>
+          </span>
+          <span className="muskeg-banner-go" aria-hidden="true">↗</span>
+        </a>
+        <button
+          type="button"
+          className="btn gallery-toggle"
+          aria-expanded={galleryOpen}
+          onClick={() => setGalleryOpen((v) => !v)}
+          title="Photos stored on this device — tap to open or close the gallery"
+        >
+          🖼️ Gallery{galleryItems.length > 0 ? ` (${galleryItems.length})` : ""}
+          <span className="gallery-chev">{galleryOpen ? "▴" : "▾"}</span>
+        </button>
+      </div>
 
       {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} autoAnalyze />}
 

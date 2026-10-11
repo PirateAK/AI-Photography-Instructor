@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -86,6 +86,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "Make three versions of the scene in front of you, changing one setting at a time — the simulator's live histogram makes each trade visible. 1) Open the aperture two stops: watch brightness rise AND background blur grow. 2) Speed the shutter two stops: brightness falls; motion effects you'll see in the field. 3) Raise ISO two stops: brightness rises and grain appears. After each, answer the lesson's question: what changed besides the number? When you're ready for the deep dive, the free 7-lesson Mastering the Exposure Triangle class is in your Classes list."
+        },
+        {
+          "id": "bc-6",
+          "title": "Focus and Autofocus Basics",
+          "duration_min": 6,
+          "summary": "Focus placement is the choice of which part of the scene appears sharp — and it's separate from exposure: a perfectly exposed photo can still be sharp in the wrong place. Autofocus is a capable tool, but the photographer guides it onto the intended subject; modes and focus-area controls vary by model, so learn yours rather than mastering them all. And never trust the small screen: a photo that looks sharp in playback can reveal missed focus enlarged — review the important detail up close.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Open the aperture wider than your as-shot value first — that wakes up the ⊹ Focus point, since placement only matters when depth of field is thin. Drag the focus dot onto the subject's detail and watch sharpness bloom there; drag it to the background and watch the subject go soft. That is focus placement. In the field: guide autofocus onto a person's eye or an object's detail, take the photo, then zoom in on playback to check the DETAIL is sharp — if focus missed, place it more deliberately and shoot again."
         }
       ]
     },

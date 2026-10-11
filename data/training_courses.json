@@ -181,6 +181,78 @@
       ]
     },
     {
+      "id": "intermediate-class",
+      "category": "Fundamentals",
+      "title": "Intermediate Photography Class",
+      "cover_emoji": "🎚️",
+      "tagline": "From knowing the dials to making them obey — 13 lessons",
+      "description": "The Beginner class built understanding; this class builds operational fluency. Thirteen lessons take deliberate control of exposure (manual practice, metering and compensation), deepen the two great side effects (depth of field and motion), advance autofocus and composition, then put it to work in natural light, flash, portraits, and landscapes — closing with a real editing workflow in RAW. Every lesson ends in the app's simulator or a field drill with written observations.",
+      "level": "Intermediate",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "ic-1",
+          "title": "Manual Exposure in Practice",
+          "duration_min": 8,
+          "summary": "Manual mode is about consistency: when you choose the settings, the camera can't second-guess the look. Read the meter as a guide, not a command, and build exposures in decision order — the dial that drives the look first (aperture for blur, shutter for motion), the next dial for the light, and ISO to balance. Know the limits: in dim light every dial hits an end, and ISO takes the remainder.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The simulator is all-manual — use it to drill the decision order twice on the same photo. Version A (portrait with blurred background): aperture first — open it wide for the look, then shutter, then ISO. Version B (moving subject kept sharp): shutter first — speed it up, then aperture, then ISO. Write down which dial led each version. In the field, photograph both situations for real in Manual and compare your decision notes."
+        },
+        {
+          "id": "ic-2",
+          "title": "Exposure Metering and Exposure Compensation",
+          "duration_min": 8,
+          "summary": "The meter reads reflected light and aims every scene at middle brightness — which is wrong for genuinely bright and genuinely dark subjects. Snow turns gray; dark subjects turn hazy. Exposure compensation shifts the camera's recommendation in stops, brighter or darker, in automatic and semi-automatic modes. Learn where the control lives before you need it, and let the image or histogram referee every correction.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/8"
+          },
+          "practice_brief": "Open the histogram guide (click the histogram) and use its ±EV buttons: push the exposure brighter and darker and watch the whole tonal shape slide — that is exposure compensation, visible. Then the field drill: a light subject on a dark background and a dark subject on a light background, each shot at plain auto exposure and again with compensation both directions. Note the values you preferred. In full Manual there is nothing to compensate — the dials themselves are the adjustment."
+        },
+        {
+          "id": "ic-3",
+          "title": "Depth of Field",
+          "duration_min": 8,
+          "summary": "Depth of field — the zone of acceptably sharp focus — responds to four factors, and aperture is only one. Wider apertures thin it; longer focal lengths thin it at the same framing; focusing closer shrinks it; and the background's distance behind the subject governs how visible the blur is. Predict the zone before you shoot, using all four factors, and let the photograph grade the prediction.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "Predict, then check. Open the aperture wider than your as-shot value so depth of field activates, then say all four factors out loud and predict thin or deep before touching anything. Move the focus dot to re-place the zone, swap to a longer lens to thin it further, stop down to deepen. Subject distance and background distance aren't simulated — those two factors are field work: shoot the same subject close and far, with the background near and distant, and grade your predictions."
+        },
+        {
+          "id": "ic-4",
+          "title": "Motion and Shutter Speed",
+          "duration_min": 8,
+          "summary": "Motion is a creative choice. Freezing depends on subject speed, direction, and distance — faster, crossing, and closer all demand more shutter. Slow shutters make motion the story: silk water, light ribbons, panning that keeps the subject recognizable inside streaks. And blur isn't always the subject's fault — camera shake smears the whole frame below your hand-holding floor, tamed by faster shutters, stabilization, or support. Choose the blur you want; fix the blur you don't.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Intermediate",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/60",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The simulator renders motion smear and camera shake honestly. Walk the shutter ladder down from 1/250 and watch the smear grow — that's subject motion becoming visible. Then mount an image-stabilized lens and repeat: the shake floor drops several stops, because stabilization tames YOUR movement, not the subject's. In the field: photograph a moving subject at two shutter speeds — one frozen, one showing motion on purpose — and one handheld frame below your shake floor to study what your own unsteadiness looks like."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
       "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",

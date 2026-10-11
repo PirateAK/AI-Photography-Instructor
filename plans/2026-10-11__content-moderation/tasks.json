@@ -22,6 +22,6 @@
   {
     "content": "[mod-5] backend tests (stub engine, cache, fail-open, 422s) + full pass + push + context",
     "id": "5",
-    "status": "in_progress"
+    "status": "completed"
   }
 ]

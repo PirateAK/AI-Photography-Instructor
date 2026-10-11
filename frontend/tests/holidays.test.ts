@@ -3,11 +3,15 @@ import {
   CHALLENGE_SHOTS_TO_COMPLETE,
   activeHolidayWindow,
   challengeAfterShot,
+  contestSchedule,
   easterSunday,
   holidayDate,
   holidayWindows,
   nthWeekday,
 } from "../src/lib/holidays";
+import { HOLIDAYS } from "../src/lib/holidays";
+
+const byId = (id: string) => HOLIDAYS.find((h) => h.id === id)!;
 
 const D = (iso: string) => {
   const [y, m, d] = iso.split("-").map(Number);
@@ -73,6 +77,29 @@ describe("activeHolidayWindow", () => {
   it("is quiet between holidays", () => {
     expect(holidayWindows(D("2026-11-10"))).toEqual([]);
     expect(holidayWindows(D("2027-06-10"))).toEqual([]);
+  });
+});
+
+describe("contestSchedule", () => {
+  it("never treats last year's contest as live (regression: 'results are in' in October)", () => {
+    // Oct 11, 2026: Halloween 2025's gallery reset long ago — 2026 is merely upcoming.
+    expect(contestSchedule(byId("halloween"), D("2026-10-11")).phase).toBe("upcoming");
+    expect(contestSchedule(byId("halloween"), D("2026-10-11")).holidayDate).toEqual(D("2026-10-31"));
+  });
+
+  it("walks the full cycle: submitting → voting → results → upcoming", () => {
+    expect(contestSchedule(byId("halloween"), D("2026-10-28")).phase).toBe("submitting");
+    expect(contestSchedule(byId("halloween"), D("2026-11-04")).phase).toBe("voting");
+    expect(contestSchedule(byId("halloween"), D("2026-11-12")).phase).toBe("results");
+    // Thanksgiving window opened Nov 19 — Halloween's gallery has reset
+    expect(contestSchedule(byId("halloween"), D("2026-11-20")).phase).toBe("upcoming");
+  });
+
+  it("keeps results live through the gap until the next window opens", () => {
+    // Nov 9–18: Halloween results, Thanksgiving not started yet
+    expect(contestSchedule(byId("thanksgiving"), D("2026-11-12")).phase).toBe("upcoming");
+    expect(contestSchedule(byId("halloween"), D("2026-11-18")).phase).toBe("results");
+    expect(contestSchedule(byId("thanksgiving"), D("2026-11-19")).phase).toBe("submitting");
   });
 });
 

@@ -185,6 +185,20 @@ export interface ContestSchedule {
   phase: ContestPhase;
 }
 
+/** First holiday-window start (any holiday) strictly after `t`. */
+function nextWindowStartAfter(t: Date): Date | null {
+  const starts: number[] = [];
+  for (const h of HOLIDAYS) {
+    for (const year of [t.getFullYear(), t.getFullYear() + 1]) {
+      const d = holidayDate(h.rule, year);
+      if (!d) continue;
+      const start = addDays(d, -HOLIDAY_WINDOW_START_DAYS).getTime();
+      if (start > t.getTime()) starts.push(start);
+    }
+  }
+  return starts.length ? new Date(Math.min(...starts)) : null;
+}
+
 export function contestSchedule(holiday: HolidayConfig, now: Date = effectiveNow()): ContestSchedule {
   const candidates: ContestSchedule[] = [];
   for (const year of [now.getFullYear() - 1, now.getFullYear(), now.getFullYear() + 1]) {
@@ -202,20 +216,27 @@ export function contestSchedule(holiday: HolidayConfig, now: Date = effectiveNow
     });
   }
   if (candidates.length === 0) throw new Error(`No schedule for ${holiday.id}`);
-  const past = candidates.filter((c) => c.windowStart <= now);
-  const chosen = past.length
-    ? past.reduce((a, b) => (b.windowStart > a.windowStart ? b : a))
-    : candidates.reduce((a, b) => (b.windowStart < a.windowStart ? b : a));
-  if (now < chosen.windowStart) chosen.phase = "upcoming";
-  else if (now <= chosen.windowEnd) chosen.phase = "submitting";
-  else if (now <= chosen.voteEnd) chosen.phase = "voting";
-  else chosen.phase = "results";
 
-  if (chosen.phase === "results") {
-    const reset = contestGalleryResetsAt(now);
-    if (reset && now >= reset) chosen.phase = "upcoming";
+  // The live cycle is the most recent occurrence whose gallery hasn't reset yet
+  // (a finished gallery lives until the NEXT holiday window opens) — never a
+  // stale one from a previous season.
+  const past = candidates.filter((c) => c.windowStart <= now);
+  if (past.length > 0) {
+    const chosen = past.reduce((a, b) => (b.windowStart > a.windowStart ? b : a));
+    const galleryEnd = nextWindowStartAfter(chosen.windowEnd);
+    if (!galleryEnd || now < galleryEnd) {
+      if (now <= chosen.windowEnd) chosen.phase = "submitting";
+      else if (now <= chosen.voteEnd) chosen.phase = "voting";
+      else chosen.phase = "results";
+      return chosen;
+    }
   }
-  return chosen;
+  const future = candidates.filter((c) => c.windowStart > now);
+  const upcoming = future.length
+    ? future.reduce((a, b) => (b.windowStart < a.windowStart ? b : a))
+    : candidates[candidates.length - 1];
+  upcoming.phase = "upcoming";
+  return upcoming;
 }
 
 /** When the next holiday window opens — the finished challenge's gallery resets then. */

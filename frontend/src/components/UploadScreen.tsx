@@ -36,7 +36,7 @@ export default function UploadScreen() {
   const holidayWindow = activeHolidayWindow();
   const goChallenge = useStore((s) => s.goChallenge);
   const contestLive = HOLIDAYS.map((h) => ({ h, phase: contestSchedule(h).phase })).find(
-    (x) => x.phase === "voting" || x.phase === "results",
+    (x) => x.phase === "submitting" || x.phase === "voting" || x.phase === "results",
   );
 
   const [dragging, setDragging] = useState(false);
@@ -205,7 +205,7 @@ export default function UploadScreen() {
 
       {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} autoAnalyze />}
 
-      {contestLive && !holidayWindow && (
+      {contestLive && (
         <button
           type="button"
           className="contest-strip"
@@ -213,10 +213,13 @@ export default function UploadScreen() {
           title="Open the challenge gallery"
         >
           <span>
-            🏆 {contestLive.h.emoji} {contestLive.h.name} Photo Challenge —{" "}
-            {contestLive.phase === "voting" ? "voting is open, pick your top 3" : "results are in"}
+            {contestLive.phase === "submitting" &&
+              <>🏆 {contestLive.h.emoji} {contestLive.h.name} Challenge is live — join the challenge →</>}
+            {contestLive.phase === "voting" &&
+              <>🏆 {contestLive.h.emoji} {contestLive.h.name} Challenge — voting is open! Pick your top 3 →</>}
+            {contestLive.phase === "results" &&
+              <>🏆 {contestLive.h.emoji} {contestLive.h.name} Challenge — see the winners →</>}
           </span>
-          <span aria-hidden="true">→</span>
         </button>
       )}
 

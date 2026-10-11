@@ -580,6 +580,198 @@
       ]
     },
     {
+      "id": "pro-class",
+      "category": "Specialized",
+      "title": "Pro Photography Class",
+      "cover_emoji": "💼",
+      "tagline": "The business of photography — the complete 12-lesson class",
+      "description": "The class that turns craft into a practice, in twelve lessons: finding a professional niche (1), client consultation and briefs (2), pricing and estimates (3), contracts, licensing and usage rights (4), professional shoot planning (5), managing a commercial shoot (6), professional file and backup management (7), client proofing and delivery (8), portfolio and website development (9), marketing and business operations (10), working with assistants and creative teams (11), and professional standards and risk management (12). Legal and insurance specifics are pointed to qualified professionals — this class teaches the vocabulary, the structure, and the habits.",
+      "level": "Pro",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "pr-1",
+          "title": "Finding a Professional Niche",
+          "duration_min": 7,
+          "summary": "You can photograph anything and still need to be known for something. A niche lives where four inputs overlap: interests (what you shoot unpaid), strengths (what your best images share), clients (a market, not one buyer), and working style (the conditions you can sustain). Write the overlap as one sentence, test it against five real client names, and narrow first — widen later.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The app supplies the evidence for the audit: your Progress screen history and the Advanced style-audit method reveal which subjects and lights you already gravitate toward — and the style selector shows which genres you've practiced. Write the niche sentence from those four inputs, then pressure-test it: list five real potential clients. Five names won't come? Revise the niche toward the names that do."
+        },
+        {
+          "id": "pr-2",
+          "title": "Client Consultation and Briefs",
+          "duration_min": 7,
+          "summary": "An inquiry that starts with 'how much for photos?' must grow into a brief before it becomes a quote. Five questions: goal (what is the photo for), audience (who sees it), deliverables (count, formats, sizes), schedule (dates that are fixed), expectations (locations, style, who approves). Listen for the unsaid, write the brief back in the client's vocabulary, and update it in writing when scope moves.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Written-work drill: take a real or invented five-line inquiry and conduct the five-question consultation in writing — in the client's vocabulary. Produce the one-page brief, send it to a friend playing the client, and let them misunderstand one line. Correcting it in writing IS the lesson. Use the coach on any reference images the client shares to learn the look they mean."
+        },
+        {
+          "id": "pr-3",
+          "title": "Pricing and Estimates",
+          "duration_min": 7,
+          "summary": "Price the iceberg: preparation, shooting, editing, administration — a half-day shoot is routinely a three-day project. License what the image will DO (who, where, how long, exclusive) — clients buy uses, not photographs. Add project expenses and profit, which is not a wage. Present itemized with payment terms and an expiry, so scope changes show which line moves. All example numbers in the lesson are examples, not rates.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Build two estimates: the bakery brief from Lesson 2 with your own rate and hours — consultation, scouting, shoot, editing, admin, license, expenses, margin — and a second brief of your invention. Compare which line surprised you. Then write down the line you were tempted to hide; that's usually the one clients most deserve to see."
+        },
+        {
+          "id": "pr-4",
+          "title": "Contracts, Licensing, and Usage Rights",
+          "duration_min": 7,
+          "summary": "The agreement anchors five things to the brief: scope, payment, usage rights, responsibilities, and resolution — protecting both sides. Usage rights have four dimensions: who uses, where, how long, and exclusively. Walk every agreement from both seats, mark what's unclear, and raise legal specifics with a qualified professional in your jurisdiction. When the client sends THEIR paper, read the license clause first. This lesson teaches vocabulary and questions — it is not legal advice.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Walk the sample agreement twice: once as the photographer (what's protected, what's missing), once as the client (what's unclear in plain language). Write the two questions you'd take to a qualified professional and the two clarifications you'd request from the client. Compare lists with a working photographer if you know one."
+        },
+        {
+          "id": "pr-5",
+          "title": "Professional Shoot Planning",
+          "duration_min": 7,
+          "summary": "Planning is shooting that happens early. Extract the shoot from the approved brief: a shot list (one line per deliverable group — the list is a floor, not a cage), a schedule worked backwards from light and availability, a location plan (positions, light direction, gear staging), an equipment list pulled shot by shot, and one written contingency per likely failure. Shoot day's job becomes execution.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Build the full pre-shoot checklist for a real or invented brief — shot list, backwards schedule, location map, equipment pulled line by line, contingencies written. Scout with the app: test frames at the location analyzed in the coach tell you the light's direction and the histogram's shape before shoot day. Hand the checklist to someone and ask them to break it."
+        },
+        {
+          "id": "pr-6",
+          "title": "Managing a Commercial Shoot",
+          "duration_min": 7,
+          "summary": "The checklist meets the day. Brief everyone: list order, schedule anchors, one role each. Work the list in order — bonus frames welcome, always return. Manage the client in real time: show frames, translate ideas into the list, surface trade-offs with the timeline in hand. When it goes sideways, adapt aloud with pre-decided contingencies. Close with the wrap habit: list verified, gear counted, next step promised.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Run one shoot from your Lesson 5 checklist at any scale, including one deliberate adaptation and the wrap habit. Use the coach on set between setups — a quick read catches exposure drift before the client notices. Write down what went sideways and which pre-decided contingency caught it."
+        },
+        {
+          "id": "pr-7",
+          "title": "Professional File and Backup Management",
+          "duration_min": 7,
+          "summary": "Professionals are judged by what they don't lose. Card discipline: import first, verify counts and spot-checks, and never format until delivery. Working structure that scales: dated, client-coded, originals untouched, exports separated. Backups by 3-2-1 — three copies, two media, one off-site — on a schedule and test-restored. Versioning by structure and date: 'final_final_v2' is the sound of a system that doesn't exist.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Run one shoot's files through the professional path: import, verify, working structure, 3-2-1 backup, test-restore. The app's gallery originals are the model — untouched originals, working previews beside them, everything findable in one minute. Time the whole path; simplify anything too cumbersome to repeat, because a workflow you skip is the one that fails."
+        },
+        {
+          "id": "pr-8",
+          "title": "Client Proofing and Delivery",
+          "duration_min": 7,
+          "summary": "Delivery is part of the product. Proof edited-enough candidates — your strongest, ordered — with written selection rules and a deadline (the deadline is a kindness). Deliver exactly what the brief and license define: folders that name themselves, sizes as agreed, the license summary in writing, and a handoff note. Close the project folder with complete records — the next project's head start.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Run one delivery end to end: proof a set with written rules, gather selections against a deadline, handle over-selection using the estimate's scope line, deliver folders that name themselves with the license summary, and close the project folder — brief, estimate, agreement, proofs, selections, delivered files, all findable in one minute."
+        },
+        {
+          "id": "pr-9",
+          "title": "Portfolio and Website Development",
+          "duration_min": 7,
+          "summary": "A portfolio is an argument for a specific job — not an archive of your best work. Choose the audience first; prove the niche with depth, currency, and range; win the first five images with consistent crops and editing; and verify the site minimums: the niche sentence where a stranger lands, an about page with a real photo, a working contact path, mobile layout. Two audiences means two arguments.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Build or refresh a portfolio for ONE audience: select against the niche's promise using the Advanced selection passes, order for the first five images, and verify the five website minimums. Use the coach's scores across your gallery to find the strongest candidates objectively. Then show it to someone in the target audience and ask what they'd hire you for — their answer grades the argument."
+        },
+        {
+          "id": "pr-10",
+          "title": "Marketing and Business Operations",
+          "duration_min": 7,
+          "summary": "Operations are the quiet half. Every project walks the same ten-stage map — inquiry, consultation, brief, estimate, agreement, planning, shoot, selection, delivery, follow-up — with a template at each stage. Promotion is steady presence: portfolio current, niche channels fed, referrals asked at delivery (the moment of maximum goodwill). The tracking board holds the truth: pending, owed, needs-a-nudge. An hour a week keeps the pipeline alive.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Draw your inquiry-to-delivery map with the templates you own, build the tracking board (a column per stage, a card per inquiry), and run one real or simulated inquiry through every stage — updating the board each time. Book the between-shoots hour: portfolio refresh, one outreach, board updated. The Progress screen doubles as your work-quality tracker across engagements."
+        },
+        {
+          "id": "pr-11",
+          "title": "Working with Assistants and Creative Teams",
+          "duration_min": 7,
+          "summary": "Growing past one pair of hands. Every helper gets a name and a job: assistant, second shooter, stylist, coordinator — ownership, not enthusiasm. One page and five minutes of briefing prevent on-set guessing. On set: quiet, clear, repeated — requests by name, transitions announced to everyone. Close the loop with specific, prompt feedback. The same habits that run clients run teams.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/250",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Run one shoot with at least one helper: write the one-page team brief, hold the five-minute meeting (each person says their job aloud), use named requests and announced transitions on set, and close with specific feedback including one thing they did better than expected. Write down what you'd brief differently next time."
+        },
+        {
+          "id": "pr-12",
+          "title": "Professional Standards and Risk Management",
+          "duration_min": 7,
+          "summary": "The professional's last habit: walk every planned shoot through five risk categories — people (safety outranks photographs), places (permissions verified in writing), equipment (failure points and backups), data (the card discipline applies), reputation (what could this shoot do to your name). One written contingency line per category, and the written positions document — ethics plus risk — becomes the practice's constitution. Insurance questions go to qualified professionals, not videos.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Take a planned shoot through the five-category risk walk in writing: people, places, equipment, data, reputation — one contingency line each. Update the written positions document from the Advanced ethics lesson with the risk habits. In the app, review the ethics positions against real photos: who appears, what the frame claims, would you defend it publicly — the same judgment, now at professional scale."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
       "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",

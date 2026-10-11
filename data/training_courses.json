@@ -388,6 +388,198 @@
       ]
     },
     {
+      "id": "advanced-class",
+      "category": "Advanced",
+      "title": "Advanced Photography Class",
+      "cover_emoji": "🏆",
+      "tagline": "Master the limits, find your voice — the complete 12-lesson class",
+      "description": "The capstone class, in twelve lessons: dynamic range as deliberate sacrifice (1), off-camera flash (2) and multi-light portraiture (3), composition as visual storytelling (4), the specialist genres and their priority orders (5), long exposure and night technique (6), panorama, focus stacking and HDR (7), color management and print preparation (8), advanced retouching (9), image selection and sequencing (10), developing a personal style (11), and ethics, permission and responsible photography (12). Every lesson ends in the simulator or a field drill with written observations.",
+      "level": "Advanced",
+      "price": "paid",
+      "lessons": [
+        {
+          "id": "av-1",
+          "title": "Advanced Exposure and Dynamic Range",
+          "duration_min": 8,
+          "summary": "High-contrast scenes exceed the sensor's span — and something gets lost. Choose what: shadows as graphic, highlights as look, added light to fit the span, or brackets to blend later. The histogram is the forecast: a shape touching both walls is the signal to pick a strategy before the shutter, not in the edit.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/125",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The simulator's histogram guide emulates the strategies: push exposure up and down with the EV buttons and watch which wall the shape approaches — that is the dynamic-range forecast. Then the field drill: one high-contrast scene three ways (protect highlights, protect shadows, bracket two stops apart), writing down what each version sacrificed."
+        },
+        {
+          "id": "av-2",
+          "title": "Off-Camera Flash and Lighting Setups",
+          "duration_min": 8,
+          "summary": "Take the flash off the camera and the light's angle becomes a creative decision. Verify sync, choose a modifier for the shadow quality — size is softness — and learn positions by moving one light through its arc: 45 degrees models, 90 divides, behind rims. Key sets the look; fill softens what the key made. That habit scales to any studio.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/125",
+            "aperture": "f/4"
+          },
+          "practice_brief": "No flash simulation in the app — this drill is honest field and equipment work. Build the one-light portrait: 45 degrees modified, then three positions, then fill from the opposite side. State position and power for every frame. Use the app's portrait style afterward as the baseline the lit version should beat."
+        },
+        {
+          "id": "av-3",
+          "title": "Multiple-Light Portraiture",
+          "duration_min": 8,
+          "summary": "Studio portraiture is one key light doing the main work, plus assistants with single jobs: fill opens the key's shadows, a rim separates subject from background, a background light controls the backdrop alone. Ratios — 2:1 gentle to 8:1 severe — are the taste dial. Build one light at a time, name each job, and keep the portrait you prefer, not the one with the most lights.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/125",
+            "aperture": "f/4"
+          },
+          "practice_brief": "Field and equipment drill: build the four-stage setup — key only, key plus fill, plus rim, plus background — photographing at each stage and writing one line about what the light contributed. The classic patterns (Rembrandt, loop, butterfly, split) are key positions; verify each against the shadow shape you actually produced."
+        },
+        {
+          "id": "av-4",
+          "title": "Advanced Composition and Visual Storytelling",
+          "duration_min": 8,
+          "summary": "Composition carries meaning at the advanced level: gesture tells stories in bodies, color in mood, relationships in the frame. One subject can carry several stories, told by viewpoint and layering — and a sequence of images forms a sentence whose meaning changes with order. Compose for the story, then edit the story into a sequence.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Photograph one subject several ways to tell different stories, add the frames to your gallery, and sequence the strongest three in the workspace — reorder once and note the meaning shift. Load a picture style to hold the mood consistent across the set, and let the coach's reads show which frames carry the story hardest."
+        },
+        {
+          "id": "av-5",
+          "title": "Specialist Genres",
+          "duration_min": 8,
+          "summary": "Skills are shared; genres specialize by priority order. Wildlife demands shutter and patience, sports anticipation, architecture verticals, macro depth discipline, events consistency, food color honesty. The transfer method: take the skills you own, reorder the priorities for the genre's demands, and go deep on one — the others borrow.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "400",
+            "shutter_speed": "1/1000",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The style selector IS this lesson: load Wildlife, Sports, Food, and Night styles in turn and watch each load a different priority order — shutter floors, ISO ceilings, aperture targets. Choose one genre, write its priority order, shoot one session in it, and review against the genre's demands rather than your general standards. Wildlife ethics hold everywhere: the animal's welfare outranks the photograph."
+        },
+        {
+          "id": "av-6",
+          "title": "Long Exposure and Night Photography",
+          "duration_min": 8,
+          "summary": "At night the rules reverse: the tripod is the exposure, focus happens once deliberately on a magnified live view, and metering gives way to test frames scaled into final exposures. Moving lights paint with time — thirty seconds of traffic becomes ribbons. Accept the noise the image earns, keep ISO as low as the shutter allows, and stop when the frames are considered.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "1600",
+            "shutter_speed": "1/8",
+            "aperture": "f/2.8"
+          },
+          "practice_brief": "The simulator shows the trade you'll live at night: walk the shutter ladder from 1/8 toward seconds and watch brightness rise while the shake floor falls away — the reason the tripod is the exposure. Then the real drill: a tripod night scene, focused once deliberately, test frame at high ISO, scaled to the final exposure. Record test values and final values and the stops between."
+        },
+        {
+          "id": "av-7",
+          "title": "Panorama, Focus Stacking, and HDR",
+          "duration_min": 8,
+          "summary": "Three limits, three combinations. Framing wider than any lens: panorama. Depth beyond any aperture: focus stacking. Brightness beyond one frame: HDR. All three demand aligned captures — locked camera, consistent settings, generous overlap, one variable changed — and all three are rescues for real limits, not replacements for craft. The best photograph is still sometimes one frame.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/250",
+            "aperture": "f/11"
+          },
+          "practice_brief": "Capture drill: choose the technique that solves a limit you actually hit — a wide panorama with 30% overlap, a close focus stack in even steps, or a two-stop HDR bracket. Combine in software and review honestly for seams, ghosts, and halos. Use the coach on the single frame first to confirm the limit was real before spending the extra captures."
+        },
+        {
+          "id": "av-8",
+          "title": "Color Management and Print Preparation",
+          "duration_min": 8,
+          "summary": "Screens emit light; paper reflects it — print is a translation. Color spaces are boxes, and delivery means the destination's box. Soft proofing rehearses the print so surprises become decisions; export at print size as a separate copy. The two rules that matter: proof first, original untouched.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "100",
+            "shutter_speed": "1/250",
+            "aperture": "f/8"
+          },
+          "practice_brief": "The app's role is pre-judgment: analyze the file in the coach and confirm the histogram holds no clipping before it meets paper — and the gallery original stays untouched through every export, exactly as the workflow lesson demands. The soft proofing, export, and physical comparison happen in your editor and print service; note what the proof predicted and what it missed."
+        },
+        {
+          "id": "av-9",
+          "title": "Advanced Retouching and Image Finishing",
+          "duration_min": 8,
+          "summary": "Finishing is surgical: local light where the story needs it, accidents subtracted, targeted color shaping the eye's path. The lines are believable and honest — subtract the accidental, not the factual, and label what AI tools invent. The final test is the thumbnail: a finish that announces itself is a finish too far.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The simulator's controls are the restrained finish preview: EV for the local-brightness instinct, white balance and picture style for the color path — each move small, each answering 'does this serve the photograph?' Then the surgical layer happens in your editor: dodge, burn, subtract the accidental. Finish with the thumbnail test — small view, beside the original."
+        },
+        {
+          "id": "av-10",
+          "title": "Image Selection and Sequencing",
+          "duration_min": 8,
+          "summary": "The edit is where photographers are made. First pass ruthless and fast — the technically dead go without sentiment. Second pass judged against stated criteria, not mood. Order is meaning: the opening sets, middles develop with varied rhythm, the closing lands. Darlings that break the sequence's rhythm go to a folder of their own.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The gallery and Progress screen are the editing table: take this week's gallery set, cut the technically dead, judge survivors against stated criteria, and sequence the survivors into a story with a deliberate opening and closing. Load each finalist into the coach — its read is one vote, not the verdict. Write the one-sentence story and verify the sequence tells it."
+        },
+        {
+          "id": "av-11",
+          "title": "Developing a Personal Style",
+          "duration_min": 8,
+          "summary": "Style is found, then chosen. Audit thirty of your own images across four columns — light, color, subject, composition — and name the patterns you never planned. Keep the loved patterns as commitments; practice at the edges you avoid. Borrow technique freely — the voice comes from your own frames, and the fastest route to a generic portfolio is a borrowed style.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "The Progress screen is the audit table: your saved analyses carry scores, styles, and history across shoots. Read them for patterns — which light scores best, which style recurs, what subject keeps returning. Name three patterns (at least one unplanned), write three commitments for the next shoot, and one edge you'll practice. Shoot for the commitments; audit again after."
+        },
+        {
+          "id": "av-12",
+          "title": "Ethics, Permission, and Responsible Photography",
+          "duration_min": 8,
+          "summary": "Advanced skills carry advanced responsibilities. Consent precedes the shutter when people are involved — and publication consent is separate. Selection is a claim: hold it fairly. Editing stays believable and honest, captions included, and AI-assisted inventions are owned. Write your positions down — deliberate responsibility is the advanced photographer's real signature.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Advanced",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "Take three of your own photographs and write the ethical review of each: who appears and did they meaningfully consent to photo AND publication, what the frame claims, what was edited, and whether you'd defend it publicly. The app keeps those photos private to your device — a safe place to practice the judgment before the public ever sees a frame."
+        }
+      ]
+    },
+    {
       "id": "free-exposure-triangle",
       "category": "Fundamentals",
       "title": "Mastering the Exposure Triangle",

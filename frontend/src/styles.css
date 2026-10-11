@@ -982,6 +982,32 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   gap: 12px;
 }
 
+/* ---------- hall of winners (past seasons) ---------- */
+.hall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.hall-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  display: grid;
+  gap: 5px;
+}
+.hall-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: calc(var(--radius-sm) - 2px);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+}
+
 /* ---------- content-terms block notice (workspace) ---------- */
 .blocked-notice {
   height: 100%;

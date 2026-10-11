@@ -633,8 +633,10 @@ export const useStore = create<PhotoState>()(
 
       // ---- holiday challenges ----
       challengeContext: () => {
-        const id = get().activeChallengeId;
-        const holiday = holidayById(id);
+        // Accepted challenge wins; otherwise any holiday whose window is open
+        // puts the coach in holiday mode (themed responses) — but shot progress
+        // and the badge only accrue to explicitly accepted challenges.
+        const holiday = holidayById(get().activeChallengeId) ?? activeHoliday();
         if (!holiday) return null;
         return { id: holiday.id, title: holiday.challenge.title, goal: holiday.challenge.goal };
       },

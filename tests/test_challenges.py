@@ -187,6 +187,30 @@ def test_prune_when_next_window_opens(monkeypatch):
 
 # ------------------------------------------------------------------- delete
 
+def test_winners_archived_and_survive_prune(monkeypatch):
+    freeze(monkeypatch, "2026-10-28T12:00:00")
+    assert submit(device_id="device-a-000001", color=(30, 30, 30), score=70).status_code == 200  # entry 1
+    assert submit(device_id="device-b-000001", color=(60, 60, 60), score=90).status_code == 200  # entry 2
+    assert submit(device_id="device-c-000001", color=(90, 90, 90), score=80).status_code == 200  # entry 3
+
+    freeze(monkeypatch, "2026-11-04T12:00:00")
+    for voter in ("device-d-000001", "device-e-000001"):
+        client.post("/api/challenge/vote", data={"device_id": voter, "holiday_id": "halloween", "entry_ids": "[2]"})
+    client.post("/api/challenge/vote", data={"device_id": "device-a-000001", "holiday_id": "halloween", "entry_ids": "[3]"})
+
+    freeze(monkeypatch, "2026-11-12T12:00:00")  # results — podium announced + archived
+    view = client.get("/api/challenge/halloween").json()
+    assert len(view["winners"]) == 2  # 1st (2 votes) + 2nd (1 vote); 0-vote 3rd not announced
+    assert view["past_winners"] == []  # nothing from earlier years yet
+
+    freeze(monkeypatch, "2026-11-20T12:00:00")  # gallery pruned — archive must survive
+    view = client.get("/api/challenge/halloween").json()
+    assert view["entries_count"] == 0
+    assert [p["place"] for p in view["past_winners"]] == [1, 2]
+    assert view["past_winners"][0]["year"] == 2026
+    assert view["past_winners"][0]["thumb"].startswith("data:image/jpeg;base64,")
+
+
 def test_delete_own_entry_while_submitting(monkeypatch):
     freeze(monkeypatch, "2026-10-28T12:00:00")
     submit(device_id="device-del-00001", color=(15, 15, 15))

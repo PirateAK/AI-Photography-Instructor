@@ -312,6 +312,35 @@ export default function ChallengeScreen() {
             </div>
           )}
 
+          {view.past_winners.length > 0 && (
+            <div className="card" style={{ padding: 16, marginBottom: 14 }}>
+              <div className="section-title">🏆 Hall of winners — shots to aspire to</div>
+              <div className="hall-grid">
+                {view.past_winners.map((p) => (
+                  <div key={`${p.year}-${p.place}`} className="hall-card">
+                    <img
+                      src={p.thumb}
+                      alt={`${p.year} ${p.place === 1 ? "1st" : p.place === 2 ? "2nd" : "3rd"} place`}
+                      draggable={false}
+                      className="hall-img"
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                    <div className="challenge-entry-meta">
+                      <span className="chip good">
+                        {p.place === 1 ? "🥇" : p.place === 2 ? "🥈" : "🥉"} {p.year}
+                      </span>
+                      <span className="chip low">Coach {p.score}/100</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="muted" style={{ fontSize: "0.76rem", margin: "8px 0 0" }}>
+                Winners' galleries from past seasons — the images stay in the hall, full-res
+                originals never leave their photographers' devices.
+              </p>
+            </div>
+          )}
+
           <div className="challenge-grid">
             {view.entries.map((e) => {
               const place = view.winners.find((w) => w.entry_id === e.id)?.place;

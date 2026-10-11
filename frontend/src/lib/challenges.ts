@@ -19,6 +19,14 @@ export interface ChallengeWinner {
   votes: number;
 }
 
+export interface PastWinner {
+  year: number;
+  place: number;
+  votes: number;
+  score: number;
+  thumb: string;
+}
+
 export interface ChallengeView {
   holiday_id: string;
   name: string;
@@ -35,6 +43,7 @@ export interface ChallengeView {
   my_entries: number[];
   my_votes: number[];
   winners: ChallengeWinner[];
+  past_winners: PastWinner[];
 }
 
 export async function fetchChallenge(holidayId: string, deviceId: string): Promise<ChallengeView> {

@@ -7,6 +7,7 @@ import {
 } from "../lib/holidays";
 import { submitChallengeEntry } from "../lib/challenges";
 import { getCameras } from "../lib/camera";
+import type { ChatMessage } from "../lib/types";
 
 /** 🎄 Holiday challenge card — lives at the top of the coach pane.
  * Suggests the active holiday's challenge, tracks accepted-challenge progress,
@@ -27,11 +28,20 @@ export default function HolidayCard() {
   const isCompleted = !!accepted && completedChallenges.includes(accepted.id);
   const shots = accepted ? Math.min(challengeShots[accepted.id] ?? 0, CHALLENGE_SHOTS_TO_COMPLETE) : 0;
 
-  // Coach "loads" with the holiday greeting when the chat is still empty.
+  // Coach "loads" with the holiday greeting + proactive shoot ideas when the
+  // chat is still empty — the coach opens in holiday mode, not waiting to be asked.
   useEffect(() => {
     const holiday = accepted ?? inWindow?.holiday ?? null;
     if (holiday && useStore.getState().chatMessages.length === 0) {
-      useStore.setState({ chatMessages: [{ role: "assistant", text: holiday.greeting }] });
+      const messages: ChatMessage[] = [{ role: "assistant", text: holiday.greeting }];
+      if (holiday.tips.length > 0) {
+        const ideas = holiday.tips.map((tip, i) => `${i + 1}. ${tip}`).join("\n");
+        messages.push({
+          role: "assistant",
+          text: `📸 Shooting ideas for ${holiday.name}:\n${ideas}\nTap a topic on the card and I'll go deeper on any of them.`,
+        });
+      }
+      useStore.setState({ chatMessages: messages });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

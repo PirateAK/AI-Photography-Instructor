@@ -1,0 +1,27 @@
+[
+  {
+    "content": "[hcm-1] challengeContext falls back to in-window holiday — coach responses follow the theme from banner entry; badge progress stays acceptance-gated",
+    "id": "1",
+    "status": "in_progress"
+  },
+  {
+    "content": "[hcm-2] chat seeding: greeting + proactive shoot-ideas message from config tips",
+    "id": "2",
+    "status": "pending"
+  },
+  {
+    "content": "[hcm-3] backend winners_archive: podium persisted at results, survives prune, past_winners in view + tests",
+    "id": "3",
+    "status": "pending"
+  },
+  {
+    "content": "[hcm-4] ChallengeScreen 'Hall of winners — shots to aspire to' strip",
+    "id": "4",
+    "status": "pending"
+  },
+  {
+    "content": "[hcm-5] full pass + push + context",
+    "id": "5",
+    "status": "pending"
+  }
+]

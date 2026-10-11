@@ -57,6 +57,18 @@ CREATE TABLE IF NOT EXISTS votes (
     PRIMARY KEY (entry_id, device_id)
 );
 CREATE INDEX IF NOT EXISTS idx_votes_device ON votes(device_id);
+CREATE TABLE IF NOT EXISTS winners_archive (
+    holiday_id TEXT NOT NULL,
+    year INTEGER NOT NULL,
+    place INTEGER NOT NULL,
+    entry_id INTEGER NOT NULL,
+    votes INTEGER NOT NULL,
+    score INTEGER NOT NULL,
+    device_id TEXT NOT NULL,
+    thumb BLOB NOT NULL,
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (holiday_id, year, place)
+);
 """
 
 # ------------------------------------------------------------------ calendar
@@ -118,6 +130,7 @@ def _windows(now: datetime) -> list[dict]:
                 "name": h["name"],
                 "emoji": h["emoji"],
                 "challenge": h["challenge"]["title"],
+                "year": date.year,
                 "start": start,
                 "end": end,
                 "vote_end": end + timedelta(days=VOTING_DAYS),
@@ -284,9 +297,34 @@ async def challenge_view(holiday_id: str, device_id: str = ""):
     winners = []
     if show_votes and rows:
         ranked = sorted(rows, key=lambda r: (-r["votes"], -r["score"], r["created_at"], r["id"]))
-        for place, r in enumerate(ranked[:3], start=1):
-            if r["votes"] > 0 or place == 1:
-                winners.append({"entry_id": r["id"], "place": place, "votes": r["votes"]})
+        with _LOCK, _connect() as conn:
+            for place, r in enumerate(ranked[:3], start=1):
+                if r["votes"] > 0 or place == 1:
+                    winners.append({"entry_id": r["id"], "place": place, "votes": r["votes"]})
+                    # podium becomes permanent: archived so it survives the gallery
+                    # prune and can be shown as aspiration in later seasons
+                    conn.execute(
+                        "INSERT OR REPLACE INTO winners_archive "
+                        "(holiday_id, year, place, entry_id, votes, score, device_id, thumb, created_at) "
+                        "VALUES (?,?,?,?,?,?,?,?,?)",
+                        (holiday_id, w["year"], place, r["id"], r["votes"], r["score"],
+                         r["device_id"], r["image"], r["created_at"]),
+                    )
+
+    past_winners = []
+    with _LOCK, _connect() as conn:
+        for row in conn.execute(
+            "SELECT year, place, votes, score, thumb FROM winners_archive "
+            "WHERE holiday_id = ? AND year < ? ORDER BY year DESC, place ASC LIMIT 12",
+            (holiday_id, w["year"]),
+        ).fetchall():
+            past_winners.append({
+                "year": row["year"],
+                "place": row["place"],
+                "votes": row["votes"],
+                "score": row["score"],
+                "thumb": "data:image/jpeg;base64," + base64.b64encode(row["thumb"]).decode("ascii"),
+            })
 
     return {
         "holiday_id": holiday_id,
@@ -304,6 +342,7 @@ async def challenge_view(holiday_id: str, device_id: str = ""):
         "my_entries": sorted(mine_ids),
         "my_votes": my_votes,
         "winners": winners,
+        "past_winners": past_winners,
     }
 
 

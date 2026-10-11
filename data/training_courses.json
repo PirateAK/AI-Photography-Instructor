@@ -8,7 +8,7 @@
       "title": "Beginner Photography Class",
       "cover_emoji": "🧭",
       "tagline": "Know your camera before you touch a setting — 11 lessons",
-      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
+      "description": "A complete beginner class built around understanding the camera first. Lesson 1 maps the key parts — lens, viewfinder or screen, shutter button, aperture, shutter and sensor — and follows the light through DSLR and mirrorless bodies. Lesson 2 turns that knowledge into a decision: phone vs built-in-lens vs DSLR vs mirrorless, how mounts govern lens compatibility, and choosing equipment for your subject. Lesson 3 adds lenses: focal length and framing, prime versus zoom, and why perspective comes from where you stand. Lesson 4 opens the mode dial: Auto, Program, aperture- and shutter-priority, and Manual — what you control in each, what the camera handles, and why the names differ by brand. Lesson 5 brings the three settings together as the exposure triangle — the brightness dials and their side effects: depth of field, motion, and noise. Lesson 6 covers focus: placing it deliberately, guiding autofocus, and checking sharpness up close instead of trusting the small screen. Lesson 7 steps back from dials to the frame itself: balance, leading lines, and the rule of thirds as tools — not rules — for deciding what to include and where it sits. Lesson 8 reads the light itself: front, side and backlight, soft versus hard sources, and how moving the subject or yourself rewrites the shadows. Later lessons build toward low light, composition, and beyond. Every lesson ends in the app's simulator, so you practice on real controls while you watch.",
       "level": "Beginner",
       "price": "free",
       "lessons": [
@@ -116,6 +116,21 @@
             "aperture": "f/5.6"
           },
           "practice_brief": "In the field, make three photos of one subject: centered, off-center along a third (turn on your camera's grid display if it has one), and one using a leading line or natural frame like a doorway. Review all three and ask where your eye lands first. In the app, run the same photo through the coach with a style selected and read its composition notes, and use the lens selector to compare wider versus tighter framing of the same scene — framing is literally what gets included."
+        },
+        {
+          "id": "bc-8",
+          "title": "Lighting Basics: Direction, Softness, and Mood",
+          "duration_min": 6,
+          "summary": "Light's direction and quality shape shadows, contrast and mood before any dial is touched. Front light flattens and flatters; side light sculpts — shape and texture show through stronger shadows; backlight rims the subject or silhouettes it, and often tricks the meter into darkening your subject. Softness follows the source's apparent size: bigger or diffused sources make gentle, gradual shadows; small hard sources make crisp edges and contrast. Moving the subject or yourself changes the light in the frame — and the exposure along with it.",
+          "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "video_kind": "mp4",
+          "difficulty": "Beginner",
+          "practice_preset": {
+            "iso": "200",
+            "shutter_speed": "1/250",
+            "aperture": "f/5.6"
+          },
+          "practice_brief": "In the field: one subject, three photos — front light, side light, backlight. For each, note where the light comes from, whether the shadow edges are soft or hard, and how the exposure looks. Backlight will try to silhouette your subject; that's the meter reacting to the bright background. In the app, see that reaction directly: use the EV buttons in the histogram guide to darken and brighten and watch the whole shape slide — a backlit frame leans bright while your subject sits dark, and −/EV or spot metering is the rescue. Move the subject or your feet and the light changes with you."
         }
       ]
     },

@@ -19,6 +19,7 @@ export default function ProgressScreen() {
   const goUpload = useStore((s) => s.goUpload);
   const dataUrl = useStore((s) => s.dataUrl);
   const openWorkspace = useStore((s) => s.openWorkspace);
+  const goCourse = useStore((s) => s.goCourse);
 
   const [sessions, setSessions] = useState<HistorySession[]>([]);
   const [loading, setLoading] = useState(true);
@@ -116,8 +117,21 @@ export default function ProgressScreen() {
             <div className="curriculum-list">
               {courses.map((course) => {
                 const p = courseProgress(course, completedLessons);
+                const complete = p.done >= p.total;
                 return (
-                  <div key={course.id} className="curriculum-row">
+                  <div
+                    key={course.id}
+                    className="curriculum-row clickable"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => goCourse(course.id)}
+                    onKeyDown={(e) => e.key === "Enter" && goCourse(course.id)}
+                    title={
+                      complete
+                        ? "Review — jump back into this class"
+                        : "Continue — jump to your next lesson in this class"
+                    }
+                  >
                     <span className="curriculum-title">
                       {course.cover_emoji} {course.title}
                     </span>
@@ -127,14 +141,22 @@ export default function ProgressScreen() {
                     <span className="muted" style={{ fontSize: "0.74rem", fontVariantNumeric: "tabular-nums" }}>
                       {p.done}/{p.total}
                     </span>
+                    <span className={`curriculum-go ${complete ? "review" : ""}`}>
+                      {complete ? "↻" : "▶"}
+                    </span>
                   </div>
                 );
               })}
             </div>
+            <p className="muted" style={{ margin: "10px 0 0", fontSize: "0.75rem" }}>
+              Click a class to jump straight to your next lesson.
+            </p>
           </div>
 
-          <div className="section-title">Sessions</div>
-          <div className="history-list">
+          <div className="section-title">
+            Sessions{sessions.length > 0 && ` (${sessions.length})`}
+          </div>
+          <div className="history-list history-scroll">
             {sessions.map((s) => (
               <div className="card history-row" key={s.id}>
                 {s.thumbnail ? (

@@ -80,6 +80,11 @@ export function courseProgress(
   return { done, total, pct: total === 0 ? 0 : Math.round((done / total) * 100) };
 }
 
+/** The next lesson a learner should open: first incomplete, else start over. */
+export function nextLessonFor(course: TrainingCourse, completedIds: string[]): Lesson {
+  return course.lessons.find((l) => !completedIds.includes(l.id)) ?? course.lessons[0];
+}
+
 export function isUnlocked(course: TrainingCourse, unlockedIds: string[]): boolean {
   return course.price === "free" || unlockedIds.includes(course.id);
 }

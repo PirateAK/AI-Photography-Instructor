@@ -3,6 +3,8 @@
 // unlock via redemption code (MVP stub) or purchase on the store site.
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useStore } from "../state/store";
 import {
   appConfig,
   canManageContent,
@@ -12,6 +14,7 @@ import {
   getCourse,
   isUnlocked,
   lessonDifficulty,
+  nextLessonFor,
   totalMinutes,
   type Lesson,
   type TrainingCourse,
@@ -33,6 +36,16 @@ export default function ClassesScreen() {
   const visibleCourses = useMemo(() => courses.filter((c) => !c.hidden), [courses]);
   const openCourse = openId ? courses.find((c) => c.id === openId) : undefined;
 
+  // deep link from the Progress curriculum: open the course and land on the
+  // learner's next lesson
+  useEffect(() => {
+    if (courseToOpen) {
+      setOpenId(courseToOpen);
+      useStore.setState({ courseToOpen: null });
+    }
+  }, [courseToOpen]);
+  const startLessonId = openCourse ? nextLessonFor(openCourse, completedLessons).id : null;
+
   if (openCourse) {
     return (
       <div className="upload-wrap">
@@ -40,6 +53,7 @@ export default function ClassesScreen() {
           course={openCourse}
           unlocked={isUnlocked(openCourse, unlockedCourses)}
           completedLessons={completedLessons}
+          startLessonId={startLessonId}
           onBack={() => setOpenId(null)}
         />
       </div>
@@ -166,15 +180,33 @@ function CourseDetail({
   course,
   unlocked,
   completedLessons,
+  startLessonId,
   onBack,
 }: {
   course: TrainingCourse;
   unlocked: boolean;
   completedLessons: string[];
+  startLessonId?: string | null;
   onBack: () => void;
 }) {
   const toggleLessonComplete = useStore((s) => s.toggleLessonComplete);
-  const [activeLesson, setActiveLesson] = useState<Lesson>(course.lessons[0]);
+  const [activeLesson, setActiveLesson] = useState<Lesson>(
+    course.lessons.find((l) => l.id === startLessonId) ?? course.lessons[0],
+  );
+  const activeRef = useRef<HTMLDivElement>(null);
+  const [flash, setFlash] = useState(Boolean(startLessonId));
+
+  // a "continue" jump lands on the learner's next lesson, highlighted
+  useEffect(() => {
+    if (!startLessonId) return;
+    const t = setTimeout(() => {
+      activeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const t2 = setTimeout(() => setFlash(false), 2400);
+      return () => clearTimeout(t2);
+    }, 250);
+    return () => clearTimeout(t);
+  }, [startLessonId]);
+
   const [difficultyFilter, setDifficultyFilter] = useState<"All" | "Beginner" | "Intermediate" | "Advanced">("All");
   const practicePreset = useStore((s) => s.practicePreset);
   const unlockWithCode = useStore((s) => s.unlockWithCode);
@@ -242,7 +274,10 @@ function CourseDetail({
                 return (
                   <div
                     key={lesson.id}
-                    className={`lesson-row ${lesson.id === activeLesson.id ? "active" : ""}`}
+                    ref={lesson.id === activeLesson.id ? activeRef : undefined}
+                    className={`lesson-row ${lesson.id === activeLesson.id ? "active" : ""} ${
+                      flash && lesson.id === activeLesson.id ? "flash" : ""
+                    }`}
                     onClick={() => setActiveLesson(lesson)}
                     role="button"
                     tabIndex={0}

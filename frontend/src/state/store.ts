@@ -89,6 +89,8 @@ interface PhotoState {
   galleryItems: GalleryMeta[];
   lastRemovedGallery: GalleryEntry | null;
   photoLoading: boolean;
+  courseToOpen: string | null;
+  photoLoading: boolean;
 
   styles: ShootingStyle[];
   deviceId: string;
@@ -123,6 +125,7 @@ interface PhotoState {
   goCourseManager: () => void;
   goProgress: () => void;
   goInstructor: () => void;
+  goCourse: (courseId: string) => void;
   unlockInstructor: (code: string) => boolean;
   lockInstructor: () => void;
   loadGallery: () => Promise<void>;
@@ -195,6 +198,8 @@ export const useStore = create<PhotoState>()(
       instructorUnlocked: false,
       galleryItems: [],
       lastRemovedGallery: null,
+      photoLoading: false,
+      courseToOpen: null,
       photoLoading: false,
 
       styles: styleCatalog.styles,
@@ -406,6 +411,7 @@ export const useStore = create<PhotoState>()(
       goCourseManager: () => set({ screen: "coursemanager" }),
       goProgress: () => set({ screen: "progress" }),
       goInstructor: () => set({ screen: "instructor" }),
+      goCourse: (courseId) => set({ screen: "classes", courseToOpen: courseId }),
       unlockInstructor: (code) => {
         if (!isInstructorCode(code)) return false;
         set({

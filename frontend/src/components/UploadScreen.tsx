@@ -142,7 +142,7 @@ export default function UploadScreen() {
         >
           <span className="muskeg-banner-text">
             <strong>Muskegman.com</strong>
-            <span className="muskeg-banner-sub">Photography from the Last Frontier</span>
+            <span className="muskeg-banner-sub">Photo software &amp; prints — Pro-Photo_Sorter inside</span>
           </span>
           <span className="muskeg-banner-go" aria-hidden="true">↗</span>
         </a>

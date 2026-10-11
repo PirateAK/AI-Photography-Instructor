@@ -7,7 +7,7 @@
   "frontend": {
     "root": "frontend",
     "dist": "dist",
-    "install": "npm install",
+    "install": "npm ci",
     "build": "npm run build"
   }
 }

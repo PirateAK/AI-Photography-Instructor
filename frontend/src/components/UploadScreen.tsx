@@ -8,7 +8,7 @@ import ModelSelector from "./ModelSelector";
 import GalleryPanel from "./GalleryPanel";
 import pkg from "../../package.json";
 import { shareApp as appShare } from "../lib/share";
-import { activeHolidayWindow } from "../lib/holidays";
+import { activeHolidayWindow, contestSchedule, HOLIDAYS } from "../lib/holidays";
 
 const WHEEL_ROW_SIZE = 5;
 const RELEASE_DATE = "October 2026";
@@ -34,6 +34,10 @@ export default function UploadScreen() {
   const cameras = getCameras();
   const styles = useStore((s) => s.styles);
   const holidayWindow = activeHolidayWindow();
+  const goChallenge = useStore((s) => s.goChallenge);
+  const contestLive = HOLIDAYS.map((h) => ({ h, phase: contestSchedule(h).phase })).find(
+    (x) => x.phase === "voting" || x.phase === "results",
+  );
 
   const [dragging, setDragging] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -200,6 +204,21 @@ export default function UploadScreen() {
       </div>
 
       {galleryOpen && <GalleryPanel onClose={() => setGalleryOpen(false)} autoAnalyze />}
+
+      {contestLive && !holidayWindow && (
+        <button
+          type="button"
+          className="contest-strip"
+          onClick={() => goChallenge(contestLive.h.id)}
+          title="Open the challenge gallery"
+        >
+          <span>
+            🏆 {contestLive.h.emoji} {contestLive.h.name} Photo Challenge —{" "}
+            {contestLive.phase === "voting" ? "voting is open, pick your top 3" : "results are in"}
+          </span>
+          <span aria-hidden="true">→</span>
+        </button>
+      )}
 
       <div className="upload-form">
         <label>

@@ -881,6 +881,113 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   margin-left: 4px;
 }
 .holiday-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.holiday-chip.active {
+  border-color: var(--accent);
+  background: rgba(10, 132, 255, 0.18);
+  color: #7db8ff;
+}
+
+/* ---------- challenge contest screen ---------- */.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+.challenge-entry {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.challenge-entry.picked { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.challenge-entry.podium-1 { border-color: rgba(255, 214, 10, 0.6); }
+.challenge-entry.podium-2 { border-color: rgba(199, 204, 214, 0.55); }
+.challenge-entry.podium-3 { border-color: rgba(224, 160, 106, 0.55); }
+.challenge-img-btn {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: calc(var(--radius) - 4px);
+  overflow: hidden;
+  cursor: default;
+  display: block;
+  width: 100%;
+}
+.challenge-entry.picked .challenge-img-btn { cursor: pointer; }
+.challenge-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+}
+.challenge-pick {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: rgba(12, 14, 18, 0.55);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+.challenge-entry.picked .challenge-pick {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.challenge-medal {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+.challenge-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+.challenge-podium {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* ---------- contest strip (voting/results on the home screen) ---------- */
+.contest-strip {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 214, 10, 0.5);
+  background: rgba(255, 214, 10, 0.07);
+  color: #ffd60a;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.contest-strip:hover {
+  border-color: #ffd60a;
+  transform: translateY(-1px);
+}
 
 /* ---------- on-device photo gallery (vertical wheel) ---------- */
 .image-pane { position: relative; }
@@ -1003,6 +1110,33 @@ input[type="range"].slider { width: 190px; accent-color: var(--accent); }
   background: rgba(0, 0, 0, 0.55);
   border-radius: 5px;
   padding: 2px 7px;
+  pointer-events: none;
+}
+.gallery-share-btn {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border-radius: 7px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.gallery-share-btn:hover { background: rgba(10, 132, 255, 0.65); }
+.gallery-share-note {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  font-size: 0.68rem;
+  color: #e8eaf0;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 6px;
+  padding: 3px 7px;
+  text-align: center;
   pointer-events: none;
 }
 .gallery-toast {

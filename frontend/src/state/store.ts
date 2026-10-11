@@ -33,7 +33,7 @@ import type { StyleLesson } from "../lib/styles";
 import { courses as bundledCourses, unlockAllPaid, isValidCode, isInstructorCode } from "../lib/training";
 import type { TrainingCourse } from "../lib/training";
 import { FALLBACK_TIPS, tipFor } from "../lib/tips";
-import { activeHoliday, challengeAfterShot, holidayById } from "../lib/holidays";
+import { activeHoliday, challengeAfterShot, contestSchedule, holidayById, HOLIDAYS } from "../lib/holidays";
 import type {
   AnalysisResult,
   CameraModel,
@@ -56,7 +56,7 @@ function exifSettings(cam: CameraModel, exif: ExifInfo | null): Settings | null 
 }
 
 interface PhotoState {
-  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "coursemanager" | "progress" | "instructor";
+  screen: "upload" | "workspace" | "settings" | "classes" | "stylemanager" | "coursemanager" | "progress" | "instructor" | "challenge";
   file: File | null;
   dataUrl: string;
   exif: ExifInfo | null;
@@ -102,6 +102,8 @@ interface PhotoState {
   activeChallengeId: string | null;
   challengeShots: Record<string, number>;
   completedChallenges: string[];
+  challengeHolidayId: string | null; // which contest gallery is open (transient)
+  challengePhotoByEntry: Record<string, number>; // entryId -> local gallery id with the full-res original
 
   // actions
   loadFile: (file: File) => Promise<void>;
@@ -136,7 +138,7 @@ interface PhotoState {
   loadGallery: () => Promise<void>;
   addToGallery: (
     files: File[],
-  ) => Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[] }>;
+  ) => Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[]; ids: number[] }>;
   removeFromGallery: (id: number) => Promise<void>;
   undoGalleryRemove: () => Promise<void>;
   loadFromGallery: (id: number) => Promise<void>;
@@ -158,6 +160,8 @@ interface PhotoState {
   dismissChallenge: () => void;
   noteChallengeShot: () => boolean;
   challengeContext: () => ChallengeContext | null;
+  goChallenge: (holidayId: string | null) => void;
+  linkChallengePhoto: (entryId: number, galleryId: number) => void;
   practicePreset: (preset: Record<string, string | number>, brief: string) => Promise<void>;
 }
 
@@ -222,6 +226,8 @@ export const useStore = create<PhotoState>()(
       activeChallengeId: null,
       challengeShots: {},
       completedChallenges: [],
+      challengeHolidayId: null,
+      challengePhotoByEntry: {},
 
       loadFile: async (file) => {
         const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -448,7 +454,7 @@ export const useStore = create<PhotoState>()(
       },
 
       addToGallery: async (files) => {
-        const { added, evicted, skipped, failures } = await idbAddToGallery(files);
+        const { added, evicted, skipped, failures, ids } = await idbAddToGallery(files);
         await get().loadGallery();
         if (evicted > 0) {
           set({
@@ -458,7 +464,7 @@ export const useStore = create<PhotoState>()(
             }),
           });
         }
-        return { added, evicted, skipped, failures };
+        return { added, evicted, skipped, failures, ids };
       },
 
       removeFromGallery: async (id) => {
@@ -640,6 +646,21 @@ export const useStore = create<PhotoState>()(
         set({ challengeShots: r.shots, completedChallenges: r.completed });
         return r.justCompleted;
       },
+
+      goChallenge: (holidayId) => {
+        let id = holidayId;
+        if (!id) {
+          // a contest in voting/results wins, else the in-window holiday
+          const live = HOLIDAYS.map((h) => ({ id: h.id, phase: contestSchedule(h).phase })).find(
+            (x) => x.phase === "voting" || x.phase === "results",
+          );
+          id = live?.id ?? activeHoliday()?.id ?? null;
+        }
+        set({ screen: "challenge", challengeHolidayId: id });
+      },
+
+      linkChallengePhoto: (entryId, galleryId) =>
+        set({ challengePhotoByEntry: { ...get().challengePhotoByEntry, [String(entryId)]: galleryId } }),
 
       practicePreset: async (preset, brief) => {
         const state = get();
@@ -866,6 +887,7 @@ export const useStore = create<PhotoState>()(
         activeChallengeId: s.activeChallengeId,
         challengeShots: s.challengeShots,
         completedChallenges: s.completedChallenges,
+        challengePhotoByEntry: s.challengePhotoByEntry,
       }),
     },
   ),

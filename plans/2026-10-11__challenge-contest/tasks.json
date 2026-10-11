@@ -1,0 +1,37 @@
+[
+  {
+    "content": "[contest-1] backend/challenges.py — SQLite entries+votes, phase engine (submit → 7d vote → results, prune on next window), submit/vote/delete/status endpoints, tests",
+    "id": "1",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-2] frontend lib/challenges.ts API client + store: challenge screen field, challengePhotoByEntry mapping, goChallenge",
+    "id": "2",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-3] lib/stamp.ts — canvas composer: coach rosette badge (score + 'Coach rated this'), app name, 1st/2nd/3rd place banner",
+    "id": "3",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-4] ChallengeScreen.tsx — entries gallery, 3-vote picker, results podium + vote counts, resets-in-N-days countdown, no-download guards",
+    "id": "4",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-5] HolidayCard: submit-this-shot button + gallery link; home contest strip during voting/results; App route",
+    "id": "5",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-6] auto-save to device gallery on submit + share-from-gallery buttons + share text with app + MuskegMan links",
+    "id": "6",
+    "status": "completed"
+  },
+  {
+    "content": "[contest-7] full test pass (pytest + tsc + vitest), push, update context",
+    "id": "7",
+    "status": "in_progress"
+  }
+]

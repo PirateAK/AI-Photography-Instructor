@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "../state/store";
-import type { GalleryMeta } from "../lib/gallery";
+import { getGalleryBlob, type GalleryMeta } from "../lib/gallery";
+import { buildGalleryShareMessage, sharePhotoBlob } from "../lib/share";
 
 const GALLERY_PAGE = 10;
 
@@ -219,8 +220,27 @@ function GalleryCard({
 }) {
   const [dx, setDx] = useState(0);
   const [gone, setGone] = useState(false);
+  const [shareNote, setShareNote] = useState<string | null>(null);
   const startRef = useRef<{ x: number; y: number } | null>(null);
   const movedRef = useRef(false);
+
+  const share = async () => {
+    setShareNote("Sharing…");
+    const blob = await getGalleryBlob(item.id);
+    if (!blob) {
+      setShareNote("Could not read that photo.");
+      return;
+    }
+    const result = await sharePhotoBlob(blob, buildGalleryShareMessage(), item.name || "photo.jpg");
+    setShareNote(
+      result === "shared"
+        ? "Shared!"
+        : result === "copied"
+          ? "Link copied — share it anywhere."
+          : "Sharing not available on this device.",
+    );
+    setTimeout(() => setShareNote(null), 3500);
+  };
 
   const onPointerDown = (e: React.PointerEvent) => {
     startRef.current = { x: e.clientX, y: e.clientY };
@@ -271,6 +291,19 @@ function GalleryCard({
         <div className="gallery-thumb-fallback">🖼️</div>
       )}
       <span className="gallery-card-name">{item.name}</span>
+      <button
+        type="button"
+        className="gallery-share-btn"
+        onClick={(e) => {
+          e.stopPropagation();
+          void share();
+        }}
+        onPointerDown={(e) => e.stopPropagation()}
+        title="Share this photo"
+      >
+        📤
+      </button>
+      {shareNote && <span className="gallery-share-note">{shareNote}</span>}
     </div>
   );
 }

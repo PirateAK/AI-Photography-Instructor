@@ -167,3 +167,67 @@ export function challengeAfterShot(
   }
   return { shots: nextShots, completed, justCompleted: false };
 }
+
+// ---------------------------------------------------------------- contest
+// Contest schedule: entries during the holiday window, voting for 7 days after
+// it closes, results until the next holiday window opens. Keep the 7 in sync
+// with backend/challenges.py VOTING_DAYS.
+export const CHALLENGE_VOTING_DAYS = 7;
+
+export type ContestPhase = "upcoming" | "submitting" | "voting" | "results";
+
+export interface ContestSchedule {
+  holiday: HolidayConfig;
+  holidayDate: Date;
+  windowStart: Date;
+  windowEnd: Date;
+  voteEnd: Date;
+  phase: ContestPhase;
+}
+
+export function contestSchedule(holiday: HolidayConfig, now: Date = effectiveNow()): ContestSchedule {
+  const candidates: ContestSchedule[] = [];
+  for (const year of [now.getFullYear() - 1, now.getFullYear(), now.getFullYear() + 1]) {
+    const date = holidayDate(holiday.rule, year);
+    if (!date) continue;
+    const windowStart = addDays(date, -HOLIDAY_WINDOW_START_DAYS);
+    const windowEnd = addDays(date, HOLIDAY_WINDOW_END_DAYS);
+    candidates.push({
+      holiday,
+      holidayDate: date,
+      windowStart,
+      windowEnd,
+      voteEnd: addDays(windowEnd, CHALLENGE_VOTING_DAYS),
+      phase: "upcoming",
+    });
+  }
+  if (candidates.length === 0) throw new Error(`No schedule for ${holiday.id}`);
+  const past = candidates.filter((c) => c.windowStart <= now);
+  const chosen = past.length
+    ? past.reduce((a, b) => (b.windowStart > a.windowStart ? b : a))
+    : candidates.reduce((a, b) => (b.windowStart < a.windowStart ? b : a));
+  if (now < chosen.windowStart) chosen.phase = "upcoming";
+  else if (now <= chosen.windowEnd) chosen.phase = "submitting";
+  else if (now <= chosen.voteEnd) chosen.phase = "voting";
+  else chosen.phase = "results";
+
+  if (chosen.phase === "results") {
+    const reset = contestGalleryResetsAt(now);
+    if (reset && now >= reset) chosen.phase = "upcoming";
+  }
+  return chosen;
+}
+
+/** When the next holiday window opens — the finished challenge's gallery resets then. */
+export function contestGalleryResetsAt(now: Date = effectiveNow()): Date | null {
+  const starts: number[] = [];
+  for (const h of HOLIDAYS) {
+    for (const year of [now.getFullYear(), now.getFullYear() + 1]) {
+      const d = holidayDate(h.rule, year);
+      if (!d) continue;
+      const start = addDays(d, -HOLIDAY_WINDOW_START_DAYS);
+      if (start > now) starts.push(start.getTime());
+    }
+  }
+  return starts.length ? new Date(Math.min(...starts)) : null;
+}

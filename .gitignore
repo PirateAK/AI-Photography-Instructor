@@ -11,3 +11,4 @@ __pycache__/
 runtime_settings.json
 data/photo_history.db
 data/photo_history.db-journal
+data/challenge_entries.db

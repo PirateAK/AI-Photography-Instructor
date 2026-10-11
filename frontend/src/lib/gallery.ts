@@ -180,7 +180,7 @@ export async function listGallery(): Promise<GalleryMeta[]> {
 
 export async function addToGallery(
   files: File[],
-): Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[] }> {
+): Promise<{ added: number; evicted: number; skipped: number; failures: GallerySkip[]; ids: number[] }> {
   // prepare thumbnails BEFORE opening the write transaction — IDB transactions
   // auto-commit when a task yields, so no awaits may sit between puts
   const base = Date.now();
@@ -216,11 +216,15 @@ export async function addToGallery(
     }
   }
   const skipped = failures.length;
-  if (!prepared.length) return { added: 0, evicted: 0, skipped, failures };
+  if (!prepared.length) return { added: 0, evicted: 0, skipped, failures, ids: [] };
 
   const store = await storeFor("readwrite");
-  if (!store) return { added: 0, evicted: 0, skipped, failures };
-  for (const entry of prepared) store.put(entry);
+  if (!store) return { added: 0, evicted: 0, skipped, failures, ids: [] };
+  const ids: number[] = [];
+  for (const entry of prepared) {
+    const key = store.put(entry);
+    if (typeof key === "number") ids.push(key);
+  }
   await commit(store.transaction);
 
   // cap: evict oldest-first — every read/write after the commit needs a FRESH
@@ -240,7 +244,7 @@ export async function addToGallery(
       evicted = excess;
     }
   }
-  return { added: prepared.length, evicted, skipped, failures };
+  return { added: prepared.length, evicted, skipped, failures, ids };
 }
 
 export async function getGalleryBlob(id: number): Promise<Blob | null> {

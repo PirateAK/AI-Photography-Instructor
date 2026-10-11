@@ -10,6 +10,7 @@ import CourseManagerScreen from "./components/CourseManagerScreen";
 import InstructorDashboard from "./components/InstructorDashboard";
 import AccessGate from "./components/AccessGate";
 import ProgressScreen from "./components/ProgressScreen";
+import ChallengeScreen from "./components/ChallengeScreen";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 export default function App() {
@@ -55,6 +56,8 @@ export default function App() {
           <InstructorDashboard />
         ) : guardedScreen === "progress" ? (
           <ProgressScreen />
+        ) : guardedScreen === "challenge" ? (
+          <ChallengeScreen />
         ) : (
           <UploadScreen />
         )}

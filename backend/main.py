@@ -265,6 +265,10 @@ app.include_router(styles_admin_router)
 app.include_router(courses_admin_router)
 app.include_router(history_router)
 
+from .challenges import router as challenges_router  # noqa: E402
+
+app.include_router(challenges_router)
+
 
 @app.post("/api/chat")
 async def chat(

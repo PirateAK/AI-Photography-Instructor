@@ -6,6 +6,7 @@ import type { HistorySession } from "./history";
 import { appConfig } from "./training";
 
 const APP_LINK = appConfig.app_share_url || "https://muskegman.com";
+const STORE_LINK = appConfig.store_url || "https://muskegman.com";
 
 export function buildShareMessage(session: {
   score: number;
@@ -61,8 +62,7 @@ export type ShareResult = "shared" | "copied" | "unavailable";
 /** Share the score (and photo when possible). Returns how it went. */
 export async function shareSession(
   session: HistorySession & { styleLabel?: string },
-): Promise<ShareResult> {
-  const message = buildShareMessage({ ...session });
+): Promise<ShareResult> {  const message = buildShareMessage({ ...session });
 
   // 1. native share sheet with the photo attached (phones)
   try {
@@ -88,6 +88,52 @@ export async function shareSession(
   }
 
   // 3. clipboard fallback
+  try {
+    await navigator.clipboard.writeText(message);
+    return "copied";
+  } catch {
+    return "unavailable";
+  }
+}
+
+export function buildContestShareMessage(place: number, holidayName: string, score: number): string {
+  const medal = place === 1 ? "🥇 1st" : place === 2 ? "🥈 2nd" : "🥉 3rd";
+  return (
+    `${medal} place in the ${holidayName} Photo Challenge — the Coach rated it ${score}/100! ` +
+    `Want your shots coached too?\n${APP_LINK}\nPrints & photo software: ${STORE_LINK}`
+  );
+}
+
+export function buildGalleryShareMessage(): string {
+  return (
+    `📷 Shot & coached with the AI Photography Instructor — a Photo Coach rates your photos and a live ` +
+    `simulator teaches the settings.\n${APP_LINK}\nPrints & photo software: ${STORE_LINK}`
+  );
+}
+
+/** Share a photo blob with a message (files → text share → clipboard). */
+export async function sharePhotoBlob(
+  blob: Blob,
+  message: string,
+  filename = "photo.jpg",
+): Promise<ShareResult> {
+  const file = new File([blob], filename, { type: blob.type || "image/jpeg" });
+  try {
+    if (typeof navigator.canShare === "function" && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], text: message, title: "AI Photography Instructor" });
+      return "shared";
+    }
+  } catch {
+    /* fall through */
+  }
+  try {
+    if (typeof navigator.share === "function") {
+      await navigator.share({ text: message, title: "AI Photography Instructor" });
+      return "shared";
+    }
+  } catch {
+    /* fall through */
+  }
   try {
     await navigator.clipboard.writeText(message);
     return "copied";

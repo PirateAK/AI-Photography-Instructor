@@ -22,6 +22,14 @@ def isolated_history_db(tmp_path, monkeypatch):
 
 
 @pytest.fixture(autouse=True)
+def isolated_challenge_db(tmp_path, monkeypatch):
+    import backend.challenges as ch
+
+    monkeypatch.setattr(ch, "_DB_PATH", str(tmp_path / "challenge_entries.db"))
+    yield
+
+
+@pytest.fixture(autouse=True)
 def access_gate_disabled(monkeypatch):
     """The suite tests endpoints directly — the site access gate is exercised
     separately in test_access_gate.py."""

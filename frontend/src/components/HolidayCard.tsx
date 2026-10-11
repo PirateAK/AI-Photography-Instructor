@@ -5,6 +5,8 @@ import {
   CHALLENGE_SHOTS_TO_COMPLETE,
   holidayById,
 } from "../lib/holidays";
+import { submitChallengeEntry } from "../lib/challenges";
+import { getCameras } from "../lib/camera";
 
 /** 🎄 Holiday challenge card — lives at the top of the coach pane.
  * Suggests the active holiday's challenge, tracks accepted-challenge progress,
@@ -58,6 +60,7 @@ export default function HolidayCard() {
           All {CHALLENGE_SHOTS_TO_COMPLETE} shots analyzed — the {accepted.name} challenge badge is
           on your trophy case. Nice work!
         </div>
+        <ChallengeActions holidayId={accepted.id} holidayName={accepted.name} />
         <div className="holiday-actions">
           <button className="btn small primary" onClick={goUpload}>
             Keep shooting
@@ -101,6 +104,7 @@ export default function HolidayCard() {
             📸 Bring shots back
           </button>
         </div>
+        <ChallengeActions holidayId={accepted.id} holidayName={accepted.name} />
         <HolidayChips askCoach={askCoach} holiday={accepted} />
       </div>
     );
@@ -135,6 +139,59 @@ export default function HolidayCard() {
           🎯 Accept the challenge
         </button>
       </div>
+      <ChallengeActions holidayId={inWindow.holiday.id} holidayName={inWindow.holiday.name} />
+    </div>
+  );
+}
+
+/** Contest row: submit the analyzed photo + open the shared gallery. */
+function ChallengeActions({ holidayId, holidayName }: { holidayId: string; holidayName: string }) {
+  const goChallenge = useStore((s) => s.goChallenge);
+  const deviceId = useStore((s) => s.deviceId);
+  const hasAnalyzedShot = !!useStore((s) => s.file) && !!useStore((s) => s.analysis);
+  const addToGallery = useStore((s) => s.addToGallery);
+  const linkChallengePhoto = useStore((s) => s.linkChallengePhoto);
+  const cameraId = useStore((s) => s.cameraId);
+  const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
+
+  const submit = async () => {
+    const { file, analysis } = useStore.getState();
+    if (!file || !analysis) return;
+    setBusy(true);
+    setNote(null);
+    try {
+      const cam = getCameras().find((c) => c.id === cameraId);
+      const res = await submitChallengeEntry(
+        file,
+        deviceId,
+        holidayId,
+        analysis.overall_score,
+        cam ? `${cam.brand} ${cam.model}`.slice(0, 80) : "",
+      );
+      const gallery = await addToGallery([file]);
+      if (gallery.ids.length > 0) linkChallengePhoto(res.entry_id, gallery.ids[0]);
+      setNote("Submitted to the challenge! 🏅");
+    } catch (e) {
+      setNote(e instanceof Error ? e.message : "Submit failed.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="holiday-actions" style={{ alignItems: "center" }}>
+      <button className="btn small" disabled={busy || !hasAnalyzedShot} onClick={() => void submit()} title={hasAnalyzedShot ? "Enter this photo in the challenge gallery" : "Analyze a photo first — then submit it"}>
+        🏅 Submit this shot
+      </button>
+      <button className="btn small ghost" onClick={() => goChallenge(holidayId)}>
+        🖼 {holidayName} gallery →
+      </button>
+      {note && (
+        <span className="muted" style={{ fontSize: "0.76rem", width: "100%" }}>
+          {note}
+        </span>
+      )}
     </div>
   );
 }

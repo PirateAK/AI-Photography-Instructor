@@ -944,7 +944,7 @@
           "id": "nl-1",
           "title": "The aurora deal: latitude, Kp, and apps",
           "duration_min": 7,
-          "summary": "The aurora is forecast, not scheduled: high latitude, dark skies, clear weather, and geomagnetic activity (the Kp index) must all agree. Apps predict hours ahead — plan a window of nights, not a night. Manage expectations honestly: the hunt is the reward, the lights are the bonus.",
+          "summary": "The aurora is forecast, not scheduled: high latitude, dark skies far from city lights, clear weather, and geomagnetic activity (the Kp index) must all agree. Apps predict hours ahead — plan a window of nights, not a night. Manage expectations honestly: the hunt is the reward, the lights are the bonus.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -953,13 +953,13 @@
             "shutter_speed": "1/8",
             "aperture": "f/2.8"
           },
-          "practice_brief": "The hunt-plan drill, written: location, date window, backup nights, the forecast apps you'll check, and the bail-out criteria. Load the Astrophotography style — its wide-open, high-ISO recipe is the aurora's starting point. The plan is the lesson: the lights refuse schedules."
+          "practice_brief": "The hunt-plan drill, written: location (dark — away from city glow), date window, backup nights, the forecast apps you'll check, and the bail-out criteria. Load the Astrophotography style — its wide-open, high-ISO recipe is the aurora's starting point. The plan is the lesson: the lights refuse schedules."
         },
         {
           "id": "nl-2",
           "title": "The camera setup: manual everything",
           "duration_min": 7,
-          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open, RAW, tripod locked, delayed shutter. The exposure balance is ISO 1600–3200, f/2.8, 2–15 seconds — fast enough to hold the curtain's shape, slow enough to gather it.",
+          "summary": "Aurora setup is manual everything: focus to infinity on a star or distant light with live view magnification, lens wide open (f/2.8 to f/4 covers most aurora lenses), RAW, tripod locked, delayed shutter. The exposure balance is ISO 1600–3200, f/2.8–f/4, 2–6 seconds — fast enough to hold the curtain's shape, slow enough to gather it. On a phone: night mode, ISO 400–1600, and the steadiest surface you can find.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -968,13 +968,13 @@
             "shutter_speed": "1/8",
             "aperture": "f/2.8"
           },
-          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — ISO 3200, f/2.8, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame."
+          "practice_brief": "Setup drill in the simulator: manual focus imagined on infinity, then the exposure walk — f/2.8 to f/4, ISO 3200, and shutter from 15s down to 2s. Watch the star smear begin as seconds stretch: the shutter ceiling is where the curtain's shape survives. That ceiling is your frame. Phone shooters: night mode on, phone braced or tripod-mounted, ISO 400–1600 — then hold still and let the stack work."
         },
         {
           "id": "nl-3",
           "title": "Exposing the dance",
           "duration_min": 7,
-          "summary": "The aurora dances: fast curtains want 2–5 second exposures, slow glows tolerate 15. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Bright displays tolerate lower ISO; faint ones demand everything the sensor has.",
+          "summary": "The working card: ISO between 800 and 3200, adjusted to the aurora's brightness; shutter between 2.5 and 6 seconds to gather the lights without blurring their structure. The histogram rule holds in the cold — pull the data off the left wall without clipping the brightest green. Then the pro loop: experiment with varying settings, review every frame, and adjust — the aurora changes faster than any fixed recipe.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -983,7 +983,7 @@
             "shutter_speed": "1/4",
             "aperture": "f/2.8"
           },
-          "practice_brief": "Exposure drill: the night lesson's test-driven method, colder. Test frame at high ISO, read the histogram, scale down and stretch the shutter. In the simulator: walk ISO and shutter at f/2.8 until the shape clears the left wall — the exact decisions you'll make at minus ten."
+          "practice_brief": "The card drill: start at ISO 1600, f/2.8–f/4, 4 seconds — then experiment. Bright dancing curtains: drop ISO toward 800 and shorten toward 2.5s. Faint glows: raise ISO toward 3200 and stretch toward 6s. Review every frame and adjust one variable at a time — in the simulator: walk ISO and shutter at f/2.8–f/4 until the shape clears the left wall without clipping. The loop is the lesson: shoot, review, adjust, repeat."
         },
         {
           "id": "nl-4",
@@ -1004,7 +1004,7 @@
           "id": "nl-5",
           "title": "Cold, batteries, and the hunt",
           "duration_min": 6,
-          "summary": "Cold kills batteries — spares live in an inside pocket, not the bag. No lens changes in the field; the sealed-bag return indoors defeats condensation. And the final Pro-class habit: three nights committed beats one hopeful evening — the hunt is the reward, and the night-photography skill is the prize.",
+          "summary": "Cold kills batteries — spares live in an inside pocket, not the bag. No lens changes in the field; the sealed-bag return indoors defeats condensation. And the habits that make the hunt: practice your settings before the trip until the manual dance is muscle memory, check weather and aurora forecasts to choose the night, and commit multiple nights — the hunt is the reward, and the night-photography skill is the prize.",
           "video_url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
           "video_kind": "mp4",
           "difficulty": "Intermediate",
@@ -1013,7 +1013,7 @@
             "shutter_speed": "1/4",
             "aperture": "f/2.8"
           },
-          "practice_brief": "The cold drill, written: your cold-night kit — spare batteries in the inside pocket, no lens changes outside, bag-sealed return indoors, hand warmers for the tripod's joints. Then the commitment: a three-night window in your hunt plan, with the foregrounds scouted in daylight. The aurora finds the prepared."
+          "practice_brief": "The pre-trip drill, written: your cold-night kit — spare batteries in the inside pocket, no lens changes outside, bag-sealed return indoors, hand warmers for the tripod's joints. Then the practice session: rehearse the manual settings dance at home in the dark until you can do it without a light. Finally, the commitment: a multi-night window in your hunt plan, forecasts checked, foregrounds scouted in daylight. The aurora finds the prepared."
         }
       ]
     },

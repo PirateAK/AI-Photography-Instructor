@@ -7,7 +7,7 @@ import type { ShootingStyle } from "../lib/styles";
 import ModelSelector from "./ModelSelector";
 import GalleryPanel from "./GalleryPanel";
 import pkg from "../../package.json";
-import { shareApp as appShare } from "../lib/share";
+import { shareApp as appShare, buildAppShareMessage } from "../lib/share";
 import { activeHolidayWindow, contestSchedule, HOLIDAYS } from "../lib/holidays";
 
 const WHEEL_ROW_SIZE = 5;
@@ -304,6 +304,7 @@ export default function UploadScreen() {
 function AboutMenu() {
   const [open, setOpen] = useState(false);
   const [shareNote, setShareNote] = useState<string | null>(null);
+  const [fallbackText, setFallbackText] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   // close on any click outside the menu
@@ -318,13 +319,15 @@ function AboutMenu() {
 
   const shareApp = async () => {
     const result = await appShare();
-    setShareNote(
-      result === "shared"
-        ? "Shared — thanks for spreading the word!"
-        : result === "copied"
-          ? "Copied to your clipboard — paste it to a friend!"
-          : "Sharing isn't available in this browser.",
-    );
+    setFallbackText(null);
+    if (result === "shared") {
+      setShareNote("Shared — thanks for spreading the word!");
+    } else if (result === "copied") {
+      setShareNote("Copied to your clipboard — paste it to a friend!");
+    } else {
+      // every automatic path failed — hand over the text for a manual copy
+      setFallbackText(buildAppShareMessage());
+    }
     setTimeout(() => setShareNote(null), 5000);
   };
 
@@ -367,6 +370,20 @@ function AboutMenu() {
             📤 Share this app with your friends
           </button>
           {shareNote && <div className="about-share-note" role="status">{shareNote}</div>}
+          {fallbackText && (
+            <div className="about-share-fallback">
+              <div className="muted" style={{ fontSize: "0.75rem" }}>
+                Automatic sharing isn't available here — copy this manually:
+              </div>
+              <textarea
+                readOnly
+                value={fallbackText}
+                rows={5}
+                onFocus={(e) => e.currentTarget.select()}
+                aria-label="App invite message — select and copy"
+              />
+            </div>
+          )}
           <hr />
           <strong>📜 Content terms</strong>
           <p className="muted" style={{ fontSize: "0.8rem" }}>

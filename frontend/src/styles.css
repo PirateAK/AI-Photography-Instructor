@@ -227,6 +227,22 @@ input, select { font-family: inherit; }
   border-radius: var(--radius-sm);
   padding: 6px 10px;
 }
+.about-share-fallback {
+  display: grid;
+  gap: 6px;
+}
+.about-share-fallback textarea {
+  width: 100%;
+  resize: none;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  padding: 8px;
+  font-family: inherit;
+}
 .upload-hero p { color: var(--text-dim); margin: 0 0 28px; line-height: 1.55; }
 
 .dropzone {

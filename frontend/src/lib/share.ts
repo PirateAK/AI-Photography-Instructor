@@ -29,6 +29,32 @@ export function buildAppShareMessage(): string {
   );
 }
 
+/** Clipboard with a legacy fallback — the Web Share API is phone-first, so
+ * desktop browsers land here. execCommand covers older/iframe contexts where
+ * the async Clipboard API is blocked. */
+export async function copyText(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    /* fall through to the legacy path */
+  }
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 /** Share the app itself (no photo) — same fallback ladder as score sharing. */
 export async function shareApp(): Promise<ShareResult> {
   const message = buildAppShareMessage();
@@ -40,12 +66,7 @@ export async function shareApp(): Promise<ShareResult> {
   } catch {
     /* fall through to clipboard */
   }
-  try {
-    await navigator.clipboard.writeText(message);
-    return "copied";
-  } catch {
-    return "unavailable";
-  }
+  return (await copyText(message)) ? "copied" : "unavailable";
 }
 
 async function thumbToFile(dataUrl: string): Promise<File | null> {
@@ -87,13 +108,8 @@ export async function shareSession(
     /* fall through */
   }
 
-  // 3. clipboard fallback
-  try {
-    await navigator.clipboard.writeText(message);
-    return "copied";
-  } catch {
-    return "unavailable";
-  }
+  // 3. clipboard fallback (legacy-aware)
+  return (await copyText(message)) ? "copied" : "unavailable";
 }
 
 export function buildContestShareMessage(place: number, holidayName: string, score: number): string {
@@ -134,10 +150,5 @@ export async function sharePhotoBlob(
   } catch {
     /* fall through */
   }
-  try {
-    await navigator.clipboard.writeText(message);
-    return "copied";
-  } catch {
-    return "unavailable";
-  }
+  return (await copyText(message)) ? "copied" : "unavailable";
 }

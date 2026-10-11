@@ -36,6 +36,7 @@ export interface AppConfig {
   store_label: string;
   redemption_codes: string[];
   instructor_codes?: string[];
+  app_share_url?: string;
 }
 
 export const appConfig = configJson as unknown as AppConfig;

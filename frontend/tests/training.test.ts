@@ -9,6 +9,7 @@ import {
   isUnlocked,
   isValidCode,
   isInstructorCode,
+  nextLessonFor,
   totalMinutes,
   unlockAllPaid,
 } from "../src/lib/training";
@@ -66,6 +67,16 @@ describe("unlocks", () => {
   it("content management is gated: instructor unlock now, Pro/credit later via the same gate", () => {
     expect(canManageContent({ instructorUnlocked: false })).toBe(false);
     expect(canManageContent({ instructorUnlocked: true })).toBe(true);
+  });
+});
+
+describe("continue-training helper", () => {
+  it("nextLessonFor points at the first incomplete lesson, else restarts", () => {
+    const et = courses.find((c) => c.id === "free-exposure-triangle")!;
+    const first = et.lessons[0];
+    expect(nextLessonFor(et, []).id).toBe(first.id);
+    expect(nextLessonFor(et, [first.id]).id).toBe(et.lessons[1].id);
+    expect(nextLessonFor(et, et.lessons.map((l) => l.id)).id).toBe(et.lessons[0].id);
   });
 });
 

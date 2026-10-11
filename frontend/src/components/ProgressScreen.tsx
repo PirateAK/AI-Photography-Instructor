@@ -2,7 +2,9 @@
 // browsable session list. Sessions auto-save after every successful analysis.
 import { useEffect, useMemo, useState } from "react";
 import { useStore } from "../state/store";
-import { courseProgress } from "../lib/training";
+import { courseProgress, nextLessonFor } from "../lib/training";
+import { classBadges, masteryBadges, type Badge } from "../lib/badges";
+import { shareSession, type ShareResult } from "../lib/share";
 import {
   buildChartPoints,
   buildStats,
@@ -44,6 +46,33 @@ export default function ProgressScreen() {
 
   const stats = useMemo(() => buildStats(sessions), [sessions]);
   const points = useMemo(() => buildChartPoints(sessions), [sessions]);
+  const badges = useMemo(
+    () => [...classBadges(courses, completedLessons), ...masteryBadges(styles, sessions)],
+    [courses, completedLessons, styles, sessions],
+  );
+  const earned = useMemo(() => badges.filter((b) => b.earned), [badges]);
+  const bestSession = useMemo(
+    () => sessions.reduce<HistorySession | null>((b, s) => (!b || s.score > b.score ? s : b), null),
+    [sessions],
+  );
+  const styleLabelOf = (id: string): string => styles.find((s) => s.id === id)?.label ?? "";
+
+  const [shareNote, setShareNote] = useState<string | null>(null);
+  const shareBest = async () => {
+    if (!bestSession) return;
+    const result: ShareResult = await shareSession({
+      ...bestSession,
+      styleLabel: styleLabelOf(bestSession.style_id),
+    });
+    setShareNote(
+      result === "shared"
+        ? "Shared! Your friend has the challenge — and the link."
+        : result === "copied"
+          ? "Copied to your clipboard — paste it to a friend!"
+          : "Sharing isn't available in this browser — screenshot this card instead.",
+    );
+    setTimeout(() => setShareNote(null), 5000);
+  };
 
   const remove = async (id: number) => {
     if (!window.confirm("Delete this session from your history?")) return;
@@ -96,14 +125,42 @@ export default function ProgressScreen() {
               <div className="stat-k">Average score</div>
               <div className="stat-v">{stats.avg}</div>
             </div>
-            <div className="card stat-card">
-              <div className="stat-k">Best score</div>
+            <button
+              className="card stat-card stat-share"
+              onClick={() => void shareBest()}
+              disabled={!bestSession}
+              title={bestSession ? "Share your best score — photo included" : "Analyze a photo first"}
+            >
+              <div className="stat-k">
+                Best score <span className="share-glyph">↗ share</span>
+              </div>
               <div className="stat-v">
                 {stats.best?.score}
                 <span className="muted" style={{ fontSize: "0.75rem", fontWeight: 400 }}>
                   {" "}· {stats.best?.created_at.slice(0, 10)}
                 </span>
               </div>
+            </button>
+          </div>
+          {shareNote && <div className="notice share-note" role="status">{shareNote}</div>}
+
+          {earned.length > 0 && (
+            <div className="card" style={{ padding: 16, marginBottom: 14 }}>
+              <div className="section-title">🏅 Badges earned ({earned.length})</div>
+              <div className="badge-case">
+                {earned.map((b) => (
+                  <BadgeMedal key={b.id} badge={b} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="card" style={{ padding: 16, marginBottom: 14 }}>
+            <div className="section-title">Trophy case — what's on offer</div>
+            <div className="badge-case">
+              {badges.map((b) => (
+                <BadgeMedal key={b.id} badge={b} />
+              ))}
             </div>
           </div>
 
@@ -196,6 +253,15 @@ export default function ProgressScreen() {
 
 function styleLabel(id: string): string {
   return useStore.getState().styles.find((s) => s.id === id)?.label ?? "";
+}
+
+function BadgeMedal({ badge }: { badge: Badge }) {
+  return (
+    <div className={`badge-slot ${badge.earned ? "" : "locked"}`} title={badge.requirement}>
+      <div className={`badge-medal ${badge.earned ? "earned" : "locked"}`}>{badge.emoji}</div>
+      <span className="badge-name">{badge.name}</span>
+    </div>
+  );
 }
 
 function ScoreChart({ points }: { points: { x: number; y: number; score: number; date: string }[] }) {

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { getCameras } from "../lib/camera";
 import { isInstructorCode } from "../lib/training";

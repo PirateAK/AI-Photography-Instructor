@@ -10,6 +10,9 @@ export default defineConfig({
     host: true,
     strictPort: true,
     port: APP_PORT,
+    // the preview proxy must never cache dev files (it once served the tool's
+    // stylesheet to this app — both share the preview origin)
+    headers: { "Cache-Control": "no-store" },
     fs: { allow: [".", ".."] }, // allow importing ../data/camera_models.json
     proxy: {
       "/api": { target: `http://localhost:${BACKEND_PORT}`, changeOrigin: true },

@@ -1,0 +1,37 @@
+[
+  {
+    "content": "[vlc-r1] lib/takes.ts — blob store (idb), mime selection, slug, duration format + tests",
+    "id": "1",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r2] store: TakeMeta list per slot (persisted) + take blob keys",
+    "id": "2",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r3] Recorder.tsx — camera/mic preview + selection, teleprompter (speed/size), record/stop, permission errors",
+    "id": "3",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r4] takes UI — playback, rename, delete, download (marks exported), status auto-advance",
+    "id": "4",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r5] trim — in/out captureStream re-record, saved as new take",
+    "id": "5",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r6] ProjectScreen wiring + styles + headless smoke (no-camera error path)",
+    "id": "6",
+    "status": "completed"
+  },
+  {
+    "content": "[vlc-r7] re-zip + offer + commit + context",
+    "id": "7",
+    "status": "completed"
+  }
+]
